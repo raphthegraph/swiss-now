@@ -11,7 +11,9 @@ export async function GET(request: Request) {
   try {
     const state = await getWeatherState();
     const body = JSON.stringify(state);
-    const etag = `"${createHash("sha1").update(body).digest("hex").slice(0, 16)}"`;
+    // `updatedAt` is stamped per build of the state; exclude it so identical data yields a stable ETag.
+    const { updatedAt: _ignored, ...stable } = state;
+    const etag = `"${createHash("sha1").update(JSON.stringify(stable)).digest("hex").slice(0, 16)}"`;
     if (request.headers.get("if-none-match") === etag) {
       return new Response(null, {
         status: 304,
