@@ -4,10 +4,10 @@
 
 ## 1. Legal and licensing
 
-- [ ] **SED earthquake catalogue** — the SED disclaimer permits copying only for private, scientific and non-commercial use; FDSN norms suggest open data. Email `SED_data_access@sed.ethz.ch` for written terms before any commercial use. [P0]
+- [ ] **SED earthquake catalogue** — the FDSN service is open (no key, no registration) and is used as-is for the non-commercial MVP with attribution. The disclaimer permits private, scientific and non-commercial use; written clarification is needed only **before any commercial use**. Parked until then. [pre-commercial]
 - [ ] **FEDRO traffic data** — confirm the 260 000-call quota reset process, TDP-partner status requirements, whether alpine pass closures are reliably included in situations, and the exact meaning of "no raw redistribution" for derived congestion indices. Contact `verkehrsdaten-plattform@astra.admin.ch`. [P1, for P5]
 - [ ] **SFOE `terms_by_ask` datasets** (production mix, consumption, spot price) — request permission for commercial use; until then use only `terms_by` files. [P4]
-- [ ] **ENTSO-E** — reuse terms for redistribution of derived values; completeness of CH generation-per-type. [P4]
+- [ ] **ENTSO-E** — token requires an email request; per the "freely accessible only" rule this stays out of scope until Phase 5 is revisited. Reuse terms and CH generation-per-type completeness still to verify then. [P5]
 - [ ] **Alplakes** — data licence and attribution (code is MIT, data terms unstated); availability expectations. Contact `james.runnalls@eawag.ch`. [P4]
 - [ ] **Zürich OGD** — CKAN shows `license_title: null` for UGZ datasets; confirm terms. [P4]
 - [ ] **Font licence** for the chosen grotesk (OFL vs commercial). [P0]
@@ -42,7 +42,8 @@
 ## 4. Product and design decisions
 
 - [x] MapLibre 5.24 vs 6.x → **6.7 chosen** (deck.gl 9.4 supports it; worker and no-WebGL2 issues fixed). See `docs/SPIKES.md`. [P0]
-- [ ] Manual frame-rate measurement of the live map on a laptop and a mid-range phone (`?fps=1`); the automated session could not paint the page. [P0]
+- [x] Laptop frame rate: 60 fps, min 60 (2026-09-07). [P0]
+- [ ] Phone frame rate (mid-range device, `?fps=1` via LAN); target ≥ 30 fps. [P1]
 - [ ] Typeface and final palette; behaviour of the daylight-driven environmental state (automatic vs user toggle). [P0]
 - [ ] MVP UI languages: EN + DE proposed; FR/IT timing. [P1]
 - [ ] Thresholds for the NOW composite (when does a delay pulse, a danger level, a rain cell earn a place by default). [P1]
