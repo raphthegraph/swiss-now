@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { WeatherState } from "@swiss-now/core";
 
 /**
- * Visibility-aware poller for /api/state/weather. Starts from the server-rendered state so the map
- * has data on first paint; refetches at the source cadence only while the tab is visible.
- * (TanStack Query replaces this once several layers exist.)
+ * Visibility-aware poller for a /api/state/* route. Starts from the server-rendered state so the
+ * map has data on first paint; refetches at the source cadence (with jitter) only while the tab is
+ * visible. Errors keep the last good state.
  */
-export function useWeatherState(initial: WeatherState, intervalMs = 300_000): WeatherState {
+export function useLayerState<T>(url: string, initial: T, intervalMs: number): T {
   const [state, setState] = useState(initial);
 
   useEffect(() => {
@@ -18,31 +17,30 @@ export function useWeatherState(initial: WeatherState, intervalMs = 300_000): We
 
     const refetch = async () => {
       try {
-        const res = await fetch("/api/state/weather", { headers: { Accept: "application/json" } });
+        const res = await fetch(url, { headers: { Accept: "application/json" } });
         if (res.status === 200) {
-          const next = (await res.json()) as WeatherState;
+          const next = (await res.json()) as T;
           if (!cancelled) setState(next);
         }
       } catch {
-        // keep the last good state; freshness ageing is handled server-side on the next successful poll
+        // keep the last good state
       } finally {
         lastFetch = Date.now();
       }
     };
-
     const schedule = () => {
-      const jitter = Math.random() * intervalMs * 0.15;
-      timer = setTimeout(async () => {
-        if (document.visibilityState === "visible") await refetch();
-        schedule();
-      }, intervalMs + jitter);
+      timer = setTimeout(
+        async () => {
+          if (document.visibilityState === "visible") await refetch();
+          schedule();
+        },
+        intervalMs + Math.random() * intervalMs * 0.15,
+      );
     };
-
     const onVisible = () => {
       if (document.visibilityState === "visible" && Date.now() - lastFetch > intervalMs)
         void refetch();
     };
-
     schedule();
     document.addEventListener("visibilitychange", onVisible);
     return () => {
@@ -50,7 +48,7 @@ export function useWeatherState(initial: WeatherState, intervalMs = 300_000): We
       if (timer) clearTimeout(timer);
       document.removeEventListener("visibilitychange", onVisible);
     };
-  }, [intervalMs]);
+  }, [url, intervalMs]);
 
   return state;
 }

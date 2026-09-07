@@ -1,0 +1,501 @@
+{
+  "head": {
+    "vars": [
+      "station",
+      "name",
+      "identifier",
+      "type",
+      "waterBody",
+      "wkt",
+      "t",
+      "level",
+      "discharge",
+      "temp",
+      "danger",
+      "isLiter"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "station": {
+          "type": "uri",
+          "value": "https://environment.ld.admin.ch/foen/hydro/station/2043"
+        },
+        "name": {
+          "type": "literal",
+          "value": "Berlingen"
+        },
+        "identifier": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "2043"
+        },
+        "type": {
+          "type": "literal",
+          "value": "lake"
+        },
+        "waterBody": {
+          "type": "literal",
+          "value": "Bodensee, Untersee"
+        },
+        "wkt": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "POINT(9.017571136862344 47.675465671121394)"
+        },
+        "t": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "2026-09-07T23:40:00+01:00"
+        },
+        "level": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "394.401"
+        },
+        "danger": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "1"
+        }
+      },
+      {
+        "station": {
+          "type": "uri",
+          "value": "https://environment.ld.admin.ch/foen/hydro/station/2289"
+        },
+        "name": {
+          "type": "literal",
+          "value": "Basel, Rheinhalle"
+        },
+        "identifier": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "2289"
+        },
+        "type": {
+          "type": "literal",
+          "value": "river"
+        },
+        "waterBody": {
+          "type": "literal",
+          "value": "Rhein"
+        },
+        "wkt": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "POINT(7.61667541986706 47.559425547598934)"
+        },
+        "t": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "2026-09-07T23:40:00+01:00"
+        },
+        "level": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "245.022"
+        },
+        "discharge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "517.275"
+        },
+        "danger": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "1"
+        },
+        "isLiter": {
+          "type": "literal",
+          "value": "true"
+        }
+      },
+      {
+        "station": {
+          "type": "uri",
+          "value": "https://environment.ld.admin.ch/foen/hydro/station/2135"
+        },
+        "name": {
+          "type": "literal",
+          "value": "Bern, Sch\u00f6nau"
+        },
+        "identifier": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "2135"
+        },
+        "type": {
+          "type": "literal",
+          "value": "river"
+        },
+        "waterBody": {
+          "type": "literal",
+          "value": "Aare"
+        },
+        "wkt": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "POINT(7.447960704633386 46.93309030401403)"
+        },
+        "t": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "2026-09-07T23:40:00+01:00"
+        },
+        "level": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "502.172"
+        },
+        "discharge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "102.191"
+        },
+        "temp": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "20.980"
+        },
+        "danger": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "1"
+        },
+        "isLiter": {
+          "type": "literal",
+          "value": "true"
+        }
+      },
+      {
+        "station": {
+          "type": "uri",
+          "value": "https://environment.ld.admin.ch/foen/hydro/station/2019"
+        },
+        "name": {
+          "type": "literal",
+          "value": "Brienzwiler"
+        },
+        "identifier": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "2019"
+        },
+        "type": {
+          "type": "literal",
+          "value": "river"
+        },
+        "waterBody": {
+          "type": "literal",
+          "value": "Aare"
+        },
+        "wkt": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "POINT(8.092031848446195 46.74573701982401)"
+        },
+        "t": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "2026-09-07T23:40:00+01:00"
+        },
+        "level": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "570.199"
+        },
+        "discharge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "36.822"
+        },
+        "temp": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "8.840"
+        },
+        "danger": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "1"
+        },
+        "isLiter": {
+          "type": "literal",
+          "value": "true"
+        }
+      },
+      {
+        "station": {
+          "type": "uri",
+          "value": "https://environment.ld.admin.ch/foen/hydro/station/2016"
+        },
+        "name": {
+          "type": "literal",
+          "value": "Brugg"
+        },
+        "identifier": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "2016"
+        },
+        "type": {
+          "type": "literal",
+          "value": "river"
+        },
+        "waterBody": {
+          "type": "literal",
+          "value": "Aare"
+        },
+        "wkt": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "POINT(8.194882033287401 47.48253378217166)"
+        },
+        "t": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "2026-09-07T23:40:00+01:00"
+        },
+        "level": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "331.299"
+        },
+        "discharge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "148.087"
+        },
+        "temp": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "22.260"
+        },
+        "danger": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "1"
+        },
+        "isLiter": {
+          "type": "literal",
+          "value": "true"
+        }
+      },
+      {
+        "station": {
+          "type": "uri",
+          "value": "https://environment.ld.admin.ch/foen/hydro/station/2152"
+        },
+        "name": {
+          "type": "literal",
+          "value": "Luzern, Geissmattbr\u00fccke"
+        },
+        "identifier": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "2152"
+        },
+        "type": {
+          "type": "literal",
+          "value": "river"
+        },
+        "waterBody": {
+          "type": "literal",
+          "value": "Reuss"
+        },
+        "wkt": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "POINT(8.29848048719635 47.054004574664305)"
+        },
+        "t": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "2026-09-07T23:40:00+01:00"
+        },
+        "level": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "430.941"
+        },
+        "discharge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "47.111"
+        },
+        "temp": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "23.060"
+        },
+        "danger": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "1"
+        },
+        "isLiter": {
+          "type": "literal",
+          "value": "true"
+        }
+      },
+      {
+        "station": {
+          "type": "uri",
+          "value": "https://environment.ld.admin.ch/foen/hydro/station/2372"
+        },
+        "name": {
+          "type": "literal",
+          "value": "Mollis, Linthbr\u00fccke"
+        },
+        "identifier": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "2372"
+        },
+        "type": {
+          "type": "literal",
+          "value": "river"
+        },
+        "waterBody": {
+          "type": "literal",
+          "value": "Linth"
+        },
+        "wkt": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "POINT(9.071992512661655 47.10107212549996)"
+        },
+        "t": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "2026-09-07T23:40:00+01:00"
+        },
+        "level": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "433.939"
+        },
+        "discharge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "11.241"
+        },
+        "temp": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.210"
+        },
+        "danger": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "1"
+        },
+        "isLiter": {
+          "type": "literal",
+          "value": "true"
+        }
+      },
+      {
+        "station": {
+          "type": "uri",
+          "value": "https://environment.ld.admin.ch/foen/hydro/station/2091"
+        },
+        "name": {
+          "type": "literal",
+          "value": "Rheinfelden"
+        },
+        "identifier": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "2091"
+        },
+        "type": {
+          "type": "literal",
+          "value": "river"
+        },
+        "waterBody": {
+          "type": "literal",
+          "value": "Rhein"
+        },
+        "wkt": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "POINT(7.799905094975461 47.56070831124783)"
+        },
+        "t": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "2026-09-07T23:40:00+01:00"
+        },
+        "level": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "261.260"
+        },
+        "discharge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "405.191"
+        },
+        "temp": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "22.220"
+        },
+        "danger": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "1"
+        },
+        "isLiter": {
+          "type": "literal",
+          "value": "true"
+        }
+      },
+      {
+        "station": {
+          "type": "uri",
+          "value": "https://environment.ld.admin.ch/foen/hydro/station/2074"
+        },
+        "name": {
+          "type": "literal",
+          "value": "Brissago"
+        },
+        "identifier": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "type": "literal",
+          "value": "2074"
+        },
+        "type": {
+          "type": "literal",
+          "value": "lake"
+        },
+        "waterBody": {
+          "type": "literal",
+          "value": "Lago Maggiore"
+        },
+        "wkt": {
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "type": "literal",
+          "value": "POINT(8.710904470043026 46.118122093495536)"
+        },
+        "t": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "type": "literal",
+          "value": "2026-09-07T23:40:00+01:00"
+        },
+        "level": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "192.776"
+        },
+        "danger": {
+          "type": "uri",
+          "value": "https://cube.link/Undefined"
+        }
+      }
+    ]
+  }
+}

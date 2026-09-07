@@ -1,5 +1,6 @@
 import Link from "next/link";
-import type { WeatherState } from "@swiss-now/core";
+import type { HydrologyState, WeatherState } from "@swiss-now/core";
+import { getHydrologyState } from "@/lib/state/hydrology";
 import { listSources } from "@swiss-now/core";
 import { getWeatherState } from "@/lib/state/weather";
 import { formatTime } from "@/lib/format";
@@ -10,11 +11,13 @@ export const revalidate = 60;
 export default async function StatusPage() {
   let weather: WeatherState | undefined;
   let weatherError: string | undefined;
-  try {
-    weather = await getWeatherState();
-  } catch (e) {
-    weatherError = e instanceof Error ? e.message : String(e);
-  }
+  let hydrology: HydrologyState | undefined;
+  let hydrologyError: string | undefined;
+  const [w, h] = await Promise.allSettled([getWeatherState(), getHydrologyState()]);
+  if (w.status === "fulfilled") weather = w.value;
+  else weatherError = w.reason instanceof Error ? w.reason.message : String(w.reason);
+  if (h.status === "fulfilled") hydrology = h.value;
+  else hydrologyError = h.reason instanceof Error ? h.reason.message : String(h.reason);
   const sources = listSources();
   const cadence = (s: number) =>
     s >= 86_400
@@ -55,6 +58,19 @@ export default async function StatusPage() {
               <td className="tnum">{weather ? formatTime(weather.observedAt) : weatherError}</td>
               <td className="tnum">{weather?.stations.length ?? "–"}</td>
               <td className="tnum">{weather?.observations.length ?? "–"}</td>
+            </tr>
+            <tr>
+              <td>hydrology</td>
+              <td>
+                <span className="freshness" data-state={hydrology?.freshness ?? "outage"}>
+                  {hydrology?.freshness ?? "outage"}
+                </span>
+              </td>
+              <td className="tnum">
+                {hydrology ? formatTime(hydrology.observedAt) : hydrologyError}
+              </td>
+              <td className="tnum">{hydrology?.stations.length ?? "–"}</td>
+              <td className="tnum">{hydrology?.observations.length ?? "–"}</td>
             </tr>
           </tbody>
         </table>

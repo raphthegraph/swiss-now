@@ -12,7 +12,8 @@
     "./geo": "./src/geo/index.ts",
     "./data-sources": "./src/data-sources/index.ts",
     "./data-sources/geoadmin": "./src/data-sources/geoadmin/index.ts",
-    "./data-sources/meteoswiss/radar": "./src/data-sources/meteoswiss/radar/index.ts"
+    "./data-sources/meteoswiss/radar": "./src/data-sources/meteoswiss/radar/index.ts",
+    "./data-sources/hydrology": "./src/data-sources/hydrology/index.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

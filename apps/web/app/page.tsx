@@ -1,6 +1,7 @@
 import { Suspense } from "react";
-import type { WeatherState } from "@swiss-now/core";
+import type { HydrologyState, WeatherState } from "@swiss-now/core";
 import { getWeatherState } from "@/lib/state/weather";
+import { getHydrologyState } from "@/lib/state/hydrology";
 import { MapPage } from "@/components/map/MapPage";
 
 export const revalidate = 300;
@@ -8,12 +9,12 @@ export const revalidate = 300;
 /** The stage: full-screen live map with the summary strip as HUD. */
 export default async function HomePage() {
   let state: WeatherState | undefined;
+  let hydrology: HydrologyState | undefined;
   let error: string | undefined;
-  try {
-    state = await getWeatherState();
-  } catch (e) {
-    error = e instanceof Error ? e.message : String(e);
-  }
+  const [w, h] = await Promise.allSettled([getWeatherState(), getHydrologyState()]);
+  if (w.status === "fulfilled") state = w.value;
+  else error = w.reason instanceof Error ? w.reason.message : String(w.reason);
+  if (h.status === "fulfilled") hydrology = h.value;
   if (!state) {
     return (
       <main className="page">
@@ -30,7 +31,7 @@ export default async function HomePage() {
   return (
     <main className="stage">
       <Suspense fallback={null}>
-        <MapPage initial={state} />
+        <MapPage initial={state} initialHydrology={hydrology} />
       </Suspense>
     </main>
   );

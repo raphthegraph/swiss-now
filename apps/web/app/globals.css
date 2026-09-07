@@ -374,3 +374,57 @@ table.sources th {
     grid-column: 1 / -1;
   }
 }
+
+/* ---- layer rail ---- */
+.hud--rail {
+  top: 50%;
+  left: var(--sn-hud-margin-regular);
+  right: auto;
+  transform: translateY(-50%);
+}
+.hud--rail ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--sn-space-2);
+}
+.rail__item {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  padding: 2px 0 2px var(--sn-space-3);
+  font: inherit;
+  font-size: var(--sn-type-label-size);
+  letter-spacing: var(--sn-type-label-tracking);
+  text-transform: uppercase;
+  color: var(--sn-ground-graphite);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    color var(--sn-duration-hover) var(--sn-ease-house),
+    border-color var(--sn-duration-hover) var(--sn-ease-house);
+}
+.rail__item:hover {
+  color: var(--sn-ground-ink);
+}
+.rail__item[aria-current="true"] {
+  color: var(--sn-ground-ink);
+  border-left-color: var(--sn-ground-ink);
+}
+.hover-card--water {
+  border-left-color: var(--sn-accent-hydrology);
+}
+@media (max-width: 767px) {
+  .hud--rail {
+    top: auto;
+    bottom: 200px;
+    left: var(--sn-hud-margin-compact);
+    transform: none;
+  }
+  .hud--rail ul {
+    grid-auto-flow: column;
+    gap: var(--sn-space-4);
+  }
+}

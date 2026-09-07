@@ -1,12 +1,57 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import type { WeatherState } from "@swiss-now/core";
+import type { HydrologyState, WeatherState } from "@swiss-now/core";
+import type { ActiveLayer } from "@/lib/layers";
 import { formatNumber, formatTime } from "@/lib/format";
 
 /** National summary — the default view already answers "what is it like out there". */
-export function SummaryStrip({ state, children }: { state: WeatherState; children?: ReactNode }) {
+export function SummaryStrip({
+  state,
+  hydrology,
+  active = "now",
+  children,
+}: {
+  state: WeatherState;
+  hydrology?: HydrologyState | undefined;
+  active?: ActiveLayer;
+  children?: ReactNode;
+}) {
   const name = (id: string) => state.stations.find((s) => s.id === id)?.name.en ?? id;
   const items: { label: string; value: string; unit: string; where: string }[] = [];
+  const water: typeof items = [];
+  if (hydrology) {
+    const basel = hydrology.observations.find(
+      (o) => o.stationId === "bafu:2289" && o.parameter === "discharge",
+    );
+    if (basel)
+      water.push({
+        label: "Rhine at Basel",
+        value: formatNumber(basel.value, 0),
+        unit: "m³/s",
+        where: "FOEN, Rheinhalle",
+      });
+    const elevated = Object.values(hydrology.dangerLevels).filter((d) => d >= 2).length;
+    water.push({
+      label: "Flood danger",
+      value: String(elevated),
+      unit: elevated === 1 ? "station ≥ level 2" : "stations ≥ level 2",
+      where: `${Object.keys(hydrology.dangerLevels).length} classified stations`,
+    });
+    const temps = hydrology.observations.filter((o) => o.parameter === "waterTemperature");
+    const warmest = temps.reduce<(typeof temps)[number] | undefined>(
+      (b, o) => (!b || o.value > b.value ? o : b),
+      undefined,
+    );
+    if (warmest) {
+      const st = hydrology.stations.find((s) => s.id === warmest.stationId);
+      water.push({
+        label: "Warmest river",
+        value: formatNumber(warmest.value),
+        unit: "°C",
+        where: `${st?.waterBody ?? ""} ${st?.name.de ?? ""}`.trim(),
+      });
+    }
+  }
   if (state.extremes.warmest)
     items.push({
       label: "Warmest",
@@ -36,6 +81,12 @@ export function SummaryStrip({ state, children }: { state: WeatherState; childre
       where: `${state.stations.length} stations`,
     });
 
+  const shown =
+    active === "water"
+      ? water
+      : active === "weather"
+        ? items
+        : [...items.slice(0, 3), ...water.slice(0, 1)];
   return (
     <>
       <header className="hud hud--top">
@@ -50,7 +101,7 @@ export function SummaryStrip({ state, children }: { state: WeatherState; childre
       <section className="hud hud--bottom" aria-label="Switzerland right now">
         {children}
         <div className="strip">
-          {items.map((m) => (
+          {shown.map((m) => (
             <div className="metric metric--hud" key={m.label}>
               <div className="label">{m.label}</div>
               <div className="value tnum">
@@ -63,6 +114,7 @@ export function SummaryStrip({ state, children }: { state: WeatherState; childre
         </div>
         <div className="colophon colophon--hud">
           <span>Source: MeteoSwiss</span>
+          {hydrology ? <span>Source: FOEN</span> : null}
           <span>© swisstopo</span>
           <Link href="/status">Status</Link>
         </div>

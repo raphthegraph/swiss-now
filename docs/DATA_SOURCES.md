@@ -115,7 +115,7 @@ No STAC collection, no geo.admin layer, not on the roadmap; app endpoints 404. *
 ### 3.1 LINDAS SPARQL — the official API — V
 
 - Endpoint `POST https://ld.admin.ch/query` (also `lindas.admin.ch/query`), form-encoded `query=`, `Accept: application/sparql-results+json`; graph `<https://lindas.admin.ch/foen/hydro>`; cubes `…/foen/hydro/river` (200 stations) and `…/hydro/lake` (34). No auth.
-- Per observation: `measurementTime`, `waterLevel` (224), `discharge` (188), `waterTemperature` (84), **`dangerLevel` (233, scale 1–5)**, `isLiter` flag (semantics **U**: presumably L/s vs m³/s). Station: `schema:name`, identifier, water body (162), geometry WKT **WGS84**.
+- Per observation: `measurementTime`, `waterLevel` (224), `discharge` (188), `waterTemperature` (84), **`dangerLevel`** (1–5 on 181 stations, `cube:Undefined` on the rest). `isLiter` is `true` on **every** discharge row while values are plainly m³/s (Rhine at Basel 517 on 2026-09-07) → ignored (**V**). Station: `schema:name`, identifier, water body (162), geometry WKT **WGS84**.
 - Observed lag ~21 min (docs: updated every 10 min). Licence `TermsOfUse/Open-Use` = "NonCommercialAllowed-CommercialAllowed-ReferenceNotRequired". Dataset `creativeWorkStatus: Draft`; `example.com` placeholder predicates; `measurementTime` carries a fixed `+01:00` offset year-round (correct as an instant — parse, don't strip). Contact `abfragezentrale@bafu.admin.ch`.
 - hydrodaten.admin.ch itself has no JSON API; its "receive latest data" page points to LINDAS.
 
