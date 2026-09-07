@@ -48,6 +48,8 @@ function firstSymbolLayerId(map: MapLibreMap): string | undefined {
 
 export interface LiveMapProps {
   weather: WeatherState;
+  /** Receives the map once its style has loaded (overlays such as WindParticles attach here). */
+  onMapReady?: (map: MapLibreMap) => void;
   /** Called once per animation frame while the map renders; used by the FPS meter in Spike A. */
   onFrame?: (nowMs: number) => void;
 }
@@ -56,7 +58,7 @@ export interface LiveMapProps {
  * The stage. MapLibre GL owns the camera and the data layers (docs/MOTION_SYSTEM.md §1);
  * React owns the HUD around it. Temperature is encoded with the shared token scale.
  */
-export function LiveMap({ weather, onFrame }: LiveMapProps) {
+export function LiveMap({ weather, onFrame, onMapReady }: LiveMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const [ready, setReady] = useState(false);
@@ -183,6 +185,7 @@ export function LiveMap({ weather, onFrame }: LiveMapProps) {
         setHovered((h) => (h ? { ...h, point: map.project(h.lonLat) } : h));
       });
       setReady(true);
+      onMapReady?.(map);
     });
 
     if (onFrame) map.on("render", () => onFrame(performance.now()));

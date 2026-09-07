@@ -294,3 +294,9 @@ table.sources th {
   margin: var(--sn-space-1) 0 0;
   color: var(--sn-ground-ink);
 }
+.wind-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
