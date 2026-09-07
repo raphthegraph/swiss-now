@@ -5,6 +5,7 @@ import {
   Map as MapLibreMap,
   setWorkerUrl,
   type GeoJSONSource,
+  type ImageSource,
   type MapGeoJSONFeature,
   type MapMouseEvent,
 } from "maplibre-gl";
@@ -20,8 +21,30 @@ const STYLE_URL = "/map/swiss-now-light.json";
 // Worker served as a static module (see scripts/copy-maplibre-worker.mjs) — bundlers mis-resolve import.meta.url.
 setWorkerUrl("/map/vendor/maplibre-gl-worker.mjs");
 const SOURCE = "weather-stations";
+const RADAR_SOURCE = "radar";
+const RADAR_LAYER = "radar-rain";
 const LAYER_CIRCLES = "weather-temp-circles";
 const LAYER_LABELS = "weather-temp-labels";
+
+/** MapLibre image sources take corners clockwise from the top-left. */
+function fieldCorners([w, s, e, n]: [number, number, number, number]): [
+  [number, number],
+  [number, number],
+  [number, number],
+  [number, number],
+] {
+  return [
+    [w, n],
+    [e, n],
+    [e, s],
+    [w, s],
+  ];
+}
+
+/** Insert data rasters below the basemap's labels so place names stay legible. */
+function firstSymbolLayerId(map: MapLibreMap): string | undefined {
+  return map.getStyle().layers.find((l) => l.type === "symbol")?.id;
+}
 
 export interface LiveMapProps {
   weather: WeatherState;
@@ -75,6 +98,28 @@ export function LiveMap({ weather, onFrame }: LiveMapProps) {
     mapRef.current = map;
 
     map.on("load", () => {
+      // precipitation radar: latest Mercator-warped composite as an image source under the stations
+      const latest = weather.fields.find((f) => f.kind === "radar-rain-rate");
+      if (latest) {
+        map.addSource(RADAR_SOURCE, {
+          type: "image",
+          url: latest.imageUrl,
+          coordinates: fieldCorners(latest.bounds),
+        });
+        map.addLayer(
+          {
+            id: RADAR_LAYER,
+            type: "raster",
+            source: RADAR_SOURCE,
+            paint: {
+              "raster-opacity": 0.78,
+              "raster-fade-duration": 0,
+              "raster-resampling": "linear",
+            },
+          },
+          firstSymbolLayerId(map),
+        );
+      }
       map.addSource(SOURCE, { type: "geojson", data: stationsToGeoJSON(weather), promoteId: "id" });
       map.addLayer({
         id: LAYER_CIRCLES,
@@ -149,12 +194,16 @@ export function LiveMap({ weather, onFrame }: LiveMapProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- map is created once; data updates flow through the effect below
   }, []);
 
-  // push new data into the existing source
+  // push new data into the existing sources
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !ready) return;
     const src = map.getSource(SOURCE) as GeoJSONSource | undefined;
     src?.setData(stationsToGeoJSON(weather));
+    const latest = weather.fields.find((f) => f.kind === "radar-rain-rate");
+    const radar = map.getSource(RADAR_SOURCE) as ImageSource | undefined;
+    if (latest && radar)
+      radar.updateImage({ url: latest.imageUrl, coordinates: fieldCorners(latest.bounds) });
   }, [weather, ready]);
 
   return (

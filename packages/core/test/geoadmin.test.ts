@@ -38,11 +38,11 @@ describe("geo.admin measurement layers", () => {
     expect(arosa?.lonLat[1]).toBeCloseTo(46.79, 1);
   });
 
-  it("emits wind direction alongside gusts", () => {
+  it("emits gusts without duplicating wind direction (direction comes from the wind-speed layer)", () => {
     const gust = normalizeGeoAdminLayer(parseGeoAdminLayer(fixture(GUST)), GUST);
     const params = new Set(gust.observations.map((o) => o.parameter));
     expect(params.has("windGust")).toBe(true);
-    expect(params.has("windDirection")).toBe(true);
+    expect(params.has("windDirection")).toBe(false);
   });
 
   it("builds a WeatherState with extremes, merged stations and freshness", () => {

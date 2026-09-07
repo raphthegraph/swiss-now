@@ -98,7 +98,7 @@
 - ODIM **HDF5** v2.4, **EPSG:2056**, < 1 MB per file (observed 50–110 KB), rolling **14 days**, one STAC item per day (`YYYYMMDD-ch`; today 689 assets; **tomorrow's item exists and is empty**).
 - Products: `RZC` PRECIP 5-radar composite rain rate mm/h, 5 min · `TZC` PRECIP-SV · `CPC` CombiPrecip radar+gauge 60-min accumulation, 5 min (quality flag `Q`) · `CPCH` reanalysis hourly, overwrites after 8 days.
 - Filenames `RZCyyjjjHHMMKK.XYZ.h5`; `KK` changes with radar availability → **list assets, never construct names**. Latency observed ~2 min.
-- Needs server-side decoding (h5wasm in Node, or Python in GitHub Actions) to PNG frames. Hail: `ogd-radar-hail` (POH %, MESHS cm), empty Oct–Mar. Reflectivity/convection products planned end of Sept 2026.
+- Decoded server-side with h5wasm in a Node route handler (verified 2026-09-08: values are float64 mm/h, `nodata` NaN outside coverage, `undetect` 0; ~30 ms decode + one-off 1.5 s Mercator lookup build; warm PNG in ~50 ms). h5wasm's virtual FS root is read-only in Node — write under `/tmp`. Hail: `ogd-radar-hail` (POH %, MESHS cm), empty Oct–Mar. Reflectivity/convection products planned end of Sept 2026.
 
 ### 2.4 Forecasts — V
 

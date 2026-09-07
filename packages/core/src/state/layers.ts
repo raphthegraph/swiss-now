@@ -44,6 +44,8 @@ export const WeatherState = LayerBase.extend({
   extremes: WeatherExtremes,
   /** Share of stations reporting precipitation > 0 in the last 10 minutes, 0–1. */
   rainingShare: z.number().min(0).max(1).optional(),
+  /** Share of the Swiss bounding box with radar rain rate ≥ 0.1 mm/h in the latest composite, 0–1. */
+  rainingAreaShare: z.number().min(0).max(1).optional(),
 });
 export type WeatherState = z.infer<typeof WeatherState>;
 

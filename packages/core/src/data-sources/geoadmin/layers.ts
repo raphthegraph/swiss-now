@@ -32,7 +32,12 @@ export type GeoAdminMeasurementLayerId = keyof typeof GEOADMIN_MEASUREMENT_LAYER
 export const WEATHER_LAYERS_MVP: GeoAdminMeasurementLayerId[] = [
   "ch.meteoschweiz.messwerte-lufttemperatur-10min",
   "ch.meteoschweiz.messwerte-niederschlag-10min",
+  "ch.meteoschweiz.messwerte-niederschlag-1h",
+  "ch.meteoschweiz.messwerte-niederschlag-24h",
   "ch.meteoschweiz.messwerte-wind-boeenspitze-kmh-10min",
+  "ch.meteoschweiz.messwerte-windgeschwindigkeit-kmh-10min",
+  "ch.meteoschweiz.messwerte-schneehoehe-automatisch-10min",
+  "ch.meteoschweiz.messwerte-luftfeuchtigkeit-10min",
 ];
 
 export type GeoAdminLang = "de" | "fr" | "it" | "en";

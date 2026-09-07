@@ -45,7 +45,7 @@ export function normalizeGeoAdminLayer(
     const ts = f.properties.reference_ts;
     if (ts === "-" || f.properties.value === null || !Number.isFinite(f.properties.value)) continue;
     observations.push({ stationId: id, parameter, value: f.properties.value, observedAt: ts });
-    if (parameter === "windGust" && f.properties.wind_direction !== undefined) {
+    if (parameter === "windSpeed" && f.properties.wind_direction !== undefined) {
       observations.push({
         stationId: id,
         parameter: "windDirection",
