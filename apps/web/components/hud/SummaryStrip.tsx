@@ -1,5 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { duration } from "@swiss-now/motion/tokens";
+
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 import type { HydrologyState, WeatherState } from "@swiss-now/core";
 import type { ActiveLayer } from "@/lib/layers";
 import { formatNumber, formatTime } from "@/lib/format";
@@ -10,11 +16,13 @@ export function SummaryStrip({
   hydrology,
   active = "now",
   children,
+  home,
 }: {
   state: WeatherState;
   hydrology?: HydrologyState | undefined;
   active?: ActiveLayer;
   children?: ReactNode;
+  home?: ReactNode;
 }) {
   const name = (id: string) => state.stations.find((s) => s.id === id)?.name.en ?? id;
   const items: { label: string; value: string; unit: string; where: string }[] = [];
@@ -89,28 +97,50 @@ export function SummaryStrip({
         : [...items.slice(0, 3), ...water.slice(0, 1)];
   return (
     <>
-      <header className="hud hud--top">
+      <motion.header
+        className="hud hud--top"
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: duration.layerSwitch / 1000, ease: EASE }}
+      >
         <h1>Swiss Now</h1>
+        {home}
         <span className="label tnum">
           Switzerland · {formatTime(state.observedAt)} ·{" "}
           <span className="freshness" data-state={state.freshness}>
             {state.freshness}
           </span>
         </span>
-      </header>
-      <section className="hud hud--bottom" aria-label="Switzerland right now">
+      </motion.header>
+      <motion.section
+        className="hud hud--bottom"
+        aria-label="Switzerland right now"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: duration.layerSwitch / 1000, ease: EASE, delay: 0.08 }}
+      >
         {children}
         <div className="strip">
-          {shown.map((m) => (
-            <div className="metric metric--hud" key={m.label}>
-              <div className="label">{m.label}</div>
-              <div className="value tnum">
-                {m.value}
-                <span className="unit">{m.unit}</span>
-              </div>
-              <div className="where">{m.where}</div>
-            </div>
-          ))}
+          <AnimatePresence mode="popLayout" initial={false}>
+            {shown.map((m) => (
+              <motion.div
+                className="metric metric--hud"
+                key={m.label}
+                layout
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: duration.panel / 1000, ease: EASE }}
+              >
+                <div className="label">{m.label}</div>
+                <div className="value tnum">
+                  {m.value}
+                  <span className="unit">{m.unit}</span>
+                </div>
+                <div className="where">{m.where}</div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
         <div className="colophon colophon--hud">
           <span>Source: MeteoSwiss</span>
@@ -118,7 +148,7 @@ export function SummaryStrip({
           <span>© swisstopo</span>
           <Link href="/status">Status</Link>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 }

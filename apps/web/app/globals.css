@@ -428,3 +428,110 @@ table.sources th {
     gap: var(--sn-space-4);
   }
 }
+
+/* ---- home place ---- */
+.home {
+  position: relative;
+  flex: 1;
+  margin: 0 var(--sn-space-6);
+  min-width: 0;
+}
+.home__button {
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--sn-ground-ink);
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.home__name {
+  font-weight: 500;
+}
+.home__now {
+  color: var(--sn-ground-graphite);
+}
+.home__meta {
+  display: block;
+  margin-top: 2px;
+}
+.home__popover {
+  position: absolute;
+  top: calc(100% + var(--sn-space-3));
+  left: 0;
+  z-index: 3;
+  width: 280px;
+  max-height: 60vh;
+  overflow: auto;
+  background: rgba(244, 243, 239, 0.98);
+  border-left: 2px solid var(--sn-ground-ink);
+  padding: var(--sn-space-2) 0;
+  box-shadow: 0 8px 24px rgba(17, 18, 20, 0.08);
+}
+.home__popover ul {
+  list-style: none;
+  margin: var(--sn-space-2) 0;
+  padding: 0;
+  columns: 2;
+}
+.home__option,
+.home__action {
+  appearance: none;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  padding: 4px var(--sn-space-3);
+  color: var(--sn-ground-ink);
+  cursor: pointer;
+}
+.home__option:hover,
+.home__action:hover,
+.home__option[aria-selected="true"] {
+  background: var(--sn-ground-ink);
+  color: var(--sn-ground-paper);
+}
+.home__option[aria-selected="true"] .label,
+.home__option:hover .label {
+  color: inherit;
+}
+.home__action {
+  font-size: var(--sn-type-label-size);
+  letter-spacing: var(--sn-type-label-tracking);
+  text-transform: uppercase;
+}
+.home__action:disabled {
+  color: var(--sn-ground-graphite);
+  cursor: progress;
+}
+.rail__item {
+  position: relative;
+  border-left-color: transparent !important;
+}
+.rail__indicator {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--sn-ground-ink);
+}
+.hover-anchor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+@media (max-width: 767px) {
+  .home {
+    margin: 0 var(--sn-space-3);
+  }
+  .home__now {
+    display: none;
+  }
+}

@@ -13,13 +13,15 @@ import type { Point } from "geojson";
 import type { Field, HydrologyState, WeatherState } from "@swiss-now/core";
 import { hydroToGeoJSON, riverWidthExpression } from "@/lib/map/hydro-geojson";
 import type { ActiveLayer } from "@/lib/layers";
-import { layerAccent } from "@swiss-now/motion/tokens";
+import { layerAccent, duration } from "@swiss-now/motion/tokens";
+import { easeHouse } from "@swiss-now/motion/math";
 import { SWITZERLAND_BBOX } from "@swiss-now/motion/specs";
 import { ground } from "@swiss-now/motion/tokens";
 import { colorExpression } from "@/lib/map/expressions";
 import { stationsToGeoJSON, type StationFeatureProps } from "@/lib/map/stations-geojson";
 import type { HydroFeatureProps } from "@/lib/map/hydro-geojson";
 import { HoverCard, type Hovered } from "./HoverCard";
+import { AnimatePresence, motion } from "motion/react";
 
 const STYLE_URL = "/map/swiss-now-light.json";
 // Worker served as a static module (see scripts/copy-maplibre-worker.mjs) — bundlers mis-resolve import.meta.url.
@@ -58,6 +60,8 @@ function firstSymbolLayerId(map: MapLibreMap): string | undefined {
 
 export interface LiveMapProps {
   weather: WeatherState;
+  /** Camera target; changing it glides the camera with the house easing. `null` = whole country. */
+  focus?: { lonLat: [number, number]; zoom: number; key: string } | null | undefined;
   hydrology?: HydrologyState | undefined;
   active: ActiveLayer;
   /** Radar frame to show; defaults to the newest in `weather.fields`. */
@@ -76,6 +80,7 @@ export function LiveMap({
   weather,
   hydrology,
   active,
+  focus,
   radarFrame,
   onFrame,
   onMapReady,
@@ -384,6 +389,26 @@ export function LiveMap({
     src?.setData(stationsToGeoJSON(weather));
   }, [weather, ready]);
 
+  // camera glide to the focus place (or back to the country)
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready || focus === undefined) return;
+    if (focus === null) {
+      map.fitBounds(SWITZERLAND_BBOX as [number, number, number, number], {
+        padding: { top: 96, right: 48, bottom: 160, left: 48 },
+        duration: duration.cameraGlide,
+        easing: easeHouse,
+      });
+      return;
+    }
+    map.easeTo({
+      center: focus.lonLat,
+      zoom: focus.zoom,
+      duration: duration.cameraGlide,
+      easing: easeHouse,
+    });
+  }, [focus?.key, ready]);
+
   // hydrology updates
   useEffect(() => {
     const map = mapRef.current;
@@ -445,7 +470,20 @@ export function LiveMap({
           <p>{unsupported}</p>
         </div>
       ) : null}
-      {hovered ? <HoverCard hovered={hovered} freshness={weather.freshness} /> : null}
+      <AnimatePresence>
+        {hovered ? (
+          <motion.div
+            key="hover"
+            className="hover-anchor"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: duration.hover / 1000 }}
+          >
+            <HoverCard hovered={hovered} freshness={weather.freshness} />
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

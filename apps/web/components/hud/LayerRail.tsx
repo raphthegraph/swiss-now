@@ -1,6 +1,9 @@
 "use client";
 
+import { motion } from "motion/react";
 import { LAYER_RAIL, type ActiveLayer } from "@/lib/layers";
+
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 /** Typographic layer rail (docs/PRODUCT_VISION.md §5.2). Selecting a layer reduces the composite to that system. */
 export function LayerRail({
