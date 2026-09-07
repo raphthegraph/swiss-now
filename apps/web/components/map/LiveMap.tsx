@@ -10,7 +10,7 @@ import {
   type MapMouseEvent,
 } from "maplibre-gl";
 import type { Point } from "geojson";
-import type { WeatherState } from "@swiss-now/core";
+import type { Field, WeatherState } from "@swiss-now/core";
 import { SWITZERLAND_BBOX } from "@swiss-now/motion/specs";
 import { ground } from "@swiss-now/motion/tokens";
 import { colorExpression } from "@/lib/map/expressions";
@@ -21,8 +21,10 @@ const STYLE_URL = "/map/swiss-now-light.json";
 // Worker served as a static module (see scripts/copy-maplibre-worker.mjs) — bundlers mis-resolve import.meta.url.
 setWorkerUrl("/map/vendor/maplibre-gl-worker.mjs");
 const SOURCE = "weather-stations";
-const RADAR_SOURCE = "radar";
-const RADAR_LAYER = "radar-rain";
+const RADAR_SOURCES = ["radar-a", "radar-b"] as const;
+const RADAR_LAYERS = ["radar-rain-a", "radar-rain-b"] as const;
+const RADAR_OPACITY = 0.78;
+const RADAR_FADE_MS = 220;
 const LAYER_CIRCLES = "weather-temp-circles";
 const LAYER_LABELS = "weather-temp-labels";
 
@@ -48,6 +50,8 @@ function firstSymbolLayerId(map: MapLibreMap): string | undefined {
 
 export interface LiveMapProps {
   weather: WeatherState;
+  /** Radar frame to show; defaults to the newest in `weather.fields`. */
+  radarFrame?: Field | undefined;
   /** Receives the map once its style has loaded (overlays such as WindParticles attach here). */
   onMapReady?: (map: MapLibreMap) => void;
   /** Called once per animation frame while the map renders; used by the FPS meter in Spike A. */
@@ -58,12 +62,15 @@ export interface LiveMapProps {
  * The stage. MapLibre GL owns the camera and the data layers (docs/MOTION_SYSTEM.md §1);
  * React owns the HUD around it. Temperature is encoded with the shared token scale.
  */
-export function LiveMap({ weather, onFrame, onMapReady }: LiveMapProps) {
+export function LiveMap({ weather, radarFrame, onFrame, onMapReady }: LiveMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const [ready, setReady] = useState(false);
   const [hovered, setHovered] = useState<Hovered | null>(null);
   const [unsupported, setUnsupported] = useState<string | null>(null);
+  /** index of the radar source currently visible */
+  const activeRadar = useRef<0 | 1>(0);
+  const shownFrameId = useRef<string | null>(null);
 
   // create the map once
   useEffect(() => {
@@ -100,27 +107,31 @@ export function LiveMap({ weather, onFrame, onMapReady }: LiveMapProps) {
     mapRef.current = map;
 
     map.on("load", () => {
-      // precipitation radar: latest Mercator-warped composite as an image source under the stations
-      const latest = weather.fields.find((f) => f.kind === "radar-rain-rate");
-      if (latest) {
-        map.addSource(RADAR_SOURCE, {
-          type: "image",
-          url: latest.imageUrl,
-          coordinates: fieldCorners(latest.bounds),
-        });
-        map.addLayer(
-          {
-            id: RADAR_LAYER,
-            type: "raster",
-            source: RADAR_SOURCE,
-            paint: {
-              "raster-opacity": 0.78,
-              "raster-fade-duration": 0,
-              "raster-resampling": "linear",
+      // precipitation radar: two alternating image sources so frame changes can crossfade
+      const initial = radarFrame ?? weather.fields.find((f) => f.kind === "radar-rain-rate");
+      if (initial) {
+        RADAR_SOURCES.forEach((sourceId, i) => {
+          map.addSource(sourceId, {
+            type: "image",
+            url: initial.imageUrl,
+            coordinates: fieldCorners(initial.bounds),
+          });
+          map.addLayer(
+            {
+              id: RADAR_LAYERS[i]!,
+              type: "raster",
+              source: sourceId,
+              paint: {
+                "raster-opacity": i === 0 ? RADAR_OPACITY : 0,
+                "raster-opacity-transition": { duration: RADAR_FADE_MS, delay: 0 },
+                "raster-fade-duration": 0,
+                "raster-resampling": "linear",
+              },
             },
-          },
-          firstSymbolLayerId(map),
-        );
+            firstSymbolLayerId(map),
+          );
+        });
+        shownFrameId.current = initial.id;
       }
       map.addSource(SOURCE, { type: "geojson", data: stationsToGeoJSON(weather), promoteId: "id" });
       map.addLayer({
@@ -203,11 +214,28 @@ export function LiveMap({ weather, onFrame, onMapReady }: LiveMapProps) {
     if (!map || !ready) return;
     const src = map.getSource(SOURCE) as GeoJSONSource | undefined;
     src?.setData(stationsToGeoJSON(weather));
-    const latest = weather.fields.find((f) => f.kind === "radar-rain-rate");
-    const radar = map.getSource(RADAR_SOURCE) as ImageSource | undefined;
-    if (latest && radar)
-      radar.updateImage({ url: latest.imageUrl, coordinates: fieldCorners(latest.bounds) });
   }, [weather, ready]);
+
+  // crossfade to the requested radar frame
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+    const frame = radarFrame ?? weather.fields.find((f) => f.kind === "radar-rain-rate");
+    if (!frame || frame.id === shownFrameId.current) return;
+    const next: 0 | 1 = activeRadar.current === 0 ? 1 : 0;
+    const src = map.getSource(RADAR_SOURCES[next]) as ImageSource | undefined;
+    if (!src) return;
+    src.updateImage({ url: frame.imageUrl, coordinates: fieldCorners(frame.bounds) });
+    // let the new image decode before swapping opacities
+    const swap = () => {
+      map.setPaintProperty(RADAR_LAYERS[next], "raster-opacity", RADAR_OPACITY);
+      map.setPaintProperty(RADAR_LAYERS[activeRadar.current], "raster-opacity", 0);
+      activeRadar.current = next;
+      shownFrameId.current = frame.id;
+    };
+    if (map.isSourceLoaded(RADAR_SOURCES[next])) swap();
+    else map.once("sourcedata", swap);
+  }, [radarFrame, weather.fields, ready]);
 
   return (
     <div className="map-root">

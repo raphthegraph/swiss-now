@@ -1,9 +1,10 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { WeatherState } from "@swiss-now/core";
 import { formatNumber, formatTime } from "@/lib/format";
 
 /** National summary — the default view already answers "what is it like out there". */
-export function SummaryStrip({ state }: { state: WeatherState }) {
+export function SummaryStrip({ state, children }: { state: WeatherState; children?: ReactNode }) {
   const name = (id: string) => state.stations.find((s) => s.id === id)?.name.en ?? id;
   const items: { label: string; value: string; unit: string; where: string }[] = [];
   if (state.extremes.warmest)
@@ -47,6 +48,7 @@ export function SummaryStrip({ state }: { state: WeatherState }) {
         </span>
       </header>
       <section className="hud hud--bottom" aria-label="Switzerland right now">
+        {children}
         <div className="strip">
           {items.map((m) => (
             <div className="metric metric--hud" key={m.label}>
