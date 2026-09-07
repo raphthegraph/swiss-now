@@ -1,0 +1,29 @@
+# Swiss Now — Spikes
+
+> Technical spikes from Phase 0 with results and decisions. Each spike is a small, disposable experiment whose outcome is recorded here and, where it changes a decision, in the other docs.
+
+## Spike A — MapLibre GL + swisstopo style + live temperature layer (2026-09-07)
+
+**Question.** Can the forked swisstopo vector style and a live MeteoSwiss station layer run smoothly in MapLibre GL inside the Next.js app, and should the MVP use MapLibre 5.24 or 6.7?
+
+**Setup.** `apps/web` production build (`next build`, Turbopack), MapLibre GL **6.7.0**, style `/map/swiss-now-light.json` (forked `ch.swisstopo.lightbasemap.vt`), GeoJSON source of 299 stations with a `circle` layer coloured by the shared temperature scale and a `symbol` layer with rounded values from zoom 8, hover card, visibility-aware 5-minute poller, opt-in FPS meter (`?fps=1`).
+
+**Results.**
+
+| Check                                      | Result                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| deck.gl 9.4 `@deck.gl/maplibre` peer range | `^4.5.1 \|\| ^5.0.0 \|\| ^6.0.0` → v6 is supported by the planned layer engine                                                                                                                                                                                                                                                                                                                                          |
+| Style, tiles, glyphs, sprites              | load from swisstopo with `© swisstopo` attribution; 4–7 vector tiles for the national view                                                                                                                                                                                                                                                                                                                              |
+| WebGL2 context                             | created; MapLibre 6 requires WebGL2                                                                                                                                                                                                                                                                                                                                                                                     |
+| Web worker under Turbopack                 | **failed initially**: MapLibre 6 spawns a module worker via `import.meta.url`, which Turbopack resolved to the page URL, so the worker fetched HTML ("non-JavaScript MIME type"). **Fix:** copy `maplibre-gl-worker.mjs` + `maplibre-gl-shared.mjs` to `public/map/vendor/` on `predev`/`prebuild` and call `setWorkerUrl("/map/vendor/maplibre-gl-worker.mjs")`. Verified: worker and shared chunk load, tiles arrive. |
+| No-WebGL2 environments                     | **failed initially**: MapLibre threw inside a client effect and Next's error boundary replaced the page. **Fix:** probe `webgl2` first and render an honest "Map unavailable" notice while the HUD stays live. Verified headless (gstack Chromium has no WebGL2).                                                                                                                                                       |
+| Frame rate (desktop / phone)               | **not measured in this session**: the in-app browser pane stayed hidden (`document.hidden = true`, no `requestAnimationFrame`) and the headless browser has no GPU. Measure manually: run `pnpm --filter @swiss-now/web dev`, open `http://localhost:3000/?fps=1`, pan and zoom, read the meter on a laptop and a phone. Target ≥ 60 fps desktop, ≥ 30 fps mid-range phone.                                             |
+| Bundle                                     | `maplibre-gl` ~580 KB minified ESM + 19 KB worker + 490 KB shared chunk, loaded once and cached                                                                                                                                                                                                                                                                                                                         |
+
+**Decision.** **MapLibre GL 6.7** for the MVP. Rationale: deck.gl supports it, the app is greenfield (ESM-only and WebGL2 are not constraints in 2026 browsers), and the two integration issues found have clean fixes that are now in the codebase. Re-evaluate only if the manual frame-rate check on a phone falls below 30 fps with the station layer.
+
+**Follow-ups.** Manual FPS measurement (above); hand-tune the forked style after looking at it on a real screen (the fork is a scripted first pass); replace the ad-hoc poller with TanStack Query when a second layer arrives (Phase 1).
+
+## Spike B — Remotion fixed-plate render of the same style (pending)
+
+Planned: a 3-second local render of `swiss-now-light` in `apps/video` using the Remotion maps-skill technique (`--gl=angle`, `preserveDrawingBuffer`, static camera, CSS-transformed plate) to prove the shared design system across both rendering targets.

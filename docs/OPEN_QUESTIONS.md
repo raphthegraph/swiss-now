@@ -41,7 +41,8 @@
 
 ## 4. Product and design decisions
 
-- [ ] MapLibre 5.24 vs 6.x for the MVP (v6: ESM-only, WebGL2 required, event-class API changes). Decide after Spike A. [P0]
+- [x] MapLibre 5.24 vs 6.x → **6.7 chosen** (deck.gl 9.4 supports it; worker and no-WebGL2 issues fixed). See `docs/SPIKES.md`. [P0]
+- [ ] Manual frame-rate measurement of the live map on a laptop and a mid-range phone (`?fps=1`); the automated session could not paint the page. [P0]
 - [ ] Typeface and final palette; behaviour of the daylight-driven environmental state (automatic vs user toggle). [P0]
 - [ ] MVP UI languages: EN + DE proposed; FR/IT timing. [P1]
 - [ ] Thresholds for the NOW composite (when does a delay pulse, a danger level, a rain cell earn a place by default). [P1]

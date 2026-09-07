@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Inter_Tight } from "next/font/google";
 import { cssVariablesBlock } from "@swiss-now/motion/tokens";
+import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 
 const interTight = Inter_Tight({

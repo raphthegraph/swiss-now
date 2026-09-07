@@ -35,3 +35,4 @@ mortar-app.html
 
 # Next.js generated
 apps/web/next-env.d.ts
+apps/web/public/map/vendor/

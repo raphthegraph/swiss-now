@@ -287,7 +287,7 @@ All responses < 1 MB gzip, `ETag`, `Vary` none. No user-specific data → everyt
 
 - Static shell: the map page is statically generated; all data arrives via TanStack Query.
 - Polling policy: `staleTime = cadence`, `refetchInterval = cadence + jitter(0–15 %)`, paused when `document.hidden`, per-layer enable flags (RAIL polls only when RAIL or NOW is active).
-- Map: MapLibre GL JS (v5.24 for MVP; v6 evaluated in Phase 0 — ESM-only, WebGL2 required, event classes changed) with a forked `lightbasemap.vt` style hosted in `apps/web/public/map/style.json`, tiles from swisstopo with attribution; vector hillshade from `relief.vt`; `@deck.gl/maplibre` `MapLibreOverlay` for point and path layers; a custom WebGL layer for wind particles; MapLibre `image` sources for radar frames; symbol layers for labels.
+- Map: MapLibre GL JS **6.7** (decided in Spike A, see `docs/SPIKES.md`; ESM-only, WebGL2 required — the app degrades to an honest notice without WebGL2; the worker is served statically from `public/map/vendor/`) with a forked `lightbasemap.vt` style hosted in `apps/web/public/map/style.json`, tiles from swisstopo with attribution; vector hillshade from `relief.vt`; `@deck.gl/maplibre` `MapLibreOverlay` for point and path layers; a custom WebGL layer for wind particles; MapLibre `image` sources for radar frames; symbol layers for labels.
 - Performance budget: ≤ 60 k points, ≤ 10 k particles desktop / 4 k mobile, 60 fps target on a 2022 laptop, 30 fps on a mid-range phone; no terrain (none available from swisstopo anyway).
 - Interpolation: `positionAlongTrip(trip, path, now)` from `@swiss-now/motion` runs per animation frame on the client using the latest `RailState`; the same function runs per Remotion frame.
 
