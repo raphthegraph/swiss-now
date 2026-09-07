@@ -68,3 +68,5 @@ export function magnitudeToRings(magnitude: number): { rings: number; radiusKm: 
 export function legendTicks(key: ScaleStopsKey): { value: number; color: string }[] {
   return scaleStops[key].map(([value, color]) => ({ value, color }));
 }
+
+export * from "./maplibre";

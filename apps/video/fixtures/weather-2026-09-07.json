@@ -1,0 +1,6856 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-07T20:39:25.877Z",
+  "observedAt": "2026-09-07T20:30:00Z",
+  "freshness": "live",
+  "sources": ["geoadmin-messwerte"],
+  "stations": [
+    {
+      "id": "smn:ARO",
+      "name": { "de": "Arosa", "en": "Arosa" },
+      "kind": "weather",
+      "lonLat": [9.679029, 46.792598],
+      "source": "geoadmin-messwerte",
+      "elevation": 1880
+    },
+    {
+      "id": "smn:RAG",
+      "name": { "de": "Bad Ragaz", "en": "Bad Ragaz" },
+      "kind": "weather",
+      "lonLat": [9.50255, 47.016579],
+      "source": "geoadmin-messwerte",
+      "elevation": 498
+    },
+    {
+      "id": "smn:HAI",
+      "name": { "de": "Salen-Reutenen", "en": "Salen-Reutenen" },
+      "kind": "weather",
+      "lonLat": [9.023919, 47.651237],
+      "source": "geoadmin-messwerte",
+      "elevation": 720
+    },
+    {
+      "id": "smn:HLL",
+      "name": { "de": "Hallau", "en": "Hallau" },
+      "kind": "weather",
+      "lonLat": [8.470478, 47.697279],
+      "source": "geoadmin-messwerte",
+      "elevation": 421
+    },
+    {
+      "id": "smn:DEM",
+      "name": { "de": "Delémont", "en": "Delémont" },
+      "kind": "weather",
+      "lonLat": [7.349547, 47.351706],
+      "source": "geoadmin-messwerte",
+      "elevation": 441
+    },
+    {
+      "id": "smn:EBK",
+      "name": { "de": "Ebnat-Kappel", "en": "Ebnat-Kappel" },
+      "kind": "weather",
+      "lonLat": [9.10849, 47.273341],
+      "source": "geoadmin-messwerte",
+      "elevation": 625
+    },
+    {
+      "id": "smn:ELM",
+      "name": { "de": "Elm", "en": "Elm" },
+      "kind": "weather",
+      "lonLat": [9.175349, 46.92375],
+      "source": "geoadmin-messwerte",
+      "elevation": 960
+    },
+    {
+      "id": "smn:EIN",
+      "name": { "de": "Einsiedeln", "en": "Einsiedeln" },
+      "kind": "weather",
+      "lonLat": [8.756562, 47.132991],
+      "source": "geoadmin-messwerte",
+      "elevation": 912
+    },
+    {
+      "id": "smn:ANT",
+      "name": { "de": "Andermatt", "en": "Andermatt" },
+      "kind": "weather",
+      "lonLat": [8.580525, 46.630866],
+      "source": "geoadmin-messwerte",
+      "elevation": 1436.52
+    },
+    {
+      "id": "smn:MER",
+      "name": { "de": "Meiringen", "en": "Meiringen" },
+      "kind": "weather",
+      "lonLat": [8.16926, 46.732174],
+      "source": "geoadmin-messwerte",
+      "elevation": 590.6
+    },
+    {
+      "id": "smn:CHD",
+      "name": { "de": "Château-d'Oex", "en": "Château-d'Oex" },
+      "kind": "weather",
+      "lonLat": [7.139654, 46.479765],
+      "source": "geoadmin-messwerte",
+      "elevation": 1031
+    },
+    {
+      "id": "smn:GRA",
+      "name": { "de": "Fribourg / Grangeneuve", "en": "Fribourg / Grangeneuve" },
+      "kind": "weather",
+      "lonLat": [7.113707, 46.771396],
+      "source": "geoadmin-messwerte",
+      "elevation": 652.6
+    },
+    {
+      "id": "smn:CHM",
+      "name": { "de": "Chaumont", "en": "Chaumont" },
+      "kind": "weather",
+      "lonLat": [6.978815, 47.049166],
+      "source": "geoadmin-messwerte",
+      "elevation": 1138
+    },
+    {
+      "id": "smn:LAG",
+      "name": { "de": "Langnau i.E.", "en": "Langnau i.E." },
+      "kind": "weather",
+      "lonLat": [7.806437, 46.939629],
+      "source": "geoadmin-messwerte",
+      "elevation": 747
+    },
+    {
+      "id": "smn:KOP",
+      "name": { "de": "Koppigen", "en": "Koppigen" },
+      "kind": "weather",
+      "lonLat": [7.605485, 47.118848],
+      "source": "geoadmin-messwerte",
+      "elevation": 486
+    },
+    {
+      "id": "smn:GRC",
+      "name": { "de": "Grächen", "en": "Grächen" },
+      "kind": "weather",
+      "lonLat": [7.836792, 46.195312],
+      "source": "geoadmin-messwerte",
+      "elevation": 1607
+    },
+    {
+      "id": "smn:BLA",
+      "name": { "de": "Blatten, Lötschental", "en": "Blatten, Lötschental" },
+      "kind": "weather",
+      "lonLat": [7.825917, 46.422265],
+      "source": "geoadmin-messwerte",
+      "elevation": 1550.14
+    },
+    {
+      "id": "smn:GRO",
+      "name": { "de": "Grono", "en": "Grono" },
+      "kind": "weather",
+      "lonLat": [9.163729, 46.254989],
+      "source": "geoadmin-messwerte",
+      "elevation": 325.52
+    },
+    {
+      "id": "smn:BEH",
+      "name": { "de": "Passo del Bernina", "en": "Passo del Bernina" },
+      "kind": "weather",
+      "lonLat": [10.019577, 46.40916],
+      "source": "geoadmin-messwerte",
+      "elevation": 2271.65
+    },
+    {
+      "id": "smn:SIA",
+      "name": { "de": "Segl-Maria", "en": "Segl-Maria" },
+      "kind": "weather",
+      "lonLat": [9.762332, 46.432331],
+      "source": "geoadmin-messwerte",
+      "elevation": 1806
+    },
+    {
+      "id": "smn:SMM",
+      "name": { "de": "Sta. Maria, Val Müstair", "en": "Sta. Maria, Val Müstair" },
+      "kind": "weather",
+      "lonLat": [10.426311, 46.602203],
+      "source": "geoadmin-messwerte",
+      "elevation": 1388.2
+    },
+    {
+      "id": "smn:DAV",
+      "name": { "de": "Davos", "en": "Davos" },
+      "kind": "weather",
+      "lonLat": [9.84349, 46.812957],
+      "source": "geoadmin-messwerte",
+      "elevation": 1595.93
+    },
+    {
+      "id": "smn:CHU",
+      "name": { "de": "Chur", "en": "Chur" },
+      "kind": "weather",
+      "lonLat": [9.530583, 46.870401],
+      "source": "geoadmin-messwerte",
+      "elevation": 558.37
+    },
+    {
+      "id": "smn:ROB",
+      "name": { "de": "Poschiavo / Robbia", "en": "Poschiavo / Robbia" },
+      "kind": "weather",
+      "lonLat": [10.062976, 46.347194],
+      "source": "geoadmin-messwerte",
+      "elevation": 1079.92
+    },
+    {
+      "id": "smn:SAM",
+      "name": { "de": "Samedan", "en": "Samedan" },
+      "kind": "weather",
+      "lonLat": [9.879412, 46.526247],
+      "source": "geoadmin-messwerte",
+      "elevation": 1710.62
+    },
+    {
+      "id": "smn:SCU",
+      "name": { "de": "Scuol", "en": "Scuol" },
+      "kind": "weather",
+      "lonLat": [10.283202, 46.793275],
+      "source": "geoadmin-messwerte",
+      "elevation": 1306.41
+    },
+    {
+      "id": "smn:DOL",
+      "name": { "de": "La Dôle", "en": "La Dôle" },
+      "kind": "weather",
+      "lonLat": [6.099506, 46.424756],
+      "source": "geoadmin-messwerte",
+      "elevation": 1671.26
+    },
+    {
+      "id": "smn:PAY",
+      "name": { "de": "Payerne", "en": "Payerne" },
+      "kind": "weather",
+      "lonLat": [6.942404, 46.811574],
+      "source": "geoadmin-messwerte",
+      "elevation": 491.04
+    },
+    {
+      "id": "smn:JUN",
+      "name": { "de": "Jungfraujoch", "en": "Jungfraujoch" },
+      "kind": "weather",
+      "lonLat": [7.985099, 46.547532],
+      "source": "geoadmin-messwerte",
+      "elevation": 3581.63
+    },
+    {
+      "id": "smn:WYN",
+      "name": { "de": "Wynau", "en": "Wynau" },
+      "kind": "weather",
+      "lonLat": [7.787405, 47.255023],
+      "source": "geoadmin-messwerte",
+      "elevation": 423.99
+    },
+    {
+      "id": "smn:SAE",
+      "name": { "de": "Säntis", "en": "Säntis" },
+      "kind": "weather",
+      "lonLat": [9.343358, 47.24944],
+      "source": "geoadmin-messwerte",
+      "elevation": 2504.18
+    },
+    {
+      "id": "smn:VAD",
+      "name": { "de": "Vaduz", "en": "Vaduz" },
+      "kind": "weather",
+      "lonLat": [9.517512, 47.127448],
+      "source": "geoadmin-messwerte",
+      "elevation": 459.18
+    },
+    {
+      "id": "smn:AIG",
+      "name": { "de": "Aigle", "en": "Aigle" },
+      "kind": "weather",
+      "lonLat": [6.924423, 46.32664],
+      "source": "geoadmin-messwerte",
+      "elevation": 382.94
+    },
+    {
+      "id": "smn:MLS",
+      "name": { "de": "Le Moléson", "en": "Le Moléson" },
+      "kind": "weather",
+      "lonLat": [7.017774, 46.546172],
+      "source": "geoadmin-messwerte",
+      "elevation": 1976.11
+    },
+    {
+      "id": "smn:FAH",
+      "name": { "de": "Fahy", "en": "Fahy" },
+      "kind": "weather",
+      "lonLat": [6.941108, 47.423809],
+      "source": "geoadmin-messwerte",
+      "elevation": 598.39
+    },
+    {
+      "id": "smn:MVE",
+      "name": { "de": "Montana", "en": "Montana" },
+      "kind": "weather",
+      "lonLat": [7.460766, 46.298775],
+      "source": "geoadmin-messwerte",
+      "elevation": 1424.45
+    },
+    {
+      "id": "smn:ZER",
+      "name": { "de": "Zermatt", "en": "Zermatt" },
+      "kind": "weather",
+      "lonLat": [7.752403, 46.029265],
+      "source": "geoadmin-messwerte",
+      "elevation": 1640.66
+    },
+    {
+      "id": "smn:CHA",
+      "name": { "de": "Chasseral", "en": "Chasseral" },
+      "kind": "weather",
+      "lonLat": [7.054318, 47.131732],
+      "source": "geoadmin-messwerte",
+      "elevation": 1595.75
+    },
+    {
+      "id": "smn:PIL",
+      "name": { "de": "Pilatus", "en": "Pilatus" },
+      "kind": "weather",
+      "lonLat": [8.25232, 46.978878],
+      "source": "geoadmin-messwerte",
+      "elevation": 2107.4
+    },
+    {
+      "id": "smn:ALT",
+      "name": { "de": "Altdorf", "en": "Altdorf" },
+      "kind": "weather",
+      "lonLat": [8.621804, 46.887048],
+      "source": "geoadmin-messwerte",
+      "elevation": 439.86
+    },
+    {
+      "id": "smn:ULR",
+      "name": { "de": "Ulrichen", "en": "Ulrichen" },
+      "kind": "weather",
+      "lonLat": [8.308147, 46.504861],
+      "source": "geoadmin-messwerte",
+      "elevation": 1347.81
+    },
+    {
+      "id": "smn:PIO",
+      "name": { "de": "Piotta", "en": "Piotta" },
+      "kind": "weather",
+      "lonLat": [8.68811, 46.51478],
+      "source": "geoadmin-messwerte",
+      "elevation": 991.38
+    },
+    {
+      "id": "smn:LUG",
+      "name": { "de": "Lugano", "en": "Lugano" },
+      "kind": "weather",
+      "lonLat": [8.960114, 46.003835],
+      "source": "geoadmin-messwerte",
+      "elevation": 274.56
+    },
+    {
+      "id": "smn:NAP",
+      "name": { "de": "Napf", "en": "Napf" },
+      "kind": "weather",
+      "lonLat": [7.940049, 47.004645],
+      "source": "geoadmin-messwerte",
+      "elevation": 1406.21
+    },
+    {
+      "id": "smn:SIO",
+      "name": { "de": "Sion", "en": "Sion" },
+      "kind": "weather",
+      "lonLat": [7.315293, 46.217494],
+      "source": "geoadmin-messwerte",
+      "elevation": 481
+    },
+    {
+      "id": "smn:MAG",
+      "name": { "de": "Magadino / Cadenazzo", "en": "Magadino / Cadenazzo" },
+      "kind": "weather",
+      "lonLat": [8.933607, 46.160024],
+      "source": "geoadmin-messwerte",
+      "elevation": 205.2
+    },
+    {
+      "id": "smn:NEU",
+      "name": { "de": "Neuchâtel", "en": "Neuchâtel" },
+      "kind": "weather",
+      "lonLat": [6.953098, 46.99999],
+      "source": "geoadmin-messwerte",
+      "elevation": 486.1
+    },
+    {
+      "id": "smn:SBO",
+      "name": { "de": "Stabio", "en": "Stabio" },
+      "kind": "weather",
+      "lonLat": [8.932403, 45.843405],
+      "source": "geoadmin-messwerte",
+      "elevation": 353.32
+    },
+    {
+      "id": "smn:INT",
+      "name": { "de": "Interlaken", "en": "Interlaken" },
+      "kind": "weather",
+      "lonLat": [7.870408, 46.67203],
+      "source": "geoadmin-messwerte",
+      "elevation": 579.78
+    },
+    {
+      "id": "smn:DIS",
+      "name": { "de": "Disentis", "en": "Disentis" },
+      "kind": "weather",
+      "lonLat": [8.853466, 46.706531],
+      "source": "geoadmin-messwerte",
+      "elevation": 1198.71
+    },
+    {
+      "id": "smn:STG",
+      "name": { "de": "St. Gallen", "en": "St. Gallen" },
+      "kind": "weather",
+      "lonLat": [9.398461, 47.425454],
+      "source": "geoadmin-messwerte",
+      "elevation": 777.6
+    },
+    {
+      "id": "smn:GLA",
+      "name": { "de": "Glarus", "en": "Glarus" },
+      "kind": "weather",
+      "lonLat": [9.066899, 47.034588],
+      "source": "geoadmin-messwerte",
+      "elevation": 519.39
+    },
+    {
+      "id": "smn:GVE",
+      "name": { "de": "Genève / Cointrin", "en": "Genève / Cointrin" },
+      "kind": "weather",
+      "lonLat": [6.122274, 46.248511],
+      "source": "geoadmin-messwerte",
+      "elevation": 417.53
+    },
+    {
+      "id": "smn:KLO",
+      "name": { "de": "Zürich / Kloten", "en": "Zürich / Kloten" },
+      "kind": "weather",
+      "lonLat": [8.535904, 47.479588],
+      "source": "geoadmin-messwerte",
+      "elevation": 428.23
+    },
+    {
+      "id": "smn:GUE",
+      "name": { "de": "Gütsch, Andermatt", "en": "Gütsch, Andermatt" },
+      "kind": "weather",
+      "lonLat": [8.61553, 46.652481],
+      "source": "geoadmin-messwerte",
+      "elevation": 2288.3
+    },
+    {
+      "id": "smn:PUY",
+      "name": { "de": "Pully", "en": "Pully" },
+      "kind": "weather",
+      "lonLat": [6.667466, 46.512271],
+      "source": "geoadmin-messwerte",
+      "elevation": 457.37
+    },
+    {
+      "id": "smn:GSB",
+      "name": { "de": "Col du Grand St-Bernard", "en": "Col du Grand St-Bernard" },
+      "kind": "weather",
+      "lonLat": [7.170733, 45.86889],
+      "source": "geoadmin-messwerte",
+      "elevation": 2479.24
+    },
+    {
+      "id": "smn:ABO",
+      "name": { "de": "Adelboden", "en": "Adelboden" },
+      "kind": "weather",
+      "lonLat": [7.560695, 46.491737],
+      "source": "geoadmin-messwerte",
+      "elevation": 1324.06
+    },
+    {
+      "id": "smn:VIS",
+      "name": { "de": "Visp", "en": "Visp" },
+      "kind": "weather",
+      "lonLat": [7.842907, 46.302881],
+      "source": "geoadmin-messwerte",
+      "elevation": 641.4
+    },
+    {
+      "id": "smn:CDF",
+      "name": { "de": "La Chaux-de-Fonds", "en": "La Chaux-de-Fonds" },
+      "kind": "weather",
+      "lonLat": [6.792236, 47.082939],
+      "source": "geoadmin-messwerte",
+      "elevation": 1019.31
+    },
+    {
+      "id": "smn:RUE",
+      "name": { "de": "Rünenberg", "en": "Rünenberg" },
+      "kind": "weather",
+      "lonLat": [7.879356, 47.434558],
+      "source": "geoadmin-messwerte",
+      "elevation": 613.19
+    },
+    {
+      "id": "smn:BUS",
+      "name": { "de": "Buchs / Aarau", "en": "Buchs / Aarau" },
+      "kind": "weather",
+      "lonLat": [8.079459, 47.384341],
+      "source": "geoadmin-messwerte",
+      "elevation": 388.87
+    },
+    {
+      "id": "smn:LUZ",
+      "name": { "de": "Luzern", "en": "Luzern" },
+      "kind": "weather",
+      "lonLat": [8.300959, 47.036422],
+      "source": "geoadmin-messwerte",
+      "elevation": 456.32
+    },
+    {
+      "id": "smn:ENG",
+      "name": { "de": "Engelberg", "en": "Engelberg" },
+      "kind": "weather",
+      "lonLat": [8.410448, 46.821621],
+      "source": "geoadmin-messwerte",
+      "elevation": 1036.65
+    },
+    {
+      "id": "smn:SHA",
+      "name": { "de": "Schaffhausen", "en": "Schaffhausen" },
+      "kind": "weather",
+      "lonLat": [8.620069, 47.689805],
+      "source": "geoadmin-messwerte",
+      "elevation": 440.88
+    },
+    {
+      "id": "smn:SMA",
+      "name": { "de": "Zürich / Fluntern", "en": "Zürich / Fluntern" },
+      "kind": "weather",
+      "lonLat": [8.567302, 47.380968],
+      "source": "geoadmin-messwerte",
+      "elevation": 605.54
+    },
+    {
+      "id": "smn:SBE",
+      "name": { "de": "S. Bernardino", "en": "S. Bernardino" },
+      "kind": "weather",
+      "lonLat": [9.184645, 46.463543],
+      "source": "geoadmin-messwerte",
+      "elevation": 1640.75
+    },
+    {
+      "id": "smn:WFJ",
+      "name": { "de": "Weissfluhjoch", "en": "Weissfluhjoch" },
+      "kind": "weather",
+      "lonLat": [9.806392, 46.833327],
+      "source": "geoadmin-messwerte",
+      "elevation": 2693.74
+    },
+    {
+      "id": "smn:COV",
+      "name": { "de": "Piz Corvatsch", "en": "Piz Corvatsch" },
+      "kind": "weather",
+      "lonLat": [9.821387, 46.418049],
+      "source": "geoadmin-messwerte",
+      "elevation": 3297.12
+    },
+    {
+      "id": "smn:BAS",
+      "name": { "de": "Basel / Binningen", "en": "Basel / Binningen" },
+      "kind": "weather",
+      "lonLat": [7.583544, 47.541069],
+      "source": "geoadmin-messwerte",
+      "elevation": 318.17
+    },
+    {
+      "id": "smn:CGI",
+      "name": { "de": "Nyon / Changins", "en": "Nyon / Changins" },
+      "kind": "weather",
+      "lonLat": [6.227668, 46.401036],
+      "source": "geoadmin-messwerte",
+      "elevation": 460.2
+    },
+    {
+      "id": "smn:FRE",
+      "name": { "de": "Bullet / La Frétaz", "en": "Bullet / La Frétaz" },
+      "kind": "weather",
+      "lonLat": [6.576301, 46.84061],
+      "source": "geoadmin-messwerte",
+      "elevation": 1207.38
+    },
+    {
+      "id": "smn:BER",
+      "name": { "de": "Bern / Zollikofen", "en": "Bern / Zollikofen" },
+      "kind": "weather",
+      "lonLat": [7.463992, 46.990743],
+      "source": "geoadmin-messwerte",
+      "elevation": 554.93
+    },
+    {
+      "id": "smn:GUT",
+      "name": { "de": "Güttingen", "en": "Güttingen" },
+      "kind": "weather",
+      "lonLat": [9.279415, 47.601705],
+      "source": "geoadmin-messwerte",
+      "elevation": 442.09
+    },
+    {
+      "id": "smn:GOE",
+      "name": { "de": "Gösgen", "en": "Gösgen" },
+      "kind": "weather",
+      "lonLat": [7.973692, 47.363109],
+      "source": "geoadmin-messwerte",
+      "elevation": 382.49
+    },
+    {
+      "id": "smn:WAE",
+      "name": { "de": "Wädenswil", "en": "Wädenswil" },
+      "kind": "weather",
+      "lonLat": [8.677638, 47.220938],
+      "source": "geoadmin-messwerte",
+      "elevation": 487.58
+    },
+    {
+      "id": "smn:TAE",
+      "name": { "de": "Aadorf / Tänikon", "en": "Aadorf / Tänikon" },
+      "kind": "weather",
+      "lonLat": [8.904882, 47.479856],
+      "source": "geoadmin-messwerte",
+      "elevation": 539.93
+    },
+    {
+      "id": "smn:REH",
+      "name": { "de": "Zürich / Affoltern", "en": "Zürich / Affoltern" },
+      "kind": "weather",
+      "lonLat": [8.517889, 47.427672],
+      "source": "geoadmin-messwerte",
+      "elevation": 445.39
+    },
+    {
+      "id": "smn:OTL",
+      "name": { "de": "Locarno / Monti", "en": "Locarno / Monti" },
+      "kind": "weather",
+      "lonLat": [8.787484, 46.17222],
+      "source": "geoadmin-messwerte",
+      "elevation": 368.95
+    },
+    {
+      "id": "smn:BEZ",
+      "name": { "de": "Beznau", "en": "Beznau" },
+      "kind": "weather",
+      "lonLat": [8.233268, 47.557235],
+      "source": "geoadmin-messwerte",
+      "elevation": 327.51
+    },
+    {
+      "id": "smn:MUB",
+      "name": { "de": "Mühleberg", "en": "Mühleberg" },
+      "kind": "weather",
+      "lonLat": [7.278158, 46.973249],
+      "source": "geoadmin-messwerte",
+      "elevation": 481.79
+    },
+    {
+      "id": "smn:CIM",
+      "name": { "de": "Cimetta", "en": "Cimetta" },
+      "kind": "weather",
+      "lonLat": [8.791597, 46.200436],
+      "source": "geoadmin-messwerte",
+      "elevation": 1662.72
+    },
+    {
+      "id": "smn:EVO",
+      "name": { "de": "Evolène / Villa", "en": "Evolène / Villa" },
+      "kind": "weather",
+      "lonLat": [7.508657, 46.112125],
+      "source": "geoadmin-messwerte",
+      "elevation": 1828
+    },
+    {
+      "id": "smn:LEI",
+      "name": { "de": "Leibstadt", "en": "Leibstadt" },
+      "kind": "weather",
+      "lonLat": [8.188268, 47.597266],
+      "source": "geoadmin-messwerte",
+      "elevation": 343.01
+    },
+    {
+      "id": "smn:GRH",
+      "name": { "de": "Grimsel Hospiz", "en": "Grimsel Hospiz" },
+      "kind": "weather",
+      "lonLat": [8.333255, 46.571695],
+      "source": "geoadmin-messwerte",
+      "elevation": 1987.5
+    },
+    {
+      "id": "smn:COM",
+      "name": { "de": "Acquarossa / Comprovasco", "en": "Acquarossa / Comprovasco" },
+      "kind": "weather",
+      "lonLat": [8.93551, 46.459477],
+      "source": "geoadmin-messwerte",
+      "elevation": 576.96
+    },
+    {
+      "id": "smn:LAE",
+      "name": { "de": "Lägern", "en": "Lägern" },
+      "kind": "weather",
+      "lonLat": [8.397223, 47.481938],
+      "source": "geoadmin-messwerte",
+      "elevation": 872.56
+    },
+    {
+      "id": "smn:HOE",
+      "name": { "de": "Hörnli", "en": "Hörnli" },
+      "kind": "weather",
+      "lonLat": [8.941619, 47.370824],
+      "source": "geoadmin-messwerte",
+      "elevation": 1133.82
+    },
+    {
+      "id": "smn:PLF",
+      "name": { "de": "Plaffeien", "en": "Plaffeien" },
+      "kind": "weather",
+      "lonLat": [7.266249, 46.747695],
+      "source": "geoadmin-messwerte",
+      "elevation": 1044.49
+    },
+    {
+      "id": "smn:ROE",
+      "name": { "de": "Robièi", "en": "Robièi" },
+      "kind": "weather",
+      "lonLat": [8.513388, 46.443073],
+      "source": "geoadmin-messwerte",
+      "elevation": 1904
+    },
+    {
+      "id": "smn:PSI",
+      "name": { "de": "Würenlingen / PSI", "en": "Würenlingen / PSI" },
+      "kind": "weather",
+      "lonLat": [8.226943, 47.536478],
+      "source": "geoadmin-messwerte",
+      "elevation": 336
+    },
+    {
+      "id": "smn:BIN",
+      "name": { "de": "Binn", "en": "Binn" },
+      "kind": "weather",
+      "lonLat": [8.192305, 46.367667],
+      "source": "geoadmin-messwerte",
+      "elevation": 1481
+    },
+    {
+      "id": "smn:MAR",
+      "name": { "de": "Les Marécottes", "en": "Les Marécottes" },
+      "kind": "weather",
+      "lonLat": [7.016611, 46.1189],
+      "source": "geoadmin-messwerte",
+      "elevation": 992
+    },
+    {
+      "id": "smn:SAG",
+      "name": { "de": "Sattel, SZ", "en": "Sattel, SZ" },
+      "kind": "weather",
+      "lonLat": [8.636965, 47.081069],
+      "source": "geoadmin-messwerte",
+      "elevation": 792.1
+    },
+    {
+      "id": "smn:CHZ",
+      "name": { "de": "Cham", "en": "Cham" },
+      "kind": "weather",
+      "lonLat": [8.46464, 47.188281],
+      "source": "geoadmin-messwerte",
+      "elevation": 444.5
+    },
+    {
+      "id": "smn:STC",
+      "name": { "de": "St. Chrischona", "en": "St. Chrischona" },
+      "kind": "weather",
+      "lonLat": [7.687083, 47.571768],
+      "source": "geoadmin-messwerte",
+      "elevation": 725.3
+    },
+    {
+      "id": "smn:COY",
+      "name": { "de": "Courtelary", "en": "Courtelary" },
+      "kind": "weather",
+      "lonLat": [7.09062, 47.18086],
+      "source": "geoadmin-messwerte",
+      "elevation": 697
+    },
+    {
+      "id": "smn:VEV",
+      "name": { "de": "Vevey / Corseaux", "en": "Vevey / Corseaux" },
+      "kind": "weather",
+      "lonLat": [6.8151, 46.471287],
+      "source": "geoadmin-messwerte",
+      "elevation": 407
+    },
+    {
+      "id": "smn:BOU",
+      "name": { "de": "Bouveret", "en": "Bouveret" },
+      "kind": "weather",
+      "lonLat": [6.857014, 46.393444],
+      "source": "geoadmin-messwerte",
+      "elevation": 377
+    },
+    {
+      "id": "smn:TIT",
+      "name": { "de": "Titlis", "en": "Titlis" },
+      "kind": "weather",
+      "lonLat": [8.42597, 46.770563],
+      "source": "geoadmin-messwerte",
+      "elevation": 3105.85
+    },
+    {
+      "id": "smn:FRU",
+      "name": { "de": "Frutigen", "en": "Frutigen" },
+      "kind": "weather",
+      "lonLat": [7.657542, 46.599008],
+      "source": "geoadmin-messwerte",
+      "elevation": 758
+    },
+    {
+      "id": "smn:MOE",
+      "name": { "de": "Möhlin", "en": "Möhlin" },
+      "kind": "weather",
+      "lonLat": [7.877904, 47.5722],
+      "source": "geoadmin-messwerte",
+      "elevation": 346
+    },
+    {
+      "id": "smn:MAH",
+      "name": { "de": "Mathod", "en": "Mathod" },
+      "kind": "weather",
+      "lonLat": [6.567983, 46.73697],
+      "source": "geoadmin-messwerte",
+      "elevation": 439
+    },
+    {
+      "id": "smn:CHB",
+      "name": { "de": "Les Charbonnières", "en": "Les Charbonnières" },
+      "kind": "weather",
+      "lonLat": [6.312429, 46.670137],
+      "source": "geoadmin-messwerte",
+      "elevation": 1047
+    },
+    {
+      "id": "smn:MTE",
+      "name": { "de": "Mottec", "en": "Mottec" },
+      "kind": "weather",
+      "lonLat": [7.624027, 46.147956],
+      "source": "geoadmin-messwerte",
+      "elevation": 1582
+    },
+    {
+      "id": "smn:VLS",
+      "name": { "de": "Vals", "en": "Vals" },
+      "kind": "weather",
+      "lonLat": [9.188711, 46.627763],
+      "source": "geoadmin-messwerte",
+      "elevation": 1244
+    },
+    {
+      "id": "smn:ARH",
+      "name": { "de": "Altenrhein", "en": "Altenrhein" },
+      "kind": "weather",
+      "lonLat": [9.566802, 47.483668],
+      "source": "geoadmin-messwerte",
+      "elevation": 400
+    },
+    {
+      "id": "smn:UEB",
+      "name": { "de": "Uetliberg", "en": "Uetliberg" },
+      "kind": "weather",
+      "lonLat": [8.490226, 47.351368],
+      "source": "geoadmin-messwerte",
+      "elevation": 1016
+    },
+    {
+      "id": "smn:GOS",
+      "name": { "de": "Göschenen", "en": "Göschenen" },
+      "kind": "weather",
+      "lonLat": [8.595363, 46.692683],
+      "source": "geoadmin-messwerte",
+      "elevation": 952.3
+    },
+    {
+      "id": "smn:AND",
+      "name": { "de": "Andeer", "en": "Andeer" },
+      "kind": "weather",
+      "lonLat": [9.431927, 46.610118],
+      "source": "geoadmin-messwerte",
+      "elevation": 988.83
+    },
+    {
+      "id": "smn:BIV",
+      "name": { "de": "Bivio", "en": "Bivio" },
+      "kind": "weather",
+      "lonLat": [9.668611, 46.462455],
+      "source": "geoadmin-messwerte",
+      "elevation": 1858
+    },
+    {
+      "id": "smn:MTR",
+      "name": { "de": "Matro", "en": "Matro" },
+      "kind": "weather",
+      "lonLat": [8.924742, 46.410108],
+      "source": "geoadmin-messwerte",
+      "elevation": 2193.1
+    },
+    {
+      "id": "smn:BIA",
+      "name": { "de": "Biasca", "en": "Biasca" },
+      "kind": "weather",
+      "lonLat": [8.978198, 46.336057],
+      "source": "geoadmin-messwerte",
+      "elevation": 280
+    },
+    {
+      "id": "smn:LAT",
+      "name": { "de": "Bergün / Latsch", "en": "Bergün / Latsch" },
+      "kind": "weather",
+      "lonLat": [9.753709, 46.627277],
+      "source": "geoadmin-messwerte",
+      "elevation": 1409.85
+    },
+    {
+      "id": "smn:MOB",
+      "name": { "de": "Montagnier, Bagnes", "en": "Montagnier, Bagnes" },
+      "kind": "weather",
+      "lonLat": [7.225286, 46.07102],
+      "source": "geoadmin-messwerte",
+      "elevation": 841
+    },
+    {
+      "id": "smn:CDM",
+      "name": { "de": "Col des Mosses", "en": "Col des Mosses" },
+      "kind": "weather",
+      "lonLat": [7.098299, 46.39156],
+      "source": "geoadmin-messwerte",
+      "elevation": 1414
+    },
+    {
+      "id": "smn:SIM",
+      "name": { "de": "Simplon-Dorf", "en": "Simplon-Dorf" },
+      "kind": "weather",
+      "lonLat": [8.056338, 46.19683],
+      "source": "geoadmin-messwerte",
+      "elevation": 1467
+    },
+    {
+      "id": "smn:BUF",
+      "name": { "de": "Buffalora", "en": "Buffalora" },
+      "kind": "weather",
+      "lonLat": [10.267203, 46.648409],
+      "source": "geoadmin-messwerte",
+      "elevation": 1973
+    },
+    {
+      "id": "smn:ILZ",
+      "name": { "de": "Ilanz", "en": "Ilanz" },
+      "kind": "weather",
+      "lonLat": [9.215352, 46.775042],
+      "source": "geoadmin-messwerte",
+      "elevation": 700
+    },
+    {
+      "id": "smn:BIZ",
+      "name": { "de": "Bischofszell / Sitterdorf", "en": "Bischofszell / Sitterdorf" },
+      "kind": "weather",
+      "lonLat": [9.266895, 47.508796],
+      "source": "geoadmin-messwerte",
+      "elevation": 509
+    },
+    {
+      "id": "smn:PFA",
+      "name": { "de": "Pfäffikon, ZH", "en": "Pfäffikon, ZH" },
+      "kind": "weather",
+      "lonLat": [8.754866, 47.37682],
+      "source": "geoadmin-messwerte",
+      "elevation": 539
+    },
+    {
+      "id": "smn:LAC",
+      "name": { "de": "Lachen / Galgenen", "en": "Lachen / Galgenen" },
+      "kind": "weather",
+      "lonLat": [8.858686, 47.179201],
+      "source": "geoadmin-messwerte",
+      "elevation": 470
+    },
+    {
+      "id": "smn:FLU",
+      "name": { "de": "Flühli, LU", "en": "Flühli, LU" },
+      "kind": "weather",
+      "lonLat": [8.020281, 46.889474],
+      "source": "geoadmin-messwerte",
+      "elevation": 941.75
+    },
+    {
+      "id": "smn:BOL",
+      "name": { "de": "Boltigen", "en": "Boltigen" },
+      "kind": "weather",
+      "lonLat": [7.384206, 46.623523],
+      "source": "geoadmin-messwerte",
+      "elevation": 822
+    },
+    {
+      "id": "smn:THU",
+      "name": { "de": "Thun", "en": "Thun" },
+      "kind": "weather",
+      "lonLat": [7.58522, 46.749802],
+      "source": "geoadmin-messwerte",
+      "elevation": 572
+    },
+    {
+      "id": "smn:MAS",
+      "name": { "de": "Marsens", "en": "Marsens" },
+      "kind": "weather",
+      "lonLat": [7.069718, 46.656523],
+      "source": "geoadmin-messwerte",
+      "elevation": 716.5
+    },
+    {
+      "id": "smn:VIT",
+      "name": { "de": "Villars-Tiercelin", "en": "Villars-Tiercelin" },
+      "kind": "weather",
+      "lonLat": [6.710072, 46.621772],
+      "source": "geoadmin-messwerte",
+      "elevation": 861
+    },
+    {
+      "id": "smn:GRE",
+      "name": { "de": "Grenchen", "en": "Grenchen" },
+      "kind": "weather",
+      "lonLat": [7.415098, 47.179089],
+      "source": "geoadmin-messwerte",
+      "elevation": 429.9
+    },
+    {
+      "id": "smn:MOA",
+      "name": { "de": "Mosen", "en": "Mosen" },
+      "kind": "weather",
+      "lonLat": [8.232817, 47.243836],
+      "source": "geoadmin-messwerte",
+      "elevation": 454
+    },
+    {
+      "id": "smn:CEV",
+      "name": { "de": "Cevio", "en": "Cevio" },
+      "kind": "weather",
+      "lonLat": [8.603162, 46.320492],
+      "source": "geoadmin-messwerte",
+      "elevation": 420.9
+    },
+    {
+      "id": "smn:CRM",
+      "name": { "de": "Cressier", "en": "Cressier" },
+      "kind": "weather",
+      "lonLat": [7.059102, 47.047603],
+      "source": "geoadmin-messwerte",
+      "elevation": 433
+    },
+    {
+      "id": "smn:CMA",
+      "name": { "de": "Crap Masegn", "en": "Crap Masegn" },
+      "kind": "weather",
+      "lonLat": [9.180344, 46.842494],
+      "source": "geoadmin-messwerte",
+      "elevation": 2470.52
+    },
+    {
+      "id": "smn:GEN",
+      "name": { "de": "Monte Generoso", "en": "Monte Generoso" },
+      "kind": "weather",
+      "lonLat": [9.017872, 45.927593],
+      "source": "geoadmin-messwerte",
+      "elevation": 1602.4
+    },
+    {
+      "id": "smn:BIE",
+      "name": { "de": "Bière", "en": "Bière" },
+      "kind": "weather",
+      "lonLat": [6.342377, 46.524881],
+      "source": "geoadmin-messwerte",
+      "elevation": 685.71
+    },
+    {
+      "id": "smn:ORO",
+      "name": { "de": "Oron", "en": "Oron" },
+      "kind": "weather",
+      "lonLat": [6.858242, 46.572261],
+      "source": "geoadmin-messwerte",
+      "elevation": 829
+    },
+    {
+      "id": "smn:BRL",
+      "name": { "de": "La Brévine", "en": "La Brévine" },
+      "kind": "weather",
+      "lonLat": [6.607421, 46.980122],
+      "source": "geoadmin-messwerte",
+      "elevation": 1042
+    },
+    {
+      "id": "smn:BAN",
+      "name": { "de": "Bantiger", "en": "Bantiger" },
+      "kind": "weather",
+      "lonLat": [7.528661, 46.977809],
+      "source": "geoadmin-messwerte",
+      "elevation": 1096.8
+    },
+    {
+      "id": "smn:EGO",
+      "name": { "de": "Egolzwil", "en": "Egolzwil" },
+      "kind": "weather",
+      "lonLat": [8.004759, 47.179426],
+      "source": "geoadmin-messwerte",
+      "elevation": 523
+    },
+    {
+      "id": "smn:DIA",
+      "name": { "de": "Les Diablerets", "en": "Les Diablerets" },
+      "kind": "weather",
+      "lonLat": [7.203787, 46.326751],
+      "source": "geoadmin-messwerte",
+      "elevation": 2966
+    },
+    {
+      "id": "smn:SPF",
+      "name": { "de": "Schüpfheim", "en": "Schüpfheim" },
+      "kind": "weather",
+      "lonLat": [8.01244, 46.947041],
+      "source": "geoadmin-messwerte",
+      "elevation": 746
+    },
+    {
+      "id": "smn:VAB",
+      "name": { "de": "Valbella", "en": "Valbella" },
+      "kind": "weather",
+      "lonLat": [9.554433, 46.755036],
+      "source": "geoadmin-messwerte",
+      "elevation": 1571
+    },
+    {
+      "id": "smn:PMA",
+      "name": { "de": "Piz Martegnas", "en": "Piz Martegnas" },
+      "kind": "weather",
+      "lonLat": [9.529547, 46.577184],
+      "source": "geoadmin-messwerte",
+      "elevation": 2670.34
+    },
+    {
+      "id": "smn:NAS",
+      "name": { "de": "Naluns / Schlivera", "en": "Naluns / Schlivera" },
+      "kind": "weather",
+      "lonLat": [10.261398, 46.817165],
+      "source": "geoadmin-messwerte",
+      "elevation": 2382
+    },
+    {
+      "id": "smn:ATT",
+      "name": { "de": "Les Attelas", "en": "Les Attelas" },
+      "kind": "weather",
+      "lonLat": [7.268666, 46.099112],
+      "source": "geoadmin-messwerte",
+      "elevation": 2744.21
+    },
+    {
+      "id": "smn:EVI",
+      "name": { "de": "Evionnaz", "en": "Evionnaz" },
+      "kind": "weather",
+      "lonLat": [7.02676, 46.182951],
+      "source": "geoadmin-messwerte",
+      "elevation": 484
+    },
+    {
+      "id": "smn:GOR",
+      "name": { "de": "Gornergrat", "en": "Gornergrat" },
+      "kind": "weather",
+      "lonLat": [7.785951, 45.983649],
+      "source": "geoadmin-messwerte",
+      "elevation": 3133
+    },
+    {
+      "id": "smn:EGH",
+      "name": { "de": "Eggishorn", "en": "Eggishorn" },
+      "kind": "weather",
+      "lonLat": [8.092728, 46.426534],
+      "source": "geoadmin-messwerte",
+      "elevation": 2895
+    },
+    {
+      "id": "smn:GIH",
+      "name": { "de": "Giswil", "en": "Giswil" },
+      "kind": "weather",
+      "lonLat": [8.190225, 46.849454],
+      "source": "geoadmin-messwerte",
+      "elevation": 473.3
+    },
+    {
+      "id": "smn:GES",
+      "name": { "de": "Gersau", "en": "Gersau" },
+      "kind": "weather",
+      "lonLat": [8.523386, 46.996083],
+      "source": "geoadmin-messwerte",
+      "elevation": 521.6
+    },
+    {
+      "id": "smn:SRS",
+      "name": { "de": "Schiers", "en": "Schiers" },
+      "kind": "weather",
+      "lonLat": [9.668072, 46.975508],
+      "source": "geoadmin-messwerte",
+      "elevation": 628
+    },
+    {
+      "id": "smn:VIO",
+      "name": { "de": "Vicosoprano", "en": "Vicosoprano" },
+      "kind": "weather",
+      "lonLat": [9.627806, 46.35302],
+      "source": "geoadmin-messwerte",
+      "elevation": 1091
+    },
+    {
+      "id": "smn:OBR",
+      "name": { "de": "Oberriet / Kriessern", "en": "Oberriet / Kriessern" },
+      "kind": "weather",
+      "lonLat": [9.612704, 47.376606],
+      "source": "geoadmin-messwerte",
+      "elevation": 411
+    },
+    {
+      "id": "smn:BEP",
+      "name": { "de": "Belp", "en": "Belp" },
+      "kind": "weather",
+      "lonLat": [7.505336, 46.906097],
+      "source": "geoadmin-messwerte",
+      "elevation": 511.5
+    },
+    {
+      "id": "smn:LOH",
+      "name": { "de": "Lohn, SH", "en": "Lohn, SH" },
+      "kind": "weather",
+      "lonLat": [8.677646, 47.751945],
+      "source": "geoadmin-messwerte",
+      "elevation": 586.5
+    },
+    {
+      "id": "smn:STB",
+      "name": { "de": "Starkenbach", "en": "Starkenbach" },
+      "kind": "weather",
+      "lonLat": [9.250448, 47.184869],
+      "source": "geoadmin-messwerte",
+      "elevation": 899
+    },
+    {
+      "id": "smn:SNG",
+      "name": { "de": "Seengen", "en": "Seengen" },
+      "kind": "weather",
+      "lonLat": [8.188447, 47.327333],
+      "source": "geoadmin-messwerte",
+      "elevation": 446.5
+    },
+    {
+      "id": "smn:AFI",
+      "name": { "de": "Andelfingen", "en": "Andelfingen" },
+      "kind": "weather",
+      "lonLat": [8.670294, 47.604671],
+      "source": "geoadmin-messwerte",
+      "elevation": 361.5
+    },
+    {
+      "id": "smn:MAB",
+      "name": { "de": "Martigny", "en": "Martigny" },
+      "kind": "weather",
+      "lonLat": [7.062531, 46.109788],
+      "source": "geoadmin-messwerte",
+      "elevation": 462.5
+    },
+    {
+      "id": "smn:SIE",
+      "name": { "de": "Siebnen", "en": "Siebnen" },
+      "kind": "weather",
+      "lonLat": [8.900483, 47.171513],
+      "source": "geoadmin-messwerte",
+      "elevation": 453.5
+    },
+    {
+      "id": "smn:JON",
+      "name": { "de": "Jona", "en": "Jona" },
+      "kind": "weather",
+      "lonLat": [8.848289, 47.223911],
+      "source": "geoadmin-messwerte",
+      "elevation": 412
+    },
+    {
+      "id": "smn:GTT",
+      "name": { "de": "Guttannen", "en": "Guttannen" },
+      "kind": "weather",
+      "lonLat": [8.291716, 46.65645],
+      "source": "geoadmin-messwerte",
+      "elevation": 1057
+    },
+    {
+      "id": "smn:GAD",
+      "name": { "de": "Gadmen", "en": "Gadmen" },
+      "kind": "weather",
+      "lonLat": [8.351136, 46.736856],
+      "source": "geoadmin-messwerte",
+      "elevation": 1191.5
+    },
+    {
+      "id": "smn:SUS",
+      "name": { "de": "Susch", "en": "Susch" },
+      "kind": "weather",
+      "lonLat": [10.083011, 46.754885],
+      "source": "geoadmin-messwerte",
+      "elevation": 1418
+    },
+    {
+      "id": "smn:KAI",
+      "name": { "de": "Kaiserstuhl, AG", "en": "Kaiserstuhl, AG" },
+      "kind": "weather",
+      "lonLat": [8.413232, 47.570607],
+      "source": "geoadmin-messwerte",
+      "elevation": 362.5
+    },
+    {
+      "id": "smn:NEB",
+      "name": { "de": "Nesselboden", "en": "Nesselboden" },
+      "kind": "weather",
+      "lonLat": [7.50857, 47.245172],
+      "source": "geoadmin-messwerte",
+      "elevation": 1057
+    },
+    {
+      "id": "smn:WIN",
+      "name": { "de": "Winterthur / Seen", "en": "Winterthur / Seen" },
+      "kind": "weather",
+      "lonLat": [8.763192, 47.474675],
+      "source": "geoadmin-messwerte",
+      "elevation": 507.5
+    },
+    {
+      "id": "smn:AVA",
+      "name": { "de": "Les Avants", "en": "Les Avants" },
+      "kind": "weather",
+      "lonLat": [6.942452, 46.456848],
+      "source": "geoadmin-messwerte",
+      "elevation": 1038
+    },
+    {
+      "id": "smn:SAI",
+      "name": { "de": "Saignelégier", "en": "Saignelégier" },
+      "kind": "weather",
+      "lonLat": [6.980839, 47.256901],
+      "source": "geoadmin-messwerte",
+      "elevation": 884.5
+    },
+    {
+      "id": "smn:SAN",
+      "name": { "de": "St. Antönien", "en": "St. Antönien" },
+      "kind": "weather",
+      "lonLat": [9.825913, 46.972131],
+      "source": "geoadmin-messwerte",
+      "elevation": 1458
+    },
+    {
+      "id": "smn:COL",
+      "name": { "de": "Coldrerio", "en": "Coldrerio" },
+      "kind": "weather",
+      "lonLat": [8.997425, 45.853913],
+      "source": "geoadmin-messwerte",
+      "elevation": 348.5
+    },
+    {
+      "id": "smn:LTB",
+      "name": { "de": "Lauterbrunnen", "en": "Lauterbrunnen" },
+      "kind": "weather",
+      "lonLat": [7.906466, 46.592923],
+      "source": "geoadmin-messwerte",
+      "elevation": 817
+    },
+    {
+      "id": "smn:LAP",
+      "name": { "de": "Laupen", "en": "Laupen" },
+      "kind": "weather",
+      "lonLat": [7.24047, 46.916764],
+      "source": "geoadmin-messwerte",
+      "elevation": 484.5
+    },
+    {
+      "id": "smn:WIT",
+      "name": { "de": "Wittnau", "en": "Wittnau" },
+      "kind": "weather",
+      "lonLat": [7.9686, 47.480313],
+      "source": "geoadmin-messwerte",
+      "elevation": 463.9
+    },
+    {
+      "id": "smn:FLW",
+      "name": { "de": "Flawil", "en": "Flawil" },
+      "kind": "weather",
+      "lonLat": [9.202888, 47.414143],
+      "source": "geoadmin-messwerte",
+      "elevation": 572.5
+    },
+    {
+      "id": "smn:URN",
+      "name": { "de": "Urnäsch", "en": "Urnäsch" },
+      "kind": "weather",
+      "lonLat": [9.279799, 47.312029],
+      "source": "geoadmin-messwerte",
+      "elevation": 826.5
+    },
+    {
+      "id": "smn:HIW",
+      "name": { "de": "Hinwil", "en": "Hinwil" },
+      "kind": "weather",
+      "lonLat": [8.812359, 47.309151],
+      "source": "geoadmin-messwerte",
+      "elevation": 540.5
+    },
+    {
+      "id": "smn:UST",
+      "name": { "de": "Uster", "en": "Uster" },
+      "kind": "weather",
+      "lonLat": [8.692886, 47.35074],
+      "source": "geoadmin-messwerte",
+      "elevation": 439.5
+    },
+    {
+      "id": "smn:LEU",
+      "name": { "de": "Leukerbad", "en": "Leukerbad" },
+      "kind": "weather",
+      "lonLat": [7.621643, 46.36704],
+      "source": "geoadmin-messwerte",
+      "elevation": 1288
+    },
+    {
+      "id": "smn:KUE",
+      "name": { "de": "Küsnacht, ZH", "en": "Küsnacht, ZH" },
+      "kind": "weather",
+      "lonLat": [8.58528, 47.310328],
+      "source": "geoadmin-messwerte",
+      "elevation": 414.5
+    },
+    {
+      "id": "smn:LSN",
+      "name": { "de": "Lausanne", "en": "Lausanne" },
+      "kind": "weather",
+      "lonLat": [6.643273, 46.527813],
+      "source": "geoadmin-messwerte",
+      "elevation": 602.5
+    },
+    {
+      "id": "smn:COS",
+      "name": { "de": "Cossonay", "en": "Cossonay" },
+      "kind": "weather",
+      "lonLat": [6.493085, 46.609509],
+      "source": "geoadmin-messwerte",
+      "elevation": 591.5
+    },
+    {
+      "id": "smn:TRU",
+      "name": { "de": "Trun", "en": "Trun" },
+      "kind": "weather",
+      "lonLat": [9.008842, 46.744402],
+      "source": "geoadmin-messwerte",
+      "elevation": 836
+    },
+    {
+      "id": "smn:VRI",
+      "name": { "de": "Vrin", "en": "Vrin" },
+      "kind": "weather",
+      "lonLat": [9.103473, 46.655802],
+      "source": "geoadmin-messwerte",
+      "elevation": 1386
+    },
+    {
+      "id": "smn:ZEV",
+      "name": { "de": "Zervreila", "en": "Zervreila" },
+      "kind": "weather",
+      "lonLat": [9.118797, 46.578801],
+      "source": "geoadmin-messwerte",
+      "elevation": 1740
+    },
+    {
+      "id": "smn:CTO",
+      "name": { "de": "Torricella / Crana", "en": "Torricella / Crana" },
+      "kind": "weather",
+      "lonLat": [8.895364, 46.075812],
+      "source": "geoadmin-messwerte",
+      "elevation": 1004
+    },
+    {
+      "id": "smn:ABE",
+      "name": { "de": "Aarberg", "en": "Aarberg" },
+      "kind": "weather",
+      "lonLat": [7.285342, 47.057968],
+      "source": "geoadmin-messwerte",
+      "elevation": 445.5
+    },
+    {
+      "id": "smn:HUT",
+      "name": { "de": "Huttwil", "en": "Huttwil" },
+      "kind": "weather",
+      "lonLat": [7.837359, 47.114006],
+      "source": "geoadmin-messwerte",
+      "elevation": 634.5
+    },
+    {
+      "id": "smn:BUE",
+      "name": { "de": "Bülach", "en": "Bülach" },
+      "kind": "weather",
+      "lonLat": [8.527733, 47.519596],
+      "source": "geoadmin-messwerte",
+      "elevation": 404.5
+    },
+    {
+      "id": "smn:BRW",
+      "name": { "de": "Braunwald", "en": "Braunwald" },
+      "kind": "weather",
+      "lonLat": [8.98765, 46.937473],
+      "source": "geoadmin-messwerte",
+      "elevation": 1301
+    },
+    {
+      "id": "smn:OBI",
+      "name": { "de": "Oberiberg", "en": "Oberiberg" },
+      "kind": "weather",
+      "lonLat": [8.778655, 47.037388],
+      "source": "geoadmin-messwerte",
+      "elevation": 1077
+    },
+    {
+      "id": "smn:LON",
+      "name": { "de": "Longirod", "en": "Longirod" },
+      "kind": "weather",
+      "lonLat": [6.258288, 46.496125],
+      "source": "geoadmin-messwerte",
+      "elevation": 901.5
+    },
+    {
+      "id": "smn:SAP",
+      "name": { "de": "Safien Platz", "en": "Safien Platz" },
+      "kind": "weather",
+      "lonLat": [9.315077, 46.678706],
+      "source": "geoadmin-messwerte",
+      "elevation": 1298
+    },
+    {
+      "id": "smn:STP",
+      "name": { "de": "Stöckalp", "en": "Stöckalp" },
+      "kind": "weather",
+      "lonLat": [8.281203, 46.800006],
+      "source": "geoadmin-messwerte",
+      "elevation": 1071.5
+    },
+    {
+      "id": "smn:SAX",
+      "name": { "de": "Salez / Saxerriet", "en": "Salez / Saxerriet" },
+      "kind": "weather",
+      "lonLat": [9.493083, 47.232961],
+      "source": "geoadmin-messwerte",
+      "elevation": 437.5
+    },
+    {
+      "id": "smn:KIE",
+      "name": { "de": "Kiental", "en": "Kiental" },
+      "kind": "weather",
+      "lonLat": [7.727099, 46.58258],
+      "source": "geoadmin-messwerte",
+      "elevation": 931.5
+    },
+    {
+      "id": "smn:EGR",
+      "name": { "de": "Eggersriet", "en": "Eggersriet" },
+      "kind": "weather",
+      "lonLat": [9.467902, 47.438752],
+      "source": "geoadmin-messwerte",
+      "elevation": 771.5
+    },
+    {
+      "id": "smn:LAB",
+      "name": { "de": "Langenbruck", "en": "Langenbruck" },
+      "kind": "weather",
+      "lonLat": [7.759586, 47.352888],
+      "source": "geoadmin-messwerte",
+      "elevation": 732.5
+    },
+    {
+      "id": "smn:FIO",
+      "name": { "de": "Fionnay", "en": "Fionnay" },
+      "kind": "weather",
+      "lonLat": [7.308975, 46.031351],
+      "source": "geoadmin-messwerte",
+      "elevation": 1502
+    },
+    {
+      "id": "smn:WEE",
+      "name": { "de": "Weesen", "en": "Weesen" },
+      "kind": "weather",
+      "lonLat": [9.086092, 47.131623],
+      "source": "geoadmin-messwerte",
+      "elevation": 426.5
+    },
+    {
+      "id": "smn:SIH",
+      "name": { "de": "Sihlbrugg", "en": "Sihlbrugg" },
+      "kind": "weather",
+      "lonLat": [8.578283, 47.220567],
+      "source": "geoadmin-messwerte",
+      "elevation": 551.5
+    },
+    {
+      "id": "smn:LGA",
+      "name": { "de": "Langnau am Albis", "en": "Langnau am Albis" },
+      "kind": "weather",
+      "lonLat": [8.532709, 47.287828],
+      "source": "geoadmin-messwerte",
+      "elevation": 536.5
+    },
+    {
+      "id": "smn:ENT",
+      "name": { "de": "Entlebuch", "en": "Entlebuch" },
+      "kind": "weather",
+      "lonLat": [8.068746, 46.98682],
+      "source": "geoadmin-messwerte",
+      "elevation": 769.5
+    },
+    {
+      "id": "smn:THS",
+      "name": { "de": "Thusis", "en": "Thusis" },
+      "kind": "weather",
+      "lonLat": [9.441713, 46.709413],
+      "source": "geoadmin-messwerte",
+      "elevation": 673.5
+    },
+    {
+      "id": "smn:MAL",
+      "name": { "de": "Malbun", "en": "Malbun" },
+      "kind": "weather",
+      "lonLat": [9.608607, 47.103163],
+      "source": "geoadmin-messwerte",
+      "elevation": 1612.5
+    },
+    {
+      "id": "smn:BRP",
+      "name": { "de": "Brusio", "en": "Brusio" },
+      "kind": "weather",
+      "lonLat": [10.117245, 46.264358],
+      "source": "geoadmin-messwerte",
+      "elevation": 857.5
+    },
+    {
+      "id": "smn:SOG",
+      "name": { "de": "Soglio", "en": "Soglio" },
+      "kind": "weather",
+      "lonLat": [9.535538, 46.342567],
+      "source": "geoadmin-messwerte",
+      "elevation": 1090
+    },
+    {
+      "id": "smn:ESZ",
+      "name": { "de": "Eschenz", "en": "Eschenz" },
+      "kind": "weather",
+      "lonLat": [8.873922, 47.645704],
+      "source": "geoadmin-messwerte",
+      "elevation": 415.5
+    },
+    {
+      "id": "smn:KIS",
+      "name": { "de": "Kiesen", "en": "Kiesen" },
+      "kind": "weather",
+      "lonLat": [7.573033, 46.820815],
+      "source": "geoadmin-messwerte",
+      "elevation": 536.5
+    },
+    {
+      "id": "smn:MEV",
+      "name": { "de": "Mervelier", "en": "Mervelier" },
+      "kind": "weather",
+      "lonLat": [7.490031, 47.346621],
+      "source": "geoadmin-messwerte",
+      "elevation": 541.5
+    },
+    {
+      "id": "smn:BEY",
+      "name": { "de": "Bellelay", "en": "Bellelay" },
+      "kind": "weather",
+      "lonLat": [7.16912, 47.264512],
+      "source": "geoadmin-messwerte",
+      "elevation": 924.5
+    },
+    {
+      "id": "smn:COU",
+      "name": { "de": "Couvet", "en": "Couvet" },
+      "kind": "weather",
+      "lonLat": [6.658676, 46.933535],
+      "source": "geoadmin-messwerte",
+      "elevation": 729.5
+    },
+    {
+      "id": "smn:DOB",
+      "name": { "de": "Benken / Doggen", "en": "Benken / Doggen" },
+      "kind": "weather",
+      "lonLat": [8.961211, 47.188736],
+      "source": "geoadmin-messwerte",
+      "elevation": 409.5
+    },
+    {
+      "id": "smn:WAG",
+      "name": { "de": "Waldegg", "en": "Waldegg" },
+      "kind": "weather",
+      "lonLat": [8.45479, 47.362273],
+      "source": "geoadmin-messwerte",
+      "elevation": 546.8
+    },
+    {
+      "id": "smn:DIT",
+      "name": { "de": "Dietikon", "en": "Dietikon" },
+      "kind": "weather",
+      "lonLat": [8.404473, 47.413562],
+      "source": "geoadmin-messwerte",
+      "elevation": 385.5
+    },
+    {
+      "id": "smn:BRT",
+      "name": { "de": "Bristen", "en": "Bristen" },
+      "kind": "weather",
+      "lonLat": [8.69839, 46.767585],
+      "source": "geoadmin-messwerte",
+      "elevation": 786
+    },
+    {
+      "id": "smn:SVG",
+      "name": { "de": "Savognin", "en": "Savognin" },
+      "kind": "weather",
+      "lonLat": [9.597144, 46.594756],
+      "source": "geoadmin-messwerte",
+      "elevation": 1174
+    },
+    {
+      "id": "smn:BLZ",
+      "name": { "de": "Bellinzona", "en": "Bellinzona" },
+      "kind": "weather",
+      "lonLat": [9.00488, 46.189889],
+      "source": "geoadmin-messwerte",
+      "elevation": 225.5
+    },
+    {
+      "id": "smn:ORS",
+      "name": { "de": "Orsières", "en": "Orsières" },
+      "kind": "weather",
+      "lonLat": [7.141934, 46.021409],
+      "source": "geoadmin-messwerte",
+      "elevation": 930.5
+    },
+    {
+      "id": "smn:BEX",
+      "name": { "de": "Bex", "en": "Bex" },
+      "kind": "weather",
+      "lonLat": [6.995296, 46.244164],
+      "source": "geoadmin-messwerte",
+      "elevation": 403.5
+    },
+    {
+      "id": "smn:MMO",
+      "name": { "de": "Mormont", "en": "Mormont" },
+      "kind": "weather",
+      "lonLat": [7.037315, 47.438106],
+      "source": "geoadmin-messwerte",
+      "elevation": 536.5
+    },
+    {
+      "id": "smn:AIR",
+      "name": { "de": "Airolo", "en": "Airolo" },
+      "kind": "weather",
+      "lonLat": [8.597443, 46.526148],
+      "source": "geoadmin-messwerte",
+      "elevation": 1141
+    },
+    {
+      "id": "smn:FAI",
+      "name": { "de": "Faido", "en": "Faido" },
+      "kind": "weather",
+      "lonLat": [8.805295, 46.477492],
+      "source": "geoadmin-messwerte",
+      "elevation": 748.5
+    },
+    {
+      "id": "smn:BOS",
+      "name": { "de": "Bosco/Gurin", "en": "Bosco/Gurin" },
+      "kind": "weather",
+      "lonLat": [8.488719, 46.316796],
+      "source": "geoadmin-messwerte",
+      "elevation": 1489
+    },
+    {
+      "id": "smn:MSG",
+      "name": { "de": "Mosogno", "en": "Mosogno" },
+      "kind": "weather",
+      "lonLat": [8.640862, 46.198551],
+      "source": "geoadmin-messwerte",
+      "elevation": 776.5
+    },
+    {
+      "id": "smn:MAT",
+      "name": { "de": "Martina", "en": "Martina" },
+      "kind": "weather",
+      "lonLat": [10.463023, 46.884013],
+      "source": "geoadmin-messwerte",
+      "elevation": 1043
+    },
+    {
+      "id": "smn:ROT",
+      "name": { "de": "Rothenbrunnen", "en": "Rothenbrunnen" },
+      "kind": "weather",
+      "lonLat": [9.418466, 46.76564],
+      "source": "geoadmin-messwerte",
+      "elevation": 621.5
+    },
+    {
+      "id": "smn:TST",
+      "name": { "de": "Tschiertschen", "en": "Tschiertschen" },
+      "kind": "weather",
+      "lonLat": [9.608141, 46.819665],
+      "source": "geoadmin-messwerte",
+      "elevation": 1275
+    },
+    {
+      "id": "smn:KLA",
+      "name": { "de": "Klosters", "en": "Klosters" },
+      "kind": "weather",
+      "lonLat": [9.8897, 46.865154],
+      "source": "geoadmin-messwerte",
+      "elevation": 1188
+    },
+    {
+      "id": "smn:VAE",
+      "name": { "de": "Vättis", "en": "Vättis" },
+      "kind": "weather",
+      "lonLat": [9.443598, 46.909081],
+      "source": "geoadmin-messwerte",
+      "elevation": 941
+    },
+    {
+      "id": "smn:SUA",
+      "name": { "de": "Schaan", "en": "Schaan" },
+      "kind": "weather",
+      "lonLat": [9.490684, 47.186989],
+      "source": "geoadmin-messwerte",
+      "elevation": 445.5
+    },
+    {
+      "id": "smn:ALS",
+      "name": { "de": "Altstätten, SG", "en": "Altstätten, SG" },
+      "kind": "weather",
+      "lonLat": [9.556528, 47.383224],
+      "source": "geoadmin-messwerte",
+      "elevation": 431.5
+    },
+    {
+      "id": "smn:AMW",
+      "name": { "de": "Amriswil", "en": "Amriswil" },
+      "kind": "weather",
+      "lonLat": [9.32248, 47.550134],
+      "source": "geoadmin-messwerte",
+      "elevation": 421.5
+    },
+    {
+      "id": "smn:APP",
+      "name": { "de": "Appenzell", "en": "Appenzell" },
+      "kind": "weather",
+      "lonLat": [9.397313, 47.339591],
+      "source": "geoadmin-messwerte",
+      "elevation": 751.5
+    },
+    {
+      "id": "smn:OPF",
+      "name": { "de": "Opfikon", "en": "Opfikon" },
+      "kind": "weather",
+      "lonLat": [8.56034, 47.437637],
+      "source": "geoadmin-messwerte",
+      "elevation": 425.5
+    },
+    {
+      "id": "smn:INN",
+      "name": { "de": "Innerthal", "en": "Innerthal" },
+      "kind": "weather",
+      "lonLat": [8.915283, 47.106443],
+      "source": "geoadmin-messwerte",
+      "elevation": 905
+    },
+    {
+      "id": "smn:REM",
+      "name": { "de": "Rempen", "en": "Rempen" },
+      "kind": "weather",
+      "lonLat": [8.896796, 47.138382],
+      "source": "geoadmin-messwerte",
+      "elevation": 652
+    },
+    {
+      "id": "smn:GOA",
+      "name": { "de": "Göscheneralp", "en": "Göscheneralp" },
+      "kind": "weather",
+      "lonLat": [8.500025, 46.647531],
+      "source": "geoadmin-messwerte",
+      "elevation": 1748
+    },
+    {
+      "id": "smn:ZWK",
+      "name": { "de": "Zwillikon", "en": "Zwillikon" },
+      "kind": "weather",
+      "lonLat": [8.431958, 47.290097],
+      "source": "geoadmin-messwerte",
+      "elevation": 462.5
+    },
+    {
+      "id": "smn:KAS",
+      "name": { "de": "Kandersteg", "en": "Kandersteg" },
+      "kind": "weather",
+      "lonLat": [7.677169, 46.493846],
+      "source": "geoadmin-messwerte",
+      "elevation": 1180
+    },
+    {
+      "id": "smn:ZWE",
+      "name": { "de": "Zweisimmen", "en": "Zweisimmen" },
+      "kind": "weather",
+      "lonLat": [7.384919, 46.550513],
+      "source": "geoadmin-messwerte",
+      "elevation": 937.5
+    },
+    {
+      "id": "smn:GSG",
+      "name": { "de": "Gsteig, Gstaad", "en": "Gsteig, Gstaad" },
+      "kind": "weather",
+      "lonLat": [7.278597, 46.376535],
+      "source": "geoadmin-messwerte",
+      "elevation": 1198
+    },
+    {
+      "id": "smn:VST",
+      "name": { "de": "La Valsainte", "en": "La Valsainte" },
+      "kind": "weather",
+      "lonLat": [7.178562, 46.647766],
+      "source": "geoadmin-messwerte",
+      "elevation": 1046
+    },
+    {
+      "id": "smn:ROM",
+      "name": { "de": "Romont", "en": "Romont" },
+      "kind": "weather",
+      "lonLat": [6.934895, 46.703693],
+      "source": "geoadmin-messwerte",
+      "elevation": 693.5
+    },
+    {
+      "id": "smn:AUB",
+      "name": { "de": "L'Auberson", "en": "L'Auberson" },
+      "kind": "weather",
+      "lonLat": [6.440688, 46.82344],
+      "source": "geoadmin-messwerte",
+      "elevation": 1098
+    },
+    {
+      "id": "smn:MGL",
+      "name": { "de": "Magglingen", "en": "Magglingen" },
+      "kind": "weather",
+      "lonLat": [7.215013, 47.140798],
+      "source": "geoadmin-messwerte",
+      "elevation": 884.5
+    },
+    {
+      "id": "smn:AIE",
+      "name": { "de": "Affoltern i. E.", "en": "Affoltern i. E." },
+      "kind": "weather",
+      "lonLat": [7.740609, 47.063128],
+      "source": "geoadmin-messwerte",
+      "elevation": 756.5
+    },
+    {
+      "id": "smn:WHF",
+      "name": { "de": "Riedholz / Wallierhof", "en": "Riedholz / Wallierhof" },
+      "kind": "weather",
+      "lonLat": [7.562687, 47.234279],
+      "source": "geoadmin-messwerte",
+      "elevation": 519.5
+    },
+    {
+      "id": "smn:BAW",
+      "name": { "de": "Barmelweid", "en": "Barmelweid" },
+      "kind": "weather",
+      "lonLat": [7.969486, 47.42146],
+      "source": "geoadmin-messwerte",
+      "elevation": 778.5
+    },
+    {
+      "id": "smn:UNK",
+      "name": { "de": "Unterkulm", "en": "Unterkulm" },
+      "kind": "weather",
+      "lonLat": [8.111077, 47.319823],
+      "source": "geoadmin-messwerte",
+      "elevation": 455.5
+    },
+    {
+      "id": "smn:MUR",
+      "name": { "de": "Muri, AG", "en": "Muri, AG" },
+      "kind": "weather",
+      "lonLat": [8.327606, 47.265385],
+      "source": "geoadmin-messwerte",
+      "elevation": 578.5
+    },
+    {
+      "id": "smn:UBB",
+      "name": { "de": "Bözberg", "en": "Bözberg" },
+      "kind": "weather",
+      "lonLat": [8.131844, 47.481701],
+      "source": "geoadmin-messwerte",
+      "elevation": 537.5
+    },
+    {
+      "id": "smn:OED",
+      "name": { "de": "Ehrendingen", "en": "Ehrendingen" },
+      "kind": "weather",
+      "lonLat": [8.339048, 47.50813],
+      "source": "geoadmin-messwerte",
+      "elevation": 429.5
+    },
+    {
+      "id": "smn:BRI",
+      "name": { "de": "Brig", "en": "Brig" },
+      "kind": "weather",
+      "lonLat": [7.965267, 46.3118],
+      "source": "geoadmin-messwerte",
+      "elevation": 666.5
+    },
+    {
+      "id": "smn:BEC",
+      "name": { "de": "Bernina / Curtinatsch", "en": "Bernina / Curtinatsch" },
+      "kind": "weather",
+      "lonLat": [9.986894, 46.441095],
+      "source": "geoadmin-messwerte",
+      "elevation": 2092.5
+    },
+    {
+      "id": "smn:BRZ",
+      "name": { "de": "Brienz", "en": "Brienz" },
+      "kind": "weather",
+      "lonLat": [8.060782, 46.740756],
+      "source": "geoadmin-messwerte",
+      "elevation": 568.65
+    },
+    {
+      "id": "smn:FIT",
+      "name": { "de": "Fieschertal", "en": "Fieschertal" },
+      "kind": "weather",
+      "lonLat": [8.141528, 46.428716],
+      "source": "geoadmin-messwerte",
+      "elevation": 1205
+    },
+    {
+      "id": "smn:VSARO",
+      "name": { "de": "Arolla", "en": "Arolla" },
+      "kind": "weather",
+      "lonLat": [7.483929, 46.014029],
+      "source": "geoadmin-messwerte",
+      "elevation": 2007
+    },
+    {
+      "id": "smn:VSGDX",
+      "name": { "de": "Barrage Grande Dixence", "en": "Barrage Grande Dixence" },
+      "kind": "weather",
+      "lonLat": [7.403153, 46.083729],
+      "source": "geoadmin-messwerte",
+      "elevation": 2164
+    },
+    {
+      "id": "smn:VSBRI",
+      "name": { "de": "Bricola", "en": "Bricola" },
+      "kind": "weather",
+      "lonLat": [7.566363, 46.046331],
+      "source": "geoadmin-messwerte",
+      "elevation": 2433
+    },
+    {
+      "id": "smn:VSFIN",
+      "name": { "de": "Findelen", "en": "Findelen" },
+      "kind": "weather",
+      "lonLat": [7.778394, 46.010961],
+      "source": "geoadmin-messwerte",
+      "elevation": 2172
+    },
+    {
+      "id": "smn:VSSTA",
+      "name": { "de": "Stafel", "en": "Stafel" },
+      "kind": "weather",
+      "lonLat": [7.678748, 46.004573],
+      "source": "geoadmin-messwerte",
+      "elevation": 2185
+    },
+    {
+      "id": "smn:VSFLY",
+      "name": { "de": "La Fouly", "en": "La Fouly" },
+      "kind": "weather",
+      "lonLat": [7.096379, 45.936624],
+      "source": "geoadmin-messwerte",
+      "elevation": 1567
+    },
+    {
+      "id": "smn:VSEMO",
+      "name": { "de": "Emosson", "en": "Emosson" },
+      "kind": "weather",
+      "lonLat": [6.930296, 46.065595],
+      "source": "geoadmin-messwerte",
+      "elevation": 1925
+    },
+    {
+      "id": "smn:VSTUR",
+      "name": { "de": "Turtmann", "en": "Turtmann" },
+      "kind": "weather",
+      "lonLat": [7.692414, 46.169833],
+      "source": "geoadmin-messwerte",
+      "elevation": 2182
+    },
+    {
+      "id": "smn:VSMOI",
+      "name": { "de": "Moiry", "en": "Moiry" },
+      "kind": "weather",
+      "lonLat": [7.570226, 46.13772],
+      "source": "geoadmin-messwerte",
+      "elevation": 2129
+    },
+    {
+      "id": "smn:VSSFE",
+      "name": { "de": "Salanfe", "en": "Salanfe" },
+      "kind": "weather",
+      "lonLat": [6.972984, 46.145644],
+      "source": "geoadmin-messwerte",
+      "elevation": 1970.5
+    },
+    {
+      "id": "smn:VSCLU",
+      "name": { "de": "Clusanfe", "en": "Clusanfe" },
+      "kind": "weather",
+      "lonLat": [6.885296, 46.135927],
+      "source": "geoadmin-messwerte",
+      "elevation": 1928
+    },
+    {
+      "id": "smn:ROG",
+      "name": { "de": "Rossberg", "en": "Rossberg" },
+      "kind": "weather",
+      "lonLat": [8.54776, 47.073669],
+      "source": "geoadmin-messwerte",
+      "elevation": 1132
+    },
+    {
+      "id": "smn:VSDUR",
+      "name": { "de": "Durnand", "en": "Durnand" },
+      "kind": "weather",
+      "lonLat": [7.084275, 46.051719],
+      "source": "geoadmin-messwerte",
+      "elevation": 1216
+    },
+    {
+      "id": "smn:VSTRI",
+      "name": { "de": "Trient", "en": "Trient" },
+      "kind": "weather",
+      "lonLat": [6.994681, 46.046311],
+      "source": "geoadmin-messwerte",
+      "elevation": 1331
+    },
+    {
+      "id": "smn:VSSOR",
+      "name": { "de": "Sorniot / Lac Inférieur", "en": "Sorniot / Lac Inférieur" },
+      "kind": "weather",
+      "lonLat": [7.099816, 46.166598],
+      "source": "geoadmin-messwerte",
+      "elevation": 1992
+    },
+    {
+      "id": "smn:VSDER",
+      "name": { "de": "Derborence", "en": "Derborence" },
+      "kind": "weather",
+      "lonLat": [7.232514, 46.288504],
+      "source": "geoadmin-messwerte",
+      "elevation": 1368
+    },
+    {
+      "id": "smn:VSTSN",
+      "name": { "de": "Tsanfleuron", "en": "Tsanfleuron" },
+      "kind": "weather",
+      "lonLat": [7.301802, 46.320705],
+      "source": "geoadmin-messwerte",
+      "elevation": 2055
+    },
+    {
+      "id": "smn:VSNEN",
+      "name": { "de": "Nendaz", "en": "Nendaz" },
+      "kind": "weather",
+      "lonLat": [7.311422, 46.122092],
+      "source": "geoadmin-messwerte",
+      "elevation": 1940
+    },
+    {
+      "id": "smn:VSISE",
+      "name": { "de": "Isérables", "en": "Isérables" },
+      "kind": "weather",
+      "lonLat": [7.248753, 46.160927],
+      "source": "geoadmin-messwerte",
+      "elevation": 1239
+    },
+    {
+      "id": "smn:VSBRU",
+      "name": { "de": "Bruchji", "en": "Bruchji" },
+      "kind": "weather",
+      "lonLat": [7.971537, 46.379384],
+      "source": "geoadmin-messwerte",
+      "elevation": 2302
+    },
+    {
+      "id": "smn:VSVIS",
+      "name": { "de": "Visperterminen", "en": "Visperterminen" },
+      "kind": "weather",
+      "lonLat": [7.904207, 46.262887],
+      "source": "geoadmin-messwerte",
+      "elevation": 1354
+    },
+    {
+      "id": "smn:VSERG",
+      "name": { "de": "Ergisch", "en": "Ergisch" },
+      "kind": "weather",
+      "lonLat": [7.716297, 46.293012],
+      "source": "geoadmin-messwerte",
+      "elevation": 1135
+    },
+    {
+      "id": "smn:VSCOL",
+      "name": { "de": "Les Collons", "en": "Les Collons" },
+      "kind": "weather",
+      "lonLat": [7.387369, 46.178976],
+      "source": "geoadmin-messwerte",
+      "elevation": 1772
+    },
+    {
+      "id": "smn:VSSIE",
+      "name": { "de": "Sierre", "en": "Sierre" },
+      "kind": "weather",
+      "lonLat": [7.556392, 46.298779],
+      "source": "geoadmin-messwerte",
+      "elevation": 537
+    },
+    {
+      "id": "smn:VSCHO",
+      "name": { "de": "Choëx", "en": "Choëx" },
+      "kind": "weather",
+      "lonLat": [6.961367, 46.232133],
+      "source": "geoadmin-messwerte",
+      "elevation": 893
+    },
+    {
+      "id": "smn:VSBSP",
+      "name": { "de": "Bourg-St-Pierre", "en": "Bourg-St-Pierre" },
+      "kind": "weather",
+      "lonLat": [7.198232, 45.927595],
+      "source": "geoadmin-messwerte",
+      "elevation": 1824.5
+    },
+    {
+      "id": "smn:AGATT",
+      "name": { "de": "Attelwil", "en": "Attelwil" },
+      "kind": "weather",
+      "lonLat": [8.050517, 47.265238],
+      "source": "geoadmin-messwerte",
+      "elevation": 476.5
+    },
+    {
+      "id": "smn:AGSTE",
+      "name": { "de": "Stetten", "en": "Stetten" },
+      "kind": "weather",
+      "lonLat": [8.299989, 47.396507],
+      "source": "geoadmin-messwerte",
+      "elevation": 356.5
+    },
+    {
+      "id": "smn:VSSAB",
+      "name": { "de": "Saas Balen", "en": "Saas Balen" },
+      "kind": "weather",
+      "lonLat": [7.928355, 46.148782],
+      "source": "geoadmin-messwerte",
+      "elevation": 1537
+    },
+    {
+      "id": "smn:VSJEI",
+      "name": { "de": "Jeizinen", "en": "Jeizinen" },
+      "kind": "weather",
+      "lonLat": [7.722476, 46.328393],
+      "source": "geoadmin-messwerte",
+      "elevation": 1558
+    },
+    {
+      "id": "smn:VSBAS",
+      "name": { "de": "Baltschiedertal", "en": "Baltschiedertal" },
+      "kind": "weather",
+      "lonLat": [7.879328, 46.342321],
+      "source": "geoadmin-messwerte",
+      "elevation": 1320
+    },
+    {
+      "id": "smn:VSMAT",
+      "name": { "de": "Mattsand", "en": "Mattsand" },
+      "kind": "weather",
+      "lonLat": [7.791294, 46.143445],
+      "source": "geoadmin-messwerte",
+      "elevation": 1232
+    },
+    {
+      "id": "smn:VSVER",
+      "name": { "de": "Vercorin", "en": "Vercorin" },
+      "kind": "weather",
+      "lonLat": [7.556286, 46.237966],
+      "source": "geoadmin-messwerte",
+      "elevation": 1652
+    },
+    {
+      "id": "smn:VSANZ",
+      "name": { "de": "Anzère", "en": "Anzère" },
+      "kind": "weather",
+      "lonLat": [7.407577, 46.305247],
+      "source": "geoadmin-messwerte",
+      "elevation": 1616
+    },
+    {
+      "id": "smn:VSSAL",
+      "name": { "de": "Saleina", "en": "Saleina" },
+      "kind": "weather",
+      "lonLat": [7.093979, 45.986028],
+      "source": "geoadmin-messwerte",
+      "elevation": 1602
+    },
+    {
+      "id": "smn:VSCHY",
+      "name": { "de": "Champéry", "en": "Champéry" },
+      "kind": "weather",
+      "lonLat": [6.861139, 46.16273],
+      "source": "geoadmin-messwerte",
+      "elevation": 1057
+    },
+    {
+      "id": "smn:WAR",
+      "name": { "de": "Wartau", "en": "Wartau" },
+      "kind": "weather",
+      "lonLat": [9.50517, 47.096661],
+      "source": "geoadmin-messwerte",
+      "elevation": 469.5
+    },
+    {
+      "id": "smn:VSCHA",
+      "name": { "de": "Chanrion", "en": "Chanrion" },
+      "kind": "weather",
+      "lonLat": [7.380605, 45.93937],
+      "source": "geoadmin-messwerte",
+      "elevation": 2475
+    },
+    {
+      "id": "smn:PRE",
+      "name": { "de": "St-Prex", "en": "St-Prex" },
+      "kind": "weather",
+      "lonLat": [6.443006, 46.483673],
+      "source": "geoadmin-messwerte",
+      "elevation": 435
+    },
+    {
+      "id": "smn:SCM",
+      "name": { "de": "Schmerikon", "en": "Schmerikon" },
+      "kind": "weather",
+      "lonLat": [8.940245, 47.224601],
+      "source": "geoadmin-messwerte",
+      "elevation": 418
+    },
+    {
+      "id": "smn:AEG",
+      "name": { "de": "Oberägeri", "en": "Oberägeri" },
+      "kind": "weather",
+      "lonLat": [8.608205, 47.13364],
+      "source": "geoadmin-messwerte",
+      "elevation": 734.43
+    },
+    {
+      "id": "smn:STK",
+      "name": { "de": "Steckborn", "en": "Steckborn" },
+      "kind": "weather",
+      "lonLat": [8.981447, 47.668625],
+      "source": "geoadmin-messwerte",
+      "elevation": 408
+    },
+    {
+      "id": "smn:QUI",
+      "name": { "de": "Quinten", "en": "Quinten" },
+      "kind": "weather",
+      "lonLat": [9.216051, 47.128742],
+      "source": "geoadmin-messwerte",
+      "elevation": 429
+    }
+  ],
+  "observations": [
+    {
+      "stationId": "smn:ARO",
+      "parameter": "airTemperature",
+      "value": 16.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:RAG",
+      "parameter": "airTemperature",
+      "value": 21.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HAI",
+      "parameter": "airTemperature",
+      "value": 23,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HLL",
+      "parameter": "airTemperature",
+      "value": 17.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DEM",
+      "parameter": "airTemperature",
+      "value": 19.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EBK",
+      "parameter": "airTemperature",
+      "value": 15.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ELM",
+      "parameter": "airTemperature",
+      "value": 17.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EIN",
+      "parameter": "airTemperature",
+      "value": 17.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ANT",
+      "parameter": "airTemperature",
+      "value": 11.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MER",
+      "parameter": "airTemperature",
+      "value": 20.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHD",
+      "parameter": "airTemperature",
+      "value": 16.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRA",
+      "parameter": "airTemperature",
+      "value": 20.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHM",
+      "parameter": "airTemperature",
+      "value": 20.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LAG",
+      "parameter": "airTemperature",
+      "value": 17.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:KOP",
+      "parameter": "airTemperature",
+      "value": 19.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRC",
+      "parameter": "airTemperature",
+      "value": 17.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BLA",
+      "parameter": "airTemperature",
+      "value": 14.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRO",
+      "parameter": "airTemperature",
+      "value": 20.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BEH",
+      "parameter": "airTemperature",
+      "value": 13.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SIA",
+      "parameter": "airTemperature",
+      "value": 11.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SMM",
+      "parameter": "airTemperature",
+      "value": 16.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DAV",
+      "parameter": "airTemperature",
+      "value": 14,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHU",
+      "parameter": "airTemperature",
+      "value": 22.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ROB",
+      "parameter": "airTemperature",
+      "value": 14.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SAM",
+      "parameter": "airTemperature",
+      "value": 9.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SCU",
+      "parameter": "airTemperature",
+      "value": 13.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DOL",
+      "parameter": "airTemperature",
+      "value": 19,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PAY",
+      "parameter": "airTemperature",
+      "value": 21.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:JUN",
+      "parameter": "airTemperature",
+      "value": 3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WYN",
+      "parameter": "airTemperature",
+      "value": 20,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SAE",
+      "parameter": "airTemperature",
+      "value": 10.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VAD",
+      "parameter": "airTemperature",
+      "value": 19.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:AIG",
+      "parameter": "airTemperature",
+      "value": 20.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MLS",
+      "parameter": "airTemperature",
+      "value": 15.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FAH",
+      "parameter": "airTemperature",
+      "value": 22.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MVE",
+      "parameter": "airTemperature",
+      "value": 17.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ZER",
+      "parameter": "airTemperature",
+      "value": 15.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHA",
+      "parameter": "airTemperature",
+      "value": 18.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PIL",
+      "parameter": "airTemperature",
+      "value": 14.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ALT",
+      "parameter": "airTemperature",
+      "value": 19.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ULR",
+      "parameter": "airTemperature",
+      "value": 12.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PIO",
+      "parameter": "airTemperature",
+      "value": 17.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LUG",
+      "parameter": "airTemperature",
+      "value": 23.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:NAP",
+      "parameter": "airTemperature",
+      "value": 19.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SIO",
+      "parameter": "airTemperature",
+      "value": 20.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAG",
+      "parameter": "airTemperature",
+      "value": 21.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:NEU",
+      "parameter": "airTemperature",
+      "value": 23.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SBO",
+      "parameter": "airTemperature",
+      "value": 20.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:INT",
+      "parameter": "airTemperature",
+      "value": 20,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DIS",
+      "parameter": "airTemperature",
+      "value": 18.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:STG",
+      "parameter": "airTemperature",
+      "value": 21.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GLA",
+      "parameter": "airTemperature",
+      "value": 20.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GVE",
+      "parameter": "airTemperature",
+      "value": 21.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:KLO",
+      "parameter": "airTemperature",
+      "value": 19.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GUE",
+      "parameter": "airTemperature",
+      "value": 13.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PUY",
+      "parameter": "airTemperature",
+      "value": 25.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GSB",
+      "parameter": "airTemperature",
+      "value": 12.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ABO",
+      "parameter": "airTemperature",
+      "value": 17.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VIS",
+      "parameter": "airTemperature",
+      "value": 18,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CDF",
+      "parameter": "airTemperature",
+      "value": 16,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:RUE",
+      "parameter": "airTemperature",
+      "value": 23.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BUS",
+      "parameter": "airTemperature",
+      "value": 20.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LUZ",
+      "parameter": "airTemperature",
+      "value": 20.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ENG",
+      "parameter": "airTemperature",
+      "value": 16.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SHA",
+      "parameter": "airTemperature",
+      "value": 20.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SMA",
+      "parameter": "airTemperature",
+      "value": 22.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SBE",
+      "parameter": "airTemperature",
+      "value": 12.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WFJ",
+      "parameter": "airTemperature",
+      "value": 9.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:COV",
+      "parameter": "airTemperature",
+      "value": 5.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BAS",
+      "parameter": "airTemperature",
+      "value": 23.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CGI",
+      "parameter": "airTemperature",
+      "value": 24,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FRE",
+      "parameter": "airTemperature",
+      "value": 19.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BER",
+      "parameter": "airTemperature",
+      "value": 20.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GUT",
+      "parameter": "airTemperature",
+      "value": 21.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GOE",
+      "parameter": "airTemperature",
+      "value": 20.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WAE",
+      "parameter": "airTemperature",
+      "value": 20.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:TAE",
+      "parameter": "airTemperature",
+      "value": 18.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:REH",
+      "parameter": "airTemperature",
+      "value": 19.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:OTL",
+      "parameter": "airTemperature",
+      "value": 25,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BEZ",
+      "parameter": "airTemperature",
+      "value": 19.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MUB",
+      "parameter": "airTemperature",
+      "value": 19.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CIM",
+      "parameter": "airTemperature",
+      "value": 18.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EVO",
+      "parameter": "airTemperature",
+      "value": 15.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LEI",
+      "parameter": "airTemperature",
+      "value": 19.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRH",
+      "parameter": "airTemperature",
+      "value": 14.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:COM",
+      "parameter": "airTemperature",
+      "value": 20.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LAE",
+      "parameter": "airTemperature",
+      "value": 23.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HOE",
+      "parameter": "airTemperature",
+      "value": 20.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PLF",
+      "parameter": "airTemperature",
+      "value": 19.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ROE",
+      "parameter": "airTemperature",
+      "value": 17.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PSI",
+      "parameter": "airTemperature",
+      "value": 19.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIN",
+      "parameter": "airTemperature",
+      "value": 15.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAR",
+      "parameter": "airTemperature",
+      "value": 21.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SAG",
+      "parameter": "airTemperature",
+      "value": 17.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHZ",
+      "parameter": "airTemperature",
+      "value": 22.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:STC",
+      "parameter": "airTemperature",
+      "value": 26,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:COY",
+      "parameter": "airTemperature",
+      "value": 16.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VEV",
+      "parameter": "airTemperature",
+      "value": 25.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BOU",
+      "parameter": "airTemperature",
+      "value": 24.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:TIT",
+      "parameter": "airTemperature",
+      "value": 6.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FRU",
+      "parameter": "airTemperature",
+      "value": 17.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MOE",
+      "parameter": "airTemperature",
+      "value": 19.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAH",
+      "parameter": "airTemperature",
+      "value": 20.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHB",
+      "parameter": "airTemperature",
+      "value": 15.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MTE",
+      "parameter": "airTemperature",
+      "value": 15.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VLS",
+      "parameter": "airTemperature",
+      "value": 13,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ARH",
+      "parameter": "airTemperature",
+      "value": 20,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:UEB",
+      "parameter": "airTemperature",
+      "value": 22.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GOS",
+      "parameter": "airTemperature",
+      "value": 19.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:AND",
+      "parameter": "airTemperature",
+      "value": 16.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIV",
+      "parameter": "airTemperature",
+      "value": 10.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MTR",
+      "parameter": "airTemperature",
+      "value": 15.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIA",
+      "parameter": "airTemperature",
+      "value": 23.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LAT",
+      "parameter": "airTemperature",
+      "value": 15,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MOB",
+      "parameter": "airTemperature",
+      "value": 15.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CDM",
+      "parameter": "airTemperature",
+      "value": 15.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SIM",
+      "parameter": "airTemperature",
+      "value": 19.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BUF",
+      "parameter": "airTemperature",
+      "value": 8.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ILZ",
+      "parameter": "airTemperature",
+      "value": 18.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIZ",
+      "parameter": "airTemperature",
+      "value": 19,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PFA",
+      "parameter": "airTemperature",
+      "value": 18.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LAC",
+      "parameter": "airTemperature",
+      "value": 21.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FLU",
+      "parameter": "airTemperature",
+      "value": 18.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BOL",
+      "parameter": "airTemperature",
+      "value": 15.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:THU",
+      "parameter": "airTemperature",
+      "value": 18.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAS",
+      "parameter": "airTemperature",
+      "value": 19.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VIT",
+      "parameter": "airTemperature",
+      "value": 17.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRE",
+      "parameter": "airTemperature",
+      "value": 20.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MOA",
+      "parameter": "airTemperature",
+      "value": 18.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CEV",
+      "parameter": "airTemperature",
+      "value": 21.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CRM",
+      "parameter": "airTemperature",
+      "value": 19.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CMA",
+      "parameter": "airTemperature",
+      "value": 11,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GEN",
+      "parameter": "airTemperature",
+      "value": 18.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIE",
+      "parameter": "airTemperature",
+      "value": 21.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ORO",
+      "parameter": "airTemperature",
+      "value": 22.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BRL",
+      "parameter": "airTemperature",
+      "value": 8.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BAN",
+      "parameter": "airTemperature",
+      "value": 23.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EGO",
+      "parameter": "airTemperature",
+      "value": 21,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DIA",
+      "parameter": "airTemperature",
+      "value": 8.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SPF",
+      "parameter": "airTemperature",
+      "value": 17.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VAB",
+      "parameter": "airTemperature",
+      "value": 17.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PMA",
+      "parameter": "airTemperature",
+      "value": 10.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:NAS",
+      "parameter": "airTemperature",
+      "value": 12.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ATT",
+      "parameter": "airTemperature",
+      "value": 10.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EVI",
+      "parameter": "airTemperature",
+      "value": 22.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GOR",
+      "parameter": "airTemperature",
+      "value": 7.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EGH",
+      "parameter": "airTemperature",
+      "value": 9.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GIH",
+      "parameter": "airTemperature",
+      "value": 18.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GES",
+      "parameter": "airTemperature",
+      "value": 22.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SRS",
+      "parameter": "airTemperature",
+      "value": 16.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VIO",
+      "parameter": "airTemperature",
+      "value": 15.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:OBR",
+      "parameter": "airTemperature",
+      "value": 20.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ARO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:RAG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HAI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HLL",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DEM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:EBK",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ELM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EIN",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ANT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MER",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:CHD",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:CHM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LAG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:KOP",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GRC",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BLA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GRO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BEH",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SIA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SMM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:DAV",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHU",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ROB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SAM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SCU",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DOL",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PAY",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WYN",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SAE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VAD",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:AIG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MLS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:FAH",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MVE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ZER",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:CHA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:PIL",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ALT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ULR",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PIO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LUG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:NAP",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SIO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:NEU",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SBO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:INT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:DIS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:STG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GLA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GVE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:KLO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GUE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PUY",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GSB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ABO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VIS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CDF",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:RUE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BUS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LUZ",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ENG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SHA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SMA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SBE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WFJ",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:COV",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BAS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CGI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FRE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BER",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GUT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GOE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WAE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:TAE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:REH",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:OTL",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BEZ",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MUB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CIM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:EVO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LEI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRH",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:COM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HOE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PLF",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ROE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:PSI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BEP",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LOH",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:STB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SNG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:10:00Z"
+    },
+    {
+      "stationId": "smn:AFI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BIN",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MAB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SIE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MAR",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:JON",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SAG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:CHZ",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GTT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GAD",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:10:00Z"
+    },
+    {
+      "stationId": "smn:SUS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:KAI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:COY",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:NEB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:WIN",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:AVA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VEV",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SAI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SAN",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:COL",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LTB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LAP",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:WIT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:FLW",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:URN",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:HIW",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:UST",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LEU",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:KUE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LSN",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:COS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:TRU",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VRI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ZEV",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:CTO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:FRU",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ABE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MOE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAH",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:CHB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:HUT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BUE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MTE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BRW",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:OBI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LON",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VLS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SAP",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:STP",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SAX",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:KIE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:10:00Z"
+    },
+    {
+      "stationId": "smn:ARH",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EGR",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LAB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:FIO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:WEE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SIH",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LGA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GOS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ENT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:AND",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:THS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BIV",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BIA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MAL",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BRP",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SOG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ESZ",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:KIS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MEV",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BEY",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:COU",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:DOB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:WAG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:DIT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BRT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SVG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LAT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BLZ",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MOB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ORS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BEX",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:CDM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MMO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:AIR",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:FAI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BOS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MSG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SIM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BUF",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MAT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ILZ",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ROT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:TST",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:KLA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VAE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SUA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ALS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:AMW",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:APP",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BIZ",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:PFA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:OPF",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:INN",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:REM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:LAC",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GOA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:FLU",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ZWK",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:KAS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ZWE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:10:00Z"
+    },
+    {
+      "stationId": "smn:BOL",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:THU",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GSG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VST",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MAS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ROM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VIT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:AUB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MGL",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GRE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:AIE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:WHF",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BAW",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:UNK",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MUR",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:UBB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:OED",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BRI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BEC",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:MOA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:CEV",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:CRM",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GEN",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BIE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ORO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:BRL",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EGO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BRZ",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SPF",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VAB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:PMA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EVI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GIH",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:GES",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:FIT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:SRS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VIO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:OBR",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSARO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSGDX",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSBRI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSFIN",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSSTA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSFLY",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSEMO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSTUR",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSMOI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSSFE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSCLU",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ROG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VSDUR",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSTRI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSSOR",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSDER",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSNEN",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSISE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSBRU",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSVIS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSERG",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSCOL",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSSIE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSCHO",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSBSP",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:AGATT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:AGSTE",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSSAB",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSJEI",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSBAS",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VSMAT",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSVER",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSANZ",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSSAL",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSCHY",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:WAR",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:VSCHA",
+      "parameter": "precipitation10min",
+      "value": 0,
+      "observedAt": "2026-09-07T20:20:00Z"
+    },
+    {
+      "stationId": "smn:ARO",
+      "parameter": "windGust",
+      "value": 6.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ARO",
+      "parameter": "windDirection",
+      "value": 275,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:RAG",
+      "parameter": "windGust",
+      "value": 15.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:RAG",
+      "parameter": "windDirection",
+      "value": 118,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HAI",
+      "parameter": "windGust",
+      "value": 14.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HAI",
+      "parameter": "windDirection",
+      "value": 213,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HLL",
+      "parameter": "windGust",
+      "value": 2.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HLL",
+      "parameter": "windDirection",
+      "value": 28,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DEM",
+      "parameter": "windGust",
+      "value": 3.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DEM",
+      "parameter": "windDirection",
+      "value": 238,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EBK",
+      "parameter": "windGust",
+      "value": 1.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EBK",
+      "parameter": "windDirection",
+      "value": 5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ELM",
+      "parameter": "windGust",
+      "value": 9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ELM",
+      "parameter": "windDirection",
+      "value": 147,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EIN",
+      "parameter": "windGust",
+      "value": 3.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EIN",
+      "parameter": "windDirection",
+      "value": 268,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ANT",
+      "parameter": "windGust",
+      "value": 6.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ANT",
+      "parameter": "windDirection",
+      "value": 241,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MER",
+      "parameter": "windGust",
+      "value": 1.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MER",
+      "parameter": "windDirection",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHD",
+      "parameter": "windGust",
+      "value": 6.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHD",
+      "parameter": "windDirection",
+      "value": 26,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRA",
+      "parameter": "windGust",
+      "value": 2.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRA",
+      "parameter": "windDirection",
+      "value": 209,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHM",
+      "parameter": "windGust",
+      "value": 19.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHM",
+      "parameter": "windDirection",
+      "value": 279,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LAG",
+      "parameter": "windGust",
+      "value": 5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LAG",
+      "parameter": "windDirection",
+      "value": 89,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:KOP",
+      "parameter": "windGust",
+      "value": 4.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:KOP",
+      "parameter": "windDirection",
+      "value": 129,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BLA",
+      "parameter": "windGust",
+      "value": 10.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BLA",
+      "parameter": "windDirection",
+      "value": 44,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRO",
+      "parameter": "windGust",
+      "value": 2.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRO",
+      "parameter": "windDirection",
+      "value": 360,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BEH",
+      "parameter": "windGust",
+      "value": 3.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BEH",
+      "parameter": "windDirection",
+      "value": 225,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SIA",
+      "parameter": "windGust",
+      "value": 7.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SIA",
+      "parameter": "windDirection",
+      "value": 166,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SMM",
+      "parameter": "windGust",
+      "value": 17.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SMM",
+      "parameter": "windDirection",
+      "value": 222,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DAV",
+      "parameter": "windGust",
+      "value": 3.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DAV",
+      "parameter": "windDirection",
+      "value": 247,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHU",
+      "parameter": "windGust",
+      "value": 4.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHU",
+      "parameter": "windDirection",
+      "value": 57,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ROB",
+      "parameter": "windGust",
+      "value": 5.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ROB",
+      "parameter": "windDirection",
+      "value": 68,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SAM",
+      "parameter": "windGust",
+      "value": 4.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SAM",
+      "parameter": "windDirection",
+      "value": 219,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SCU",
+      "parameter": "windGust",
+      "value": 4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SCU",
+      "parameter": "windDirection",
+      "value": 301,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DOL",
+      "parameter": "windGust",
+      "value": 17.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DOL",
+      "parameter": "windDirection",
+      "value": 214,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PAY",
+      "parameter": "windGust",
+      "value": 7.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PAY",
+      "parameter": "windDirection",
+      "value": 189,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:JUN",
+      "parameter": "windGust",
+      "value": 36.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:JUN",
+      "parameter": "windDirection",
+      "value": 330,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WYN",
+      "parameter": "windGust",
+      "value": 2.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WYN",
+      "parameter": "windDirection",
+      "value": 269,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SAE",
+      "parameter": "windGust",
+      "value": 46.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SAE",
+      "parameter": "windDirection",
+      "value": 264,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VAD",
+      "parameter": "windGust",
+      "value": 7.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VAD",
+      "parameter": "windDirection",
+      "value": 146,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:AIG",
+      "parameter": "windGust",
+      "value": 11.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:AIG",
+      "parameter": "windDirection",
+      "value": 159,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MLS",
+      "parameter": "windGust",
+      "value": 11.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MLS",
+      "parameter": "windDirection",
+      "value": 211,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FAH",
+      "parameter": "windGust",
+      "value": 9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FAH",
+      "parameter": "windDirection",
+      "value": 207,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MVE",
+      "parameter": "windGust",
+      "value": 6.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MVE",
+      "parameter": "windDirection",
+      "value": 44,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ZER",
+      "parameter": "windGust",
+      "value": 2.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ZER",
+      "parameter": "windDirection",
+      "value": 223,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHA",
+      "parameter": "windGust",
+      "value": 36.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHA",
+      "parameter": "windDirection",
+      "value": 261,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PIL",
+      "parameter": "windGust",
+      "value": 24.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PIL",
+      "parameter": "windDirection",
+      "value": 238,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ALT",
+      "parameter": "windGust",
+      "value": 8.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ALT",
+      "parameter": "windDirection",
+      "value": 163,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ULR",
+      "parameter": "windGust",
+      "value": 1.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ULR",
+      "parameter": "windDirection",
+      "value": 103,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PIO",
+      "parameter": "windGust",
+      "value": 11.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PIO",
+      "parameter": "windDirection",
+      "value": 282,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LUG",
+      "parameter": "windGust",
+      "value": 10.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LUG",
+      "parameter": "windDirection",
+      "value": 353,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:NAP",
+      "parameter": "windGust",
+      "value": 18.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:NAP",
+      "parameter": "windDirection",
+      "value": 208,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SIO",
+      "parameter": "windGust",
+      "value": 5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SIO",
+      "parameter": "windDirection",
+      "value": 127,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAG",
+      "parameter": "windGust",
+      "value": 3.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAG",
+      "parameter": "windDirection",
+      "value": 309,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:NEU",
+      "parameter": "windGust",
+      "value": 17.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:NEU",
+      "parameter": "windDirection",
+      "value": 24,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SBO",
+      "parameter": "windGust",
+      "value": 4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SBO",
+      "parameter": "windDirection",
+      "value": 224,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:INT",
+      "parameter": "windGust",
+      "value": 6.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:INT",
+      "parameter": "windDirection",
+      "value": 193,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DIS",
+      "parameter": "windGust",
+      "value": 2.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DIS",
+      "parameter": "windDirection",
+      "value": 258,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:STG",
+      "parameter": "windGust",
+      "value": 18,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:STG",
+      "parameter": "windDirection",
+      "value": 166,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GLA",
+      "parameter": "windGust",
+      "value": 5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GLA",
+      "parameter": "windDirection",
+      "value": 174,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GVE",
+      "parameter": "windGust",
+      "value": 6.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GVE",
+      "parameter": "windDirection",
+      "value": 346,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:KLO",
+      "parameter": "windGust",
+      "value": 8.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:KLO",
+      "parameter": "windDirection",
+      "value": 123,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GUE",
+      "parameter": "windGust",
+      "value": 16.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GUE",
+      "parameter": "windDirection",
+      "value": 15,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PUY",
+      "parameter": "windGust",
+      "value": 15.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PUY",
+      "parameter": "windDirection",
+      "value": 18,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GSB",
+      "parameter": "windGust",
+      "value": 10.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GSB",
+      "parameter": "windDirection",
+      "value": 71,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ABO",
+      "parameter": "windGust",
+      "value": 5.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ABO",
+      "parameter": "windDirection",
+      "value": 300,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VIS",
+      "parameter": "windGust",
+      "value": 3.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VIS",
+      "parameter": "windDirection",
+      "value": 109,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CDF",
+      "parameter": "windGust",
+      "value": 0.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CDF",
+      "parameter": "windDirection",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:RUE",
+      "parameter": "windGust",
+      "value": 5.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:RUE",
+      "parameter": "windDirection",
+      "value": 173,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BUS",
+      "parameter": "windGust",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BUS",
+      "parameter": "windDirection",
+      "value": 0,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LUZ",
+      "parameter": "windGust",
+      "value": 8.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LUZ",
+      "parameter": "windDirection",
+      "value": 260,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ENG",
+      "parameter": "windGust",
+      "value": 8.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ENG",
+      "parameter": "windDirection",
+      "value": 105,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SHA",
+      "parameter": "windGust",
+      "value": 8.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SHA",
+      "parameter": "windDirection",
+      "value": 210,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SMA",
+      "parameter": "windGust",
+      "value": 3.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SMA",
+      "parameter": "windDirection",
+      "value": 163,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SBE",
+      "parameter": "windGust",
+      "value": 2.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SBE",
+      "parameter": "windDirection",
+      "value": 269,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WFJ",
+      "parameter": "windGust",
+      "value": 18,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WFJ",
+      "parameter": "windDirection",
+      "value": 319,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:COV",
+      "parameter": "windGust",
+      "value": 22.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:COV",
+      "parameter": "windDirection",
+      "value": 300,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BAS",
+      "parameter": "windGust",
+      "value": 4.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BAS",
+      "parameter": "windDirection",
+      "value": 120,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CGI",
+      "parameter": "windGust",
+      "value": 9.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CGI",
+      "parameter": "windDirection",
+      "value": 29,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FRE",
+      "parameter": "windGust",
+      "value": 7.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FRE",
+      "parameter": "windDirection",
+      "value": 55,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BER",
+      "parameter": "windGust",
+      "value": 4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BER",
+      "parameter": "windDirection",
+      "value": 181,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GUT",
+      "parameter": "windGust",
+      "value": 19.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GUT",
+      "parameter": "windDirection",
+      "value": 229,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GOE",
+      "parameter": "windGust",
+      "value": 2.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GOE",
+      "parameter": "windDirection",
+      "value": 135,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WAE",
+      "parameter": "windGust",
+      "value": 4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:WAE",
+      "parameter": "windDirection",
+      "value": 132,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:TAE",
+      "parameter": "windGust",
+      "value": 3.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:TAE",
+      "parameter": "windDirection",
+      "value": 166,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:REH",
+      "parameter": "windGust",
+      "value": 1.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:REH",
+      "parameter": "windDirection",
+      "value": 132,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:OTL",
+      "parameter": "windGust",
+      "value": 5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:OTL",
+      "parameter": "windDirection",
+      "value": 18,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BEZ",
+      "parameter": "windGust",
+      "value": 2.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BEZ",
+      "parameter": "windDirection",
+      "value": 162,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MUB",
+      "parameter": "windGust",
+      "value": 5.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MUB",
+      "parameter": "windDirection",
+      "value": 63,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CIM",
+      "parameter": "windGust",
+      "value": 4.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CIM",
+      "parameter": "windDirection",
+      "value": 71,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EVO",
+      "parameter": "windGust",
+      "value": 7.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EVO",
+      "parameter": "windDirection",
+      "value": 56,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LEI",
+      "parameter": "windGust",
+      "value": 1.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LEI",
+      "parameter": "windDirection",
+      "value": 32,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRH",
+      "parameter": "windGust",
+      "value": 14.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRH",
+      "parameter": "windDirection",
+      "value": 246,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:COM",
+      "parameter": "windGust",
+      "value": 7.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:COM",
+      "parameter": "windDirection",
+      "value": 295,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LAE",
+      "parameter": "windGust",
+      "value": 11.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LAE",
+      "parameter": "windDirection",
+      "value": 196,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HOE",
+      "parameter": "windGust",
+      "value": 22.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:HOE",
+      "parameter": "windDirection",
+      "value": 230,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PLF",
+      "parameter": "windGust",
+      "value": 18.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PLF",
+      "parameter": "windDirection",
+      "value": 127,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ROE",
+      "parameter": "windGust",
+      "value": 15.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ROE",
+      "parameter": "windDirection",
+      "value": 345,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PSI",
+      "parameter": "windGust",
+      "value": 4.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PSI",
+      "parameter": "windDirection",
+      "value": 157,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIN",
+      "parameter": "windGust",
+      "value": 11.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIN",
+      "parameter": "windDirection",
+      "value": 79,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAR",
+      "parameter": "windGust",
+      "value": 5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAR",
+      "parameter": "windDirection",
+      "value": 303,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SAG",
+      "parameter": "windGust",
+      "value": 17.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SAG",
+      "parameter": "windDirection",
+      "value": 49,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHZ",
+      "parameter": "windGust",
+      "value": 7.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHZ",
+      "parameter": "windDirection",
+      "value": 65,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:STC",
+      "parameter": "windGust",
+      "value": 9.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:STC",
+      "parameter": "windDirection",
+      "value": 254,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:COY",
+      "parameter": "windGust",
+      "value": 7.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:COY",
+      "parameter": "windDirection",
+      "value": 224,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VEV",
+      "parameter": "windGust",
+      "value": 8.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VEV",
+      "parameter": "windDirection",
+      "value": 340,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BOU",
+      "parameter": "windGust",
+      "value": 11.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BOU",
+      "parameter": "windDirection",
+      "value": 128,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:TIT",
+      "parameter": "windGust",
+      "value": 34.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:TIT",
+      "parameter": "windDirection",
+      "value": 263,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FRU",
+      "parameter": "windGust",
+      "value": 5.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FRU",
+      "parameter": "windDirection",
+      "value": 210,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MOE",
+      "parameter": "windGust",
+      "value": 7.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MOE",
+      "parameter": "windDirection",
+      "value": 75,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAH",
+      "parameter": "windGust",
+      "value": 7.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAH",
+      "parameter": "windDirection",
+      "value": 244,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHB",
+      "parameter": "windGust",
+      "value": 5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CHB",
+      "parameter": "windDirection",
+      "value": 291,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MTE",
+      "parameter": "windGust",
+      "value": 16.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MTE",
+      "parameter": "windDirection",
+      "value": 181,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PRE",
+      "parameter": "windGust",
+      "value": 10.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PRE",
+      "parameter": "windDirection",
+      "value": 351,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VLS",
+      "parameter": "windGust",
+      "value": 2.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VLS",
+      "parameter": "windDirection",
+      "value": 182,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ARH",
+      "parameter": "windGust",
+      "value": 7.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ARH",
+      "parameter": "windDirection",
+      "value": 351,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:UEB",
+      "parameter": "windGust",
+      "value": 18.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:UEB",
+      "parameter": "windDirection",
+      "value": 229,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GOS",
+      "parameter": "windGust",
+      "value": 15.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GOS",
+      "parameter": "windDirection",
+      "value": 208,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:AND",
+      "parameter": "windGust",
+      "value": 3.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:AND",
+      "parameter": "windDirection",
+      "value": 54,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIV",
+      "parameter": "windGust",
+      "value": 3.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIV",
+      "parameter": "windDirection",
+      "value": 107,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MTR",
+      "parameter": "windGust",
+      "value": 22.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MTR",
+      "parameter": "windDirection",
+      "value": 335,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIA",
+      "parameter": "windGust",
+      "value": 22.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIA",
+      "parameter": "windDirection",
+      "value": 333,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SCM",
+      "parameter": "windGust",
+      "value": 8.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SCM",
+      "parameter": "windDirection",
+      "value": 80,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:AEG",
+      "parameter": "windGust",
+      "value": 5.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:AEG",
+      "parameter": "windDirection",
+      "value": 311,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LAT",
+      "parameter": "windGust",
+      "value": 8.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:LAT",
+      "parameter": "windDirection",
+      "value": 105,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MOB",
+      "parameter": "windGust",
+      "value": 11.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MOB",
+      "parameter": "windDirection",
+      "value": 132,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CDM",
+      "parameter": "windGust",
+      "value": 6.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CDM",
+      "parameter": "windDirection",
+      "value": 32,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SIM",
+      "parameter": "windGust",
+      "value": 17.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SIM",
+      "parameter": "windDirection",
+      "value": 307,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BUF",
+      "parameter": "windGust",
+      "value": 5.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BUF",
+      "parameter": "windDirection",
+      "value": 130,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIZ",
+      "parameter": "windGust",
+      "value": 14,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIZ",
+      "parameter": "windDirection",
+      "value": 244,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PFA",
+      "parameter": "windGust",
+      "value": 2.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PFA",
+      "parameter": "windDirection",
+      "value": 130,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FLU",
+      "parameter": "windGust",
+      "value": 13.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:FLU",
+      "parameter": "windDirection",
+      "value": 141,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BOL",
+      "parameter": "windGust",
+      "value": 4.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BOL",
+      "parameter": "windDirection",
+      "value": 195,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:THU",
+      "parameter": "windGust",
+      "value": 6.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:THU",
+      "parameter": "windDirection",
+      "value": 195,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAS",
+      "parameter": "windGust",
+      "value": 2.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MAS",
+      "parameter": "windDirection",
+      "value": 338,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VIT",
+      "parameter": "windGust",
+      "value": 5.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VIT",
+      "parameter": "windDirection",
+      "value": 103,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRE",
+      "parameter": "windGust",
+      "value": 7.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GRE",
+      "parameter": "windDirection",
+      "value": 326,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MOA",
+      "parameter": "windGust",
+      "value": 4.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:MOA",
+      "parameter": "windDirection",
+      "value": 172,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CEV",
+      "parameter": "windGust",
+      "value": 5.8,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CEV",
+      "parameter": "windDirection",
+      "value": 141,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CRM",
+      "parameter": "windGust",
+      "value": 8.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CRM",
+      "parameter": "windDirection",
+      "value": 185,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CMA",
+      "parameter": "windGust",
+      "value": 26.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:CMA",
+      "parameter": "windDirection",
+      "value": 274,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GEN",
+      "parameter": "windGust",
+      "value": 13.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GEN",
+      "parameter": "windDirection",
+      "value": 210,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIE",
+      "parameter": "windGust",
+      "value": 5.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BIE",
+      "parameter": "windDirection",
+      "value": 222,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ORO",
+      "parameter": "windGust",
+      "value": 12.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ORO",
+      "parameter": "windDirection",
+      "value": 79,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BRL",
+      "parameter": "windGust",
+      "value": 2.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BRL",
+      "parameter": "windDirection",
+      "value": 221,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BAN",
+      "parameter": "windGust",
+      "value": 18.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BAN",
+      "parameter": "windDirection",
+      "value": 196,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EGO",
+      "parameter": "windGust",
+      "value": 4.7,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EGO",
+      "parameter": "windDirection",
+      "value": 147,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:STK",
+      "parameter": "windGust",
+      "value": 7.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:STK",
+      "parameter": "windDirection",
+      "value": 233,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DIA",
+      "parameter": "windGust",
+      "value": 27,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:DIA",
+      "parameter": "windDirection",
+      "value": 236,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BRZ",
+      "parameter": "windGust",
+      "value": 2.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:BRZ",
+      "parameter": "windDirection",
+      "value": 153,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SPF",
+      "parameter": "windGust",
+      "value": 9.4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SPF",
+      "parameter": "windDirection",
+      "value": 188,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:QUI",
+      "parameter": "windGust",
+      "value": 2.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:QUI",
+      "parameter": "windDirection",
+      "value": 6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VAB",
+      "parameter": "windGust",
+      "value": 4.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VAB",
+      "parameter": "windDirection",
+      "value": 313,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PMA",
+      "parameter": "windGust",
+      "value": 12.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:PMA",
+      "parameter": "windDirection",
+      "value": 348,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:NAS",
+      "parameter": "windGust",
+      "value": 20.5,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:NAS",
+      "parameter": "windDirection",
+      "value": 260,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ATT",
+      "parameter": "windGust",
+      "value": 19.1,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:ATT",
+      "parameter": "windDirection",
+      "value": 224,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EVI",
+      "parameter": "windGust",
+      "value": 4.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EVI",
+      "parameter": "windDirection",
+      "value": 184,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GOR",
+      "parameter": "windGust",
+      "value": 16.6,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GOR",
+      "parameter": "windDirection",
+      "value": 276,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EGH",
+      "parameter": "windGust",
+      "value": 23,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:EGH",
+      "parameter": "windDirection",
+      "value": 293,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GIH",
+      "parameter": "windGust",
+      "value": 4.3,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GIH",
+      "parameter": "windDirection",
+      "value": 249,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GES",
+      "parameter": "windGust",
+      "value": 4,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:GES",
+      "parameter": "windDirection",
+      "value": 360,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SRS",
+      "parameter": "windGust",
+      "value": 2.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:SRS",
+      "parameter": "windDirection",
+      "value": 319,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VIO",
+      "parameter": "windGust",
+      "value": 2.9,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:VIO",
+      "parameter": "windDirection",
+      "value": 84,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:OBR",
+      "parameter": "windGust",
+      "value": 16.2,
+      "observedAt": "2026-09-07T20:30:00Z"
+    },
+    {
+      "stationId": "smn:OBR",
+      "parameter": "windDirection",
+      "value": 236,
+      "observedAt": "2026-09-07T20:30:00Z"
+    }
+  ],
+  "fields": [],
+  "extremes": {
+    "warmest": { "stationId": "smn:STC", "value": 26, "observedAt": "2026-09-07T20:30:00Z" },
+    "coldest": { "stationId": "smn:JUN", "value": 3, "observedAt": "2026-09-07T20:30:00Z" },
+    "windiestGust": { "stationId": "smn:SAE", "value": 46.8, "observedAt": "2026-09-07T20:30:00Z" }
+  },
+  "rainingShare": 0
+}

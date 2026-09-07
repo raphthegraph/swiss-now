@@ -34,7 +34,7 @@ Durations assume one developer working part-time; they are sequencing guidance, 
 - Design sprint: fork `ch.swisstopo.lightbasemap.vt` into a near-monochrome Swiss Now style with `relief.vt` hillshade; typography choice; HUD layout on desktop and phone; layer accent palette; environmental states.
 - One pull-through handler end to end (`/api/state/weather` from the geo.admin temperature layer) with Data Cache + CDN headers verified via `x-vercel-cache` in Vercel logs; `/status`.
 - **Spike A** (done, `docs/SPIKES.md`): MapLibre 6.7 + forked style + live station layer; worker and WebGL2 fallback issues fixed; frame-rate check on laptop and phone still to be done manually.
-- **Spike B**: a 3-second Remotion fixed-plate render of the same style and tokens locally (`--gl=angle`, concurrency 1) to prove the shared design system works in both targets.
+- **Spike B** (done, `docs/SPIKES.md`): 3-second Remotion fixed-plate render of the same style, tokens, scale and `Metric` primitive; 90 frames in 19 s locally.
 - Register the opentransportdata API key; email SED about licence; note FEDRO contact for Phase 5.
 - No database.
 

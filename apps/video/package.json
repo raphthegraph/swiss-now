@@ -3,7 +3,29 @@
   "version": "0.0.1",
   "private": true,
   "description": "Swiss Now Remotion project: 'Switzerland Today' compositions rendered locally from the same SwissNowState / StorySpec as the website.",
+  "type": "module",
   "scripts": {
+    "prestudio": "node scripts/copy-maplibre-worker.mjs",
+    "studio": "remotion studio --no-open",
+    "prerender": "node scripts/copy-maplibre-worker.mjs",
+    "render": "remotion render src/index.ts",
+    "still": "remotion still src/index.ts",
+    "typecheck": "tsc --noEmit",
     "test": "echo \"no tests yet\""
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.522",
+    "@swiss-now/core": "workspace:*",
+    "@swiss-now/motion": "workspace:*",
+    "maplibre-gl": "^6.7.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "remotion": "^4.0.522"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "typescript": "^5.9.2"
   }
 }

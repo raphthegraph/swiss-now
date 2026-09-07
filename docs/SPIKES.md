@@ -24,6 +24,25 @@
 
 **Follow-ups.** Manual FPS measurement (above); hand-tune the forked style after looking at it on a real screen (the fork is a scripted first pass); replace the ad-hoc poller with TanStack Query when a second layer arrives (Phase 1).
 
-## Spike B — Remotion fixed-plate render of the same style (pending)
+## Spike B — Remotion fixed-plate render of the same style (2026-09-07)
 
-Planned: a 3-second local render of `swiss-now-light` in `apps/video` using the Remotion maps-skill technique (`--gl=angle`, `preserveDrawingBuffer`, static camera, CSS-transformed plate) to prove the shared design system across both rendering targets.
+**Question.** Does the shared design system (forked swisstopo style, tokens, scales, `Metric` primitive) render correctly in the Remotion target, using the official maps-skill technique, on the free licence and a laptop?
+
+**Setup.** `apps/video`, Remotion 4.0.522, MapLibre GL 6.7 (same version as the web app), composition `SwissNowPlateSpike` 1920×1080 @ 30 fps, 90 frames. Map rendered once as a **fixed plate** (3840×2160, static renderer camera at the route's maximum zoom, centred on the route's midpoint) and moved per frame with CSS `translate` + `scale` from `interpolateCamera(START, END, easeHouse(t))`; zoom delta capped at 1.0 so the CSS scale never exceeds 1. Station circles from a saved `/api/state/weather` fixture coloured by `maplibreColorExpression("temp", "temperature")` (moved into `@swiss-now/motion` so web and video share it). HUD: `Metric` primitive with frame-driven `progress`, legend from `legendTicks("temperature")`, attribution line. `remotion.config.ts`: `--gl=angle`, concurrency 1, JPEG frames. MapLibre worker copied to `public/map/vendor/` and set via `setWorkerUrl(staticFile(...))`, same workaround as the web app.
+
+**Results.**
+
+| Check                                                                                        | Result                                                                                                                                     |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Bundling workspace TS sources (`@swiss-now/core`, `@swiss-now/motion`) in Remotion's webpack | works without configuration                                                                                                                |
+| Style, tiles, glyphs from swisstopo in headless Chrome                                       | load; attribution rendered in the frame                                                                                                    |
+| Worker                                                                                       | loads from the static copy; no `import.meta.url` issue surfaced under webpack, but the static path keeps both targets identical            |
+| Render time                                                                                  | **90 frames in 19 s** (~4.7 frames/s) on an Apple-silicon laptop with `--gl=angle`, concurrency 1; MP4 5.6 MB                              |
+| Frames 5 and 60 (see `docs/spikes/`)                                                         | national view → corridor glide; circles, metrics and legend match the website's tokens exactly; no shimmer on the basemap during the glide |
+| Licence                                                                                      | local render, individual use → Remotion free licence                                                                                       |
+
+![frame 60](spikes/spike-b-frame60.jpg)
+
+**Decision.** The architecture holds: one style JSON, one token set, one scale definition, one primitive library, two renderers. Remotion stays local-only for the MVP; a 30–45 s story at this throughput renders in ~3–4 minutes on a laptop, well inside the free GitHub Actions or Vercel Sandbox budgets if automation is wanted later.
+
+**Follow-ups (design pass, Phase 1).** The forked style is still label-heavy (every town at zoom 8) and the hillshade is strong for a "quiet" ground; hand-tune `fork-basemap-style.mjs` (hide `place_other` below zoom 9, lower hillshade opacity further). The 10–30 °C band of the temperature scale reads almost uniformly orange on a warm day; add a stop around 15 °C. Both changes propagate to web and video automatically.

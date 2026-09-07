@@ -47,7 +47,7 @@ Small live sources are read through **pull-through cached route handlers** on Ve
 swiss-now/
 ├─ apps/
 │  ├─ web/          Next.js 16 interactive experience (scaffolded next)
-│  └─ video/        Remotion story / video project (Phase 4)
+│  └─ video/        Remotion story / video project (Spike B done; story compositions in Phase 4)
 ├─ packages/
 │  ├─ core/         @swiss-now/core — SwissNowState contracts (zod), freshness model, source registry, adapters
 │  ├─ motion/       @swiss-now/motion — tokens, scales, animation math, SVG primitives, scene specs
