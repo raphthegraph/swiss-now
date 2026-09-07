@@ -4,14 +4,39 @@
   "private": true,
   "description": "Swiss Now shared visual and motion system: design tokens, scales, deterministic animation math, stateless SVG primitives and scene specs. Framework-agnostic; consumed by the web app and the Remotion project.",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens": "./src/tokens/index.ts",
+    "./scales": "./src/scales/index.ts",
+    "./math": "./src/math/index.ts",
+    "./svg": "./src/svg/index.ts",
+    "./specs": "./src/specs/index.ts"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "echo \"no tests yet\""
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@swiss-now/core": "workspace:*",
+    "d3-interpolate": "^3.0.1",
+    "d3-scale": "^4.0.2"
+  },
+  "peerDependencies": {
+    "react": ">=19"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "typescript": "^5.9.2"
+    "@types/d3-interpolate": "^3.0.4",
+    "@types/d3-scale": "^4.0.9",
+    "@types/react": "^19.1.12",
+    "react": "^19.1.1",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   }
 }

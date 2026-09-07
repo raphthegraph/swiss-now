@@ -84,6 +84,8 @@ pnpm test
 
 Formatting: `pnpm format`. Tests use Vitest.
 
+Workspace packages are consumed **just-in-time** from `src/` (their `exports` point at TypeScript sources), so no build step is needed for development; Next.js (`transpilePackages`), Remotion's bundler, Vitest and `tsx` all handle TypeScript directly.
+
 ## Data sources and attribution
 
 All sources are official Swiss open data or free public services. Attribution strings are served from the source registry and shown in the app and in every video end card. Principal providers: MeteoSwiss (CC BY 4.0), Federal Office for the Environment FOEN, Federal Office of Topography swisstopo (© swisstopo), Open Data Platform Mobility Switzerland, SBB, Federal Office of Transport, Swiss Seismological Service at ETH Zurich, WSL Institute for Snow and Avalanche Research SLF, Swiss Federal Office of Energy, Federal Statistical Office. Licences and open questions per source are documented in [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md) and [`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md).

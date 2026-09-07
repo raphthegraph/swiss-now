@@ -2,31 +2,14 @@
   "name": "@swiss-now/core",
   "version": "0.0.1",
   "private": true,
-  "description": "Swiss Now core: normalized SwissNowState contracts (zod), freshness model, source registry, and data-source adapters. Pure TypeScript — no React, no DOM.",
+  "description": "Swiss Now core: normalized SwissNowState contracts (zod), freshness model, source registry, and data-source adapters. Pure TypeScript \u2014 no React, no DOM.",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./state": {
-      "types": "./dist/state/index.d.ts",
-      "import": "./dist/state/index.js"
-    },
-    "./sources": {
-      "types": "./dist/sources/index.d.ts",
-      "import": "./dist/sources/index.js"
-    },
-    "./freshness": {
-      "types": "./dist/freshness/index.d.ts",
-      "import": "./dist/freshness/index.js"
-    }
+    ".": "./src/index.ts",
+    "./state": "./src/state/index.ts",
+    "./sources": "./src/sources/index.ts",
+    "./freshness": "./src/freshness/index.ts"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
