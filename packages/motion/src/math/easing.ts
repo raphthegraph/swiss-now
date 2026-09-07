@@ -1,5 +1,5 @@
-import type { Bezier } from "../tokens/motion.js";
-import { easing } from "../tokens/motion.js";
+import type { Bezier } from "../tokens/motion";
+import { easing } from "../tokens/motion";
 
 export const clamp01 = (t: number): number => (t < 0 ? 0 : t > 1 ? 1 : t);
 export const lerp = (a: number, b: number, t: number): number => a + (b - a) * t;

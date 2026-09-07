@@ -1,3 +1,3 @@
-export * from "./ids.js";
-export * from "./meta.js";
-export * from "./registry.js";
+export * from "./ids";
+export * from "./meta";
+export * from "./registry";

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Freshness, ISODateTime, LayerId } from "./common.js";
+import { Freshness, ISODateTime, LayerId } from "./common";
 import {
   AirState,
   EnergyState,
@@ -8,9 +8,9 @@ import {
   SeismicState,
   TrafficState,
   WeatherState,
-} from "./layers.js";
-import { Summary } from "./summary.js";
-import { SourceMeta } from "../sources/meta.js";
+} from "./layers";
+import { Summary } from "./summary";
+import { SourceMeta } from "../sources/meta";
 
 /**
  * The composite state. The web client assembles it from per-layer responses;

@@ -3,8 +3,8 @@
  * everything in the app and in Remotion speaks these shapes only.
  */
 import { z } from "zod";
-import { BBox, CantonCode, ISODateTime, LocalizedText, LonLat, Severity } from "./common.js";
-import { SourceId } from "../sources/ids.js";
+import { BBox, CantonCode, ISODateTime, LocalizedText, LonLat, Severity } from "./common";
+import { SourceId } from "../sources/ids";
 
 /** Physical quantities Swiss Now understands. Units are fixed per parameter (see `PARAMETER_UNITS`). */
 export const Parameter = z.enum([

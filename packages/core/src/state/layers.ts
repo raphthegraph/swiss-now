@@ -3,9 +3,9 @@
  * and independently versioned.
  */
 import { z } from "zod";
-import { Freshness, ISODateTime, SCHEMA_VERSION } from "./common.js";
-import { Event, Field, Observation, Segment, Station, TripSnapshot } from "./entities.js";
-import { SourceId } from "../sources/ids.js";
+import { Freshness, ISODateTime, SCHEMA_VERSION } from "./common";
+import { Event, Field, Observation, Segment, Station, TripSnapshot } from "./entities";
+import { SourceId } from "../sources/ids";
 
 export const LayerBase = z.object({
   schemaVersion: z.literal(SCHEMA_VERSION),

@@ -5,7 +5,7 @@ import {
   layerAccent,
   scaleStops,
   toCssVariables,
-} from "../src/tokens/index.js";
+} from "../src/tokens/index";
 
 describe("tokens", () => {
   it("exports CSS custom properties for every accent and duration", () => {

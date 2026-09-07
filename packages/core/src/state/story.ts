@@ -3,7 +3,7 @@
  * Remotion compositions: same narrative, different renderers.
  */
 import { z } from "zod";
-import { ISODateTime, LayerId, LocalizedText, LonLat } from "./common.js";
+import { ISODateTime, LayerId, LocalizedText, LonLat } from "./common";
 
 export const CameraSpec = z.object({
   center: LonLat,

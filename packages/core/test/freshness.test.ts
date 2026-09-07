@@ -4,7 +4,7 @@ import {
   freshnessForSource,
   ttlForCadence,
   worstFreshness,
-} from "../src/freshness/index.js";
+} from "../src/freshness/index";
 
 const now = new Date("2026-09-07T20:00:00Z");
 const minutesAgo = (m: number) => new Date(now.getTime() - m * 60_000).toISOString();

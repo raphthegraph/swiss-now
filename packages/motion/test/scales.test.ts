@@ -8,8 +8,8 @@ import {
   rainRateColor,
   temperatureColor,
   windParticleDensity,
-} from "../src/scales/index.js";
-import { scaleStops } from "../src/tokens/color.js";
+} from "../src/scales/index";
+import { scaleStops } from "../src/tokens/color";
 
 const hexToRgb = (c: string) => {
   const m = /^rgb\((\d+), (\d+), (\d+)\)$/.exec(c);

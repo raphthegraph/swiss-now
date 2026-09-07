@@ -1,0 +1,125 @@
+{
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:2056"
+    }
+  },
+  "license": "https://www.meteoswiss.admin.ch/about-us/legal-basis.html",
+  "mapname": "ch.meteoschweiz.messwerte-niederschlag-10min",
+  "map_long_name": "Measurement values precipitation, past 10 min total",
+  "map_short_name": "Precipitation, 10 min total",
+  "map_abstract": "Current measurement values of Precipitation, 10 min total [mm]. Data is updated every 10 minutes. The data set contains all weather stations of the SwissMetNet, the automatic monitoring network of MeteoSwiss, which comprises 160 automatic monitoring stations. These stations deliver a multitude of current data on the weather and climate in Switzerland every ten minutes. The monitoring network is supplemented by around 140 automatic precipitation stations which enlarge the SwissMetNet to a total of 300 weather stations.",
+  "creation_time": "07.09.2026 22:25",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2771031.3, 1184825.6]
+      },
+      "id": "ARO",
+      "properties": {
+        "station_name": "Arosa",
+        "station_symbol": 1,
+        "value": 0.0,
+        "unit": "mm",
+        "reference_ts": "2026-09-07T20:10:00Z",
+        "altitude": "1880.00",
+        "measurement_height": "2.00 m",
+        "description": "<table>\u2026</table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2756908.09, 1209340.65]
+      },
+      "id": "RAG",
+      "properties": {
+        "station_name": "Bad Ragaz",
+        "station_symbol": 1,
+        "value": 0.0,
+        "unit": "mm",
+        "reference_ts": "2026-09-07T20:20:00Z",
+        "altitude": "497.50",
+        "measurement_height": "1.50 m",
+        "description": "<table>\u2026</table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2719103.41, 1279041.57]
+      },
+      "id": "HAI",
+      "properties": {
+        "station_name": "Salen-Reutenen",
+        "station_symbol": 1,
+        "value": 0.0,
+        "unit": "mm",
+        "reference_ts": "2026-09-07T20:20:00Z",
+        "altitude": "719.50",
+        "measurement_height": "1.50 m",
+        "description": "<table>\u2026</table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2677457.15, 1283471.74]
+      },
+      "id": "HLL",
+      "properties": {
+        "station_name": "Hallau",
+        "station_symbol": 1,
+        "value": 0.0,
+        "unit": "mm",
+        "reference_ts": "2026-09-07T20:20:00Z",
+        "altitude": "420.50",
+        "measurement_height": "1.50 m",
+        "description": "<table>\u2026</table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2593269.41, 1244543.47]
+      },
+      "id": "DEM",
+      "properties": {
+        "station_name": "Del\u00e9mont",
+        "station_symbol": 1,
+        "value": 0.0,
+        "unit": "mm",
+        "reference_ts": "2026-09-07T20:10:00Z",
+        "altitude": "440.50",
+        "measurement_height": "1.50 m",
+        "description": "<table>\u2026</table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2589460.48, 1129932.24]
+      },
+      "id": "VSTSN",
+      "properties": {
+        "station_name": "Tsanfleuron",
+        "station_symbol": 1,
+        "value": 99999,
+        "unit": "mm",
+        "reference_ts": "-",
+        "altitude": "2055.00",
+        "measurement_height": "3.00 m",
+        "description": "<table>\u2026</table>"
+      }
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:2056"
+    }
+  },
+  "license": "https://www.meteoswiss.admin.ch/about-us/legal-basis.html",
+  "mapname": "ch.meteoschweiz.messwerte-wind-boeenspitze-kmh-10min",
+  "map_long_name": "Measurement values wind gust 1 s, 10 min maximum",
+  "map_short_name": "Wind gust 1 s, 10 min",
+  "map_abstract": "Current measurement values of Wind gust 1 s, 10 min [km/h]. Data is updated every 10 minutes. The data set contains all weather stations of the SwissMetNet, the automatic monitoring network of MeteoSwiss, which comprises 160 automatic monitoring stations. These stations deliver a multitude of current data on the weather and climate in Switzerland every ten minutes.",
+  "creation_time": "07.09.2026 22:25",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2771036.8, 1184825.9]
+      },
+      "id": "ARO",
+      "properties": {
+        "station_name": "Arosa",
+        "station_symbol": 1,
+        "value": 5.4,
+        "wind_direction": 277,
+        "wind_direction_radian": 4.834562,
+        "unit": "km/h",
+        "reference_ts": "2026-09-07T20:20:00Z",
+        "altitude": "1888.00",
+        "measurement_height": "10.00 m",
+        "description": "<table>\u2026</table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2756910.52, 1209350.65]
+      },
+      "id": "RAG",
+      "properties": {
+        "station_name": "Bad Ragaz",
+        "station_symbol": 1,
+        "value": 11.9,
+        "wind_direction": 124,
+        "wind_direction_radian": 2.164208,
+        "unit": "km/h",
+        "reference_ts": "2026-09-07T20:20:00Z",
+        "altitude": "506.00",
+        "measurement_height": "10.00 m",
+        "description": "<table>\u2026</table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2719100.41, 1279046.07]
+      },
+      "id": "HAI",
+      "properties": {
+        "station_name": "Salen-Reutenen",
+        "station_symbol": 1,
+        "value": 13.3,
+        "wind_direction": 210,
+        "wind_direction_radian": 3.665191,
+        "unit": "km/h",
+        "reference_ts": "2026-09-07T20:20:00Z",
+        "altitude": "728.00",
+        "measurement_height": "10.00 m",
+        "description": "<table>\u2026</table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2677457.15, 1283471.74]
+      },
+      "id": "HLL",
+      "properties": {
+        "station_name": "Hallau",
+        "station_symbol": 1,
+        "value": 2.9,
+        "wind_direction": 18,
+        "wind_direction_radian": 0.314159,
+        "unit": "km/h",
+        "reference_ts": "2026-09-07T20:20:00Z",
+        "altitude": "429.00",
+        "measurement_height": "10.00 m",
+        "description": "<table>\u2026</table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2593269.41, 1244543.47]
+      },
+      "id": "DEM",
+      "properties": {
+        "station_name": "Del\u00e9mont",
+        "station_symbol": 1,
+        "value": 2.2,
+        "wind_direction": 306,
+        "wind_direction_radian": 5.340708,
+        "unit": "km/h",
+        "reference_ts": "2026-09-07T20:20:00Z",
+        "altitude": "449.00",
+        "measurement_height": "10.00 m",
+        "description": "<table>\u2026</table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2726347.4, 1237175.91]
+      },
+      "id": "EBK",
+      "properties": {
+        "station_name": "Ebnat-Kappel",
+        "station_symbol": 1,
+        "value": 1.8,
+        "wind_direction": 315,
+        "wind_direction_radian": 5.497787,
+        "unit": "km/h",
+        "reference_ts": "2026-09-07T20:20:00Z",
+        "altitude": "633.00",
+        "measurement_height": "10.00 m",
+        "description": "<table>\u2026</table>"
+      }
+    }
+  ]
+}

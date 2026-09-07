@@ -2,9 +2,10 @@
   "name": "@swiss-now/geo-build",
   "version": "0.0.1",
   "private": true,
-  "description": "Build-time geo scripts: swissBOUNDARIES3D → simplified GeoJSON, SBB/BAV rail lines → route paths, RDS-TMC lookup. Runs in GitHub Actions or locally, never in the app.",
+  "description": "Build-time geo scripts: swissBOUNDARIES3D \u2192 simplified GeoJSON, SBB/BAV rail lines \u2192 route paths, RDS-TMC lookup. Runs in GitHub Actions or locally, never in the app.",
   "type": "module",
   "scripts": {
-    "test": "echo \"no tests yet\""
+    "test": "echo \"no tests yet\"",
+    "fork-style": "node scripts/fork-basemap-style.mjs"
   }
 }

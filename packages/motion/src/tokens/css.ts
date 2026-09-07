@@ -1,7 +1,7 @@
-import { ground, layerAccent, daylightGround } from "./color.js";
-import { fontFamily, typeScale } from "./type.js";
-import { space, hudMargin } from "./space.js";
-import { duration, cssEasing } from "./motion.js";
+import { ground, layerAccent, daylightGround } from "./color";
+import { fontFamily, typeScale } from "./type";
+import { space, hudMargin } from "./space";
+import { duration, cssEasing } from "./motion";
 
 /**
  * Flattens the tokens into CSS custom properties for the web app.

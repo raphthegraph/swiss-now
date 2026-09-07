@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { SourceId } from "./ids.js";
+import { SourceId } from "./ids";
 
 export const CommercialUse = z.enum(["yes", "ask", "no", "unresolved"]);
 export type CommercialUse = z.infer<typeof CommercialUse>;

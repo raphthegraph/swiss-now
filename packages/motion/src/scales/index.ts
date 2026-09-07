@@ -4,7 +4,7 @@
  */
 import { scaleLinear, scaleSqrt, type ScaleLinear, type ScalePower } from "d3-scale";
 import { interpolateLab } from "d3-interpolate";
-import { scaleStops, type ScaleStopsKey } from "../tokens/color.js";
+import { scaleStops, type ScaleStopsKey } from "../tokens/color";
 
 export type ColorScale = ScaleLinear<string, string>;
 

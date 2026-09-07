@@ -1,1 +1,1 @@
-export * from "./Metric.js";
+export * from "./Metric";

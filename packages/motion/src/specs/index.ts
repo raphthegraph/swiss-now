@@ -3,7 +3,7 @@
  * The types live in @swiss-now/core (StorySpec, Chapter, CameraSpec); this module adds helpers.
  */
 import type { CameraSpec } from "@swiss-now/core";
-import { lerp } from "../math/easing.js";
+import { lerp } from "../math/easing";
 
 /** Whole-country framing used as the resting camera and as the story's opening shot. */
 export const SWITZERLAND_CAMERA: CameraSpec = {

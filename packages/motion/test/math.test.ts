@@ -14,8 +14,8 @@ import {
   ringProgress,
   seededRandom,
   sunAltitudeDeg,
-} from "../src/math/index.js";
-import { interpolateCamera, SWITZERLAND_CAMERA, secondsToFrames } from "../src/specs/index.js";
+} from "../src/math/index";
+import { interpolateCamera, SWITZERLAND_CAMERA, secondsToFrames } from "../src/specs/index";
 
 describe("random", () => {
   it("is deterministic and uniform-ish", () => {

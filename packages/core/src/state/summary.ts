@@ -1,6 +1,6 @@
 /** National and per-canton key figures shown in the summary strip and used by the story builder. */
 import { z } from "zod";
-import { CantonCode, ISODateTime, LayerId, LocalizedText } from "./common.js";
+import { CantonCode, ISODateTime, LayerId, LocalizedText } from "./common";
 
 export const KPI = z.object({
   id: z.string().min(1),

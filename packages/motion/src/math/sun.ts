@@ -1,4 +1,4 @@
-import { daylightState, referencePoint, type DaylightState } from "../tokens/daylight.js";
+import { daylightState, referencePoint, type DaylightState } from "../tokens/daylight";
 
 /**
  * Sun altitude in degrees for a moment and place. Compact NOAA-style approximation; accurate to

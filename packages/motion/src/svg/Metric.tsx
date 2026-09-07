@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
-import { fontFamily, tabularFigures, typeScale, type TypeScaleKey } from "../tokens/type.js";
-import { ground } from "../tokens/color.js";
-import { easeHouse, lerp } from "../math/easing.js";
+import { fontFamily, tabularFigures, typeScale, type TypeScaleKey } from "../tokens/type";
+import { ground } from "../tokens/color";
+import { easeHouse, lerp } from "../math/easing";
 
 export interface MetricProps {
   /** Final value to display. */

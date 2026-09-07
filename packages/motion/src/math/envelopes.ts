@@ -1,4 +1,4 @@
-import { clamp01 } from "./easing.js";
+import { clamp01 } from "./easing";
 
 /**
  * Looping pulse envelope: rises quickly, decays over the period. Returns 0–1.

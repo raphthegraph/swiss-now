@@ -2,9 +2,9 @@
  * Freshness model. Derived from the age of the newest observation relative to the
  * source's expected cadence. See docs/ARCHITECTURE.md §9.
  */
-import type { Freshness } from "../state/common.js";
-import { getSource } from "../sources/registry.js";
-import type { SourceId } from "../sources/ids.js";
+import type { Freshness } from "../state/common";
+import { getSource } from "../sources/registry";
+import type { SourceId } from "../sources/ids";
 
 export const FRESHNESS_MULTIPLIERS = {
   live: 1.5,

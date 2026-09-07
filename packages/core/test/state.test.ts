@@ -8,8 +8,8 @@ import {
   SwissNowState,
   TripSnapshot,
   WeatherState,
-} from "../src/state/index.js";
-import { SOURCES, SourceId, listSources } from "../src/sources/index.js";
+} from "../src/state/index";
+import { SOURCES, SourceId, listSources } from "../src/sources/index";
 
 const t = "2026-09-07T19:00:00Z";
 

@@ -2,8 +2,8 @@
  * Source registry: licences, attribution strings and cadences as verified on 2026-09-07.
  * See docs/DATA_SOURCES.md for evidence and open questions. Keep this file boring and exact.
  */
-import type { SourceMeta } from "./meta.js";
-import type { SourceId } from "./ids.js";
+import type { SourceMeta } from "./meta";
+import type { SourceId } from "./ids";
 
 const MIN = 60;
 const HOUR = 3600;

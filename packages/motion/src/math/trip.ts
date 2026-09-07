@@ -1,5 +1,5 @@
 import type { LonLat, TripSnapshot, TripStop } from "@swiss-now/core";
-import { positionAlongPath, type MeasuredPath } from "./geo.js";
+import { positionAlongPath, type MeasuredPath } from "./geo";
 
 export interface TripPosition {
   lonLat: LonLat;
