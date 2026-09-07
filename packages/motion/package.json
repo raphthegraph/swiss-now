@@ -1,0 +1,17 @@
+{
+  "name": "@swiss-now/motion",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Swiss Now shared visual and motion system: design tokens, scales, deterministic animation math, stateless SVG primitives and scene specs. Framework-agnostic; consumed by the web app and the Remotion project.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "echo \"no tests yet\""
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@swiss-now/web",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Swiss Now interactive web experience (Next.js + MapLibre). Scaffolded in Phase 0 after the state schemas.",
+  "scripts": {
+    "test": "echo \"no tests yet\""
+  }
+}

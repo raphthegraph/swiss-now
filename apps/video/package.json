@@ -1,0 +1,9 @@
+{
+  "name": "@swiss-now/video",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Swiss Now Remotion project: 'Switzerland Today' compositions rendered locally from the same SwissNowState / StorySpec as the website.",
+  "scripts": {
+    "test": "echo \"no tests yet\""
+  }
+}

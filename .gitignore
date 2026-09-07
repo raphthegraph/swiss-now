@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+dist/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+
+# env & secrets
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Remotion
+apps/video/out/
+apps/video/.remotion/
+
+# Vercel
+.vercel/
+
+# local scratch & unrelated files in this directory
+mortar-app.html
+.gstack/
+.claude/settings.local.json

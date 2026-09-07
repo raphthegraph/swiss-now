@@ -1,0 +1,10 @@
+{
+  "name": "@swiss-now/geo-build",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Build-time geo scripts: swissBOUNDARIES3D → simplified GeoJSON, SBB/BAV rail lines → route paths, RDS-TMC lookup. Runs in GitHub Actions or locally, never in the app.",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"no tests yet\""
+  }
+}
