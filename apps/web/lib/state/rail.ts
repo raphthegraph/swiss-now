@@ -1,6 +1,11 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import type { RailState } from "@swiss-now/core";
+import type { Event, RailState } from "@swiss-now/core";
+import {
+  buildStationIndex,
+  fetchSbbDisruptions,
+  sbbRecordsToEvents,
+} from "@swiss-now/core/data-sources/transit";
 import {
   buildRailState,
   fetchTripUpdates,
@@ -30,13 +35,23 @@ export async function readRailJson<T>(name: string): Promise<T> {
   return readJson<T>(name);
 }
 
+/** When set (e.g. a Vercel Blob base URL), rail files are fetched over HTTP instead of the local dir. */
+const RAIL_URL = process.env["RAIL_DATA_URL"]?.replace(/\/$/, "");
+
 async function readJson<T>(name: string): Promise<T> {
-  const path = join(RAIL_DIR, name);
-  const cached = fileCache.get(path);
+  const key = RAIL_URL ? `${RAIL_URL}/${name}` : join(RAIL_DIR, name);
+  const cached = fileCache.get(key);
   const now = Date.now();
   if (cached && now - cached.mtime < 5 * 60_000) return cached.value as T;
-  const value = JSON.parse(await readFile(path, "utf8")) as T;
-  fileCache.set(path, { mtime: now, value });
+  let value: T;
+  if (RAIL_URL) {
+    const res = await fetch(key, { next: { revalidate: 3600 } });
+    if (!res.ok) throw new Error(`rail file ${name}: ${res.status}`);
+    value = (await res.json()) as T;
+  } else {
+    value = JSON.parse(await readFile(key, "utf8")) as T;
+  }
+  fileCache.set(key, { mtime: now, value });
   return value;
 }
 
@@ -116,5 +131,29 @@ export async function getRailState(): Promise<RailState> {
   if (states.length === 0) throw new Error("no service-day file for today — run the GTFS build");
   const merged = states[0]!;
   for (const s of states.slice(1)) merged.activeTrips.push(...s.activeTrips);
+  merged.disruptions = await getDisruptions(now);
+  if (merged.disruptions.length > 0)
+    merged.sources = [...new Set([...merged.sources, "sbb-rail-traffic-info" as const])];
   return merged;
+}
+
+/** SBB rail-traffic messages placed between their named stations (5-minute cadence). */
+async function getDisruptions(now: Date): Promise<Event[]> {
+  try {
+    const cachedFetch: typeof fetch = (input, init) =>
+      fetch(input, { ...init, next: { revalidate: 300, tags: ["state:rail-disruptions"] } });
+    const [records, stops] = await Promise.all([
+      fetchSbbDisruptions(cachedFetch, 100),
+      readJson<RailStopsFile>("stops.json"),
+    ]);
+    const index = buildStationIndex(
+      Object.entries(stops).map(([, [lon, lat, name]]) => ({
+        name,
+        lonLat: [lon, lat] as [number, number],
+      })),
+    );
+    return sbbRecordsToEvents(records, index, now);
+  } catch {
+    return [];
+  }
 }

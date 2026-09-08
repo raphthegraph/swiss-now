@@ -3,10 +3,11 @@
 import type { Freshness } from "@swiss-now/core";
 import type { StationFeatureProps } from "@/lib/map/stations-geojson";
 import type { HydroFeatureProps } from "@/lib/map/hydro-geojson";
+import type { DisruptionFeatureProps } from "@/lib/map/disruptions-geojson";
 import { formatNumber, formatTime } from "@/lib/format";
 
 export interface Hovered {
-  props: StationFeatureProps | HydroFeatureProps;
+  props: StationFeatureProps | HydroFeatureProps | DisruptionFeatureProps;
   lonLat: [number, number];
   point: { x: number; y: number };
 }
@@ -14,6 +15,25 @@ export interface Hovered {
 /** value · time · source — the honesty rule made visible (docs/PRODUCT_VISION.md §5.8). */
 export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness: Freshness }) {
   const { props, point } = hovered;
+  if ("disruption" in props) {
+    const d = props;
+    return (
+      <div
+        className="hover-card hover-card--disruption"
+        style={{ transform: `translate(${point.x + 14}px, ${point.y - 12}px)` }}
+      >
+        <div className="hover-card__name">{d.headline}</div>
+        {d.description ? (
+          <div className="hover-card__meta">{d.description.slice(0, 220)}</div>
+        ) : null}
+        <div className="hover-card__meta tnum">
+          {formatTime(d.startsAt)}
+          {d.endsAt ? ` – ${formatTime(d.endsAt)}` : ""}
+          {" · Source: SBB"}
+        </div>
+      </div>
+    );
+  }
   if ("kind" in props) {
     const h = props;
     const dangerText = h.danger >= 2 ? ` · danger level ${h.danger}` : "";

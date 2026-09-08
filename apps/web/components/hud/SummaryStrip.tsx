@@ -123,6 +123,13 @@ export function SummaryStrip({
         unit: "min",
         where: `${worst.trip.routeShortName} → ${worst.trip.headsign ?? ""}`.trim(),
       });
+    if (rail.disruptions.length > 0)
+      trains.push({
+        label: "Disruptions",
+        value: String(rail.disruptions.length),
+        unit: rail.disruptions.length === 1 ? "section" : "sections",
+        where: rail.disruptions[0]!.affects?.join(" – ") ?? rail.disruptions[0]!.headline.de,
+      });
     const cancelled = rail.activeTrips.length - running.length;
     if (cancelled > 0)
       trains.push({

@@ -10,7 +10,7 @@ import {
   type MapMouseEvent,
 } from "maplibre-gl";
 import type { Point } from "geojson";
-import type { Field, HydrologyState, WeatherState } from "@swiss-now/core";
+import type { Event, Field, HydrologyState, WeatherState } from "@swiss-now/core";
 import { hydroToGeoJSON, riverWidthExpression } from "@/lib/map/hydro-geojson";
 import type { ActiveLayer } from "@/lib/layers";
 import { layerAccent, duration } from "@swiss-now/motion/tokens";
@@ -20,6 +20,7 @@ import { ground } from "@swiss-now/motion/tokens";
 import { colorExpression } from "@/lib/map/expressions";
 import { stationsToGeoJSON, type StationFeatureProps } from "@/lib/map/stations-geojson";
 import type { HydroFeatureProps } from "@/lib/map/hydro-geojson";
+import { disruptionsToGeoJSON, type DisruptionFeatureProps } from "@/lib/map/disruptions-geojson";
 import { HoverCard, type Hovered } from "./HoverCard";
 import { AnimatePresence, motion } from "motion/react";
 
@@ -29,6 +30,9 @@ setWorkerUrl("/map/vendor/maplibre-gl-worker.mjs");
 const SOURCE = "weather-stations";
 const RADAR_SOURCES = ["radar-a", "radar-b"] as const;
 const RADAR_LAYERS = ["radar-rain-a", "radar-rain-b"] as const;
+const DISRUPTION_SOURCE = "rail-disruptions";
+const LAYER_DISRUPTION_LINES = "rail-disruption-lines";
+const LAYER_DISRUPTION_POINTS = "rail-disruption-points";
 const HYDRO_SOURCE = "hydro-stations";
 const LAYER_HYDRO = "hydro-circles";
 const LAYER_HYDRO_LABELS = "hydro-labels";
@@ -63,6 +67,8 @@ export interface LiveMapProps {
   /** Camera target; changing it glides the camera with the house easing. `null` = whole country. */
   focus?: { lonLat: [number, number]; zoom: number; key: string } | null | undefined;
   hydrology?: HydrologyState | undefined;
+  /** rail disruptions (SBB rail-traffic messages placed between their stations) */
+  disruptions?: Event[] | undefined;
   active: ActiveLayer;
   /** Radar frame to show; defaults to the newest in `weather.fields`. */
   radarFrame?: Field | undefined;
@@ -79,6 +85,7 @@ export interface LiveMapProps {
 export function LiveMap({
   weather,
   hydrology,
+  disruptions,
   active,
   focus,
   radarFrame,
@@ -306,6 +313,41 @@ export function LiveMap({
         },
       });
 
+      // rail disruptions: the affected section as a red hairline with end markers
+      map.addSource(DISRUPTION_SOURCE, {
+        type: "geojson",
+        data: disruptionsToGeoJSON(disruptions ?? []),
+        promoteId: "id",
+      });
+      map.addLayer(
+        {
+          id: LAYER_DISRUPTION_LINES,
+          type: "line",
+          source: DISRUPTION_SOURCE,
+          filter: ["==", ["geometry-type"], "LineString"],
+          layout: { "line-cap": "round", visibility: "none" },
+          paint: {
+            "line-color": layerAccent.railDelay,
+            "line-width": ["interpolate", ["linear"], ["zoom"], 6, 2, 10, 4],
+            "line-opacity": 0.85,
+            "line-dasharray": [1, 1.5],
+          },
+        },
+        firstSymbolLayerId(map),
+      );
+      map.addLayer({
+        id: LAYER_DISRUPTION_POINTS,
+        type: "circle",
+        source: DISRUPTION_SOURCE,
+        layout: { visibility: "none" },
+        paint: {
+          "circle-radius": ["interpolate", ["linear"], ["zoom"], 6, 4, 10, 7],
+          "circle-color": layerAccent.railDelay,
+          "circle-stroke-color": ground.paper,
+          "circle-stroke-width": 1.5,
+          "circle-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 1, 0.9],
+        },
+      });
       // flow animation: cycle the dash pattern (dasharray cannot be data-driven or transitioned)
       const dashSeq: [number, number, number][] = [
         [0, 3, 3],
@@ -349,8 +391,12 @@ export function LiveMap({
         hoveredSource = source;
         map.setFeatureState({ source, id: f.id as string }, { hover: true });
         map.getCanvas().style.cursor = "crosshair";
-        const p = f.properties as StationFeatureProps | HydroFeatureProps;
-        const coords = (f.geometry as Point).coordinates as [number, number];
+        const p = f.properties as StationFeatureProps | HydroFeatureProps | DisruptionFeatureProps;
+        const coords = (
+          f.geometry.type === "Point"
+            ? (f.geometry as Point).coordinates
+            : [e.lngLat.lng, e.lngLat.lat]
+        ) as [number, number];
         setHovered({ props: p, lonLat: coords, point: map.project(coords) });
       };
       const onLeave = () => {
@@ -364,6 +410,10 @@ export function LiveMap({
       map.on("mouseleave", LAYER_CIRCLES, onLeave);
       map.on("mousemove", LAYER_HYDRO, onMove);
       map.on("mouseleave", LAYER_HYDRO, onLeave);
+      map.on("mousemove", LAYER_DISRUPTION_POINTS, onMove);
+      map.on("mouseleave", LAYER_DISRUPTION_POINTS, onLeave);
+      map.on("mousemove", LAYER_DISRUPTION_LINES, onMove);
+      map.on("mouseleave", LAYER_DISRUPTION_LINES, onLeave);
       // keep the card anchored while the camera moves
       map.on("move", () => {
         setHovered((h) => (h ? { ...h, point: map.project(h.lonLat) } : h));
@@ -417,6 +467,15 @@ export function LiveMap({
     map.setPaintProperty(LAYER_RIVERS, "line-width", riverWidthExpression(hydrology) as never);
   }, [hydrology, ready]);
 
+  // disruption updates
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+    (map.getSource(DISRUPTION_SOURCE) as GeoJSONSource | undefined)?.setData(
+      disruptionsToGeoJSON(disruptions ?? []),
+    );
+  }, [disruptions, ready]);
+
   // layer visibility follows the rail: NOW = curated composite, others reduce to one system
   useEffect(() => {
     const map = mapRef.current;
@@ -430,6 +489,8 @@ export function LiveMap({
     show(LAYER_CIRCLES, weatherOn);
     show(LAYER_LABELS, active === "weather");
     RADAR_LAYERS.forEach((l) => show(l, weatherOn));
+    show(LAYER_DISRUPTION_LINES, active === "now" || active === "rail");
+    show(LAYER_DISRUPTION_POINTS, active === "now" || active === "rail");
     show(LAYER_RIVERS, waterOn);
     show(LAYER_HYDRO, waterOn);
     show(LAYER_HYDRO_LABELS, active === "water");

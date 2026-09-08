@@ -18,6 +18,7 @@ import {
   type RailPatternsFile,
   type RailStopsFile,
 } from "../data-sources/transit/index";
+import { BAV_XTF_URL, readBavSegments } from "../data-sources/transit/bav-xtf";
 
 /** Simplification tolerance: invisible below zoom 12 (≈ 38 m/px), keeps paths around 2 KB. */
 const SIMPLIFY_METERS = 20;
@@ -69,15 +70,36 @@ function cumulative(coords: LonLat[], i: number): number {
 const main = async () => {
   const dir = arg("rail", join(process.cwd(), "out", "rail"));
   const linesPath = arg("lines", join(dir, "sbb-lines.geojson"));
+  /** `both` (default) merges the SBB lines with the BAV national network; `sbb` or `bav` alone for diagnosis. */
+  const network = arg("network", "both");
+  const bavPath = arg("bav", join(dir, "schienennetz_2056_de.xtf"));
   const t0 = Date.now();
   const log = (m: string) =>
     console.log(`[build-rail-paths] ${m} (${((Date.now() - t0) / 1000).toFixed(0)}s)`);
 
   const patterns = JSON.parse(readFileSync(join(dir, "patterns.json"), "utf8")) as RailPatternsFile;
   const stops = JSON.parse(readFileSync(join(dir, "stops.json"), "utf8")) as RailStopsFile;
-  const lines = await loadLines(linesPath);
+  let lines: LonLat[][] = [];
+  if (network === "bav" || network === "both") {
+    if (!existsSync(bavPath)) {
+      log(`downloading BAV network → ${bavPath}`);
+      const res = await fetch(BAV_XTF_URL, {
+        headers: { "User-Agent": "SwissNow/0.0.1 (+https://github.com/raphthegraph/swiss-now)" },
+      });
+      if (!res.ok) throw new Error(`BAV xtf ${res.status}`);
+      writeFileSync(bavPath, Buffer.from(await res.arrayBuffer()));
+    }
+    const segments = await readBavSegments(bavPath);
+    lines.push(...segments.map((s) => s.coordinates));
+    log(`BAV network: ${segments.length} segments`);
+  }
+  if (network === "sbb" || network === "both") {
+    const sbb = await loadLines(linesPath);
+    lines.push(...sbb);
+    log(`SBB lines: ${sbb.length}`);
+  }
   const graph = buildRailGraph(lines);
-  log(`graph: ${graph.nodes.length} nodes from ${lines.length} lines`);
+  log(`graph: ${graph.nodes.length} nodes from ${lines.length} lines (${network})`);
 
   mkdirSync(join(dir, "paths"), { recursive: true });
   // only patterns that appear in the service-day files; one path per unique stop sequence

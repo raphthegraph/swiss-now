@@ -24,7 +24,7 @@
 - [ ] True GTFS-RT rate limit (cookbook 2/min vs limits page 5/min). Design for 2/min. [P2]
 - [ ] Which train operators/route types are reliably present in TripUpdates; coverage of BLS/SOB/RhB. [P2]
 - [~] Map-matching onto SBB `linie-mit-polygon` works (A* on a 500 k-node graph, ≈ 3 min for 9 k patterns) but ≈ 32 % of legs on patterns in service are straight-line fallbacks where the SBB dataset has no track (BLS, SOB, RhB, foreign). Next: convert BAV `schienennetz` with GDAL in the Actions job and merge. [P2]
-- [ ] Rail payload: ≈ 1.8 MB uncompressed per minute (≈ 1 000 trips × 8 stops with ISO timestamps). Consider a compact wire format (epoch seconds, arrays) behind the same `RailState` contract. [P2]
+- [x] Rail payload: 1.86 MB uncompressed gzips to 164 KB (measured 2026-09-08); the Vercel CDN compresses responses, so no compact wire format is needed for the MVP. Revisit only if the 60-s poll shows up in bandwidth metrics. [P2]
 - [ ] Rail files hosting: today `public/rail/` generated locally; the Actions job uploads an artifact. Wire Vercel Blob (free tier) so deployments read the newest build. [P2]
 - [ ] Radar: feasibility of decoding ODIM HDF5 with `h5wasm` in a Node function; CPU cost; colour scale for RZC (mm/h) vs CPC (mm/h accumulated). [P1]
 - [ ] MeteoSwiss degraded-cadence behaviour (the June 2026 incident) — how freshness should present a 60-min cadence. [P1]

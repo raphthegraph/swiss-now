@@ -97,7 +97,7 @@ export function TrainLayer({ map, rail, mode, onHover, onProgress }: TrainLayerP
       let loaded = 0;
 
       for (const trip of state.activeTrips) {
-        if (trip.cancelled) continue;
+        if (trip.cancelled || trip.stops.filter((st) => !st.skipped).length < 2) continue;
         needed++;
         const path = s.get(trip.pathId);
         if (!path) continue;

@@ -9,6 +9,9 @@ export function RailLegend({ loaded, needed }: { loaded: number; needed: number 
       <span className="legend__item">
         <span className="legend__ring" /> delayed ≥ 3 min · ring grows with the delay
       </span>
+      <span className="legend__item">
+        <span className="legend__disruption" /> disruption between the named stations (SBB)
+      </span>
       {loading ? (
         <span className="legend__item label">
           loading routes {loaded} / {needed}

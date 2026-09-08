@@ -26,8 +26,12 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Build rail files from the newest GTFS (streams the 248 MB archive)
         run: pnpm --filter @swiss-now/core build-gtfs -- --out "$GITHUB_WORKSPACE/out/rail" --days 7
-      - name: Build route paths on the SBB rail network
-        run: pnpm --filter @swiss-now/core build-rail-paths -- --rail "$GITHUB_WORKSPACE/out/rail"
+      - name: Build route paths on the BAV railway network
+        run: pnpm --filter @swiss-now/core build-rail-paths -- --rail "$GITHUB_WORKSPACE/out/rail" --network bav
+      - name: Upload to Vercel Blob (skipped until BLOB_READ_WRITE_TOKEN is configured)
+        env:
+          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
+        run: pnpm --filter @swiss-now/core upload-rail -- --rail "$GITHUB_WORKSPACE/out/rail"
       - name: Summary
         run: |
           cat out/rail/meta.json

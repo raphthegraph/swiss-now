@@ -571,3 +571,13 @@ table.sources th {
 .hover-card--rail {
   border-left-color: var(--sn-accent-rail);
 }
+.legend__disruption {
+  display: inline-block;
+  width: 14px;
+  height: 0;
+  border-top: 2px dashed var(--sn-accent-rail-delay);
+}
+.hover-card--disruption {
+  border-left-color: var(--sn-accent-rail-delay);
+  max-width: 320px;
+}

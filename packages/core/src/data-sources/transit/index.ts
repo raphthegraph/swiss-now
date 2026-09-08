@@ -19,3 +19,4 @@ export * from "./rail-graph";
 export * from "./gtfs-rt";
 export * from "./active-trips";
 export * from "./rail-state";
+export * from "./sbb-disruptions";

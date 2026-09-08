@@ -23,8 +23,12 @@ function keyOf(lon: number, lat: number): string {
   return `${Math.round(lon / SNAP_PRECISION)}:${Math.round(lat / SNAP_PRECISION)}`;
 }
 
-/** Builds an undirected graph from LineString coordinate arrays. */
-export function buildRailGraph(lines: LonLat[][], cellDeg = 0.02): RailGraph {
+/**
+ * Builds an undirected graph from LineString coordinate arrays. Source datasets do not share exact
+ * vertices at junctions (SBB and BAV both split into > 200 components at 1 m), so line endpoints are
+ * stitched to the nearest node of another line within `stitchMeters`.
+ */
+export function buildRailGraph(lines: LonLat[][], cellDeg = 0.02, stitchMeters = 40): RailGraph {
   const index = new Map<string, number>();
   const nodes: LonLat[] = [];
   const adj: Array<Array<[number, number]>> = [];
@@ -42,10 +46,13 @@ export function buildRailGraph(lines: LonLat[][], cellDeg = 0.02): RailGraph {
     }
     return i;
   };
+  const endpoints: number[] = [];
   for (const line of lines) {
     let prev = -1;
+    let first = -1;
     for (const p of line) {
       const cur = nodeFor(p);
+      if (first < 0) first = cur;
       if (prev >= 0 && prev !== cur) {
         const len = haversineMeters(nodes[prev]!, nodes[cur]!);
         adj[prev]!.push([cur, len]);
@@ -53,8 +60,45 @@ export function buildRailGraph(lines: LonLat[][], cellDeg = 0.02): RailGraph {
       }
       prev = cur;
     }
+    if (first >= 0) endpoints.push(first);
+    if (prev >= 0 && prev !== first) endpoints.push(prev);
   }
-  return { nodes, adj, grid, cellDeg };
+  const graph: RailGraph = { nodes, adj, grid, cellDeg };
+  if (stitchMeters > 0) stitchEndpoints(graph, endpoints, stitchMeters);
+  return graph;
+}
+
+/** Connects each line endpoint to the nearest node it is not already adjacent to, within `maxMeters`. */
+export function stitchEndpoints(graph: RailGraph, endpoints: number[], maxMeters: number): number {
+  let added = 0;
+  for (const e of endpoints) {
+    const p = graph.nodes[e]!;
+    const cx = Math.floor(p[0] / graph.cellDeg);
+    const cy = Math.floor(p[1] / graph.cellDeg);
+    const neighbours = new Set(graph.adj[e]!.map(([m]) => m));
+    let best = -1;
+    let bestD = maxMeters;
+    for (let dx = -1; dx <= 1; dx++) {
+      for (let dy = -1; dy <= 1; dy++) {
+        const cell = graph.grid.get(`${cx + dx}:${cy + dy}`);
+        if (!cell) continue;
+        for (const i of cell) {
+          if (i === e || neighbours.has(i)) continue;
+          const d = haversineMeters(p, graph.nodes[i]!);
+          if (d < bestD) {
+            bestD = d;
+            best = i;
+          }
+        }
+      }
+    }
+    if (best >= 0) {
+      graph.adj[e]!.push([best, bestD]);
+      graph.adj[best]!.push([e, bestD]);
+      added++;
+    }
+  }
+  return added;
 }
 
 /** Nearest graph node within `maxMeters`, or -1. */

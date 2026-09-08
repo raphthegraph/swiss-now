@@ -211,6 +211,12 @@ describe("gtfs-rt", () => {
     });
     expect(active.map((t) => t.tripId)).toEqual(["t"]);
     expect(active[0]!.stops.map((s) => s.stopId)).toEqual(["s2", "s3"]);
+    // a train dwelling at its terminus keeps its last two stops
+    const atEnd = activeTrips(day, patterns, undefined, {
+      now: new Date(dayStart + (9 * 3600 + 30) * 1000),
+      keepIfAnyStop: new Set(["s1", "s2", "s3"]),
+    });
+    expect(atEnd[0]!.stops.length).toBeGreaterThanOrEqual(2);
     expect(active[0]!.stops[0]!.distanceAlongPath).toBe(1000); // original index preserved in the placeholder
   });
 });

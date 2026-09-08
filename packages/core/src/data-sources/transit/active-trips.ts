@@ -85,6 +85,8 @@ export function activeTrips(
         if (times[i]![1] + (delays[i] ?? 0) <= nowSec) from = i;
         else break;
       }
+      // always keep at least two stops so interpolation has a segment (arrived trains dwell at the end)
+      from = Math.min(from, times.length - 2);
     }
     const stops: TripStop[] = times.slice(from).map(([arr, dep], j) => {
       const i = j + from;

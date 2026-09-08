@@ -57,6 +57,7 @@ export function MapPage({
       <LiveMap
         weather={weather}
         hydrology={hydrology}
+        disruptions={rail?.disruptions}
         active={active}
         radarFrame={radar.frame}
         onMapReady={setMap}

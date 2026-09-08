@@ -23,9 +23,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build-gtfs": "tsx src/cli/build-gtfs.ts",
-    "build-rail-paths": "tsx src/cli/build-rail-paths.ts"
+    "build-rail-paths": "tsx src/cli/build-rail-paths.ts",
+    "upload-rail": "tsx src/cli/upload-rail.ts"
   },
   "dependencies": {
+    "@vercel/blob": "^2.8.0",
     "csv-parse": "^7.0.2",
     "gtfs-realtime-bindings": "^2.2.0",
     "h5wasm": "^0.10.3",
