@@ -5,6 +5,8 @@ import * as Plot from "@observablehq/plot";
 import type { EnergyState, GenerationType } from "@swiss-now/core";
 import { ground, layerAccent } from "@swiss-now/motion/tokens";
 import { PlotFigure } from "../charts/PlotFigure";
+import { StatsCharts } from "./StatsCharts";
+import type { GeoRegister, IndicatorSeries } from "@swiss-now/core";
 import { formatNumber } from "@/lib/format";
 
 const TYPE_LABEL: Record<GenerationType, string> = {
@@ -116,11 +118,27 @@ export function EnergyCharts({ energy }: { energy: EnergyState | undefined }) {
   );
 }
 
-export function ChartsView({ topic, energy }: { topic: string; energy: EnergyState | undefined }) {
+export interface ChartsViewProps {
+  topic: string;
+  energy: EnergyState | undefined;
+  stats?:
+    | {
+        series: IndicatorSeries | undefined;
+        national?: IndicatorSeries | undefined;
+        register: GeoRegister | undefined;
+        accent: string;
+        period: string | undefined;
+      }
+    | undefined;
+}
+
+export function ChartsView({ topic, energy, stats }: ChartsViewProps) {
   return (
     <section className="charts-view" aria-label="Charts">
       {topic === "energy" ? (
         <EnergyCharts energy={energy} />
+      ) : stats ? (
+        <StatsCharts {...stats} />
       ) : (
         <p className="label">No charts for this topic yet.</p>
       )}

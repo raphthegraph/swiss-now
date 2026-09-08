@@ -5,6 +5,12 @@ import type { LayerId } from "@swiss-now/core";
 import { ground, scaleStops, type ScaleStopsKey } from "@swiss-now/motion/tokens";
 import { show, type MapContribution } from "./types";
 
+export interface ChoroplethUpdate {
+  cells: ChoroplethState;
+  /** colour stops for dynamic scales (value → colour), ascending */
+  stops?: [number, string][];
+}
+
 export interface ChoroplethCell {
   value: number | null;
   /** extra numbers shown in the hover card (e.g. turnout) */
@@ -17,7 +23,10 @@ export interface ChoroplethOptions {
   layer: LayerId;
   /** TopoJSON with `municipalities`, `cantons` (and `lakes`) objects; ids are BFS numbers / codes. */
   topoUrl: string;
-  scale: ScaleStopsKey;
+  /** which polygons carry the values */
+  object?: "municipalities" | "cantons";
+  /** fixed stops from the shared scales, or dynamic stops passed with each update */
+  scale: ScaleStopsKey | "dynamic";
   /** merged into hovered features: label, unit, source */
   hoverExtras?: Record<string, unknown>;
 }
@@ -27,7 +36,9 @@ export interface ChoroplethOptions {
  * feature-state (no geometry re-upload when the indicator or vote changes). Missing values stay
  * transparent; canton borders are drawn as ink hairlines above the fill.
  */
-export function choroplethContribution(o: ChoroplethOptions): MapContribution<ChoroplethState> {
+export function choroplethContribution(
+  o: ChoroplethOptions,
+): MapContribution<ChoroplethState | ChoroplethUpdate> {
   const SRC = `${o.id}-municipalities`;
   const SRC_CANTONS = `${o.id}-cantons`;
   const FILL = `${o.id}-fill`;
@@ -35,9 +46,21 @@ export function choroplethContribution(o: ChoroplethOptions): MapContribution<Ch
   const CANTONS = `${o.id}-canton-lines`;
   let loaded = false;
   let pending: ChoroplethState | undefined;
+  let pendingStops: (number | string)[] | undefined;
   let visible = false;
   let applied = new Set<string>();
-  const stops = scaleStops[o.scale].flatMap(([v, c]) => [v, c]);
+  const object = o.object ?? "municipalities";
+  const fixedStops =
+    o.scale === "dynamic"
+      ? [0, "#F4F3EF", 1, "#111214"]
+      : scaleStops[o.scale].flatMap(([v, c]) => [v, c]);
+  const fillColor = (stops: (number | string)[]) =>
+    [
+      "case",
+      ["==", ["feature-state", "value"], null],
+      "rgba(0,0,0,0)",
+      ["interpolate", ["linear"], ["feature-state", "value"], ...stops],
+    ] as never;
 
   const apply = (map: MapLibreMap, state: ChoroplethState) => {
     const next = new Set<string>();
@@ -60,7 +83,7 @@ export function choroplethContribution(o: ChoroplethOptions): MapContribution<Ch
         .then((r) => r.json())
         .then((topo: Topology) => {
           if (!map.getStyle()) return;
-          const munis = feature(topo, topo.objects["municipalities"] as GeometryCollection);
+          const munis = feature(topo, topo.objects[object] as GeometryCollection);
           const cantons = feature(topo, topo.objects["cantons"] as GeometryCollection);
           map.addSource(SRC, { type: "geojson", data: munis });
           map.addSource(SRC_CANTONS, { type: "geojson", data: cantons });
@@ -72,12 +95,7 @@ export function choroplethContribution(o: ChoroplethOptions): MapContribution<Ch
               source: SRC,
               layout: { visibility: "none" },
               paint: {
-                "fill-color": [
-                  "case",
-                  ["==", ["feature-state", "value"], null],
-                  "rgba(0,0,0,0)",
-                  ["interpolate", ["linear"], ["feature-state", "value"], ...stops],
-                ] as never,
+                "fill-color": fillColor(fixedStops),
                 "fill-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 1, 0.82],
                 "fill-color-transition": { duration: 240, delay: 0 },
               },
@@ -89,7 +107,7 @@ export function choroplethContribution(o: ChoroplethOptions): MapContribution<Ch
               id: LINES,
               type: "line",
               source: SRC,
-              minzoom: 9,
+              minzoom: object === "cantons" ? 6 : 9,
               layout: { visibility: "none" },
               paint: { "line-color": ground.paper, "line-width": 0.5, "line-opacity": 0.7 },
             },
@@ -111,6 +129,7 @@ export function choroplethContribution(o: ChoroplethOptions): MapContribution<Ch
           );
           loaded = true;
           if (pending) apply(map, pending);
+          if (pendingStops) map.setPaintProperty(FILL, "fill-color", fillColor(pendingStops));
           show(map, FILL, visible);
           show(map, LINES, visible);
           show(map, CANTONS, visible);
@@ -120,8 +139,17 @@ export function choroplethContribution(o: ChoroplethOptions): MapContribution<Ch
         });
     },
     update(map, state) {
-      pending = state;
-      if (loaded) apply(map, state);
+      const u: ChoroplethUpdate =
+        "cells" in state && typeof state["cells"] === "object" && !("value" in state)
+          ? (state as ChoroplethUpdate)
+          : { cells: state as ChoroplethState };
+      pending = u.cells;
+      if (u.stops && u.stops.length >= 2) pendingStops = u.stops.flatMap(([v, c]) => [v, c]);
+      if (loaded) {
+        apply(map, u.cells);
+        if (pendingStops && map.getLayer(FILL))
+          map.setPaintProperty(FILL, "fill-color", fillColor(pendingStops));
+      }
     },
     setPresence(map, presence) {
       const on = presence === "full";

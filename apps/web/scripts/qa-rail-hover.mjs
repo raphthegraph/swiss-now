@@ -158,6 +158,52 @@ const hazardsOk = hazCounts.fire >= 10 && hazCounts.fireVisible === "visible" &&
 console.log("hazards fire regions/snow:", hazCounts.fire, hazCounts.snow, hazCounts.fireVisible, "| strip:", hazStrip.replace(/\n/g, " | ").slice(0, 90), "| ok:", hazardsOk);
 await page.screenshot({ path: "/tmp/sn/qa-hazards.png" });
 
+// STATISTICS: population choropleth (quantile stops), charts, period timeline; tourism by canton
+await page.getByRole("button", { name: "Population" }).click();
+await page.locator(".legend--ramp").waitFor({ timeout: 60_000 });
+await page.waitForFunction(
+  () => {
+    const m = window.__swissNowMap;
+    if (!m || !m.getSource("stats-muni-municipalities")) return false;
+    const fs = m.querySourceFeatures("stats-muni-municipalities");
+    return fs.length > 100 && fs.some((f) => typeof m.getFeatureState({ source: "stats-muni-municipalities", id: f.id }).value === "number");
+  },
+  null,
+  { timeout: 90_000 },
+);
+const popFilled = await page.evaluate(() => {
+  const m = window.__swissNowMap;
+  const seen = new Set();
+  let n = 0;
+  for (const f of m.querySourceFeatures("stats-muni-municipalities")) {
+    if (seen.has(f.id)) continue;
+    seen.add(f.id);
+    if (typeof m.getFeatureState({ source: "stats-muni-municipalities", id: f.id }).value === "number") n++;
+  }
+  return n;
+});
+const popStrip = await page.locator(".strip").innerText();
+await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Charts$/i }).click();
+await page.locator(".charts-view svg.plot").first().waitFor({ timeout: 30_000 });
+const popChart = await page.locator(".charts-view svg.plot").count();
+await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Timeline$/i }).click();
+await page.locator(".scrubber--votes .scrubber__play").first().waitFor({ timeout: 20_000 });
+await page.locator(".scrubber--votes .scrubber__play").first().click();
+await page.waitForTimeout(600);
+const popT = new URL(page.url()).searchParams.get("t");
+await page.getByRole("button", { name: "Tourism" }).click();
+await page.waitForFunction(
+  () => {
+    const m = window.__swissNowMap;
+    return m && m.getSource("stats-canton-municipalities") && m.getLayoutProperty("stats-canton-fill", "visibility") === "visible";
+  },
+  null,
+  { timeout: 60_000 },
+);
+const statsOk = popFilled > 1500 && /switzerland/i.test(popStrip) && popChart >= 1 && popT === "2024";
+console.log("stats population filled:", popFilled, "| strip:", popStrip.replace(/\n/g, " | ").slice(0, 70), "| charts:", popChart, "| timeline t:", popT, "| ok:", statsOk);
+await page.screenshot({ path: "/tmp/sn/qa-stats.png" });
+
 // POLITICS: choropleth from the geo spine with feature-state values, hover card, vote timeline
 await page.getByRole("button", { name: "Politics" }).click();
 await page.locator(".legend--ramp").waitFor({ timeout: 60_000 });
@@ -271,7 +317,8 @@ process.exit(
   energyOk &&
   eventsOk &&
   airOk &&
-  hazardsOk
+  hazardsOk &&
+  statsOk
     ? 0
     : 1,
 );

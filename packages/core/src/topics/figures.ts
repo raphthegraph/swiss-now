@@ -9,6 +9,7 @@ import type { EnergyState } from "../state/layers";
 import type { EventsState } from "../state/events";
 import type { AirState } from "../state/layers";
 import type { HazardsState } from "../state/hazards";
+import { latestValues, type IndicatorSeries } from "../state/stats";
 import { currentDelay } from "../data-sources/transit/rail-state";
 import type { TopicId } from "./spec";
 
@@ -34,6 +35,10 @@ export interface TopicStates {
   events?: EventsState | undefined;
   air?: AirState | undefined;
   hazards?: HazardsState | undefined;
+  /** the statistics topic's indicator on the map, its selected period and a name lookup */
+  stats?:
+    | { series: IndicatorSeries; period?: string | undefined; nameOf: (key: string) => string }
+    | undefined;
   /** the vote currently shown (latest or the timeline selection) */
   vote?: VoteResult | undefined;
 }
@@ -429,6 +434,58 @@ export function hazardsFigures(
   return [...out, ...quakeFigures(q, nowMs).slice(0, 2)];
 }
 
+export function statsFigures(st: TopicStates["stats"]): Figure[] {
+  if (!st) return [];
+  const { series, nameOf } = st;
+  const pi = st.period ? series.periods.indexOf(st.period) : -1;
+  const vals =
+    pi >= 0
+      ? Object.fromEntries(
+          Object.entries(series.values).flatMap(([k, arr]) =>
+            typeof arr[pi] === "number" ? [[k, arr[pi] as number]] : [],
+          ),
+        )
+      : latestValues(series).values;
+  const period = pi >= 0 ? st.period! : latestValues(series).period;
+  const label = series.meta.label.en ?? series.meta.label.de;
+  const out: Figure[] = [];
+  const unit = series.meta.unit || undefined;
+  if (typeof vals["CH"] === "number")
+    out.push(
+      fig("national", `${label}, Switzerland`, vals["CH"], series.meta.decimals, {
+        ...(unit ? { unit } : {}),
+        where: `${period} · ${series.meta.attribution}`,
+      }),
+    );
+  const places = Object.entries(vals).filter(([k]) => k !== "CH");
+  const top = places.sort((a, b) => b[1] - a[1])[0];
+  if (top)
+    out.push(
+      fig("top", "Highest", top[1], series.meta.decimals, {
+        ...(unit ? { unit } : {}),
+        where: nameOf(top[0]),
+      }),
+    );
+  const low = places[places.length - 1];
+  if (low && places.length > 2)
+    out.push(
+      fig("low", "Lowest", low[1], series.meta.decimals, {
+        ...(unit ? { unit } : {}),
+        where: nameOf(low[0]),
+      }),
+    );
+  out.push(
+    fig(
+      "count",
+      series.meta.geoLevel === "canton" ? "Cantons" : "Municipalities",
+      places.length,
+      0,
+      { where: `with a value for ${period}` },
+    ),
+  );
+  return out;
+}
+
 /** Figures for a topic; NOW composes the leads of its contributors. */
 export function figuresFor(topic: TopicId, s: TopicStates, nowMs = Date.now()): Figure[] {
   switch (topic) {
@@ -442,6 +499,11 @@ export function figuresFor(topic: TopicId, s: TopicStates, nowMs = Date.now()): 
       return hazardsFigures(s.hazards, s.seismic, nowMs);
     case "air":
       return airFigures(s.air);
+    case "population":
+    case "housing":
+    case "economy":
+    case "tourism":
+      return statsFigures(s.stats);
     case "politics":
       return politicsFigures(s.politics, s.vote, nowMs);
     case "energy":

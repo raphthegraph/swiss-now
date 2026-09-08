@@ -14,7 +14,7 @@ export interface ChoroplethHoverProps {
   canton: string;
   value: number | null;
   turnout?: number | null;
-  choropleth: { label: string; unit: string; source: string };
+  choropleth: { label: string; unit: string; source: string; decimals?: number };
 }
 
 export interface Hovered {
@@ -145,7 +145,9 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
           {c.name} <span className="label">{c.canton}</span>
         </div>
         <div className="hover-card__value tnum">
-          {c.value === null ? "—" : `${formatNumber(c.value, 1)} ${c.choropleth.unit}`}
+          {c.value === null
+            ? "—"
+            : `${formatNumber(c.value, c.choropleth.decimals ?? 1)} ${c.choropleth.unit}`.trim()}
           <span className="label"> {c.choropleth.label}</span>
         </div>
         <div className="hover-card__meta tnum">

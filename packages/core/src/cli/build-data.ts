@@ -12,6 +12,14 @@ import { fetchVoteResult, listVotes } from "../data-sources/bfs-pxweb/votes";
 import { SWISSVOTES_URL, enrichVoteMeta, parseSwissvotes } from "../data-sources/swissvotes/index";
 import { fetchVoteDates } from "../data-sources/lindas/vote-dates";
 import { VoteIndex, VoteResult, type VoteMeta } from "../state/politics";
+import { IndicatorCatalog, IndicatorSeries } from "../state/stats";
+import {
+  buildJobs,
+  buildKofBarometer,
+  buildOvernightStays,
+  buildPopulation,
+  buildVacancy,
+} from "../data-sources/stats/index";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const args = Object.fromEntries(
@@ -67,11 +75,47 @@ async function votes() {
   );
 }
 
+async function stats() {
+  const vintage = Number(args["vintage"] ?? new Date().getFullYear());
+  const now = new Date();
+  const year = String(now.getFullYear());
+  const builders: [string, () => Promise<import("../state/stats").IndicatorSeries>][] = [
+    ["population", () => buildPopulation(now, vintage)],
+    ["vacancy-rate", () => buildVacancy(now, vintage)],
+    ["jobs-fte", () => buildJobs(now, vintage, String(now.getFullYear() - 2))],
+    ["overnight-stays", () => buildOvernightStays(now, [String(now.getFullYear() - 1), year])],
+    ["kof-barometer", () => buildKofBarometer(now)],
+  ];
+  const metas = [];
+  for (const [id, build] of builders) {
+    log(`building ${id}`);
+    try {
+      const s = IndicatorSeries.parse(await build());
+      write(join(outDir, "stats", `${id}.json`), s);
+      metas.push(s.meta);
+      log(
+        `  ${s.periods[0]} … ${s.periods[s.periods.length - 1]} · ${Object.keys(s.values).length} keys`,
+      );
+    } catch (e) {
+      console.error(`[build-data] ${id} failed: ${e instanceof Error ? e.message : String(e)}`);
+    }
+    await sleep(500);
+  }
+  write(
+    join(outDir, "stats", "index.json"),
+    IndicatorCatalog.parse({ schemaVersion: 1, generatedAt: now.toISOString(), indicators: metas }),
+  );
+  log(`${metas.length} indicators → ${join(outDir, "stats")}`);
+}
+
 switch (command) {
   case "votes":
     await votes();
     break;
+  case "stats":
+    await stats();
+    break;
   default:
-    console.error("usage: build-data votes [--out dir] [--sundays 4] [--vintage 2026]");
+    console.error("usage: build-data votes|stats [--out dir] [--sundays 4] [--vintage 2026]");
     process.exit(1);
 }

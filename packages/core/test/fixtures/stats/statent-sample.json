@@ -1,0 +1,53 @@
+{
+  "class": "dataset",
+  "label": "Arbeitsstätten und Beschäftigte nach Jahr, Gemeinde, Wirtschaftssektor und Beobachtungseinheit",
+  "source": "BFS - Statistik der Unternehmensstruktur - © BFS",
+  "updated": "2013-11-15T08:15:00Z",
+  "id": ["Jahr", "Gemeinde", "Wirtschaftssektor", "Beobachtungseinheit"],
+  "size": [1, 5, 3, 1],
+  "dimension": {
+    "Jahr": {
+      "extension": { "show": "value" },
+      "label": "Jahr",
+      "category": { "index": { "2024": 0 }, "label": { "2024": "2024" } }
+    },
+    "Gemeinde": {
+      "extension": { "show": "value" },
+      "label": "Gemeinde",
+      "category": {
+        "index": { "99999": 0, "1": 1, "261": 2, "351": 3, "5586": 4 },
+        "label": {
+          "99999": "Schweiz",
+          "1": "1 Aeugst am Albis",
+          "261": "261 Zürich",
+          "351": "351 Bern",
+          "5586": "5586 Lausanne"
+        }
+      }
+    },
+    "Wirtschaftssektor": {
+      "extension": { "show": "value" },
+      "label": "Wirtschaftssektor",
+      "category": {
+        "index": { "999": 0, "2": 1, "3": 2 },
+        "label": {
+          "999": "Wirtschaftssektor - Total",
+          "2": "Sekundärer Sektor",
+          "3": "Tertiärer Sektor"
+        }
+      }
+    },
+    "Beobachtungseinheit": {
+      "extension": { "show": "value" },
+      "label": "Beobachtungseinheit",
+      "category": { "index": { "5": 0 }, "label": { "5": "Vollzeitäquivalente" } }
+    }
+  },
+  "value": [
+    4404860, 1017259, 3283243, 285, 12, 249, 420208, 26469, 393588, 151595, 13015, 138337, 102657,
+    6020, 96546
+  ],
+  "role": { "time": ["Jahr"] },
+  "version": "2.0",
+  "extension": { "px": { "decimals": 0 } }
+}

@@ -23,10 +23,11 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @swiss-now/core build-data votes -- --sundays 4 --vintage 2026
+      - run: pnpm --filter @swiss-now/core build-data stats -- --vintage 2026
       - run: pnpm --filter @swiss-now/core test
       - name: Commit refreshed data
         run: |
           git config user.name "swiss-now-data"
           git config user.email "data@users.noreply.github.com"
           git add apps/web/public/data
-          if git diff --cached --quiet; then echo "no changes"; else git commit -m "data: refresh politics ($(date -u +%F))" && git push; fi
+          if git diff --cached --quiet; then echo "no changes"; else git commit -m "data: refresh statistics ($(date -u +%F))" && git push; fi

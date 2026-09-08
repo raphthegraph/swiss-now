@@ -33,7 +33,10 @@
     "./data-sources/slf": "./src/data-sources/slf/index.ts",
     "./data-sources/bafu-fire": "./src/data-sources/bafu-fire/index.ts",
     "./data-sources/meteoswiss/hail": "./src/data-sources/meteoswiss/hail/index.ts",
-    "./data-sources/hazards": "./src/data-sources/hazards/index.ts"
+    "./data-sources/hazards": "./src/data-sources/hazards/index.ts",
+    "./data-sources/bfs-sdmx": "./src/data-sources/bfs-sdmx/index.ts",
+    "./data-sources/kof": "./src/data-sources/kof/index.ts",
+    "./data-sources/stats": "./src/data-sources/stats/index.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

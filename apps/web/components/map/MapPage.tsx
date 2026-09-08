@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Map as MapLibreMap } from "maplibre-gl";
 import type {
+  GeoRegister as GeoRegisterType,
   AirState,
   EnergyState,
   EventsState,
@@ -19,6 +20,13 @@ import { VoteResult as VoteResultSchema } from "@swiss-now/core/state";
 import { figuresFor, presenceFor, type TopicId } from "@swiss-now/core/topics";
 import { choroplethContribution } from "@/lib/map/contributions/choropleth";
 import { airContribution } from "@/lib/map/contributions/air";
+import { useIndicator, useIndicatorCatalog } from "@/lib/use-indicator";
+import { quantileStops, sequentialRamp } from "@/lib/map/quantile-stops";
+import { GeoRegister, latestValues } from "@swiss-now/core/state";
+import { layerAccent } from "@swiss-now/motion/tokens";
+import { DynamicRampLegend } from "../hud/DynamicRampLegend";
+import { PeriodScrubber } from "../hud/PeriodScrubber";
+import { TOPICS } from "@swiss-now/core/topics";
 import { hazardsContribution } from "@/lib/map/contributions/hazards";
 import { dataUrl } from "@/lib/data-url";
 import { formatDate } from "@/lib/format";
@@ -60,7 +68,38 @@ function presenceOf(topic: TopicId): LayerPresence {
     events: presenceFor(topic, "events"),
     air: presenceFor(topic, "air"),
     hazards: presenceFor(topic, "hazards"),
+    stats: presenceFor(topic, "stats"),
   };
+}
+
+const STATS_TOPICS = new Set<TopicId>(["population", "housing", "economy", "tourism"]);
+/** the indicator each statistics topic puts on the map */
+const MAP_INDICATOR: Partial<Record<TopicId, string>> = {
+  population: "population",
+  housing: "vacancy-rate",
+  economy: "jobs-fte",
+  tourism: "overnight-stays",
+};
+const accentOf = (t: TopicId) =>
+  layerAccent[TOPICS[t].accent as keyof typeof layerAccent] ?? layerAccent.population;
+
+let registerPromise: Promise<GeoRegisterType | undefined> | undefined;
+/** The municipality register (names) for figures and charts; fetched once when a statistics topic opens. */
+function useGeoRegister(enabled: boolean): GeoRegisterType | undefined {
+  const [reg, setReg] = useState<GeoRegisterType | undefined>(undefined);
+  useEffect(() => {
+    if (!enabled) return;
+    registerPromise ??= fetch("/geo/municipalities-2026.json")
+      .then((r) => (r.ok ? r.json() : undefined))
+      .then((j: unknown) => (j ? GeoRegister.parse(j) : undefined))
+      .catch(() => undefined);
+    let cancelled = false;
+    void registerPromise.then((r) => !cancelled && setReg(r));
+    return () => {
+      cancelled = true;
+    };
+  }, [enabled]);
+  return reg;
 }
 
 /** The vote to show: the timeline selection when it is in the index, else the latest Sunday's first. */
@@ -153,6 +192,90 @@ export function MapPage({
     presence.hazards !== "off",
   );
   const [airLayer] = useState(() => airContribution(undefined));
+  // statistics: the catalogue, the topic's map indicator, the register for names, quantile stops
+  const isStats = STATS_TOPICS.has(topic);
+  const catalog = useIndicatorCatalog(isStats);
+  const mapIndicatorId = isStats ? MAP_INDICATOR[topic] : undefined;
+  const indicator = useIndicator(
+    mapIndicatorId && catalog?.indicators.some((i) => i.id === mapIndicatorId)
+      ? mapIndicatorId
+      : undefined,
+  );
+  const national = useIndicator(
+    topic === "economy" && catalog?.indicators.some((i) => i.id === "kof-barometer")
+      ? "kof-barometer"
+      : undefined,
+  );
+  const register = useGeoRegister(isStats);
+  const period = indicator && view.t && indicator.periods.includes(view.t) ? view.t : undefined;
+  // hover extras are read at hover time: mutate the one object the contributions hold
+  const [statsHover] = useState<{
+    choropleth: { label: string; unit: string; source: string; decimals: number };
+  }>(() => ({
+    choropleth: { label: "", unit: "", source: "", decimals: 0 },
+  }));
+  useEffect(() => {
+    if (!indicator) return;
+    statsHover.choropleth = {
+      label: indicator.meta.label.en ?? indicator.meta.label.de,
+      unit: indicator.meta.unit,
+      source: indicator.meta.attribution,
+      decimals: indicator.meta.decimals,
+    };
+  }, [indicator, statsHover]);
+  const [statsMuni] = useState(() =>
+    choroplethContribution({
+      id: "stats-muni",
+      layer: "stats",
+      topoUrl: "/geo/ch-2026.topo.json",
+      object: "municipalities",
+      scale: "dynamic",
+      hoverExtras: statsHover,
+    }),
+  );
+  const [statsCanton] = useState(() =>
+    choroplethContribution({
+      id: "stats-canton",
+      layer: "stats",
+      topoUrl: "/geo/ch-2026.topo.json",
+      object: "cantons",
+      scale: "dynamic",
+      hoverExtras: statsHover,
+    }),
+  );
+  const statsUpdate = useMemo(() => {
+    if (!indicator) return undefined;
+    const pi = period ? indicator.periods.indexOf(period) : -1;
+    const vals =
+      pi >= 0
+        ? Object.fromEntries(
+            Object.entries(indicator.values).flatMap(([k, arr]) =>
+              typeof arr[pi] === "number" ? [[k, arr[pi] as number]] : [],
+            ),
+          )
+        : latestValues(indicator).values;
+    const cells = Object.fromEntries(
+      Object.entries(vals)
+        .filter(([k]) => k !== "CH")
+        .map(([k, v]) => [k, { value: v }]),
+    );
+    const stops = quantileStops(
+      Object.values(cells).map((c) => c.value),
+      sequentialRamp(accentOf(topic)),
+    );
+    return { cells, stops, level: indicator.meta.geoLevel };
+  }, [indicator, period, topic]);
+  const nameOf = useMemo(
+    () => (key: string) =>
+      register?.municipalities.find((m) => String(m.bfs) === key)?.name ??
+      register?.cantons[key]?.name ??
+      key,
+    [register],
+  );
+  const statsFig = useMemo(
+    () => (indicator ? { series: indicator, period, nameOf } : undefined),
+    [indicator, period, nameOf],
+  );
   const [hazardsLayer] = useState(() => hazardsContribution(undefined));
   const voteId =
     view.t && politics?.index.some((v) => v.id === view.t) ? view.t : politics?.latest[0]?.meta.id;
@@ -183,8 +306,26 @@ export function MapPage({
       { contribution: choropleth, state: choroState },
       { contribution: airLayer, state: air },
       { contribution: hazardsLayer, state: hazards },
+      {
+        contribution: statsMuni,
+        state: statsUpdate?.level === "municipality" ? statsUpdate : { cells: {} },
+      },
+      {
+        contribution: statsCanton,
+        state: statsUpdate?.level === "canton" ? statsUpdate : { cells: {} },
+      },
     ],
-    [choropleth, choroState, airLayer, air, hazardsLayer, hazards],
+    [
+      choropleth,
+      choroState,
+      airLayer,
+      air,
+      hazardsLayer,
+      hazards,
+      statsMuni,
+      statsCanton,
+      statsUpdate,
+    ],
   );
   const [quakeHover, setQuakeHover] = useState<QuakeHover | null>(null);
   const [trainHover, setTrainHover] = useState<TrainHover | null>(null);
@@ -222,13 +363,32 @@ export function MapPage({
         events,
         air,
         hazards,
+        stats: statsFig,
       }),
-    [topic, weather, hydrology, rail, seismic, politics, vote, energy, events, air, hazards],
+    [
+      topic,
+      weather,
+      hydrology,
+      rail,
+      seismic,
+      politics,
+      vote,
+      energy,
+      events,
+      air,
+      hazards,
+      statsFig,
+    ],
   );
   const voteStatus =
     topic === "politics" && vote ? (
       <span className="label tnum">
         Vote of {formatDate(vote.meta.date)} · {vote.status} · Source: BFS
+      </span>
+    ) : isStats && indicator ? (
+      <span className="label tnum">
+        {indicator.meta.label.en ?? indicator.meta.label.de} ·{" "}
+        {period ?? latestValues(indicator).period} · {indicator.meta.attribution}
       </span>
     ) : undefined;
   return (
@@ -259,7 +419,17 @@ export function MapPage({
           mode={presence.events === "full" ? "full" : "quiet"}
         />
       ) : null}
-      {mode === "charts" ? <ChartsView topic={topic} energy={energy} /> : null}
+      {mode === "charts" ? (
+        <ChartsView
+          topic={topic}
+          energy={energy}
+          stats={
+            isStats
+              ? { series: indicator, national, register, accent: accentOf(topic), period }
+              : undefined
+          }
+        />
+      ) : null}
       {presence.rail !== "off" ? (
         <TrainLayer
           map={map}
@@ -317,9 +487,24 @@ export function MapPage({
             <RampLegend scale="airIndex" label="Air index" />
           ) : topic === "hazards" ? (
             <RampLegend scale="dangerLevel" label="Danger level" />
+          ) : isStats && statsUpdate && indicator ? (
+            <DynamicRampLegend
+              stops={statsUpdate.stops}
+              label={indicator.meta.label.en ?? indicator.meta.label.de}
+              unit={indicator.meta.unit ? ` ${indicator.meta.unit}` : ""}
+              decimals={indicator.meta.decimals}
+            />
           ) : null
         }
       >
+        {isStats && mode === "timeline" && indicator ? (
+          <PeriodScrubber
+            periods={indicator.periods}
+            selected={period ?? latestValues(indicator).period}
+            onChange={setTime}
+            label={indicator.meta.periodKind === "month" ? "Month" : "Year"}
+          />
+        ) : null}
         {topic === "politics" && mode === "timeline" && politics && voteId ? (
           <VoteScrubber votes={politics.index} selectedId={voteId} onChange={setTime} />
         ) : null}

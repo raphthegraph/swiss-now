@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-08T16:35:43.528Z",
+  "indicators": [
+    {
+      "id": "population",
+      "topic": "population",
+      "label": {
+        "de": "Ständige Wohnbevölkerung",
+        "fr": "Population résidante permanente",
+        "it": "Popolazione residente permanente",
+        "en": "Permanent resident population"
+      },
+      "unit": "",
+      "decimals": 0,
+      "geoLevel": "municipality",
+      "periodKind": "year",
+      "source": "bfs-sdmx",
+      "cube": "CH1.STATPOP/DF_STATPOP_GEO_SEX_ZIVL_AGE5",
+      "attribution": "Source: BFS STATPOP",
+      "publishedAt": "2026-09-08T16:35:43.528Z",
+      "geoVintage": 2026,
+      "scale": "sequential"
+    },
+    {
+      "id": "vacancy-rate",
+      "topic": "housing",
+      "label": {
+        "de": "Leerwohnungsziffer",
+        "fr": "Taux de logements vacants",
+        "it": "Tasso di abitazioni vuote",
+        "en": "Vacancy rate"
+      },
+      "unit": "%",
+      "decimals": 2,
+      "geoLevel": "municipality",
+      "periodKind": "year",
+      "source": "bfs-sdmx",
+      "cube": "CH1.LWZ/DF_LWZ_1",
+      "attribution": "Source: BFS",
+      "publishedAt": "2026-09-08T16:35:43.528Z",
+      "geoVintage": 2026,
+      "scale": "sequential",
+      "higherIsBetter": true
+    },
+    {
+      "id": "jobs-fte",
+      "topic": "economy",
+      "label": {
+        "de": "Vollzeitäquivalente",
+        "fr": "Équivalents plein temps",
+        "it": "Equivalenti a tempo pieno",
+        "en": "Full-time-equivalent jobs"
+      },
+      "unit": "",
+      "decimals": 0,
+      "geoLevel": "municipality",
+      "periodKind": "year",
+      "source": "bfs-pxweb",
+      "cube": "px-x-0602010000_102",
+      "attribution": "Source: BFS STATENT",
+      "publishedAt": "2026-09-08T16:35:43.528Z",
+      "geoVintage": 2026,
+      "scale": "sequential"
+    },
+    {
+      "id": "overnight-stays",
+      "topic": "tourism",
+      "label": {
+        "de": "Hotellogiernächte",
+        "fr": "Nuitées hôtelières",
+        "it": "Pernottamenti alberghieri",
+        "en": "Hotel overnight stays"
+      },
+      "unit": "",
+      "decimals": 0,
+      "geoLevel": "canton",
+      "periodKind": "month",
+      "source": "bfs-pxweb",
+      "cube": "px-x-1003020000_102",
+      "attribution": "Source: BFS HESTA",
+      "publishedAt": "2026-09-08T16:35:43.528Z",
+      "scale": "sequential"
+    },
+    {
+      "id": "kof-barometer",
+      "topic": "economy",
+      "label": {
+        "de": "KOF Konjunkturbarometer",
+        "fr": "Baromètre conjoncturel KOF",
+        "it": "Barometro congiunturale KOF",
+        "en": "KOF Economic Barometer"
+      },
+      "unit": "",
+      "decimals": 1,
+      "geoLevel": "country",
+      "periodKind": "month",
+      "source": "kof",
+      "cube": "ch.kof.barometer",
+      "attribution": "Source: KOF ETH Zurich",
+      "publishedAt": "2026-09-08T16:35:43.528Z",
+      "scale": "sequential"
+    }
+  ]
+}

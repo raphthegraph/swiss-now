@@ -8,3 +8,4 @@ export * from "./geo";
 export * from "./politics";
 export * from "./events";
 export * from "./hazards";
+export * from "./stats";
