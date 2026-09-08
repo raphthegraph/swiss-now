@@ -10,6 +10,8 @@ import { layerAccent, period } from "@swiss-now/motion/tokens";
 import { RailPathStore } from "@/lib/map/rail-paths";
 
 const DELAY_PULSE_SECONDS = 180;
+const TRAIL_SAMPLES = 3;
+const TRAIL_STEP_MS = 20_000;
 const HIT_RADIUS_PX = 12;
 
 export interface TrainHover {
@@ -122,19 +124,43 @@ export function TrainLayer({ map, rail, mode, onHover, onProgress }: TrainLayerP
           ctx.globalAlpha = 0.55 * env;
           ctx.stroke();
         }
+        // where the train was over the last minute: a fading trail, visible once zoomed in
+        if (!quiet) {
+          ctx.lineCap = "round";
+          ctx.lineWidth = Math.max(1, thick * 0.5);
+          let from = pt;
+          for (let k = 1; k <= TRAIL_SAMPLES; k++) {
+            const past = positionAlongTrip(trip, path, t - k * TRAIL_STEP_MS);
+            if (!past.active) break;
+            const to = map.project(past.lonLat);
+            ctx.globalAlpha = 0.35 * (1 - (k - 1) / TRAIL_SAMPLES);
+            ctx.strokeStyle = layerAccent.rail;
+            ctx.beginPath();
+            ctx.moveTo(from.x, from.y);
+            ctx.lineTo(to.x, to.y);
+            ctx.stroke();
+            from = to;
+          }
+        }
         // the train: a short capsule along the bearing, with a paper halo so it stays visible on the ground
         ctx.globalAlpha = quiet && !delayed ? 0.45 : 0.95;
         const a = ((p.bearing - 90) * Math.PI) / 180;
         ctx.save();
         ctx.translate(pt.x, pt.y);
         ctx.rotate(a);
-        ctx.fillStyle = "rgba(244,243,239,0.9)";
+        ctx.fillStyle = "rgba(250,250,248,0.9)";
         ctx.beginPath();
         ctx.roundRect(-len / 2 - 1, -thick / 2 - 1, len + 2, thick + 2, thick);
         ctx.fill();
         ctx.fillStyle = delayed ? delayColor(p.delaySeconds) : layerAccent.rail;
         ctx.beginPath();
         ctx.roundRect(-len / 2, -thick / 2, len, thick, thick / 2);
+        ctx.fill();
+        // a light dot slides from the back to the front of the capsule: the train is moving this way
+        const phase = (nowMs / 1400) % 1;
+        ctx.fillStyle = "rgba(255,255,255,0.85)";
+        ctx.beginPath();
+        ctx.arc(-len / 2 + thick / 2 + (len - thick) * phase, 0, thick * 0.28, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }

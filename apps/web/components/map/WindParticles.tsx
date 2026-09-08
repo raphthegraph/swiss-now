@@ -12,7 +12,7 @@ import {
   type WindSample,
 } from "@swiss-now/motion/math";
 import { windParticleDensity } from "@swiss-now/motion/scales";
-import { layerAccent } from "@swiss-now/motion/tokens";
+import { ground, layerAccent } from "@swiss-now/motion/tokens";
 import { SWITZERLAND_BBOX } from "@swiss-now/motion/specs";
 
 const MAX_PARTICLES_DESKTOP = 3500;
@@ -45,9 +45,12 @@ export function windSamplesFromState(state: WeatherState): WindSample[] {
 export function WindParticles({
   map,
   weather,
+  emphasis = "quiet",
 }: {
   map: MapLibreMap | null;
   weather: WeatherState;
+  /** full: the AIR and WEATHER topics show the wind itself (more particles, longer, darker trails) */
+  emphasis?: "quiet" | "full";
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gridRef = useRef<WindGrid | null>(null);
@@ -66,7 +69,11 @@ export function WindParticles({
     if (!ctx) return;
 
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    const maxParticles = isMobile ? MAX_PARTICLES_MOBILE : MAX_PARTICLES_DESKTOP;
+    const full = emphasis === "full";
+    const maxParticles = Math.round(
+      (isMobile ? MAX_PARTICLES_MOBILE : MAX_PARTICLES_DESKTOP) * (full ? 1.6 : 1),
+    );
+    const trailFade = full ? 0.955 : TRAIL_FADE;
     const rng = seededRandom(Date.now());
     let particles = createParticles(maxParticles, SWITZERLAND_BBOX, rng() * 1e9);
     let prev = new Float32Array(particles.length);
@@ -102,7 +109,7 @@ export function WindParticles({
       // fade the previous frame → trails
       ctx.save();
       ctx.globalCompositeOperation = "destination-in";
-      ctx.fillStyle = `rgba(0,0,0,${TRAIL_FADE})`;
+      ctx.fillStyle = `rgba(0,0,0,${trailFade})`;
       ctx.fillRect(0, 0, w, h);
       ctx.restore();
 
@@ -113,10 +120,10 @@ export function WindParticles({
         timeScale: 700 * Math.pow(2, 7 - map.getZoom()),
       });
 
-      ctx.lineWidth = 1.1;
+      ctx.lineWidth = full ? 1.5 : 1.1;
       ctx.lineCap = "round";
-      ctx.strokeStyle = layerAccent.wind;
-      ctx.globalAlpha = 0.55;
+      ctx.strokeStyle = full ? ground.ink : layerAccent.wind;
+      ctx.globalAlpha = full ? 0.7 : 0.55;
       ctx.beginPath();
       for (let i = 0; i < active; i += 3) {
         if (particles[i + 2]! === 0) continue; // just respawned: no segment
@@ -141,7 +148,7 @@ export function WindParticles({
       map.off("movestart", clear);
       map.off("move", clear);
     };
-  }, [map]);
+  }, [map, emphasis]);
 
   return <canvas ref={canvasRef} className="wind-canvas" aria-hidden="true" />;
 }

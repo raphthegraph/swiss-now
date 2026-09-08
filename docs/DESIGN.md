@@ -26,18 +26,17 @@ uses the paper value as its background.
 
 Inter for the interface (400/500/600), loaded through `next/font` on the web and
 `@remotion/google-fonts` in the video. Labels are 12 px uppercase with 0.12 em tracking; figures
-are 28 px semibold with tabular figures; the unit sits at half size in graphite. The wordmark is
-the only place Montserrat appears: `SWISS` bold, `NOW` light, 0.08 em tracking
-(`components/brand/Wordmark.tsx`).
+are 28 px semibold with tabular figures; the unit sits at half size in graphite.
 
-## The mark
+## Wordmark and mark
 
-`components/brand/Mark.tsx` draws Switzerland's real border as six nested contour lines that
-shrink towards a red dot near the country's centre. The path data is generated from the geo spine
-by `packages/geo-build/scripts/build-mark.mjs` (cantons merged, simplified, smoothed, then scaled
-towards the focus point so the rings never cross) into `apps/web/lib/brand/mark.ts`,
-`public/brand/mark.svg` and the favicon `app/icon.svg`. Re-run the script when the boundary
-vintage changes.
+Both are the owner's artwork, kept as transparent PNGs trimmed to their ink: `public/brand/
+wordmark.png` (1200 × 181, shown 22 px tall in the top bar) and `public/brand/mark.png` (640 px, the
+contour map with the red dot, shown 72 px in the bottom bar and as the favicon `app/icon.png`).
+`components/brand/{Wordmark,Mark}.tsx` render them. A generated SVG twin of the mark
+(`packages/geo-build/scripts/build-mark.mjs` → `public/brand/mark.svg`, `lib/brand/mark.ts`) is
+built from the real border for the video and for any place that needs a recolourable vector.
+Montserrat stays loaded as `--sn-font-brand` for text that should sit next to the wordmark.
 
 ## Layout
 
@@ -77,6 +76,17 @@ The same components in one column: top bar (48 px, no home control), map, the to
 horizontal scroll, sources hidden) and a thin tools row (languages, info). The mode switcher becomes
 a full-width pill at the top of the map; zoom and locate shrink to 36 px. The bottom takes about
 a fifth of the screen. A tap opens the card a hover would; a tap on open water closes it.
+
+## Motion on the map
+
+- **Trains** move at their real interpolated speed, so at national zoom they barely shift; a light
+  dot slides along each capsule in the direction of travel, and a fading trail of the last minute
+  appears as you zoom in.
+- **Rain** drifts: outside the weather timeline the map cycles through the radar frames of the last
+  40 minutes (650 ms per frame, a pause on the newest), so the rain field is never a still image.
+- **Wind** particles are quiet on NOW and full on WEATHER and AIR (more particles, longer and darker
+  trails); AIR shows the wind because it carries the pollutants.
+- Everything above stops under the reduced-motion preference.
 
 ## Motion and access
 

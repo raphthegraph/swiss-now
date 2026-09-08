@@ -10,7 +10,12 @@ const PLAYBACK_FPS = 4;
  * the API) and are exposed oldest → newest. While the viewer sits on the latest frame, new data
  * keeps them on the latest; a manual scrub position is preserved across polls.
  */
-export function useRadarTimeline(weather: WeatherState) {
+/** Frames the ambient loop cycles through when nobody scrubs: the last 40 minutes. */
+const AMBIENT_FRAMES = 8;
+const AMBIENT_STEP_MS = 650;
+const AMBIENT_DWELL_MS = 1800;
+
+export function useRadarTimeline(weather: WeatherState, opts: { ambient?: boolean } = {}) {
   const frames = useMemo(
     () =>
       weather.fields
@@ -37,6 +42,27 @@ export function useRadarTimeline(weather: WeatherState) {
     }, 1000 / PLAYBACK_FPS);
     return () => clearInterval(t);
   }, [playing, frames.length]);
+
+  // ambient motion: the rain of the last 40 minutes drifts across the map, then rests on now
+  useEffect(() => {
+    if (!opts.ambient || playing || frames.length < 3) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let timer = 0;
+    const first = Math.max(0, frames.length - AMBIENT_FRAMES);
+    const tick = () => {
+      if (!followLatest.current) return;
+      setIndex((i) => {
+        const next = i >= frames.length - 1 ? first : i + 1;
+        timer = window.setTimeout(
+          tick,
+          next === frames.length - 1 ? AMBIENT_DWELL_MS : AMBIENT_STEP_MS,
+        );
+        return next;
+      });
+    };
+    timer = window.setTimeout(tick, AMBIENT_DWELL_MS);
+    return () => clearTimeout(timer);
+  }, [opts.ambient, playing, frames.length]);
 
   // warm the browser cache so scrubbing is instant (frames are immutable and CDN-cached)
   useEffect(() => {

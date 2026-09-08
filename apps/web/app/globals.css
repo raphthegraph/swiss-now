@@ -42,23 +42,13 @@ button {
 }
 /* ---- brand ---- */
 .wordmark {
-  font-family: var(--sn-font-brand);
-  font-size: 20px;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  color: var(--sn-ground-ink);
-  white-space: nowrap;
-}
-.wordmark__heavy {
-  font-weight: 700;
-}
-.wordmark__light {
-  font-weight: 300;
-  margin-left: 0.4em;
+  display: block;
+  height: 22px;
+  width: auto;
 }
 .mark {
   display: block;
-  color: var(--sn-ground-ink);
+  object-fit: contain;
 }
 /* ---- shared ---- */
 .freshness {
@@ -728,6 +718,58 @@ table.sources th {
 .scrubber--votes .scrubber__time {
   white-space: normal;
 }
+/* ---- vote menu (POLITICS, map mode) ---- */
+.vote-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--sn-space-4);
+  flex-wrap: wrap;
+}
+.vote-menu__field {
+  display: flex;
+  align-items: center;
+  gap: var(--sn-space-3);
+  min-width: 0;
+}
+.vote-menu__select {
+  font: inherit;
+  font-size: var(--sn-type-body-size);
+  color: var(--sn-ground-ink);
+  background: var(--sn-ground-paper);
+  border: 1px solid var(--sn-ground-mist);
+  border-radius: var(--sn-radius-control);
+  padding: 6px 32px 6px 10px;
+  max-width: min(520px, 70vw);
+  text-overflow: ellipsis;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%2364748B' stroke-width='1.5'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+.vote-menu__result {
+  font-size: var(--sn-type-caption-size);
+  color: var(--sn-ground-graphite);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sn-space-2);
+}
+.vote-menu__result strong {
+  color: var(--sn-ground-ink);
+  font-weight: 600;
+}
+.vote-menu__badge {
+  font-size: 10px;
+  letter-spacing: var(--sn-type-label-tracking);
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--sn-radius-pill);
+  background: var(--sn-ground-mist);
+  color: var(--sn-ground-ink);
+}
+.vote-menu__badge--yes {
+  background: #2e9e5b;
+  color: var(--sn-ground-surface);
+}
 /* ---- legends ---- */
 .legend {
   display: flex;
@@ -1092,7 +1134,7 @@ table.sources th {
     gap: var(--sn-space-3);
   }
   .wordmark {
-    font-size: 17px;
+    height: 18px;
   }
   .topbar__home {
     display: none;

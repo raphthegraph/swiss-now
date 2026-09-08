@@ -43,6 +43,7 @@ import { dataUrl } from "@/lib/data-url";
 import { formatDate } from "@/lib/format";
 import { RampLegend } from "../hud/RampLegend";
 import { VoteScrubber } from "../hud/VoteScrubber";
+import { VoteMenu } from "../hud/VoteMenu";
 import { FlowLayer } from "./FlowLayer";
 import { AircraftLayer } from "./AircraftLayer";
 import { EventMarkers } from "./EventMarkers";
@@ -421,9 +422,9 @@ export function MapPage({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [topic, setTopic, setMode, help]);
-  const radar = useRadarTimeline(weather);
-  // the radar timeline is the WEATHER topic's TIMELINE instrument; elsewhere the map shows the latest frame
+  // the radar timeline is the WEATHER topic's TIMELINE instrument; elsewhere the last 40 minutes drift by
   const radarOn = topic === "weather" && mode === "timeline";
+  const radar = useRadarTimeline(weather, { ambient: !radarOn && mode === "map" });
   const radarReset = radar.reset;
   useEffect(() => {
     if (!radarOn) radarReset();
@@ -576,6 +577,8 @@ export function MapPage({
     />
   ) : topic === "politics" && mode === "timeline" && politics && voteId ? (
     <VoteScrubber votes={politics.index} selectedId={voteId} onChange={setTime} />
+  ) : topic === "politics" && politics && voteId ? (
+    <VoteMenu votes={politics.index} selectedId={voteId} vote={vote} onChange={setTime} />
   ) : radarOn ? (
     <RadarScrubber
       frames={radar.frames}
@@ -628,7 +631,13 @@ export function MapPage({
             (window as unknown as { __swissNowMap?: MapLibreMap }).__swissNowMap = m;
           }}
         />
-        {presence.weather !== "off" ? <WindParticles map={map} weather={viewWeather} /> : null}
+        {presence.weather !== "off" || topic === "air" ? (
+          <WindParticles
+            map={map}
+            weather={viewWeather}
+            emphasis={topic === "air" || topic === "weather" ? "full" : "quiet"}
+          />
+        ) : null}
         {presence.energy !== "off" ? (
           <FlowLayer
             map={map}

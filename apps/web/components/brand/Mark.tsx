@@ -1,28 +1,18 @@
-import { MARK_DOT, MARK_DOT_R, MARK_PATHS, MARK_STROKE, MARK_VIEWBOX } from "@/lib/brand/mark";
-
-/** The contour mark: Switzerland's border as nested lines around a red dot; strokes in currentColor. */
+/* eslint-disable @next/next/no-img-element -- a static brand asset, no optimisation needed */
+/**
+ * The contour mark (owner's artwork, public/brand/mark.png): Switzerland's border as nested
+ * lines around a red dot. A generated SVG twin lives in public/brand/mark.svg for the video.
+ */
 export function Mark({ size = 48, className = "" }: { size?: number; className?: string }) {
   return (
-    <svg
+    <img
       className={`mark ${className}`.trim()}
+      src="/brand/mark.png"
+      alt=""
       width={size}
       height={size}
-      viewBox={MARK_VIEWBOX}
+      decoding="async"
       aria-hidden="true"
-      focusable="false"
-    >
-      <g
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={MARK_STROKE}
-        strokeLinejoin="round"
-        strokeLinecap="round"
-      >
-        {MARK_PATHS.map((d, i) => (
-          <path key={i} d={d} />
-        ))}
-      </g>
-      <circle cx={MARK_DOT[0]} cy={MARK_DOT[1]} r={MARK_DOT_R} fill="var(--sn-brand-swiss-red)" />
-    </svg>
+    />
   );
 }

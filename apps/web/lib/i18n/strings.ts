@@ -221,6 +221,8 @@ export const STRINGS = {
     "catalogo verificato, pubblicato ore dopo l'evento",
   ),
   yes: t("Ja", "yes", "oui", "sì"),
+  accepted: t("angenommen", "accepted", "acceptée", "accettata"),
+  rejected: t("abgelehnt", "rejected", "refusée", "respinta"),
   // charts
   loadingEnergy: t(
     "Energiedaten werden geladen…",

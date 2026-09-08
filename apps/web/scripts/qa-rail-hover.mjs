@@ -52,7 +52,9 @@ await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 90_000 });
 // IA: topics rail with groups, mode switcher, view state in the URL
 const railGroups = await page.locator("nav[aria-label='Topics'] .rail__group").allInnerTexts();
 const modeCount = await page.locator("nav[aria-label='View'] .modes__item").count();
-console.log("rail groups:", railGroups.join("/"), "| modes:", modeCount);
+const wordmarkOk = await page.locator("img.wordmark").first().evaluate((img) => img.complete && img.naturalWidth > 0);
+const markOk = await page.locator("img.mark").first().evaluate((img) => img.complete && img.naturalWidth > 0);
+console.log("rail groups:", railGroups.join("/"), "| modes:", modeCount, "| brand images:", wordmarkOk, markOk);
 const webgl = await page.evaluate(() => !!document.createElement("canvas").getContext("webgl2"));
 console.log("webgl2:", webgl, "canvas:", await page.locator("canvas.maplibregl-canvas").count());
 await page.getByRole("button", { name: "Rail" }).click();
@@ -296,6 +298,7 @@ const filled = await page.evaluate(() => {
   return { features: seen.size, filled: n };
 });
 const stripPolitics = await page.locator(".strip").innerText();
+const voteMenuOptions = await page.locator(".vote-menu__select option").count();
 const bern = await page.evaluate(() => {
   const m = window.__swissNowMap;
   const p = m.project([7.44, 46.95]);
@@ -311,7 +314,7 @@ await page.locator(".scrubber--votes").waitFor({ timeout: 20_000 });
 await page.locator(".scrubber--votes .scrubber__play").first().click();
 await page.waitForTimeout(800);
 const tParam = new URL(page.url()).searchParams.get("t");
-const politicsOk = filled.filled > 100 && /yes/i.test(stripPolitics) && voteCard === 1 && !!tParam;
+const politicsOk = filled.filled > 100 && /yes/i.test(stripPolitics) && voteCard === 1 && !!tParam && voteMenuOptions >= 3;
 console.log(
   "politics features/filled:",
   filled.features,
@@ -320,6 +323,8 @@ console.log(
   stripPolitics.replace(/\n/g, " | ").slice(0, 90),
   "| hover:",
   cardText.replace(/\n/g, " | ").slice(0, 80),
+  "| vote menu options:",
+  voteMenuOptions,
   "| timeline t:",
   tParam,
   "| ok:",
@@ -406,7 +411,11 @@ const lake = await page.evaluate(({ top, bottom }) => {
   const m = window.__swissNowMap;
   for (const ll of [[6.55, 46.45], [6.85, 46.9], [9.4, 47.6], [8.55, 47.25], [8.3, 46.95]]) {
     const r = m.getContainer().getBoundingClientRect();
-    const p = { x: m.project(ll).x + r.left, y: m.project(ll).y + r.top };
+    const local = m.project(ll);
+    const p = { x: local.x + r.left, y: local.y + r.top };
+    // only basemap (vector/raster) features may sit there: no station, gauge or region
+    const data = m.queryRenderedFeatures(local).filter((f) => { const src = m.getSource(f.source); return src && src.type === "geojson"; });
+    if (data.length) continue;
     if (p.x > 20 && p.x < innerWidth - 20 && p.y > top && p.y < bottom) return { x: p.x, y: p.y };
   }
   return null;
@@ -467,6 +476,8 @@ process.exit(
   compareOk &&
   keyTopic === "housing" &&
   aviationOk &&
+  wordmarkOk &&
+  markOk &&
   shortOk &&
   helpOk &&
   mobileOk &&
