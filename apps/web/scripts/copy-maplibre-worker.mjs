@@ -15,6 +15,7 @@ const dist = join(dirname(pkgPath), "dist");
 const version = JSON.parse(readFileSync(pkgPath, "utf8")).version;
 const out = join(process.cwd(), "public", "map", "vendor");
 mkdirSync(out, { recursive: true });
-for (const f of ["maplibre-gl-worker.mjs", "maplibre-gl-shared.mjs"]) copyFileSync(join(dist, f), join(out, f));
+for (const f of ["maplibre-gl-worker.mjs", "maplibre-gl-shared.mjs"])
+  copyFileSync(join(dist, f), join(out, f));
 writeFileSync(join(out, "VERSION"), `${version}\n`);
 console.log(`copied maplibre-gl ${version} worker + shared chunk → public/map/vendor/`);

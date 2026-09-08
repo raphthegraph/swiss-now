@@ -80,5 +80,16 @@ console.log(
   scrubber > 0,
 );
 await page.screenshot({ path: "/tmp/sn/qa-rail.png" });
+// QUAKES view (present only when a magnitude ≥ 2 event is in the window)
+const quakesButton = page.getByRole("button", { name: "Quakes" });
+let quakesOk = true;
+if ((await quakesButton.count()) > 0) {
+  await quakesButton.click();
+  await page.waitForTimeout(800);
+  const quakeStrip = (await page.locator(".strip").innerText()).replace(/\n/g, " | ");
+  quakesOk = /Last earthquake/i.test(quakeStrip);
+  console.log("strip in QUAKES:", quakeStrip.slice(0, 140), "| ok:", quakesOk);
+  await page.screenshot({ path: "/tmp/sn/qa-quakes.png" });
+} else console.log("QUAKES not in rail (no M≥2 event in window)");
 await browser.close();
-process.exit(shown && railFigures ? 0 : 1);
+process.exit(shown && railFigures && quakesOk ? 0 : 1);

@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Map as MapLibreMap } from "maplibre-gl";
-import type { HydrologyState, RailState, WeatherState } from "@swiss-now/core";
+import type { HydrologyState, RailState, SeismicState, WeatherState } from "@swiss-now/core";
+import { QuakeLayer, type QuakeHover } from "./QuakeLayer";
+import { QuakeHoverCard } from "./QuakeHoverCard";
 import { TrainLayer, type TrainHover } from "./TrainLayer";
 import { TrainHoverCard } from "./TrainHoverCard";
 import { RailLegend } from "../hud/RailLegend";
@@ -24,14 +26,20 @@ export function MapPage({
   initial,
   initialHydrology,
   initialRail,
+  initialSeismic,
 }: {
   initial: WeatherState;
   initialHydrology?: HydrologyState | undefined;
   initialRail?: RailState | undefined;
+  initialSeismic?: SeismicState | undefined;
 }) {
   const weather = useLayerState("/api/state/weather", initial, 300_000);
   const hydrology = useLayerState("/api/state/hydrology", initialHydrology, 600_000);
   const rail = useLayerState("/api/state/rail", initialRail, 60_000);
+  const seismic = useLayerState("/api/state/seismic", initialSeismic, 120_000);
+  const [quakeHover, setQuakeHover] = useState<QuakeHover | null>(null);
+  // QUAKES joins the rail only when a magnitude ≥ 2.0 event happened in the window
+  const quakesNotable = (seismic?.events ?? []).some((e) => (e.magnitude ?? 0) >= 2);
   const [trainHover, setTrainHover] = useState<TrainHover | null>(null);
   const [railProgress, setRailProgress] = useState({ loaded: 0, needed: 0 });
   const stopNames = useStopNames(rail);
@@ -79,11 +87,25 @@ export function MapPage({
           <TrainHoverCard hover={trainHover} freshness={rail.freshness} stopName={stopNames} />
         </div>
       ) : null}
-      <LayerRail active={active} onChange={setActive} />
+      {active === "now" || active === "quakes" ? (
+        <QuakeLayer
+          map={map}
+          seismic={seismic}
+          mode={active === "quakes" ? "full" : "quiet"}
+          onHover={setQuakeHover}
+        />
+      ) : null}
+      {active === "quakes" && quakeHover ? (
+        <div className="hover-anchor">
+          <QuakeHoverCard hover={quakeHover} />
+        </div>
+      ) : null}
+      <LayerRail active={active} onChange={setActive} hidden={quakesNotable ? [] : ["quakes"]} />
       <SummaryStrip
         state={weather}
         hydrology={hydrology}
         rail={rail}
+        seismic={seismic}
         active={active}
         legend={
           active === "rail" ? (

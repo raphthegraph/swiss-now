@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { duration } from "@swiss-now/motion/tokens";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-import type { HydrologyState, RailState, WeatherState } from "@swiss-now/core";
+import type { HydrologyState, RailState, SeismicState, WeatherState } from "@swiss-now/core";
 import { currentDelay } from "@swiss-now/core/data-sources/transit";
 import type { ActiveLayer } from "@/lib/layers";
 import { formatNumber, formatTime } from "@/lib/format";
@@ -16,6 +16,7 @@ export function SummaryStrip({
   state,
   hydrology,
   rail,
+  seismic,
   active = "now",
   children,
   home,
@@ -24,6 +25,7 @@ export function SummaryStrip({
   state: WeatherState;
   hydrology?: HydrologyState | undefined;
   rail?: RailState | undefined;
+  seismic?: SeismicState | undefined;
   active?: ActiveLayer;
   children?: ReactNode;
   home?: ReactNode;
@@ -139,6 +141,39 @@ export function SummaryStrip({
         where: "in the current window",
       });
   }
+  const quakes: typeof items = [];
+  if (seismic) {
+    const latest = seismic.events[0];
+    const place = (e: (typeof seismic.events)[number]) =>
+      (e.headline.en ?? "").replace(/^M[\d.]+ earthquake near /, "");
+    if (latest) {
+      const hours = (Date.now() - new Date(latest.startsAt).getTime()) / 3_600_000;
+      quakes.push({
+        label: "Last earthquake",
+        value: `M${formatNumber(latest.magnitude ?? 0, 1)}`,
+        unit: "",
+        where: `${place(latest)} · ${hours < 48 ? `${Math.round(hours)} h ago` : `${Math.round(hours / 24)} days ago`}`,
+      });
+    }
+    const strong = seismic.events.filter((e) => (e.magnitude ?? 0) >= 2);
+    quakes.push({
+      label: `Quakes, ${seismic.windowDays} days`,
+      value: String(seismic.events.length),
+      unit: "",
+      where: `${strong.length} of magnitude 2 or more`,
+    });
+    const strongest = seismic.events.reduce<(typeof seismic.events)[number] | undefined>(
+      (b, e) => (!b || (e.magnitude ?? 0) > (b.magnitude ?? 0) ? e : b),
+      undefined,
+    );
+    if (strongest && strongest !== latest)
+      quakes.push({
+        label: "Strongest",
+        value: `M${formatNumber(strongest.magnitude ?? 0, 1)}`,
+        unit: "",
+        where: place(strongest),
+      });
+  }
   const shown =
     active === "water"
       ? water
@@ -146,7 +181,9 @@ export function SummaryStrip({
         ? items
         : active === "rail"
           ? trains
-          : [...items.slice(0, 2), ...trains.slice(1, 2), ...water.slice(0, 1)];
+          : active === "quakes"
+            ? quakes
+            : [...items.slice(0, 2), ...trains.slice(1, 2), ...water.slice(0, 1)];
   return (
     <>
       <motion.header
@@ -199,6 +236,7 @@ export function SummaryStrip({
           <span>Source: MeteoSwiss</span>
           {hydrology ? <span>Source: FOEN</span> : null}
           {rail ? <span>Source: opentransportdata.swiss</span> : null}
+          {seismic ? <span>Source: SED / ETH Zurich</span> : null}
           <span>© swisstopo</span>
           <Link href="/status">Status</Link>
         </div>

@@ -581,3 +581,11 @@ table.sources th {
   border-left-color: var(--sn-accent-rail-delay);
   max-width: 320px;
 }
+.quake-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hover-card--quake {
+  border-left-color: var(--sn-accent-seismic);
+}

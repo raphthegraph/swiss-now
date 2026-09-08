@@ -84,6 +84,8 @@ export const SeismicState = LayerBase.extend({
   events: z.array(Event),
   /** Window covered by `events`, e.g. 30 days. */
   windowDays: z.number().int().positive(),
+  /** Time of the most recent event in the window. */
+  latestEventAt: ISODateTime.optional(),
 });
 export type SeismicState = z.infer<typeof SeismicState>;
 

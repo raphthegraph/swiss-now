@@ -1,5 +1,6 @@
 import Link from "next/link";
-import type { HydrologyState, RailState, WeatherState } from "@swiss-now/core";
+import type { HydrologyState, RailState, SeismicState, WeatherState } from "@swiss-now/core";
+import { getSeismicState } from "@/lib/state/seismic";
 import { getRailState } from "@/lib/state/rail";
 import { getHydrologyState } from "@/lib/state/hydrology";
 import { listSources } from "@swiss-now/core";
@@ -16,13 +17,18 @@ export default async function StatusPage() {
   let hydrologyError: string | undefined;
   let rail: RailState | undefined;
   let railError: string | undefined;
-  const [w, h, r] = await Promise.allSettled([
+  let seismic: SeismicState | undefined;
+  let seismicError: string | undefined;
+  const [w, h, r, q] = await Promise.allSettled([
     getWeatherState(),
     getHydrologyState(),
     getRailState(),
+    getSeismicState(),
   ]);
   if (r.status === "fulfilled") rail = r.value;
   else railError = r.reason instanceof Error ? r.reason.message : String(r.reason);
+  if (q.status === "fulfilled") seismic = q.value;
+  else seismicError = q.reason instanceof Error ? q.reason.message : String(q.reason);
   if (w.status === "fulfilled") weather = w.value;
   else weatherError = w.reason instanceof Error ? w.reason.message : String(w.reason);
   if (h.status === "fulfilled") hydrology = h.value;
@@ -91,6 +97,21 @@ export default async function StatusPage() {
               <td className="tnum">{rail ? formatTime(rail.observedAt) : railError}</td>
               <td className="tnum">{rail ? `${rail.activeTrips.length} trips` : "–"}</td>
               <td className="tnum">{rail?.gtfsBuild ?? "–"}</td>
+            </tr>
+            <tr>
+              <td>seismic</td>
+              <td>
+                <span className="freshness" data-state={seismic?.freshness ?? "outage"}>
+                  {seismic?.freshness ?? "outage"}
+                </span>
+              </td>
+              <td className="tnum">{seismic ? formatTime(seismic.observedAt) : seismicError}</td>
+              <td className="tnum">
+                {seismic ? `${seismic.events.length} events / ${seismic.windowDays} d` : "–"}
+              </td>
+              <td className="tnum">
+                {seismic?.latestEventAt ? formatTime(seismic.latestEventAt) : "–"}
+              </td>
             </tr>
           </tbody>
         </table>

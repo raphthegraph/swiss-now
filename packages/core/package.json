@@ -15,7 +15,8 @@
     "./data-sources/meteoswiss/radar": "./src/data-sources/meteoswiss/radar/index.ts",
     "./data-sources/hydrology": "./src/data-sources/hydrology/index.ts",
     "./data-sources/transit": "./src/data-sources/transit/index.ts",
-    "./data-sources/transit/build": "./src/data-sources/transit/build.ts"
+    "./data-sources/transit/build": "./src/data-sources/transit/build.ts",
+    "./data-sources/earthquakes": "./src/data-sources/earthquakes/index.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
