@@ -18,11 +18,11 @@ export interface SnapshotStore {
   read(id: string): Promise<Snapshot | undefined>;
 }
 
-/** Local development: `public/snapshots/` (gitignored), served as static files. */
+/** Local development: `public/snapshots/` (gitignored); served through /api/snapshots/{id} because files written after the build are not static assets. */
 export class FsSnapshotStore implements SnapshotStore {
   constructor(
     private dir: string,
-    private publicBase = "/snapshots",
+    private publicBase = "/api/snapshots",
   ) {}
   private async ids(): Promise<string[]> {
     try {
