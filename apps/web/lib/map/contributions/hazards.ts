@@ -205,11 +205,18 @@ export function hazardsContribution(
       show(map, LAYER_AVALANCHE, on);
       show(map, LAYER_SNOW, presence === "full");
       if (map.getLayer(LAYER_HAIL)) show(map, LAYER_HAIL, on);
-      // NOW: only regions at level 3 or more
-      if (map.getLayer(LAYER_FIRE))
-        map.setFilter(LAYER_FIRE, presence === "quiet" ? [">=", ["get", "level"], 3] : null);
+      // NOW stays uncluttered: only regions at level 4 or more, and fainter
+      if (map.getLayer(LAYER_FIRE)) {
+        map.setFilter(LAYER_FIRE, presence === "quiet" ? [">=", ["get", "level"], 4] : null);
+        map.setPaintProperty(LAYER_FIRE, "fill-opacity", [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          0.6,
+          presence === "quiet" ? 0.16 : 0.32,
+        ]);
+      }
       if (map.getLayer(LAYER_AVALANCHE))
-        map.setFilter(LAYER_AVALANCHE, presence === "quiet" ? [">=", ["get", "level"], 3] : null);
+        map.setFilter(LAYER_AVALANCHE, presence === "quiet" ? [">=", ["get", "level"], 4] : null);
       void regionsLoaded;
     },
   };

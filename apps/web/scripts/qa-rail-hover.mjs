@@ -213,6 +213,42 @@ const statsOk = popFilled > 1500 && /switzerland/i.test(popStrip) && popChart >=
 console.log("stats population filled:", popFilled, "| strip:", popStrip.replace(/\n/g, " | ").slice(0, 70), "| charts:", popChart, "| timeline t:", popT, "| ok:", statsOk);
 await page.screenshot({ path: "/tmp/sn/qa-stats.png" });
 
+// SNAPSHOT TIMELINE: NOW → TIMELINE shows the 48 h scrubber; stepping back writes the slot into the URL
+await page.getByRole("button", { name: "Now" }).click();
+await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Timeline$/i }).click();
+await page.locator(".scrubber--snapshots").waitFor({ timeout: 30_000 });
+await page.locator(".scrubber--snapshots input[type=range]").waitFor({ timeout: 30_000 });
+await page.evaluate(() => {
+  const r = document.querySelector(".scrubber--snapshots input[type=range]");
+  const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set;
+  setter.call(r, "0");
+  r.dispatchEvent(new Event("input", { bubbles: true }));
+});
+await page.waitForFunction(() => /snapshot/i.test(document.querySelector(".scrubber--snapshots")?.textContent ?? ""), null, { timeout: 30_000 });
+await page.waitForTimeout(1200);
+const snapT = new URL(page.url()).searchParams.get("t");
+const snapStrip = await page.locator(".strip").innerText();
+const snapshotOk = /^\d{8}T\d{4}$/.test(snapT ?? "") && /warmest/i.test(snapStrip) && /snapshot/i.test(await page.locator(".hud--top").innerText());
+console.log("snapshot timeline t:", snapT, "| strip:", snapStrip.replace(/\n/g, " | ").slice(0, 60), "| ok:", snapshotOk);
+await page.screenshot({ path: "/tmp/sn/qa-snapshot.png" });
+await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Map$/i }).click();
+
+// COMPARE: two places via the URL, figures side by side (population)
+await page.goto(`${base}/?topic=population&mode=compare&place=261,351`, { waitUntil: "domcontentloaded", timeout: 90_000 });
+await page.locator(".compare-view").waitFor({ timeout: 60_000 });
+await page.waitForFunction(() => /Bern/.test(document.querySelector(".compare__table")?.textContent ?? ""), null, { timeout: 60_000 });
+const compareText = (await page.locator(".compare__table").innerText()).replace(/\n/g, " | ");
+const compareOk = /Zürich/.test(compareText) && /Bern/.test(compareText) && /Rank/i.test(compareText);
+console.log("compare:", compareText.slice(0, 120), "| ok:", compareOk);
+await page.screenshot({ path: "/tmp/sn/qa-compare.png" });
+// keyboard: "]" moves to the next topic
+await page.keyboard.press("]");
+await page.waitForTimeout(500);
+const keyTopic = new URL(page.url()).searchParams.get("topic");
+console.log("keyboard ] →", keyTopic);
+await page.goto(`${base}/`, { waitUntil: "domcontentloaded", timeout: 90_000 });
+await page.getByRole("button", { name: "Politics" }).waitFor({ timeout: 60_000 });
+
 // POLITICS: choropleth from the geo spine with feature-state values, hover card, vote timeline
 await page.getByRole("button", { name: "Politics" }).click();
 await page.locator(".legend--ramp").waitFor({ timeout: 60_000 });
@@ -327,7 +363,10 @@ process.exit(
   eventsOk &&
   airOk &&
   hazardsOk &&
-  statsOk
+  statsOk &&
+  snapshotOk &&
+  compareOk &&
+  keyTopic === "housing"
     ? 0
     : 1,
 );

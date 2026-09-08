@@ -39,5 +39,14 @@ export function useViewState() {
     },
     [view, write],
   );
-  return { view, setTopic, setMode, setTime };
+  const setPlace = useCallback(
+    (place: string | undefined) => {
+      const next: ViewState = { topic: view.topic, mode: view.mode };
+      if (view.t) next.t = view.t;
+      if (place) next.place = place;
+      write(next, false);
+    },
+    [view, write],
+  );
+  return { view, setTopic, setMode, setTime, setPlace };
 }

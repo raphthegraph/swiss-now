@@ -36,7 +36,12 @@ export function StatsCharts({
       return key;
     };
     return Object.entries(vals)
-      .filter(([k, v]) => k !== "CH" && typeof v === "number")
+      .filter(
+        ([k, v]) =>
+          k !== "CH" &&
+          typeof v === "number" &&
+          /^[A-Z]{2}$/.test(k) === (series.meta.geoLevel === "canton"),
+      )
       .sort((a, b) => (b[1] as number) - (a[1] as number))
       .slice(0, 12)
       .map(([k, v]) => ({ name: name(k), value: v as number }));

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { Map as MapLibreMap } from "maplibre-gl";
-import type { BorderCode, EnergyState } from "@swiss-now/core";
+import type { BorderCode } from "@swiss-now/core";
 import { flowDashOffset } from "@swiss-now/motion/math";
 import { fontFamily, ground, layerAccent } from "@swiss-now/motion/tokens";
 import { formatNumber } from "@/lib/format";
@@ -19,7 +19,8 @@ const REF_MW = 3000;
 
 export interface FlowLayerProps {
   map: MapLibreMap | null;
-  energy: EnergyState | undefined;
+  /** anything with border flows: the live state or a stored snapshot summary */
+  energy: { borderFlows: Partial<Record<BorderCode, number>> } | undefined;
   mode: "full" | "quiet";
 }
 

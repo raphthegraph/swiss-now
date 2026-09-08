@@ -17,7 +17,15 @@ import type {
   WeatherState,
 } from "@swiss-now/core";
 import { VoteResult as VoteResultSchema } from "@swiss-now/core/state";
-import { figuresFor, presenceFor, type TopicId } from "@swiss-now/core/topics";
+import { figuresFor, figuresForSnapshot, presenceFor, type TopicId } from "@swiss-now/core/topics";
+import { useSnapshotTimeline } from "@/lib/use-snapshot-timeline";
+import { SnapshotScrubber } from "../hud/SnapshotScrubber";
+import { formatAgo, formatTime } from "@/lib/format";
+import { indicatorPlaceFigures, votePlaceFigures, type Figure } from "@swiss-now/core/topics";
+import { CompareView } from "../views/CompareView";
+import type { PlacePick } from "../hud/PlaceSearch";
+import { localSummary } from "@/lib/local-summary";
+import { Mode } from "@swiss-now/core/topics";
 import { choroplethContribution } from "@/lib/map/contributions/choropleth";
 import { airContribution } from "@/lib/map/contributions/air";
 import { useIndicator, useIndicatorCatalog } from "@/lib/use-indicator";
@@ -73,6 +81,7 @@ function presenceOf(topic: TopicId): LayerPresence {
 }
 
 const STATS_TOPICS = new Set<TopicId>(["population", "housing", "economy", "tourism"]);
+const TOPIC_ORDER_BUILT = (Object.keys(TOPICS) as TopicId[]).filter((t) => TOPICS[t].built);
 /** the indicator each statistics topic puts on the map */
 const MAP_INDICATOR: Partial<Record<TopicId, string>> = {
   population: "population",
@@ -143,7 +152,7 @@ export function MapPage({
   initialRail?: RailState | undefined;
   initialSeismic?: SeismicState | undefined;
 }) {
-  const { view, setTopic, setMode, setTime } = useViewState();
+  const { view, setTopic, setMode, setTime, setPlace } = useViewState();
   const { topic, mode } = view;
   const presence = useMemo(() => presenceOf(topic), [topic]);
   // poll only what is on screen (the masthead clock always needs weather)
@@ -191,6 +200,34 @@ export function MapPage({
     600_000,
     presence.hazards !== "off",
   );
+  // TIMELINE over the 10-minute snapshots (weather keeps its radar frames; statistics their periods)
+  const snapshotMode =
+    mode === "timeline" &&
+    !["weather", "politics", "population", "housing", "economy", "tourism"].includes(topic);
+  const tl = useSnapshotTimeline(snapshotMode, snapshotMode ? view.t : undefined);
+  const past = snapshotMode && tl.index !== null ? tl.snapshot : undefined;
+  const viewWeather = past?.weather ?? weather;
+  const viewHydrology = past?.hydrology ?? hydrology;
+  const viewSeismic = past?.seismic ?? seismic;
+  const viewDisruptions = past ? past.rail?.disruptions : rail?.disruptions;
+  // COMPARE: two places from the URL (`place=a,b`), the same figures for each
+  const compareMode = mode === "compare";
+  const compareRegister = useGeoRegister(compareMode);
+  const placeKeys = useMemo(
+    () => (view.place ?? "").split(",").filter(Boolean).slice(0, 2),
+    [view.place],
+  );
+  const pickOf = (key: string | undefined): PlacePick | undefined => {
+    if (!key || !compareRegister) return undefined;
+    const c = compareRegister.cantons[key];
+    if (c) return { key, name: c.name, kind: "canton", canton: key, lonLat: c.lonLat };
+    const m = compareRegister.municipalities.find((x) => String(x.bfs) === key);
+    return m
+      ? { key, name: m.name, kind: "municipality", canton: m.canton, lonLat: m.lonLat }
+      : undefined;
+  };
+  const setPlaces = (a: string | undefined, b: string | undefined) =>
+    setPlace([a, b].filter(Boolean).join(",") || undefined);
   const [airLayer] = useState(() => airContribution(undefined));
   // statistics: the catalogue, the topic's map indicator, the register for names, quantile stops
   const isStats = STATS_TOPICS.has(topic);
@@ -254,9 +291,11 @@ export function MapPage({
             ),
           )
         : latestValues(indicator).values;
+    // only keys of the indicator's level: canton rows would skew the municipality quantiles
+    const isCanton = (k: string) => /^[A-Z]{2}$/.test(k);
     const cells = Object.fromEntries(
       Object.entries(vals)
-        .filter(([k]) => k !== "CH")
+        .filter(([k]) => k !== "CH" && isCanton(k) === (indicator.meta.geoLevel === "canton"))
         .map(([k, v]) => [k, { value: v }]),
     );
     const stops = quantileStops(
@@ -342,6 +381,29 @@ export function MapPage({
   const [map, setMap] = useState<MapLibreMap | null>(null);
   // visitor-driven persistence: keeps the day's snapshots (the story's input) written while someone watches
   useSnapshotPing();
+  // keyboard: [ ] topics · 1–4 modes · Esc back to NOW (docs/IA.md)
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement ||
+        e.metaKey ||
+        e.ctrlKey
+      )
+        return;
+      const order = TOPIC_ORDER_BUILT;
+      const i = order.indexOf(topic);
+      if (e.key === "]") setTopic(order[(i + 1) % order.length]!);
+      else if (e.key === "[") setTopic(order[(i - 1 + order.length) % order.length]!);
+      else if (e.key === "Escape") setTopic("now");
+      else if (/^[1-4]$/.test(e.key)) {
+        const m = Mode.options[Number(e.key) - 1]!;
+        if (TOPICS[topic].modes.includes(m)) setMode(m);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [topic, setTopic, setMode]);
   const radar = useRadarTimeline(weather);
   // the radar timeline is the WEATHER topic's TIMELINE instrument; elsewhere the map shows the latest frame
   const radarOn = topic === "weather" && mode === "timeline";
@@ -350,22 +412,75 @@ export function MapPage({
     if (!radarOn) radarReset();
     // eslint-disable-next-line react-hooks/exhaustive-deps -- reset only when the view changes
   }, [radarOn]);
+  const placeA = pickOf(placeKeys[0]);
+  const placeB = pickOf(placeKeys[1]);
+  const compareFigures = (p: PlacePick | undefined): Figure[] => {
+    if (!p) return [];
+    if (isStats && indicator) return indicatorPlaceFigures(indicator, p.key, period);
+    if (topic === "politics" && vote) return votePlaceFigures(vote, p.key);
+    if ((topic === "weather" || topic === "water" || topic === "now") && p.lonLat) {
+      const l = localSummary(p.lonLat, weather, hydrology);
+      if (!l) return [];
+      const out: Figure[] = [];
+      if (l.temperature !== undefined)
+        out.push({
+          id: "temp",
+          label: "Temperature",
+          value: l.temperature,
+          decimals: 1,
+          unit: "°C",
+          where: `${l.stationName} · ${l.distanceKm.toFixed(0)} km`,
+        });
+      if (l.gustKmh !== undefined)
+        out.push({ id: "gust", label: "Gust", value: l.gustKmh, decimals: 0, unit: "km/h" });
+      if (l.rain10min !== undefined)
+        out.push({
+          id: "rain",
+          label: "Rain, 10 min",
+          value: l.rain10min,
+          decimals: 1,
+          unit: "mm",
+        });
+      if (l.river?.discharge !== undefined)
+        out.push({
+          id: "discharge",
+          label: "River",
+          value: l.river.discharge,
+          decimals: 0,
+          unit: "m³/s",
+          where: `${l.river.waterBody ?? ""} ${l.river.name}`.trim(),
+        });
+      if (l.river?.temp !== undefined)
+        out.push({
+          id: "water-temp",
+          label: "Water",
+          value: l.river.temp,
+          decimals: 1,
+          unit: "°C",
+        });
+      return out;
+    }
+    return [];
+  };
   const figures = useMemo(
     () =>
-      figuresFor(topic, {
-        weather,
-        hydrology,
-        rail,
-        seismic,
-        politics,
-        vote,
-        energy,
-        events,
-        air,
-        hazards,
-        stats: statsFig,
-      }),
+      past
+        ? figuresForSnapshot(topic, past, Date.now())
+        : figuresFor(topic, {
+            weather,
+            hydrology,
+            rail,
+            seismic,
+            politics,
+            vote,
+            energy,
+            events,
+            air,
+            hazards,
+            stats: statsFig,
+          }),
     [
+      past,
       topic,
       weather,
       hydrology,
@@ -380,25 +495,37 @@ export function MapPage({
       statsFig,
     ],
   );
-  const voteStatus =
-    topic === "politics" && vote ? (
-      <span className="label tnum">
-        Vote of {formatDate(vote.meta.date)} · {vote.status} · Source: BFS
+  const voteStatus = past ? (
+    <span className="label tnum">
+      Snapshot · {formatTime(past.at)} ·{" "}
+      <span className="freshness" data-state="stale">
+        {formatAgo(Date.now() - new Date(past.at).getTime())}
       </span>
-    ) : isStats && indicator ? (
-      <span className="label tnum">
-        {indicator.meta.label.en ?? indicator.meta.label.de} ·{" "}
-        {period ?? latestValues(indicator).period} · {indicator.meta.attribution}
-      </span>
-    ) : undefined;
+    </span>
+  ) : topic === "politics" && vote ? (
+    <span className="label tnum">
+      Vote of {formatDate(vote.meta.date)} · {vote.status} · Source: BFS
+    </span>
+  ) : isStats && indicator ? (
+    <span className="label tnum">
+      {indicator.meta.label.en ?? indicator.meta.label.de} ·{" "}
+      {period ?? latestValues(indicator).period} · {indicator.meta.attribution}
+    </span>
+  ) : undefined;
   return (
     <>
       <LiveMap
-        weather={weather}
-        hydrology={hydrology}
-        disruptions={rail?.disruptions}
+        weather={viewWeather}
+        hydrology={viewHydrology}
+        disruptions={viewDisruptions}
         presence={presence}
-        muted={topic === "rail" || topic === "hazards" || topic === "events" || mode === "charts"}
+        muted={
+          topic === "rail" ||
+          topic === "hazards" ||
+          topic === "events" ||
+          mode === "charts" ||
+          compareMode
+        }
         focus={focus}
         radarFrame={radar.frame}
         contributions={contributions}
@@ -408,15 +535,29 @@ export function MapPage({
           (window as unknown as { __swissNowMap?: MapLibreMap }).__swissNowMap = m;
         }}
       />
-      {presence.weather !== "off" ? <WindParticles map={map} weather={weather} /> : null}
+      {presence.weather !== "off" ? <WindParticles map={map} weather={viewWeather} /> : null}
       {presence.energy !== "off" ? (
-        <FlowLayer map={map} energy={energy} mode={presence.energy === "full" ? "full" : "quiet"} />
+        <FlowLayer
+          map={map}
+          energy={past ? past.energy : energy}
+          mode={presence.energy === "full" ? "full" : "quiet"}
+        />
       ) : null}
-      {presence.events !== "off" ? (
+      {presence.events !== "off" && !past ? (
         <EventMarkers
           map={map}
           events={events}
           mode={presence.events === "full" ? "full" : "quiet"}
+        />
+      ) : null}
+      {compareMode ? (
+        <CompareView
+          register={compareRegister}
+          a={{ place: placeA, figures: compareFigures(placeA) }}
+          b={{ place: placeB, figures: compareFigures(placeB) }}
+          onPickA={(p) => setPlaces(p.key, placeKeys[1])}
+          onPickB={(p) => setPlaces(placeKeys[0], p.key)}
+          title={`Compare · ${TOPICS[topic].label.en ?? topic}`}
         />
       ) : null}
       {mode === "charts" ? (
@@ -430,7 +571,7 @@ export function MapPage({
           }
         />
       ) : null}
-      {presence.rail !== "off" ? (
+      {presence.rail !== "off" && !past ? (
         <TrainLayer
           map={map}
           rail={rail}
@@ -447,7 +588,7 @@ export function MapPage({
       {presence.seismic !== "off" ? (
         <QuakeLayer
           map={map}
-          seismic={seismic}
+          seismic={viewSeismic}
           mode={presence.seismic === "full" ? "full" : "quiet"}
           onHover={setQuakeHover}
         />
@@ -497,6 +638,28 @@ export function MapPage({
           ) : null
         }
       >
+        {snapshotMode ? (
+          <SnapshotScrubber
+            slots={tl.slots}
+            index={tl.index}
+            playing={tl.playing}
+            onChange={(i) => {
+              tl.setIndex(i);
+              setTime(
+                i === null
+                  ? undefined
+                  : tl.slots[i]?.url
+                      .split("/")
+                      .pop()
+                      ?.replace(/\.json$/, ""),
+              );
+            }}
+            onTogglePlay={() => {
+              if (view.t) setTime(undefined);
+              tl.togglePlay();
+            }}
+          />
+        ) : null}
         {isStats && mode === "timeline" && indicator ? (
           <PeriodScrubber
             periods={indicator.periods}

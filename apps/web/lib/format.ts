@@ -24,3 +24,12 @@ export function formatDate(isoDate: string, locale = "en-GB"): string {
     timeZone: "Europe/Zurich",
   }).format(new Date(`${isoDate.slice(0, 10)}T12:00:00+02:00`));
 }
+
+/** `35 min ago`, `6 h 45 min ago`, `2 days ago`. */
+export function formatAgo(ms: number): string {
+  const min = Math.max(0, Math.round(ms / 60_000));
+  if (min < 90) return `${min} min ago`;
+  const h = Math.floor(min / 60);
+  if (h < 48) return `${h} h ${min - h * 60} min ago`;
+  return `${Math.round(h / 24)} days ago`;
+}

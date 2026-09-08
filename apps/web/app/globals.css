@@ -557,6 +557,87 @@ table.sources th {
   font-weight: 500;
   letter-spacing: -0.01em;
 }
+/* ---- COMPARE ---- */
+.compare__pickers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sn-space-5);
+  margin-bottom: var(--sn-space-4);
+}
+.place-search {
+  position: relative;
+  display: grid;
+  gap: var(--sn-space-1);
+}
+.place-search__input {
+  font: inherit;
+  font-size: var(--sn-type-body-large-size);
+  padding: var(--sn-space-2) 0;
+  border: none;
+  border-bottom: 1px solid var(--sn-ground-ink);
+  background: transparent;
+  color: var(--sn-ground-ink);
+  outline: none;
+}
+.place-search__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  margin: 0;
+  padding: var(--sn-space-1) 0;
+  list-style: none;
+  background: var(--sn-ground-paper);
+  border: 1px solid var(--sn-ground-mist);
+  max-height: 260px;
+  overflow: auto;
+}
+.place-search__option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  padding: var(--sn-space-1) var(--sn-space-3);
+  border: none;
+  background: transparent;
+  color: var(--sn-ground-ink);
+  cursor: pointer;
+}
+.place-search__option:hover {
+  background: var(--sn-ground-ink);
+  color: var(--sn-ground-paper);
+}
+.compare__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.compare__table th,
+.compare__table td {
+  text-align: left;
+  vertical-align: top;
+  padding: var(--sn-space-2) var(--sn-space-3) var(--sn-space-2) 0;
+  border-top: 1px solid var(--sn-ground-mist);
+}
+.compare__table thead th {
+  border-top: none;
+  font-size: var(--sn-type-body-large-size);
+  font-weight: 500;
+}
+.compare__table td {
+  font-size: var(--sn-type-metric-size);
+  line-height: 1.1;
+}
+.compare__table td .where {
+  font-size: var(--sn-type-caption-size);
+  color: var(--sn-ground-graphite);
+  margin-top: 2px;
+}
+@media (max-width: 767px) {
+  .compare__pickers {
+    grid-template-columns: 1fr;
+  }
+}
 .charts__title--small {
   font-size: var(--sn-type-body-large-size);
   margin: var(--sn-space-5) 0 var(--sn-space-2);

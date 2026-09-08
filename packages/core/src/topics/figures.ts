@@ -457,7 +457,10 @@ export function statsFigures(st: TopicStates["stats"]): Figure[] {
         where: `${period} · ${series.meta.attribution}`,
       }),
     );
-  const places = Object.entries(vals).filter(([k]) => k !== "CH");
+  const isCanton = (k: string) => /^[A-Z]{2}$/.test(k);
+  const places = Object.entries(vals).filter(
+    ([k]) => k !== "CH" && isCanton(k) === (series.meta.geoLevel === "canton"),
+  );
   const top = places.sort((a, b) => b[1] - a[1])[0];
   if (top)
     out.push(

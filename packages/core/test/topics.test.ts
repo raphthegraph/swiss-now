@@ -60,7 +60,11 @@ describe("view state", () => {
   });
   it("keeps the mode across topics when supported", () => {
     const v = { topic: "weather", mode: "timeline", t: "x" } as const;
-    expect(switchTopic(v, "water")).toEqual({ topic: "water", mode: "map" });
+    expect(switchTopic(v, "water")).toEqual({ topic: "water", mode: "timeline" });
+    expect(switchTopic({ topic: "energy", mode: "charts" }, "water")).toEqual({
+      topic: "water",
+      mode: "map",
+    });
     expect(switchTopic({ topic: "now", mode: "map" }, "rail")).toEqual({
       topic: "rail",
       mode: "map",
@@ -82,5 +86,35 @@ describe("presence", () => {
     expect(layersNeeded("now")).toEqual(
       expect.arrayContaining(["weather", "hydrology", "rail", "seismic"]),
     );
+  });
+});
+
+describe("place figures", () => {
+  it("ranks a place and reports its change", async () => {
+    const { indicatorPlaceFigures, rankOf } = await import("../src/topics/place-figures");
+    const series = {
+      schemaVersion: 1 as const,
+      meta: {
+        id: "population",
+        topic: "population" as const,
+        label: { de: "Bevölkerung", en: "Population" },
+        unit: "",
+        decimals: 0,
+        geoLevel: "municipality" as const,
+        periodKind: "year" as const,
+        source: "bfs-sdmx" as const,
+        cube: "c",
+        attribution: "BFS",
+        publishedAt: "2026-09-08T00:00:00Z",
+        scale: "sequential" as const,
+      },
+      periods: ["2024", "2025"],
+      values: { CH: [100, 110], "1": [10, 12], "2": [20, 18], "3": [5, 5] },
+    };
+    expect(rankOf({ "1": 12, "2": 18, "3": 5, CH: 110, ZH: 900 }, "1")).toEqual({ rank: 2, of: 3 }); // cantons ignored
+    const f = indicatorPlaceFigures(series, "1");
+    expect(f.map((x) => x.id)).toEqual(["value", "rank", "change"]);
+    expect(f[0]!.value).toBe(12);
+    expect(f[2]!.text).toBe("+20.0 %");
   });
 });

@@ -124,7 +124,8 @@ export const Field = z.object({
   bounds: BBox,
   width: z.number().int().positive(),
   height: z.number().int().positive(),
-  imageUrl: z.url(),
+  /** absolute, or relative to the app (our own radar and hail routes) */
+  imageUrl: z.string().min(1),
   /** Colour-scale identifier from @swiss-now/motion, so web and video legends match. */
   scaleId: z.string().min(1),
   validAt: ISODateTime,
