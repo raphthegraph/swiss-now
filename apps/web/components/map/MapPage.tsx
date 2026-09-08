@@ -46,6 +46,12 @@ export function MapPage({
   const showFps = params.get("fps") === "1";
   const [map, setMap] = useState<MapLibreMap | null>(null);
   const radar = useRadarTimeline(weather);
+  // the radar timeline is a WEATHER instrument; elsewhere the map shows the latest frame only
+  const radarReset = radar.reset;
+  useEffect(() => {
+    if (active !== "weather") radarReset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- reset only when the view changes
+  }, [active]);
   return (
     <>
       <LiveMap
@@ -59,7 +65,18 @@ export function MapPage({
         <WindParticles map={map} weather={weather} />
       ) : null}
       {active === "now" || active === "rail" ? (
-        <TrainLayer map={map} rail={rail} mode={active === "rail" ? "full" : "quiet"} />
+        <TrainLayer
+          map={map}
+          rail={rail}
+          mode={active === "rail" ? "full" : "quiet"}
+          onHover={setTrainHover}
+          onProgress={(loaded, needed) => setRailProgress({ loaded, needed })}
+        />
+      ) : null}
+      {active === "rail" && trainHover && rail ? (
+        <div className="hover-anchor">
+          <TrainHoverCard hover={trainHover} freshness={rail.freshness} stopName={stopNames} />
+        </div>
       ) : null}
       <LayerRail active={active} onChange={setActive} />
       <SummaryStrip
@@ -85,13 +102,15 @@ export function MapPage({
           />
         }
       >
-        <RadarScrubber
-          frames={radar.frames}
-          index={radar.index}
-          playing={radar.playing}
-          onChange={radar.scrubTo}
-          onTogglePlay={radar.togglePlay}
-        />
+        {active === "weather" ? (
+          <RadarScrubber
+            frames={radar.frames}
+            index={radar.index}
+            playing={radar.playing}
+            onChange={radar.scrubTo}
+            onTogglePlay={radar.togglePlay}
+          />
+        ) : null}
       </SummaryStrip>
       {showFps ? <FpsMeter /> : null}
     </>

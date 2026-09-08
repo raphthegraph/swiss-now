@@ -62,6 +62,13 @@ export function useRadarTimeline(weather: WeatherState) {
     });
   };
 
+  /** Back to the newest frame and follow it again (used when the radar timeline leaves the screen). */
+  const reset = () => {
+    followLatest.current = true;
+    setPlaying(false);
+    setIndex(Math.max(0, frames.length - 1));
+  };
+
   const frame: Field | undefined = frames[index] ?? frames[frames.length - 1];
-  return { frames, index, frame, playing, scrubTo, togglePlay };
+  return { frames, index, frame, playing, scrubTo, togglePlay, reset };
 }

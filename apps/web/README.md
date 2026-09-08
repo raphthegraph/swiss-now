@@ -30,3 +30,13 @@ pnpm --filter @swiss-now/core build-rail-paths -- --rail apps/web/public/rail   
 ```
 
 and the free GTFS-RT token in `apps/web/.env.local` as `OTD_API_KEY=…` (register at api-manager.opentransportdata.swiss). Without the token the layer still shows scheduled trains, marked stale.
+
+## QA in a painting browser
+
+The in-app and headless browsers used by the assistant cannot render WebGL, so map behaviour is checked with Chromium's software renderer:
+
+```bash
+node scripts/qa-rail-hover.mjs            # switches to RAIL, hovers a drawn train, expects the hover card; screenshot in /tmp/sn/qa-rail.png
+```
+
+It needs a cached Playwright Chromium (`~/Library/Caches/ms-playwright/chromium-*`) and the server on port 3100.

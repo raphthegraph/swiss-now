@@ -138,6 +138,15 @@ export function TrainLayer({ map, rail, mode, onHover, onProgress }: TrainLayerP
         ctx.restore();
       }
       ctx.globalAlpha = 1;
+      // debug handle for QA scripts: last drawn screen positions
+      (window as unknown as { __swissNowTrains?: unknown }).__swissNowTrains = drawnRef.current.map(
+        (d) => ({
+          x: d.x,
+          y: d.y,
+          line: d.trip.routeShortName,
+          delay: d.position.delaySeconds,
+        }),
+      );
       const key = `${loaded}/${needed}`;
       if (key !== lastProgress) {
         lastProgress = key;
