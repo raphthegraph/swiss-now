@@ -14,6 +14,8 @@ const browser = await chromium.launch({ executablePath: exe, headless: true, arg
 const shots = [
   ["desktop-now", { width: 1440, height: 900 }, "/?lang=de"],
   ["desktop-weather-timeline", { width: 1440, height: 900 }, "/?topic=weather&mode=timeline&lang=de"],
+  ["desktop-politics", { width: 1440, height: 900 }, "/?topic=politics&lang=de"],
+  ["desktop-air", { width: 1440, height: 900 }, "/?topic=air&lang=de"],
   ["desktop-population-charts", { width: 1440, height: 900 }, "/?topic=population&mode=charts&lang=de"],
   ["desktop-today", { width: 1440, height: 900 }, "/today?lang=de"],
   ["desktop-status", { width: 1440, height: 900 }, "/status"],

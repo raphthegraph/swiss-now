@@ -407,6 +407,7 @@ export function MapPage({
   const [help, setHelp] = useState(false);
   // visitor-driven persistence: keeps the day's snapshots (the story's input) written while someone watches
   useSnapshotPing();
+  const [windOn, setWindOn] = useWindPreference();
   // keyboard: [ ] topics · 1–4 modes · Esc back to NOW (docs/IA.md)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -588,8 +589,6 @@ export function MapPage({
     />
   ) : topic === "politics" && mode === "timeline" && politics && voteId ? (
     <VoteScrubber votes={politics.index} selectedId={voteId} onChange={setTime} />
-  ) : topic === "politics" && politics && voteId ? (
-    <VoteMenu votes={politics.index} selectedId={voteId} vote={vote} onChange={setTime} />
   ) : radarOn ? (
     <RadarScrubber
       frames={radar.frames}
@@ -643,7 +642,8 @@ export function MapPage({
             (window as unknown as { __swissNowMap?: MapLibreMap }).__swissNowMap = m;
           }}
         />
-        {presence.weather !== "off" || topic === "air" ? (
+        {(presence.weather !== "off" || topic === "air") &&
+        (windOn || (topic !== "weather" && topic !== "air")) ? (
           <WindParticles
             map={map}
             weather={viewWeather}
@@ -716,6 +716,24 @@ export function MapPage({
           </div>
         ) : null}
         <ModeSwitcher view={view} onChange={setMode} />
+        {topic === "politics" && mode !== "timeline" && politics && voteId ? (
+          <div className="instrument instrument--top">
+            <VoteMenu votes={politics.index} selectedId={voteId} vote={vote} onChange={setTime} />
+          </div>
+        ) : null}
+        {topic === "weather" || topic === "air" ? (
+          <div className="instrument instrument--top">
+            <button
+              type="button"
+              className="toggle"
+              aria-pressed={windOn}
+              onClick={() => setWindOn(!windOn)}
+            >
+              <span className="toggle__knob" aria-hidden="true" />
+              {t("wind")}
+            </button>
+          </div>
+        ) : null}
         <MapControls
           map={map}
           onLocate={(lonLat) => setFocus({ lonLat, zoom: 9.2, key: `me:${Date.now()}` })}
@@ -759,4 +777,25 @@ function useStopNames(rail: RailState | undefined): (id: string) => string {
     };
   }, [rail?.gtfsBuild]);
   return (id: string) => names[id] ?? id;
+}
+
+/** Wind on WEATHER and AIR can be switched off; the choice is kept in the browser. */
+function useWindPreference(): [boolean, (on: boolean) => void] {
+  const [on, setOnState] = useState(true);
+  useEffect(() => {
+    try {
+      if (window.localStorage.getItem("swiss-now:wind") === "off") setOnState(false);
+    } catch {
+      // no storage
+    }
+  }, []);
+  const setOn = (next: boolean) => {
+    setOnState(next);
+    try {
+      window.localStorage.setItem("swiss-now:wind", next ? "on" : "off");
+    } catch {
+      // no storage
+    }
+  };
+  return [on, setOn];
 }

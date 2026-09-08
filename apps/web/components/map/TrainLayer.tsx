@@ -10,8 +10,8 @@ import { layerAccent, period } from "@swiss-now/motion/tokens";
 import { RailPathStore } from "@/lib/map/rail-paths";
 
 const DELAY_PULSE_SECONDS = 180;
-const TRAIL_SAMPLES = 3;
-const TRAIL_STEP_MS = 20_000;
+const TRAIL_SAMPLES = 6;
+const TRAIL_STEP_MS = 30_000;
 const HIT_RADIUS_PX = 12;
 
 export interface TrainHover {
@@ -124,17 +124,18 @@ export function TrainLayer({ map, rail, mode, onHover, onProgress }: TrainLayerP
           ctx.globalAlpha = 0.55 * env;
           ctx.stroke();
         }
-        // where the train was over the last minute: a fading trail, visible once zoomed in
+        // where the train was over the last three minutes: a tail along its real path, thinning into the past
         if (!quiet) {
           ctx.lineCap = "round";
-          ctx.lineWidth = Math.max(1, thick * 0.5);
           let from = pt;
           for (let k = 1; k <= TRAIL_SAMPLES; k++) {
             const past = positionAlongTrip(trip, path, t - k * TRAIL_STEP_MS);
             if (!past.active) break;
             const to = map.project(past.lonLat);
-            ctx.globalAlpha = 0.35 * (1 - (k - 1) / TRAIL_SAMPLES);
-            ctx.strokeStyle = layerAccent.rail;
+            const fade = 1 - (k - 1) / TRAIL_SAMPLES;
+            ctx.globalAlpha = 0.4 * fade;
+            ctx.lineWidth = Math.max(0.8, thick * 0.6 * fade);
+            ctx.strokeStyle = delayed ? delayColor(p.delaySeconds) : layerAccent.rail;
             ctx.beginPath();
             ctx.moveTo(from.x, from.y);
             ctx.lineTo(to.x, to.y);
@@ -155,12 +156,6 @@ export function TrainLayer({ map, rail, mode, onHover, onProgress }: TrainLayerP
         ctx.fillStyle = delayed ? delayColor(p.delaySeconds) : layerAccent.rail;
         ctx.beginPath();
         ctx.roundRect(-len / 2, -thick / 2, len, thick, thick / 2);
-        ctx.fill();
-        // a light dot slides from the back to the front of the capsule: the train is moving this way
-        const phase = (nowMs / 1400) % 1;
-        ctx.fillStyle = "rgba(255,255,255,0.85)";
-        ctx.beginPath();
-        ctx.arc(-len / 2 + thick / 2 + (len - thick) * phase, 0, thick * 0.28, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }

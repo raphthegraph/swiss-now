@@ -142,16 +142,17 @@ export function WindParticles({
       if (full) {
         const zoom = map.getZoom();
         const scale = Math.max(0.8, Math.min(1.8, 0.6 + (zoom - 6) * 0.35));
-        const creep = ((now / 1500) % 1) * 6;
-        ctx.lineWidth = 1.6;
+        const creep = ((now / 1800) % 1) * 4;
+        ctx.lineWidth = 1.2;
         ctx.lineJoin = "round";
-        ctx.strokeStyle = ground.ink;
-        ctx.fillStyle = ground.ink;
+        ctx.strokeStyle = ground.graphite;
+        ctx.fillStyle = ground.graphite;
         for (const s of samplesRef.current) {
-          if (s.speedKmh < 3) continue;
+          // calm stations stay quiet; the arrows mark where the wind actually blows
+          if (s.speedKmh < 8) continue;
           const p = map.project(s.lonLat);
           if (p.x < 0 || p.y < 0 || p.x > w || p.y > h) continue;
-          const len = Math.min(34, 10 + s.speedKmh * 0.55) * scale;
+          const len = Math.min(26, 8 + s.speedKmh * 0.4) * scale;
           const to = ((s.directionDeg + 180) * Math.PI) / 180; // meteorological FROM → TO
           const dx = Math.sin(to),
             dy = -Math.cos(to);
@@ -159,12 +160,12 @@ export function WindParticles({
             y0 = p.y - (dy * len) / 2 + dy * creep;
           const x1 = x0 + dx * len,
             y1 = y0 + dy * len;
-          ctx.globalAlpha = Math.min(0.85, 0.4 + s.speedKmh / 60);
+          ctx.globalAlpha = Math.min(0.7, 0.25 + s.speedKmh / 80);
           ctx.beginPath();
           ctx.moveTo(x0, y0);
           ctx.lineTo(x1, y1);
           ctx.stroke();
-          const head = 4 * scale;
+          const head = 3 * scale;
           ctx.beginPath();
           ctx.moveTo(x1, y1);
           ctx.lineTo(x1 - dx * head * 1.8 - dy * head, y1 - dy * head * 1.8 + dx * head);
