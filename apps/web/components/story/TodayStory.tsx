@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { motion } from "motion/react";
 import type {
   Chapter,
@@ -17,9 +18,14 @@ import { TrainLayer } from "@/components/map/TrainLayer";
 import type { Map as MapLibreMap } from "maplibre-gl";
 import type { ActiveLayer } from "@/lib/layers";
 import { useLayerState } from "@/lib/use-layer-state";
+import { chapterFigures } from "@swiss-now/core/story";
 import { formatNumber } from "@/lib/format";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+// Remotion Player + MapLibre plate: browser-only, loaded when the section renders
+const StoryPlayer = dynamic(() => import("./StoryPlayer").then((m) => m.StoryPlayer), {
+  ssr: false,
+});
 
 function layerFor(c: Chapter): ActiveLayer {
   return c.layer === "seismic"
@@ -117,6 +123,14 @@ export function TodayStory({
             <ChapterFigures c={c} />
           </motion.section>
         ))}
+        <section className="chapter chapter--video">
+          <div className="label">The video version</div>
+          <p className="chapter__body">
+            The same chapters as a vertical "Switzerland Today" video: one Remotion composition fed
+            by this story, rendered locally for social media and playable here.
+          </p>
+          <StoryPlayer story={story} />
+        </section>
         <footer className="chapter chapter--credits">
           <div className="label">Credits</div>
           <p className="chapter__body">{story.credits.join(" · ")}</p>
@@ -134,49 +148,19 @@ export function TodayStory({
 }
 
 function ChapterFigures({ c }: { c: Chapter }) {
-  const d = c.data as Record<string, unknown>;
-  const fig = (label: string, value: string, unit = "") => (
-    <div className="metric metric--hud" key={label}>
-      <div className="label">{label}</div>
-      <div className="value tnum">
-        {value}
-        {unit ? <span className="unit">{unit}</span> : null}
-      </div>
+  const items = chapterFigures(c);
+  if (!items.length) return null;
+  return (
+    <div className="strip chapter__figures">
+      {items.map((f) => (
+        <div className="metric metric--hud" key={f.label}>
+          <div className="label">{f.label}</div>
+          <div className="value tnum">
+            {formatNumber(f.value, f.decimals)}
+            {f.unit ? <span className="unit">{f.unit}</span> : null}
+          </div>
+        </div>
+      ))}
     </div>
   );
-  const items: React.ReactNode[] = [];
-  const ex = (k: string) => d[k] as { value: number } | undefined;
-  if (c.type === "weather-summary" || c.type === "extremes") {
-    if (ex("warmest")) items.push(fig("Warmest", formatNumber(ex("warmest")!.value), "°C"));
-    if (ex("coldest")) items.push(fig("Coldest", formatNumber(ex("coldest")!.value), "°C"));
-    if (typeof d["rainingShare"] === "number")
-      items.push(fig("Raining over", formatNumber((d["rainingShare"] as number) * 100, 0), "%"));
-  }
-  if (c.type === "rainfall" && ex("wettest24h"))
-    items.push(fig("24 h", formatNumber(ex("wettest24h")!.value, 0), "mm"));
-  if (c.type === "rail") {
-    if (typeof d["worstOnTime"] === "number")
-      items.push(
-        fig("On time, worst moment", formatNumber((d["worstOnTime"] as number) * 100, 0), "%"),
-      );
-    const w = d["worst"] as { delaySeconds: number } | undefined;
-    if (w) items.push(fig("Largest delay", formatNumber(w.delaySeconds / 60, 0), "min"));
-    if (typeof d["running"] === "number") items.push(fig("Trains now", String(d["running"])));
-  }
-  if (c.type === "river") {
-    if (typeof d["discharge"] === "number")
-      items.push(fig("Discharge", formatNumber(d["discharge"] as number, 0), "m³/s"));
-    if (typeof d["dangerLevel"] === "number")
-      items.push(fig("Danger level", String(d["dangerLevel"])));
-  }
-  if (c.type === "quake") {
-    const e = d["event"] as { magnitude?: number; depthKm?: number } | undefined;
-    if (e?.magnitude !== undefined) items.push(fig("Magnitude", formatNumber(e.magnitude, 1)));
-    if (e?.depthKm !== undefined) items.push(fig("Depth", formatNumber(e.depthKm, 0), "km"));
-  }
-  if (c.type === "stat" && ex("gust"))
-    items.push(fig("Gust", formatNumber(ex("gust")!.value, 0), "km/h"));
-  if (c.type === "snow" && ex("snow"))
-    items.push(fig("Snow depth", formatNumber(ex("snow")!.value, 0), "cm"));
-  return items.length ? <div className="strip chapter__figures">{items}</div> : null;
 }

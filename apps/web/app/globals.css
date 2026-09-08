@@ -676,6 +676,45 @@ table.sources th {
 .chapter--credits {
   margin-bottom: 0;
 }
+.chapter--video {
+  margin-bottom: 40vh;
+}
+.video-poster {
+  display: grid;
+  gap: var(--sn-space-2);
+  width: 100%;
+  margin-top: var(--sn-space-3);
+  padding: var(--sn-space-5);
+  border: 1px solid var(--sn-ground-ink);
+  background: var(--sn-ground-paper);
+  color: var(--sn-ground-ink);
+  font: inherit;
+  font-size: var(--sn-type-body-large-size);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--sn-duration-hover) var(--sn-ease-house);
+}
+.video-poster:hover {
+  background: var(--sn-ground-ink);
+  color: var(--sn-ground-paper);
+}
+.video-poster:hover .label {
+  color: var(--sn-ground-mist);
+}
+.video-poster__mark {
+  font-size: var(--sn-type-metric-size);
+  line-height: 1;
+}
+.video-frame {
+  margin-top: var(--sn-space-3);
+  background: var(--sn-ground-ink);
+}
+.video-frame__loading {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  color: var(--sn-ground-mist);
+}
 @media (max-width: 767px) {
   .today__chapters {
     margin: 0 var(--sn-hud-margin-compact);

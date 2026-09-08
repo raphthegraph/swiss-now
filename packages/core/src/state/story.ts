@@ -26,6 +26,36 @@ export const ChapterType = z.enum([
 ]);
 export type ChapterType = z.infer<typeof ChapterType>;
 
+/**
+ * A geographic marker a chapter renderer draws over the map (the video projects them through its
+ * map plate; the web can use them for highlights). Coordinates travel with the story so a renderer
+ * needs no state lookups.
+ */
+export const StoryMarkerKind = z.enum([
+  "temperature",
+  "rain",
+  "gust",
+  "snow",
+  "river",
+  "quake",
+  "disruption",
+  "place",
+]);
+export type StoryMarkerKind = z.infer<typeof StoryMarkerKind>;
+
+export const StoryMarker = z.object({
+  id: z.string().min(1),
+  kind: StoryMarkerKind,
+  lonLat: LonLat,
+  /** Display name (already localized by the builder). */
+  label: z.string().optional(),
+  value: z.number().optional(),
+  unit: z.string().optional(),
+  /** Emphasised markers get a label and a larger mark. */
+  emphasis: z.boolean().default(false),
+});
+export type StoryMarker = z.infer<typeof StoryMarker>;
+
 export const Chapter = z.object({
   id: z.string().min(1),
   type: ChapterType,
@@ -36,6 +66,8 @@ export const Chapter = z.object({
   highlights: z.array(z.string()).default([]),
   /** Chapter-specific payload (KPI list, event, field frames), validated by the chapter renderer. */
   data: z.unknown(),
+  /** Markers to draw over the map for this chapter. */
+  markers: z.array(StoryMarker).default([]),
   camera: CameraSpec,
   /** Suggested duration in seconds; the video derives `durationInFrames` from it. */
   durationHint: z.number().positive(),

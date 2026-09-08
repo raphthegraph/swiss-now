@@ -88,6 +88,20 @@ const firstHeadline = await page.locator(".chapter__headline").first().innerText
 const todayOk = chapters >= 1 && firstHeadline.length > 10;
 console.log("today chapters:", chapters, "|", firstHeadline.slice(0, 80), "| ok:", todayOk);
 await page.screenshot({ path: "/tmp/sn/qa-today.png" });
+
+// Today video: the poster mounts the Remotion Player, whose map plate must come up
+let playerOk = false;
+const poster = await page.$(".video-poster");
+if (poster) {
+  await poster.scrollIntoViewIfNeeded();
+  await poster.click();
+  await page
+    .waitForSelector(".video-frame canvas.maplibregl-canvas", { timeout: 90_000 })
+    .then(() => (playerOk = true))
+    .catch(() => {});
+}
+console.log("today player mounted:", playerOk);
+await page.screenshot({ path: "/tmp/sn/qa-today-player.png" });
 await page.goto(`${base}/`, { waitUntil: "domcontentloaded", timeout: 90_000 });
 await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 90_000 });
 // QUAKES view (present only when a magnitude ≥ 2 event is in the window)
@@ -102,4 +116,4 @@ if ((await quakesButton.count()) > 0) {
   await page.screenshot({ path: "/tmp/sn/qa-quakes.png" });
 } else console.log("QUAKES not in rail (no M≥2 event in window)");
 await browser.close();
-process.exit(shown && railFigures && quakesOk && todayOk ? 0 : 1);
+process.exit(shown && railFigures && quakesOk && todayOk && playerOk ? 0 : 1);

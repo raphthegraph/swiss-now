@@ -252,22 +252,22 @@ swiss-now/
 │  │  │  ├─ hud/                            SummaryStrip, LayerRail, Timeline, Legend, HoverCard, PlaceFocus (React + Motion/GSAP)
 │  │  │  └─ story/                          TodayStory, Chapter*.tsx (React + Motion, scroll-driven)
 │  │  └─ lib/                               queries (TanStack Query), polling policy, map style loader, daylight state
-│  └─ video/                                Remotion 4.x — the story / video experience
-│     ├─ src/Root.tsx                       compositions registry
-│     ├─ src/compositions/                  SwitzerlandToday{Vertical,Landscape}.tsx, Explainer*.tsx
-│     ├─ src/scenes/                        WeatherScene, ExtremesScene, RainScene, RailScene, RiverScene, QuakeScene, StatScene
-│     ├─ src/map/FixedMapPlate.tsx          MapLibre rendered once, moved with CSS transforms per frame
-│     └─ fixtures/                          saved SwissNowState / StorySpec JSON days
+│  └─ video/                                Remotion 4.x — registers compositions, renders locally
+│     ├─ src/Root.tsx                       SwitzerlandToday (1080×1920), SwitzerlandTodayWide, the Phase 0 spike
+│     ├─ scripts/fetch-story.mjs            saves /api/story/today as a fixture
+│     └─ fixtures/                          saved StorySpec / WeatherState JSON days (deterministic renders)
 ├─ packages/
 │  ├─ core/      @swiss-now/core            pure TypeScript, no React/DOM
 │  │  └─ src/{state, data-sources/<source>/{client,parse,normalize,index}.ts, geo, freshness, story, cli}
 │  ├─ motion/    @swiss-now/motion          tokens, scales, math, stateless SVG primitives, scene specs
+│  ├─ story-video/ @swiss-now/story-video   the Remotion composition: timeline, FixedMapPlate, Markers, hud/, SwitzerlandToday
+│  │                                        (the only package importing Remotion; mounted by apps/video and by the web <Player>)
 │  └─ geo-build/                            build-time GDAL/mapshaper scripts (boundaries, rail lines, TMC lookup)
 ├─ .github/workflows/                        gtfs.yml, snapshot.yml, story.yml, forecast.yml, render.yml
 └─ docs/
 ```
 
-Dependency rules: `core` and `motion` never import React-DOM, MapLibre, GSAP, Motion or Remotion (`motion/svg` imports React only). `apps/web` and `apps/video` never import each other. Anything both need moves down into a package. The originally requested `/lib/data-sources/<source>` lives at `packages/core/src/data-sources/<source>/`.
+Dependency rules: `core` and `motion` never import React-DOM, MapLibre, GSAP, Motion or Remotion (`motion/svg` imports React only). `apps/web` and `apps/video` never import each other. Anything both need moves down into a package — the composition itself is one such thing (`packages/story-video`), which is how the web Player and the renderer share code. The originally requested `/lib/data-sources/<source>` lives at `packages/core/src/data-sources/<source>/`.
 
 ## 5. Public internal API
 

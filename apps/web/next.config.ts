@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   // workspace packages are consumed from src/ (just-in-time); Next transpiles them
-  transpilePackages: ["@swiss-now/core", "@swiss-now/motion"],
+  transpilePackages: ["@swiss-now/core", "@swiss-now/motion", "@swiss-now/story-video"],
   poweredByHeader: false,
   // the generated rail files (≈ 20 k JSON files) are read at runtime by name; never trace them into
   // the function bundles — on Vercel they move to Blob (docs/FREE_TIER_ARCHITECTURE.md)

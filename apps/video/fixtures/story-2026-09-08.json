@@ -1,0 +1,1592 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-08",
+  "generatedAt": "2026-09-08T11:55:19.545Z",
+  "title": {
+    "de": "Die Schweiz heute — 2026-09-08",
+    "en": "Switzerland today — 2026-09-08"
+  },
+  "chapters": [
+    {
+      "id": "weather-summary",
+      "type": "weather-summary",
+      "layer": "weather",
+      "headline": {
+        "de": "31.8° in Genève / Cointrin, 4.2° on Jungfraujoch, a few showers",
+        "en": "31.8° in Genève / Cointrin, 4.2° on Jungfraujoch, a few showers"
+      },
+      "body": {
+        "de": "Peak of the day so far: 32°",
+        "en": "Peak of the day so far: 32°"
+      },
+      "highlights": ["smn:GVE", "smn:JUN"],
+      "data": {
+        "warmest": {
+          "stationId": "smn:GVE",
+          "value": 31.8,
+          "observedAt": "2026-09-08T11:10:00Z"
+        },
+        "coldest": {
+          "stationId": "smn:JUN",
+          "value": 4.2,
+          "observedAt": "2026-09-08T11:10:00Z"
+        },
+        "rainingShare": 0.001996654954686305,
+        "stations": 299
+      },
+      "markers": [
+        {
+          "id": "smn:ARO",
+          "kind": "temperature",
+          "lonLat": [9.679029, 46.792598],
+          "label": "Arosa",
+          "emphasis": false,
+          "value": 21,
+          "unit": "°"
+        },
+        {
+          "id": "smn:RAG",
+          "kind": "temperature",
+          "lonLat": [9.50255, 47.016579],
+          "label": "Bad Ragaz",
+          "emphasis": false,
+          "value": 31.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:HAI",
+          "kind": "temperature",
+          "lonLat": [9.023919, 47.651237],
+          "label": "Salen-Reutenen",
+          "emphasis": false,
+          "value": 26.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:HLL",
+          "kind": "temperature",
+          "lonLat": [8.470478, 47.697279],
+          "label": "Hallau",
+          "emphasis": false,
+          "value": 28,
+          "unit": "°"
+        },
+        {
+          "id": "smn:DEM",
+          "kind": "temperature",
+          "lonLat": [7.349547, 47.351706],
+          "label": "Delémont",
+          "emphasis": false,
+          "value": 29.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:EBK",
+          "kind": "temperature",
+          "lonLat": [9.10849, 47.273341],
+          "label": "Ebnat-Kappel",
+          "emphasis": false,
+          "value": 27.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ELM",
+          "kind": "temperature",
+          "lonLat": [9.175349, 46.92375],
+          "label": "Elm",
+          "emphasis": false,
+          "value": 25.5,
+          "unit": "°"
+        },
+        {
+          "id": "smn:EIN",
+          "kind": "temperature",
+          "lonLat": [8.756562, 47.132991],
+          "label": "Einsiedeln",
+          "emphasis": false,
+          "value": 25.4,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ANT",
+          "kind": "temperature",
+          "lonLat": [8.580525, 46.630866],
+          "label": "Andermatt",
+          "emphasis": false,
+          "value": 23.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MER",
+          "kind": "temperature",
+          "lonLat": [8.16926, 46.732174],
+          "label": "Meiringen",
+          "emphasis": false,
+          "value": 26.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CHD",
+          "kind": "temperature",
+          "lonLat": [7.139654, 46.479765],
+          "label": "Château-d'Oex",
+          "emphasis": false,
+          "value": 29.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GRA",
+          "kind": "temperature",
+          "lonLat": [7.113707, 46.771396],
+          "label": "Fribourg / Grangeneuve",
+          "emphasis": false,
+          "value": 28.4,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CHM",
+          "kind": "temperature",
+          "lonLat": [6.978815, 47.049166],
+          "label": "Chaumont",
+          "emphasis": false,
+          "value": 24.5,
+          "unit": "°"
+        },
+        {
+          "id": "smn:LAG",
+          "kind": "temperature",
+          "lonLat": [7.806437, 46.939629],
+          "label": "Langnau i.E.",
+          "emphasis": false,
+          "value": 27.5,
+          "unit": "°"
+        },
+        {
+          "id": "smn:KOP",
+          "kind": "temperature",
+          "lonLat": [7.605485, 47.118848],
+          "label": "Koppigen",
+          "emphasis": false,
+          "value": 27.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GRC",
+          "kind": "temperature",
+          "lonLat": [7.836792, 46.195312],
+          "label": "Grächen",
+          "emphasis": false,
+          "value": 24,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BLA",
+          "kind": "temperature",
+          "lonLat": [7.825917, 46.422265],
+          "label": "Blatten, Lötschental",
+          "emphasis": false,
+          "value": 24.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GRO",
+          "kind": "temperature",
+          "lonLat": [9.163729, 46.254989],
+          "label": "Grono",
+          "emphasis": false,
+          "value": 28.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BEH",
+          "kind": "temperature",
+          "lonLat": [10.019577, 46.40916],
+          "label": "Passo del Bernina",
+          "emphasis": false,
+          "value": 14.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SIA",
+          "kind": "temperature",
+          "lonLat": [9.762332, 46.432331],
+          "label": "Segl-Maria",
+          "emphasis": false,
+          "value": 18.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SMM",
+          "kind": "temperature",
+          "lonLat": [10.426311, 46.602203],
+          "label": "Sta. Maria, Val Müstair",
+          "emphasis": false,
+          "value": 20.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:DAV",
+          "kind": "temperature",
+          "lonLat": [9.84349, 46.812957],
+          "label": "Davos",
+          "emphasis": false,
+          "value": 24.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CHU",
+          "kind": "temperature",
+          "lonLat": [9.530583, 46.870401],
+          "label": "Chur",
+          "emphasis": false,
+          "value": 30.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ROB",
+          "kind": "temperature",
+          "lonLat": [10.062976, 46.347194],
+          "label": "Poschiavo / Robbia",
+          "emphasis": false,
+          "value": 24,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SAM",
+          "kind": "temperature",
+          "lonLat": [9.879412, 46.526247],
+          "label": "Samedan",
+          "emphasis": false,
+          "value": 21.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SCU",
+          "kind": "temperature",
+          "lonLat": [10.283202, 46.793275],
+          "label": "Scuol",
+          "emphasis": false,
+          "value": 25.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:DOL",
+          "kind": "temperature",
+          "lonLat": [6.099506, 46.424756],
+          "label": "La Dôle",
+          "emphasis": false,
+          "value": 20.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:PAY",
+          "kind": "temperature",
+          "lonLat": [6.942404, 46.811574],
+          "label": "Payerne",
+          "emphasis": false,
+          "value": 31.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:JUN",
+          "kind": "temperature",
+          "lonLat": [7.985099, 46.547532],
+          "label": "Jungfraujoch",
+          "emphasis": true,
+          "value": 4.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:WYN",
+          "kind": "temperature",
+          "lonLat": [7.787405, 47.255023],
+          "label": "Wynau",
+          "emphasis": false,
+          "value": 28.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SAE",
+          "kind": "temperature",
+          "lonLat": [9.343358, 47.24944],
+          "label": "Säntis",
+          "emphasis": false,
+          "value": 15.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:VAD",
+          "kind": "temperature",
+          "lonLat": [9.517512, 47.127448],
+          "label": "Vaduz",
+          "emphasis": false,
+          "value": 29.5,
+          "unit": "°"
+        },
+        {
+          "id": "smn:AIG",
+          "kind": "temperature",
+          "lonLat": [6.924423, 46.32664],
+          "label": "Aigle",
+          "emphasis": false,
+          "value": 28.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MLS",
+          "kind": "temperature",
+          "lonLat": [7.017774, 46.546172],
+          "label": "Le Moléson",
+          "emphasis": false,
+          "value": 18.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:FAH",
+          "kind": "temperature",
+          "lonLat": [6.941108, 47.423809],
+          "label": "Fahy",
+          "emphasis": false,
+          "value": 28.5,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MVE",
+          "kind": "temperature",
+          "lonLat": [7.460766, 46.298775],
+          "label": "Montana",
+          "emphasis": false,
+          "value": 24.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ZER",
+          "kind": "temperature",
+          "lonLat": [7.752403, 46.029265],
+          "label": "Zermatt",
+          "emphasis": false,
+          "value": 25.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CHA",
+          "kind": "temperature",
+          "lonLat": [7.054318, 47.131732],
+          "label": "Chasseral",
+          "emphasis": false,
+          "value": 21,
+          "unit": "°"
+        },
+        {
+          "id": "smn:PIL",
+          "kind": "temperature",
+          "lonLat": [8.25232, 46.978878],
+          "label": "Pilatus",
+          "emphasis": false,
+          "value": 17.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ALT",
+          "kind": "temperature",
+          "lonLat": [8.621804, 46.887048],
+          "label": "Altdorf",
+          "emphasis": false,
+          "value": 27,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ULR",
+          "kind": "temperature",
+          "lonLat": [8.308147, 46.504861],
+          "label": "Ulrichen",
+          "emphasis": false,
+          "value": 26.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:PIO",
+          "kind": "temperature",
+          "lonLat": [8.68811, 46.51478],
+          "label": "Piotta",
+          "emphasis": false,
+          "value": 24.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:LUG",
+          "kind": "temperature",
+          "lonLat": [8.960114, 46.003835],
+          "label": "Lugano",
+          "emphasis": false,
+          "value": 26.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:NAP",
+          "kind": "temperature",
+          "lonLat": [7.940049, 47.004645],
+          "label": "Napf",
+          "emphasis": false,
+          "value": 23.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SIO",
+          "kind": "temperature",
+          "lonLat": [7.315293, 46.217494],
+          "label": "Sion",
+          "emphasis": false,
+          "value": 29.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MAG",
+          "kind": "temperature",
+          "lonLat": [8.933607, 46.160024],
+          "label": "Magadino / Cadenazzo",
+          "emphasis": false,
+          "value": 28.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:NEU",
+          "kind": "temperature",
+          "lonLat": [6.953098, 46.99999],
+          "label": "Neuchâtel",
+          "emphasis": false,
+          "value": 28.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SBO",
+          "kind": "temperature",
+          "lonLat": [8.932403, 45.843405],
+          "label": "Stabio",
+          "emphasis": false,
+          "value": 28.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:INT",
+          "kind": "temperature",
+          "lonLat": [7.870408, 46.67203],
+          "label": "Interlaken",
+          "emphasis": false,
+          "value": 27,
+          "unit": "°"
+        },
+        {
+          "id": "smn:DIS",
+          "kind": "temperature",
+          "lonLat": [8.853466, 46.706531],
+          "label": "Disentis",
+          "emphasis": false,
+          "value": 27.5,
+          "unit": "°"
+        },
+        {
+          "id": "smn:STG",
+          "kind": "temperature",
+          "lonLat": [9.398461, 47.425454],
+          "label": "St. Gallen",
+          "emphasis": false,
+          "value": 25.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GLA",
+          "kind": "temperature",
+          "lonLat": [9.066899, 47.034588],
+          "label": "Glarus",
+          "emphasis": false,
+          "value": 28,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GVE",
+          "kind": "temperature",
+          "lonLat": [6.122274, 46.248511],
+          "label": "Genève / Cointrin",
+          "emphasis": true,
+          "value": 31.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:KLO",
+          "kind": "temperature",
+          "lonLat": [8.535904, 47.479588],
+          "label": "Zürich / Kloten",
+          "emphasis": false,
+          "value": 29.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GUE",
+          "kind": "temperature",
+          "lonLat": [8.61553, 46.652481],
+          "label": "Gütsch, Andermatt",
+          "emphasis": false,
+          "value": 15.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:PUY",
+          "kind": "temperature",
+          "lonLat": [6.667466, 46.512271],
+          "label": "Pully",
+          "emphasis": false,
+          "value": 27.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GSB",
+          "kind": "temperature",
+          "lonLat": [7.170733, 45.86889],
+          "label": "Col du Grand St-Bernard",
+          "emphasis": false,
+          "value": 15.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ABO",
+          "kind": "temperature",
+          "lonLat": [7.560695, 46.491737],
+          "label": "Adelboden",
+          "emphasis": false,
+          "value": 26.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:VIS",
+          "kind": "temperature",
+          "lonLat": [7.842907, 46.302881],
+          "label": "Visp",
+          "emphasis": false,
+          "value": 29.4,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CDF",
+          "kind": "temperature",
+          "lonLat": [6.792236, 47.082939],
+          "label": "La Chaux-de-Fonds",
+          "emphasis": false,
+          "value": 27.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:RUE",
+          "kind": "temperature",
+          "lonLat": [7.879356, 47.434558],
+          "label": "Rünenberg",
+          "emphasis": false,
+          "value": 26.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BUS",
+          "kind": "temperature",
+          "lonLat": [8.079459, 47.384341],
+          "label": "Buchs / Aarau",
+          "emphasis": false,
+          "value": 29.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:LUZ",
+          "kind": "temperature",
+          "lonLat": [8.300959, 47.036422],
+          "label": "Luzern",
+          "emphasis": false,
+          "value": 28.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ENG",
+          "kind": "temperature",
+          "lonLat": [8.410448, 46.821621],
+          "label": "Engelberg",
+          "emphasis": false,
+          "value": 25.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SHA",
+          "kind": "temperature",
+          "lonLat": [8.620069, 47.689805],
+          "label": "Schaffhausen",
+          "emphasis": false,
+          "value": 28,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SMA",
+          "kind": "temperature",
+          "lonLat": [8.567302, 47.380968],
+          "label": "Zürich / Fluntern",
+          "emphasis": false,
+          "value": 29.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SBE",
+          "kind": "temperature",
+          "lonLat": [9.184645, 46.463543],
+          "label": "S. Bernardino",
+          "emphasis": false,
+          "value": 17.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:WFJ",
+          "kind": "temperature",
+          "lonLat": [9.806392, 46.833327],
+          "label": "Weissfluhjoch",
+          "emphasis": false,
+          "value": 13.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:COV",
+          "kind": "temperature",
+          "lonLat": [9.821387, 46.418049],
+          "label": "Piz Corvatsch",
+          "emphasis": false,
+          "value": 5.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BAS",
+          "kind": "temperature",
+          "lonLat": [7.583544, 47.541069],
+          "label": "Basel / Binningen",
+          "emphasis": false,
+          "value": 29.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CGI",
+          "kind": "temperature",
+          "lonLat": [6.227668, 46.401036],
+          "label": "Nyon / Changins",
+          "emphasis": false,
+          "value": 31.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:FRE",
+          "kind": "temperature",
+          "lonLat": [6.576301, 46.84061],
+          "label": "Bullet / La Frétaz",
+          "emphasis": false,
+          "value": 23.5,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BER",
+          "kind": "temperature",
+          "lonLat": [7.463992, 46.990743],
+          "label": "Bern / Zollikofen",
+          "emphasis": false,
+          "value": 28.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GUT",
+          "kind": "temperature",
+          "lonLat": [9.279415, 47.601705],
+          "label": "Güttingen",
+          "emphasis": false,
+          "value": 25.5,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GOE",
+          "kind": "temperature",
+          "lonLat": [7.973692, 47.363109],
+          "label": "Gösgen",
+          "emphasis": false,
+          "value": 29.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:WAE",
+          "kind": "temperature",
+          "lonLat": [8.677638, 47.220938],
+          "label": "Wädenswil",
+          "emphasis": false,
+          "value": 26.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:TAE",
+          "kind": "temperature",
+          "lonLat": [8.904882, 47.479856],
+          "label": "Aadorf / Tänikon",
+          "emphasis": false,
+          "value": 30,
+          "unit": "°"
+        },
+        {
+          "id": "smn:REH",
+          "kind": "temperature",
+          "lonLat": [8.517889, 47.427672],
+          "label": "Zürich / Affoltern",
+          "emphasis": false,
+          "value": 29.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:OTL",
+          "kind": "temperature",
+          "lonLat": [8.787484, 46.17222],
+          "label": "Locarno / Monti",
+          "emphasis": false,
+          "value": 29.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BEZ",
+          "kind": "temperature",
+          "lonLat": [8.233268, 47.557235],
+          "label": "Beznau",
+          "emphasis": false,
+          "value": 29.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MUB",
+          "kind": "temperature",
+          "lonLat": [7.278158, 46.973249],
+          "label": "Mühleberg",
+          "emphasis": false,
+          "value": 28.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CIM",
+          "kind": "temperature",
+          "lonLat": [8.791597, 46.200436],
+          "label": "Cimetta",
+          "emphasis": false,
+          "value": 19.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:EVO",
+          "kind": "temperature",
+          "lonLat": [7.508657, 46.112125],
+          "label": "Evolène / Villa",
+          "emphasis": false,
+          "value": 22,
+          "unit": "°"
+        },
+        {
+          "id": "smn:LEI",
+          "kind": "temperature",
+          "lonLat": [8.188268, 47.597266],
+          "label": "Leibstadt",
+          "emphasis": false,
+          "value": 28.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GRH",
+          "kind": "temperature",
+          "lonLat": [8.333255, 46.571695],
+          "label": "Grimsel Hospiz",
+          "emphasis": false,
+          "value": 18.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:COM",
+          "kind": "temperature",
+          "lonLat": [8.93551, 46.459477],
+          "label": "Acquarossa / Comprovasco",
+          "emphasis": false,
+          "value": 28,
+          "unit": "°"
+        },
+        {
+          "id": "smn:LAE",
+          "kind": "temperature",
+          "lonLat": [8.397223, 47.481938],
+          "label": "Lägern",
+          "emphasis": false,
+          "value": 25.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:HOE",
+          "kind": "temperature",
+          "lonLat": [8.941619, 47.370824],
+          "label": "Hörnli",
+          "emphasis": false,
+          "value": 24.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:PLF",
+          "kind": "temperature",
+          "lonLat": [7.266249, 46.747695],
+          "label": "Plaffeien",
+          "emphasis": false,
+          "value": 25.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ROE",
+          "kind": "temperature",
+          "lonLat": [8.513388, 46.443073],
+          "label": "Robièi",
+          "emphasis": false,
+          "value": 15,
+          "unit": "°"
+        },
+        {
+          "id": "smn:PSI",
+          "kind": "temperature",
+          "lonLat": [8.226943, 47.536478],
+          "label": "Würenlingen / PSI",
+          "emphasis": false,
+          "value": 29.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BIN",
+          "kind": "temperature",
+          "lonLat": [8.192305, 46.367667],
+          "label": "Binn",
+          "emphasis": false,
+          "value": 23.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MAR",
+          "kind": "temperature",
+          "lonLat": [7.016611, 46.1189],
+          "label": "Les Marécottes",
+          "emphasis": false,
+          "value": 28.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SAG",
+          "kind": "temperature",
+          "lonLat": [8.636965, 47.081069],
+          "label": "Sattel, SZ",
+          "emphasis": false,
+          "value": 26.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CHZ",
+          "kind": "temperature",
+          "lonLat": [8.46464, 47.188281],
+          "label": "Cham",
+          "emphasis": false,
+          "value": 28.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:STC",
+          "kind": "temperature",
+          "lonLat": [7.687083, 47.571768],
+          "label": "St. Chrischona",
+          "emphasis": false,
+          "value": 24.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:COY",
+          "kind": "temperature",
+          "lonLat": [7.09062, 47.18086],
+          "label": "Courtelary",
+          "emphasis": false,
+          "value": 28.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:VEV",
+          "kind": "temperature",
+          "lonLat": [6.8151, 46.471287],
+          "label": "Vevey / Corseaux",
+          "emphasis": false,
+          "value": 25.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BOU",
+          "kind": "temperature",
+          "lonLat": [6.857014, 46.393444],
+          "label": "Bouveret",
+          "emphasis": false,
+          "value": 24,
+          "unit": "°"
+        },
+        {
+          "id": "smn:TIT",
+          "kind": "temperature",
+          "lonLat": [8.42597, 46.770563],
+          "label": "Titlis",
+          "emphasis": false,
+          "value": 9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:FRU",
+          "kind": "temperature",
+          "lonLat": [7.657542, 46.599008],
+          "label": "Frutigen",
+          "emphasis": false,
+          "value": 26.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MOE",
+          "kind": "temperature",
+          "lonLat": [7.877904, 47.5722],
+          "label": "Möhlin",
+          "emphasis": false,
+          "value": 29,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MAH",
+          "kind": "temperature",
+          "lonLat": [6.567983, 46.73697],
+          "label": "Mathod",
+          "emphasis": false,
+          "value": 31.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CHB",
+          "kind": "temperature",
+          "lonLat": [6.312429, 46.670137],
+          "label": "Les Charbonnières",
+          "emphasis": false,
+          "value": 27,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MTE",
+          "kind": "temperature",
+          "lonLat": [7.624027, 46.147956],
+          "label": "Mottec",
+          "emphasis": false,
+          "value": 22.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:VLS",
+          "kind": "temperature",
+          "lonLat": [9.188711, 46.627763],
+          "label": "Vals",
+          "emphasis": false,
+          "value": 24.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ARH",
+          "kind": "temperature",
+          "lonLat": [9.566802, 47.483668],
+          "label": "Altenrhein",
+          "emphasis": false,
+          "value": 24.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:UEB",
+          "kind": "temperature",
+          "lonLat": [8.490226, 47.351368],
+          "label": "Uetliberg",
+          "emphasis": false,
+          "value": 22.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GOS",
+          "kind": "temperature",
+          "lonLat": [8.595363, 46.692683],
+          "label": "Göschenen",
+          "emphasis": false,
+          "value": 27.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:AND",
+          "kind": "temperature",
+          "lonLat": [9.431927, 46.610118],
+          "label": "Andeer",
+          "emphasis": false,
+          "value": 27.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BIV",
+          "kind": "temperature",
+          "lonLat": [9.668611, 46.462455],
+          "label": "Bivio",
+          "emphasis": false,
+          "value": 19.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MTR",
+          "kind": "temperature",
+          "lonLat": [8.924742, 46.410108],
+          "label": "Matro",
+          "emphasis": false,
+          "value": 14.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BIA",
+          "kind": "temperature",
+          "lonLat": [8.978198, 46.336057],
+          "label": "Biasca",
+          "emphasis": false,
+          "value": 28.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:LAT",
+          "kind": "temperature",
+          "lonLat": [9.753709, 46.627277],
+          "label": "Bergün / Latsch",
+          "emphasis": false,
+          "value": 24.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MOB",
+          "kind": "temperature",
+          "lonLat": [7.225286, 46.07102],
+          "label": "Montagnier, Bagnes",
+          "emphasis": false,
+          "value": 28.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CDM",
+          "kind": "temperature",
+          "lonLat": [7.098299, 46.39156],
+          "label": "Col des Mosses",
+          "emphasis": false,
+          "value": 23.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SIM",
+          "kind": "temperature",
+          "lonLat": [8.056338, 46.19683],
+          "label": "Simplon-Dorf",
+          "emphasis": false,
+          "value": 20.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BUF",
+          "kind": "temperature",
+          "lonLat": [10.267203, 46.648409],
+          "label": "Buffalora",
+          "emphasis": false,
+          "value": 19.4,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ILZ",
+          "kind": "temperature",
+          "lonLat": [9.215352, 46.775042],
+          "label": "Ilanz",
+          "emphasis": false,
+          "value": 29.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BIZ",
+          "kind": "temperature",
+          "lonLat": [9.266895, 47.508796],
+          "label": "Bischofszell / Sitterdorf",
+          "emphasis": false,
+          "value": 28,
+          "unit": "°"
+        },
+        {
+          "id": "smn:PFA",
+          "kind": "temperature",
+          "lonLat": [8.754866, 47.37682],
+          "label": "Pfäffikon, ZH",
+          "emphasis": false,
+          "value": 28.4,
+          "unit": "°"
+        },
+        {
+          "id": "smn:LAC",
+          "kind": "temperature",
+          "lonLat": [8.858686, 47.179201],
+          "label": "Lachen / Galgenen",
+          "emphasis": false,
+          "value": 27.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:FLU",
+          "kind": "temperature",
+          "lonLat": [8.020281, 46.889474],
+          "label": "Flühli, LU",
+          "emphasis": false,
+          "value": 27.7,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BOL",
+          "kind": "temperature",
+          "lonLat": [7.384206, 46.623523],
+          "label": "Boltigen",
+          "emphasis": false,
+          "value": 30.4,
+          "unit": "°"
+        },
+        {
+          "id": "smn:THU",
+          "kind": "temperature",
+          "lonLat": [7.58522, 46.749802],
+          "label": "Thun",
+          "emphasis": false,
+          "value": 28.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MAS",
+          "kind": "temperature",
+          "lonLat": [7.069718, 46.656523],
+          "label": "Marsens",
+          "emphasis": false,
+          "value": 28.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:VIT",
+          "kind": "temperature",
+          "lonLat": [6.710072, 46.621772],
+          "label": "Villars-Tiercelin",
+          "emphasis": false,
+          "value": 26.4,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GRE",
+          "kind": "temperature",
+          "lonLat": [7.415098, 47.179089],
+          "label": "Grenchen",
+          "emphasis": false,
+          "value": 29,
+          "unit": "°"
+        },
+        {
+          "id": "smn:MOA",
+          "kind": "temperature",
+          "lonLat": [8.232817, 47.243836],
+          "label": "Mosen",
+          "emphasis": false,
+          "value": 29.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CEV",
+          "kind": "temperature",
+          "lonLat": [8.603162, 46.320492],
+          "label": "Cevio",
+          "emphasis": false,
+          "value": 28.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CRM",
+          "kind": "temperature",
+          "lonLat": [7.059102, 47.047603],
+          "label": "Cressier",
+          "emphasis": false,
+          "value": 29,
+          "unit": "°"
+        },
+        {
+          "id": "smn:CMA",
+          "kind": "temperature",
+          "lonLat": [9.180344, 46.842494],
+          "label": "Crap Masegn",
+          "emphasis": false,
+          "value": 14.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GEN",
+          "kind": "temperature",
+          "lonLat": [9.017872, 45.927593],
+          "label": "Monte Generoso",
+          "emphasis": false,
+          "value": 18.4,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BIE",
+          "kind": "temperature",
+          "lonLat": [6.342377, 46.524881],
+          "label": "Bière",
+          "emphasis": false,
+          "value": 29,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ORO",
+          "kind": "temperature",
+          "lonLat": [6.858242, 46.572261],
+          "label": "Oron",
+          "emphasis": false,
+          "value": 26.3,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BRL",
+          "kind": "temperature",
+          "lonLat": [6.607421, 46.980122],
+          "label": "La Brévine",
+          "emphasis": false,
+          "value": 26.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:BAN",
+          "kind": "temperature",
+          "lonLat": [7.528661, 46.977809],
+          "label": "Bantiger",
+          "emphasis": false,
+          "value": 22.2,
+          "unit": "°"
+        },
+        {
+          "id": "smn:EGO",
+          "kind": "temperature",
+          "lonLat": [8.004759, 47.179426],
+          "label": "Egolzwil",
+          "emphasis": false,
+          "value": 28.5,
+          "unit": "°"
+        },
+        {
+          "id": "smn:DIA",
+          "kind": "temperature",
+          "lonLat": [7.203787, 46.326751],
+          "label": "Les Diablerets",
+          "emphasis": false,
+          "value": 10.5,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SPF",
+          "kind": "temperature",
+          "lonLat": [8.01244, 46.947041],
+          "label": "Schüpfheim",
+          "emphasis": false,
+          "value": 29,
+          "unit": "°"
+        },
+        {
+          "id": "smn:VAB",
+          "kind": "temperature",
+          "lonLat": [9.554433, 46.755036],
+          "label": "Valbella",
+          "emphasis": false,
+          "value": 23.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:PMA",
+          "kind": "temperature",
+          "lonLat": [9.529547, 46.577184],
+          "label": "Piz Martegnas",
+          "emphasis": false,
+          "value": 13.4,
+          "unit": "°"
+        },
+        {
+          "id": "smn:NAS",
+          "kind": "temperature",
+          "lonLat": [10.261398, 46.817165],
+          "label": "Naluns / Schlivera",
+          "emphasis": false,
+          "value": 17.1,
+          "unit": "°"
+        },
+        {
+          "id": "smn:ATT",
+          "kind": "temperature",
+          "lonLat": [7.268666, 46.099112],
+          "label": "Les Attelas",
+          "emphasis": false,
+          "value": 14,
+          "unit": "°"
+        },
+        {
+          "id": "smn:EVI",
+          "kind": "temperature",
+          "lonLat": [7.02676, 46.182951],
+          "label": "Evionnaz",
+          "emphasis": false,
+          "value": 28.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GOR",
+          "kind": "temperature",
+          "lonLat": [7.785951, 45.983649],
+          "label": "Gornergrat",
+          "emphasis": false,
+          "value": 10.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:EGH",
+          "kind": "temperature",
+          "lonLat": [8.092728, 46.426534],
+          "label": "Eggishorn",
+          "emphasis": false,
+          "value": 14,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GIH",
+          "kind": "temperature",
+          "lonLat": [8.190225, 46.849454],
+          "label": "Giswil",
+          "emphasis": false,
+          "value": 28.4,
+          "unit": "°"
+        },
+        {
+          "id": "smn:GES",
+          "kind": "temperature",
+          "lonLat": [8.523386, 46.996083],
+          "label": "Gersau",
+          "emphasis": false,
+          "value": 25.9,
+          "unit": "°"
+        },
+        {
+          "id": "smn:SRS",
+          "kind": "temperature",
+          "lonLat": [9.668072, 46.975508],
+          "label": "Schiers",
+          "emphasis": false,
+          "value": 31.6,
+          "unit": "°"
+        },
+        {
+          "id": "smn:VIO",
+          "kind": "temperature",
+          "lonLat": [9.627806, 46.35302],
+          "label": "Vicosoprano",
+          "emphasis": false,
+          "value": 23,
+          "unit": "°"
+        },
+        {
+          "id": "smn:OBR",
+          "kind": "temperature",
+          "lonLat": [9.612704, 47.376606],
+          "label": "Oberriet / Kriessern",
+          "emphasis": false,
+          "value": 28,
+          "unit": "°"
+        }
+      ],
+      "camera": {
+        "center": [8.2275, 46.8182],
+        "zoom": 7.2,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "durationHint": 6,
+      "score": 1
+    },
+    {
+      "id": "extremes",
+      "type": "extremes",
+      "layer": "weather",
+      "headline": {
+        "de": "28 degrees between Genève / Cointrin and Jungfraujoch",
+        "en": "28 degrees between Genève / Cointrin and Jungfraujoch"
+      },
+      "highlights": ["smn:GVE", "smn:JUN"],
+      "data": {
+        "warmest": {
+          "stationId": "smn:GVE",
+          "value": 31.8,
+          "observedAt": "2026-09-08T11:10:00Z"
+        },
+        "coldest": {
+          "stationId": "smn:JUN",
+          "value": 4.2,
+          "observedAt": "2026-09-08T11:10:00Z"
+        },
+        "spread": 27.6
+      },
+      "markers": [
+        {
+          "id": "smn:GVE",
+          "kind": "temperature",
+          "lonLat": [6.122274, 46.248511],
+          "label": "Genève / Cointrin",
+          "emphasis": true,
+          "value": 31.8,
+          "unit": "°"
+        },
+        {
+          "id": "smn:JUN",
+          "kind": "temperature",
+          "lonLat": [7.985099, 46.547532],
+          "label": "Jungfraujoch",
+          "emphasis": true,
+          "value": 4.2,
+          "unit": "°"
+        }
+      ],
+      "camera": {
+        "center": [6.122274, 46.248511],
+        "zoom": 8.5,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "durationHint": 6,
+      "score": 0.92
+    },
+    {
+      "id": "rail",
+      "type": "rail",
+      "layer": "rail",
+      "headline": {
+        "de": "IC1 to Genève-Aéroport was 34 minutes late · 92 % of trains on time at the worst moment",
+        "en": "IC1 to Genève-Aéroport was 34 minutes late · 92 % of trains on time at the worst moment"
+      },
+      "body": {
+        "de": "Interrupted service: Cadenazzo - Luino (I)",
+        "en": "Interrupted service: Cadenazzo - Luino (I)"
+      },
+      "highlights": [],
+      "data": {
+        "worstOnTime": 0.9226907630522089,
+        "worst": {
+          "line": "IC1",
+          "delaySeconds": 2058,
+          "trainNumber": "714",
+          "headsign": "Genève-Aéroport"
+        },
+        "disruptions": 2,
+        "running": 996
+      },
+      "markers": [
+        {
+          "id": "sbb-rti:1236381",
+          "kind": "disruption",
+          "lonLat": [8.941624, 46.152673],
+          "label": "Interrupted service: Cadenazzo - Luino (I)",
+          "emphasis": true
+        },
+        {
+          "id": "sbb-rti:1236342",
+          "kind": "disruption",
+          "lonLat": [7.907699, 47.351934],
+          "label": "Limited service: Olten - Bern",
+          "emphasis": true
+        }
+      ],
+      "camera": {
+        "center": [8.941624, 46.152673],
+        "zoom": 8.5,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "durationHint": 6,
+      "score": 0.8716666666666666
+    },
+    {
+      "id": "stat-gust",
+      "type": "stat",
+      "layer": "weather",
+      "headline": {
+        "de": "Gusts of 53 km/h on Les Attelas",
+        "en": "Gusts of 53 km/h on Les Attelas"
+      },
+      "highlights": ["smn:ATT"],
+      "data": {
+        "gust": {
+          "stationId": "smn:ATT",
+          "value": 52.9,
+          "observedAt": "2026-09-08T11:10:00Z"
+        }
+      },
+      "markers": [
+        {
+          "id": "smn:ATT",
+          "kind": "gust",
+          "lonLat": [7.268666, 46.099112],
+          "label": "Les Attelas",
+          "emphasis": true,
+          "value": 52.9,
+          "unit": "km/h"
+        }
+      ],
+      "camera": {
+        "center": [7.268666, 46.099112],
+        "zoom": 8.5,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "durationHint": 5,
+      "score": 0.4408333333333333
+    },
+    {
+      "id": "river",
+      "type": "river",
+      "layer": "hydrology",
+      "headline": {
+        "de": "Rhein at Basel, Rheinhalle: 463 m³/s, the largest flow in the country",
+        "en": "Rhein at Basel, Rheinhalle: 463 m³/s, the largest flow in the country"
+      },
+      "highlights": ["bafu:2289"],
+      "data": {
+        "stationId": "bafu:2289",
+        "discharge": 463.069
+      },
+      "markers": [
+        {
+          "id": "bafu:2289",
+          "kind": "river",
+          "lonLat": [7.61667541986706, 47.559425547598934],
+          "label": "Rhein Basel, Rheinhalle",
+          "value": 463.069,
+          "unit": "m³/s",
+          "emphasis": true
+        }
+      ],
+      "camera": {
+        "center": [7.61667541986706, 47.559425547598934],
+        "zoom": 9,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "durationHint": 5,
+      "score": 0.25
+    }
+  ],
+  "credits": [
+    "Source: MeteoSwiss",
+    "Source: opentransportdata.swiss",
+    "Source: FOEN",
+    "© swisstopo"
+  ]
+}

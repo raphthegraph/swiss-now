@@ -11,16 +11,20 @@
     "render": "remotion render src/index.ts",
     "still": "remotion still src/index.ts",
     "typecheck": "tsc --noEmit",
-    "test": "echo \"no tests yet\""
+    "test": "echo \"no tests yet\"",
+    "story:fetch": "node scripts/fetch-story.mjs",
+    "render:today": "remotion render src/index.ts SwitzerlandToday out/today.mp4",
+    "render:today:wide": "remotion render src/index.ts SwitzerlandTodayWide out/today-wide.mp4"
   },
   "dependencies": {
-    "@remotion/cli": "^4.0.522",
+    "@remotion/cli": "4.0.522",
     "@swiss-now/core": "workspace:*",
     "@swiss-now/motion": "workspace:*",
+    "@swiss-now/story-video": "workspace:*",
     "maplibre-gl": "^6.7.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "remotion": "^4.0.522"
+    "remotion": "4.0.522"
   },
   "devDependencies": {
     "@types/node": "^22.18.0",

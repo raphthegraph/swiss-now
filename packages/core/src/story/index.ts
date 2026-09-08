@@ -4,7 +4,7 @@
  * Heuristic scores 0–1 per chapter; chapters below `minScore` are cut; the summary always leads.
  */
 import type { Snapshot } from "../snapshot/index";
-import type { Chapter, StorySpec } from "../state/story";
+import type { Chapter, StoryMarker, StorySpec } from "../state/story";
 import type { LonLat } from "../state/common";
 import type { Event, Observation, Station } from "../state/entities";
 
@@ -34,6 +34,29 @@ function name(snap: Snapshot | undefined, id: string): string {
 function camera(lonLat: LonLat | undefined, zoom = 9): Chapter["camera"] {
   return lonLat ? { center: lonLat, zoom, bearing: 0, pitch: 0 } : { ...NATIONAL };
 }
+function marker(
+  snap: Snapshot | undefined,
+  kind: StoryMarker["kind"],
+  stationId: string,
+  extra: Partial<Omit<StoryMarker, "id" | "kind" | "lonLat">> = {},
+): StoryMarker | undefined {
+  const st = stationById(snap, stationId);
+  if (!st) return undefined;
+  const m: StoryMarker = {
+    id: stationId,
+    kind,
+    lonLat: st.lonLat,
+    label: name(snap, stationId),
+    emphasis: false,
+  };
+  if (extra.value !== undefined) m.value = extra.value;
+  if (extra.unit !== undefined) m.unit = extra.unit;
+  if (extra.emphasis !== undefined) m.emphasis = extra.emphasis;
+  if (extra.label !== undefined) m.label = extra.label;
+  return m;
+}
+const defined = <T>(xs: (T | undefined)[]): T[] => xs.filter((x): x is T => x !== undefined);
+
 function latestObs(snap: Snapshot | undefined, parameter: Observation["parameter"]): Observation[] {
   const obs = snap?.weather?.observations.filter((o) => o.parameter === parameter) ?? [];
   const byStation = new Map<string, Observation>();
@@ -73,6 +96,15 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
       },
       highlights: [warm?.stationId, cold?.stationId].filter((x): x is string => Boolean(x)),
       data: { warmest: warm, coldest: cold, rainingShare: rain, stations: w.stations.length },
+      markers: defined(
+        latestObs(latest, "airTemperature").map((o) =>
+          marker(latest, "temperature", o.stationId, {
+            value: o.value,
+            unit: "°",
+            emphasis: o.stationId === warm?.stationId || o.stationId === cold?.stationId,
+          }),
+        ),
+      ),
       camera: { ...NATIONAL },
       durationHint: 6,
       score: 1,
@@ -90,6 +122,18 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         },
         highlights: [warm.stationId, cold.stationId],
         data: { warmest: warm, coldest: cold, spread },
+        markers: defined([
+          marker(latest, "temperature", warm.stationId, {
+            value: warm.value,
+            unit: "°",
+            emphasis: true,
+          }),
+          marker(latest, "temperature", cold.stationId, {
+            value: cold.value,
+            unit: "°",
+            emphasis: true,
+          }),
+        ]),
         camera: camera(stationById(latest, warm.stationId)?.lonLat, 8.5),
         durationHint: 6,
         score: Math.min(1, spread / 30),
@@ -108,6 +152,9 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         },
         highlights: [wet.stationId],
         data: { wettest24h: wet, rainingShare: rain },
+        markers: defined([
+          marker(latest, "rain", wet.stationId, { value: wet.value, unit: "mm", emphasis: true }),
+        ]),
         camera: camera(stationById(latest, wet.stationId)?.lonLat, 8.5),
         durationHint: 5,
         score: Math.min(1, wet.value / 40),
@@ -127,6 +174,13 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         },
         highlights: [gust.stationId],
         data: { gust },
+        markers: defined([
+          marker(latest, "gust", gust.stationId, {
+            value: gust.value,
+            unit: "km/h",
+            emphasis: true,
+          }),
+        ]),
         camera: camera(stationById(latest, gust.stationId)?.lonLat, 8.5),
         durationHint: 5,
         score: Math.min(1, gust.value / 120),
@@ -142,6 +196,9 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         },
         highlights: [snow.stationId],
         data: { snow },
+        markers: defined([
+          marker(latest, "snow", snow.stationId, { value: snow.value, unit: "cm", emphasis: true }),
+        ]),
         camera: camera(stationById(latest, snow.stationId)?.lonLat, 8.5),
         durationHint: 5,
         score: Math.min(1, snow.value / 150),
@@ -186,6 +243,25 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         disruptions: disruptions.length,
         running: rails[rails.length - 1]!.running,
       },
+      markers: disruptions.slice(0, 3).flatMap((d): StoryMarker[] => {
+        const at =
+          d.geometry.type === "LineString"
+            ? (d.geometry.coordinates[0] as LonLat | undefined)
+            : d.geometry.type === "Point"
+              ? (d.geometry.coordinates as LonLat)
+              : undefined;
+        return at
+          ? [
+              {
+                id: d.id,
+                kind: "disruption",
+                lonLat: at,
+                label: d.headline.en ?? d.headline.de,
+                emphasis: true,
+              },
+            ]
+          : [];
+      }),
       camera: camera(disCam as LonLat | undefined, 8.5),
       durationHint: 6,
       score: Math.min(
@@ -232,6 +308,16 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
           dangerLevel: isDanger ? danger![1] : undefined,
           discharge: q?.value,
         },
+        markers: [
+          {
+            id: st.id,
+            kind: "river",
+            lonLat: st.lonLat,
+            label: `${st.waterBody ?? ""} ${st.name.de}`.trim(),
+            ...(q ? { value: q.value, unit: "m³/s" } : {}),
+            emphasis: true,
+          },
+        ],
         camera: camera(st.lonLat, 9),
         durationHint: 5,
         score: isDanger ? Math.min(1, 0.4 + danger![1] * 0.15) : 0.25,
@@ -267,6 +353,16 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         headline: { de: chosen.headline.de, en: chosen.headline.en ?? chosen.headline.de },
         highlights: [chosen.id],
         data: { event: chosen },
+        markers: [
+          {
+            id: chosen.id,
+            kind: "quake",
+            lonLat: chosen.geometry.coordinates,
+            label: chosen.headline.en ?? chosen.headline.de,
+            ...(chosen.magnitude !== undefined ? { value: chosen.magnitude, unit: "M" } : {}),
+            emphasis: true,
+          },
+        ],
         camera: camera(chosen.geometry.coordinates, 9.5),
         durationHint: 5,
         score: Math.min(1, ((chosen.magnitude ?? 0) - 1.5) / 3),
@@ -298,9 +394,83 @@ function placeholder(date: string): Chapter {
     layer: "weather",
     headline: { de: "Noch keine Daten für heute", en: "No data for today yet" },
     highlights: [],
+    markers: [],
     data: { date },
     camera: { ...NATIONAL },
     durationHint: 4,
     score: 0,
   };
+}
+
+/** A key figure a chapter renderer shows next to the headline; formatting is the renderer's job. */
+export interface ChapterFigure {
+  label: string;
+  value: number;
+  decimals: number;
+  unit?: string;
+}
+
+/**
+ * Key figures per chapter type, read from `chapter.data`. Shared by the web Today mode and the
+ * video so both show the same numbers with the same labels.
+ */
+export function chapterFigures(c: Chapter): ChapterFigure[] {
+  const d = (c.data ?? {}) as Record<string, unknown>;
+  const num = (k: string): number | undefined =>
+    typeof d[k] === "number" ? (d[k] as number) : undefined;
+  const obs = (k: string): number | undefined => {
+    const o = d[k] as { value?: unknown } | undefined;
+    return typeof o?.value === "number" ? o.value : undefined;
+  };
+  const out: ChapterFigure[] = [];
+  const push = (label: string, value: number | undefined, decimals: number, unit?: string) => {
+    if (value === undefined) return;
+    out.push(unit ? { label, value, decimals, unit } : { label, value, decimals });
+  };
+  switch (c.type) {
+    case "weather-summary":
+    case "extremes": {
+      push("Warmest", obs("warmest"), 1, "°C");
+      push("Coldest", obs("coldest"), 1, "°C");
+      const share = num("rainingShare");
+      if (share !== undefined && c.type === "weather-summary")
+        push("Raining over", share * 100, 0, "%");
+      break;
+    }
+    case "rainfall":
+      push("24 h", obs("wettest24h"), 0, "mm");
+      break;
+    case "rail": {
+      const w = num("worstOnTime");
+      push("Lowest on time", w === undefined ? undefined : w * 100, 0, "%");
+      const worst = d["worst"] as { delaySeconds?: unknown } | undefined;
+      push(
+        "Largest delay",
+        typeof worst?.delaySeconds === "number" ? worst.delaySeconds / 60 : undefined,
+        0,
+        "min",
+      );
+      push("Trains now", num("running"), 0);
+      break;
+    }
+    case "river":
+      push("Discharge", num("discharge"), 0, "m³/s");
+      push("Danger level", num("dangerLevel"), 0);
+      break;
+    case "quake": {
+      const e = d["event"] as { magnitude?: unknown; depthKm?: unknown } | undefined;
+      push("Magnitude", typeof e?.magnitude === "number" ? e.magnitude : undefined, 1);
+      push("Depth", typeof e?.depthKm === "number" ? e.depthKm : undefined, 0, "km");
+      break;
+    }
+    case "stat":
+      push("Gust", obs("gust"), 0, "km/h");
+      break;
+    case "snow":
+      push("Snow depth", obs("snow"), 0, "cm");
+      break;
+    default:
+      break;
+  }
+  return out;
 }

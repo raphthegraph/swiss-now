@@ -72,3 +72,24 @@ export function positionAlongPath(
     progress: path.lengthMeters > 0 ? d / path.lengthMeters : 0,
   };
 }
+
+/**
+ * Web Mercator pixel position of `p` on a map plate of `plateW × plateH` px centred on `center`
+ * at `zoom` (512-px tiles, bearing 0, pitch 0 — identical to MapLibre's projection). Pure math,
+ * so overlays can be placed without asking the renderer.
+ */
+export function projectOnPlate(
+  p: LonLat,
+  center: LonLat,
+  zoom: number,
+  plateW: number,
+  plateH: number,
+): { x: number; y: number } {
+  const world = 512 * 2 ** zoom;
+  const mx = (lon: number) => ((lon + 180) / 360) * world;
+  const my = (lat: number) => {
+    const r = (lat * Math.PI) / 180;
+    return ((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2) * world;
+  };
+  return { x: plateW / 2 + mx(p[0]) - mx(center[0]), y: plateH / 2 + my(p[1]) - my(center[1]) };
+}

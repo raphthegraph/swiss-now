@@ -24,7 +24,7 @@ importers:
   apps/video:
     dependencies:
       '@remotion/cli':
-        specifier: ^4.0.522
+        specifier: 4.0.522
         version: 4.0.522(@swc/helpers@0.5.23)(postcss@8.5.28)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@5.9.3)
       '@swiss-now/core':
         specifier: workspace:*
@@ -32,6 +32,9 @@ importers:
       '@swiss-now/motion':
         specifier: workspace:*
         version: link:../../packages/motion
+      '@swiss-now/story-video':
+        specifier: workspace:*
+        version: link:../../packages/story-video
       maplibre-gl:
         specifier: ^6.7.0
         version: 6.7.0
@@ -42,7 +45,7 @@ importers:
         specifier: ^19.2.8
         version: 19.2.8(react@19.2.8)
       remotion:
-        specifier: ^4.0.522
+        specifier: 4.0.522
         version: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     devDependencies:
       '@types/node':
@@ -60,12 +63,18 @@ importers:
 
   apps/web:
     dependencies:
+      '@remotion/player':
+        specifier: 4.0.522
+        version: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@swiss-now/core':
         specifier: workspace:*
         version: link:../../packages/core
       '@swiss-now/motion':
         specifier: workspace:*
         version: link:../../packages/motion
+      '@swiss-now/story-video':
+        specifier: workspace:*
+        version: link:../../packages/story-video
       '@vercel/blob':
         specifier: ^2.8.0
         version: 2.8.0
@@ -84,6 +93,9 @@ importers:
       react-dom:
         specifier: ^19.2.8
         version: 19.2.8(react@19.2.8)
+      remotion:
+        specifier: 4.0.522
+        version: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     devDependencies:
       '@types/geojson':
         specifier: ^7946.0.16
@@ -169,6 +181,43 @@ importers:
         version: 19.2.18
       react:
         specifier: ^19.1.1
+        version: 19.2.8
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.7(@types/node@22.20.1)(terser@5.51.2)(tsx@4.23.13)
+
+  packages/story-video:
+    dependencies:
+      '@remotion/google-fonts':
+        specifier: 4.0.522
+        version: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@remotion/transitions':
+        specifier: 4.0.522
+        version: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@swiss-now/core':
+        specifier: workspace:*
+        version: link:../core
+      '@swiss-now/motion':
+        specifier: workspace:*
+        version: link:../motion
+      maplibre-gl:
+        specifier: ^6.7.0
+        version: 6.7.0
+      remotion:
+        specifier: 4.0.522
+        version: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      zod:
+        specifier: ^4.1.5
+        version: 4.5.4
+    devDependencies:
+      '@types/react':
+        specifier: ^19.1.12
+        version: 19.2.18
+      react:
+        specifier: ^19.2.8
         version: 19.2.8
       typescript:
         specifier: ^5.9.2
@@ -924,6 +973,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@remotion/google-fonts@4.0.522':
+    resolution: {integrity: sha512-1oGIJY2EvxDeUM6CLLxVg4eMhmsvT+lXmTxIfx/kvz15xWJondTuswa9753PGlt+iu9eLwMwNf01oNRiKnwQyQ==}
+
   '@remotion/licensing@4.0.522':
     resolution: {integrity: sha512-RSu7Pze1omLFHBTdAzvIB7PBoNHJZBcac4yRDtSsF0tRmaSpf1E7qZlVZmj+M+BnzG3ut6eMS9c3wTW3K0izKw==}
 
@@ -942,6 +994,9 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
+  '@remotion/paths@4.0.522':
+    resolution: {integrity: sha512-G8Nsc5QvKP8rlHF7duxPQB2RbJBIa4Pi0vzhNic9HrSrWZ1y335zZWe66WgSYCHY8CJTGfvs8zmmM6AvRaRW8g==}
+
   '@remotion/player@4.0.522':
     resolution: {integrity: sha512-IAdV0Qu90Orl0fETLY8MVTJBSMo8zHDTvjxo0ghj9sfb+ouk2IDhOZEqzfCOqmBEEmFHgDVMcC8P01hnxaHR/g==}
     peerDependencies:
@@ -950,6 +1005,12 @@ packages:
 
   '@remotion/renderer@4.0.522':
     resolution: {integrity: sha512-Eu6MuGLnt0LNSAxuIzjjBXHXjxr1qRnhRd3RkQUkAqGJxsOYFnEXURv7DnBj7qmS2At4TFnv+Men9sCYTWOP1A==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
+  '@remotion/shapes@4.0.522':
+    resolution: {integrity: sha512-WdD3HB6zgGjZHo0cOOQ5K/pyYgeN54IqMdtfvyk6UaS5Is/sYiAqwNjGJKIh8kCIwFiygGNtaicDBoyfylZvAg==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -977,6 +1038,12 @@ packages:
 
   '@remotion/timeline-utils@4.0.522':
     resolution: {integrity: sha512-nG9MayoC2+5bADdOxp7bhcZi9ALnhcGW3UTYnIHtrc3opKOqxt1mzd8A+glNYjcv5xskFdGcGm5qtSHD3ZsdWw==}
+
+  '@remotion/transitions@4.0.522':
+    resolution: {integrity: sha512-UyBTvDhSCJJNcH6sLurm5sx5qEs5js6r7gXt2WzBN8864S5BOJUX+GnvyotZuQFbc60zdKDtqfFAfAWwfYLRmA==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   '@remotion/web-renderer@4.0.522':
     resolution: {integrity: sha512-fOy0fhXbxXLGO+GT124D4o9GlY+2AhNvk56mmXj8Cax2DPjk35JphaMeKEwZZfVjQulLD79ssN5RAz6OpaCjaw==}
@@ -3180,13 +3247,13 @@ snapshots:
       '@remotion/timeline-utils': 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@rspack/core': 1.7.11(@swc/helpers@0.5.23)
       '@rspack/plugin-react-refresh': 1.6.1(react-refresh@0.18.0)
-      css-loader: 7.1.4(@rspack/core@1.7.11(@swc/helpers@0.5.23))(webpack@5.105.0(postcss@8.5.28))
+      css-loader: 7.1.4(@rspack/core@1.7.11(@swc/helpers@0.5.23))(webpack@5.105.0(esbuild@0.28.1)(postcss@8.5.28))
       esbuild: 0.28.1
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
       react-refresh: 0.18.0
       remotion: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      style-loader: 4.0.0(webpack@5.105.0(postcss@8.5.28))
+      style-loader: 4.0.0(webpack@5.105.0(esbuild@0.28.1)(postcss@8.5.28))
       webpack: 5.105.0(esbuild@0.28.1)(postcss@8.5.28)
     transitivePeerDependencies:
       - '@minify-html/node'
@@ -3273,6 +3340,13 @@ snapshots:
   '@remotion/compositor-win32-x64-msvc@4.0.522':
     optional: true
 
+  '@remotion/google-fonts@4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      remotion: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
   '@remotion/licensing@4.0.522': {}
 
   '@remotion/media-parser@4.0.522': {}
@@ -3291,6 +3365,8 @@ snapshots:
       react-dom: 19.2.8(react@19.2.8)
       remotion: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       zod: 4.5.4
+
+  '@remotion/paths@4.0.522': {}
 
   '@remotion/player@4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
@@ -3319,6 +3395,13 @@ snapshots:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
+
+  '@remotion/shapes@4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@remotion/paths': 4.0.522
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+      remotion: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
 
   '@remotion/streaming@4.0.522': {}
 
@@ -3421,6 +3504,14 @@ snapshots:
     transitivePeerDependencies:
       - react
       - react-dom
+
+  '@remotion/transitions@4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@remotion/paths': 4.0.522
+      '@remotion/shapes': 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+      remotion: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
 
   '@remotion/web-renderer@4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
@@ -3633,7 +3724,7 @@ snapshots:
 
   '@svgr/hast-util-to-babel-ast@8.0.0':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.29.8
       entities: 4.5.0
 
   '@svgr/plugin-jsx@8.1.0(@svgr/core@8.1.0(typescript@5.9.3))':
@@ -3988,7 +4079,7 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  css-loader@7.1.4(@rspack/core@1.7.11(@swc/helpers@0.5.23))(webpack@5.105.0(postcss@8.5.28)):
+  css-loader@7.1.4(@rspack/core@1.7.11(@swc/helpers@0.5.23))(webpack@5.105.0(esbuild@0.28.1)(postcss@8.5.28)):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.28)
       postcss: 8.5.28
@@ -4783,7 +4874,7 @@ snapshots:
     dependencies:
       js-tokens: 9.0.1
 
-  style-loader@4.0.0(webpack@5.105.0(postcss@8.5.28)):
+  style-loader@4.0.0(webpack@5.105.0(esbuild@0.28.1)(postcss@8.5.28)):
     dependencies:
       webpack: 5.105.0(esbuild@0.28.1)(postcss@8.5.28)
 

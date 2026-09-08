@@ -46,18 +46,19 @@ Small live sources are read through **pull-through cached route handlers** on Ve
 ```
 swiss-now/
 ├─ apps/
-│  ├─ web/          Next.js 16 interactive experience (scaffolded next)
-│  └─ video/        Remotion story / video project (Spike B done; story compositions in Phase 4)
+│  ├─ web/          Next.js 16 interactive experience: live map, HUD, /today story with the Remotion Player
+│  └─ video/        Remotion project: registers the compositions, keeps story fixtures, renders locally
 ├─ packages/
 │  ├─ core/         @swiss-now/core — SwissNowState contracts (zod), freshness model, source registry, adapters
 │  ├─ motion/       @swiss-now/motion — tokens, scales, animation math, SVG primitives, scene specs
+│  ├─ story-video/  @swiss-now/story-video — the "Switzerland Today" Remotion composition (fixed map plate, chapters, markers)
 │  └─ geo-build/    build-time geodata conversion (swissBOUNDARIES3D, rail lines, TMC lookup)
 ├─ docs/            planning documents (vision, data sources, architecture, free tier, motion, MVP plan, open questions)
 ├─ .agents/skills/  official Remotion Agent Skills (installed via `npx skills add remotion-dev/skills`)
 └─ .github/         CI and, later, the scheduled data workflows
 ```
 
-Dependency rules: `packages/core` and `packages/motion` never import React-DOM, MapLibre, GSAP, Motion or Remotion. `apps/web` and `apps/video` never import each other; anything both need moves into a package.
+Dependency rules: `packages/core` and `packages/motion` never import React-DOM, MapLibre, GSAP, Motion or Remotion. `apps/web` and `apps/video` never import each other; anything both need moves into a package — which is why the composition lives in `packages/story-video`: the web Player and the renderer mount the same code.
 
 ## The Swiss Now State
 
@@ -92,15 +93,26 @@ All sources are official Swiss open data or free public services. Attribution st
 
 Interpolated train positions are estimates derived from schedules and published delays; they are never GPS positions. Swiss Now is not an official warning channel.
 
+## The video
+
+`/api/story/today` ranks the day's snapshots into a `StorySpec`; the same spec drives the scroll-driven `/today` page and the Remotion composition `SwitzerlandToday` (1080 × 1920, plus a 1920 × 1080 variant). The composition renders title → chapters → credits over one fixed MapLibre plate of the forked swisstopo style: the renderer camera only jumps at cuts, hidden by a dip to paper, and the push-in within a chapter is a CSS transform (Remotion's render-stability technique). Chapter markers travel inside the story (coordinates included), so the video needs no state lookups. Renders happen locally under the free licence; a five-chapter story renders in about 90 s on a laptop:
+
+```bash
+pnpm --filter @swiss-now/video story:fetch      # save today's story as a fixture
+pnpm --filter @swiss-now/video render:today     # → apps/video/out/today.mp4
+```
+
+On `/today` the same composition plays in a Remotion `<Player>` (mounted on demand). Details in [`apps/video/README.md`](apps/video/README.md).
+
 ## Roadmap
 
 | Phase | Scope                                                                                                       | Status                                           |
 | ----- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| 0     | Workspace, state contracts, tokens, forked map style, first cached handler, performance and Remotion spikes | in progress                                      |
+| 0     | Workspace, state contracts, tokens, forked map style, first cached handler, performance and Remotion spikes | done                                             |
 | 1     | Weather + Water layers, HUD, place focus, NOW composite                                                     |                                                  |
 | 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                  | done (Blob hosting waits for the Vercel project) |
 | 3     | Quakes, snapshots and timeline, Today story, seasonal layers                                                | done                                             |
-| 4     | Remotion "Switzerland Today" compositions, local rendering, Player on `/today`                              |                                                  |
+| 4     | Remotion "Switzerland Today" compositions, local rendering, Player on `/today`                              | done                                             |
 | 5     | Traffic (FEDRO), city air quality, energy flows, polish                                                     |                                                  |
 
 ## Licence

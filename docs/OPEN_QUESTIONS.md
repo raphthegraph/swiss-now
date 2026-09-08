@@ -12,7 +12,7 @@
 - [ ] **Zürich OGD** — CKAN shows `license_title: null` for UGZ datasets; confirm terms. [P4]
 - [ ] **Font licence** for the chosen grotesk (OFL vs commercial). [P0]
 - [ ] **Vercel Hobby fair use** — define the moment the project stops being "personal, non-commercial" (sponsorship, ads, company ownership) → Pro. [ongoing]
-- [ ] **Remotion 5.0** licence changes and Player status; team headcount trajectory (free ≤ 3 people). [P4]
+- [~] **Remotion 5.0** licence changes and Player status; team headcount trajectory (free ≤ 3 people). Phase 4 uses the Player on `/today` and local renders under the free licence; re-check before 5.0 and before any automated rendering. [P4]
 - [ ] **MeteoSwiss pictograms** are proprietary — design our own symbol set mapped from symbol numbers. [P3]
 
 ## 2. Data verification

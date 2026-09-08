@@ -10,6 +10,7 @@ import {
   measurePath,
   positionAlongPath,
   positionAlongTrip,
+  projectOnPlate,
   pulseEnvelope,
   ringProgress,
   seededRandom,
@@ -204,5 +205,21 @@ describe("specs", () => {
   });
   it("converts seconds to frames at 30 fps", () => {
     expect(secondsToFrames(6)).toBe(180);
+  });
+});
+
+describe("projectOnPlate", () => {
+  it("puts the plate centre in the middle and grows x eastwards, y southwards", () => {
+    const c = projectOnPlate([8.2, 46.8], [8.2, 46.8], 7, 2000, 1000);
+    expect(c.x).toBeCloseTo(1000);
+    expect(c.y).toBeCloseTo(500);
+    const e = projectOnPlate([9.2, 46.8], [8.2, 46.8], 7, 2000, 1000);
+    expect(e.x).toBeGreaterThan(1000);
+    expect(e.y).toBeCloseTo(500);
+    const s = projectOnPlate([8.2, 45.8], [8.2, 46.8], 7, 2000, 1000);
+    expect(s.y).toBeGreaterThan(500);
+    // one zoom level doubles the offset
+    const e8 = projectOnPlate([9.2, 46.8], [8.2, 46.8], 8, 2000, 1000);
+    expect(e8.x - 1000).toBeCloseTo(2 * (e.x - 1000));
   });
 });

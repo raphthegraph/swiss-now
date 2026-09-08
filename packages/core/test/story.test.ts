@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildStory } from "../src/story/index";
+import { buildStory, chapterFigures } from "../src/story/index";
 import type { Snapshot } from "../src/snapshot/index";
 
 const t = "2026-09-08T12:00:00Z";
@@ -90,5 +90,29 @@ describe("story builder", () => {
     const story = buildStory([], { date: "2026-09-08", now: new Date(t) });
     expect(story.chapters).toHaveLength(1);
     expect(story.chapters[0]!.id).toBe("empty");
+  });
+});
+
+describe("story markers and figures", () => {
+  it("carries marker coordinates and shared figures per chapter", () => {
+    const story = buildStory([snap], { date: "2026-09-08", now: new Date(t) });
+    const summary = story.chapters[0]!;
+    expect(summary.markers.length).toBe(0); // no temperature observations in this fixture
+    const extremes = story.chapters.find((c) => c.type === "extremes")!;
+    expect(extremes.markers.map((m) => m.id).sort()).toEqual(["smn:CHU", "smn:JUN"]);
+    expect(extremes.markers.every((m) => m.emphasis && m.kind === "temperature")).toBe(true);
+    expect(chapterFigures(extremes)).toEqual([
+      { label: "Warmest", value: 31.5, decimals: 1, unit: "°C" },
+      { label: "Coldest", value: 4.3, decimals: 1, unit: "°C" },
+    ]);
+    const quake = story.chapters.find((c) => c.type === "quake")!;
+    expect(quake.markers[0]).toMatchObject({ kind: "quake", lonLat: [9.6, 46.6], value: 2.5 });
+    expect(chapterFigures(quake)[0]).toEqual({ label: "Magnitude", value: 2.5, decimals: 1 });
+    const rail = story.chapters.find((c) => c.type === "rail")!;
+    expect(chapterFigures(rail).map((f) => f.label)).toEqual([
+      "Lowest on time",
+      "Largest delay",
+      "Trains now",
+    ]);
   });
 });
