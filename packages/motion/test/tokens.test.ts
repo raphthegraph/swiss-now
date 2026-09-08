@@ -31,3 +31,11 @@ describe("tokens", () => {
     expect(daylightState(30, false)).toBe("day");
   });
 });
+
+describe("topic accents", () => {
+  it("has an accent colour for every topic in the registry", async () => {
+    const { TOPICS, TOPIC_ORDER } = await import("@swiss-now/core/topics");
+    for (const id of TOPIC_ORDER)
+      expect(layerAccent[TOPICS[id].accent as keyof typeof layerAccent]).toMatch(/^#/);
+  });
+});

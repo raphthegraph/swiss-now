@@ -35,7 +35,7 @@ export type LocalizedText = z.infer<typeof LocalizedText>;
 export const Language = z.enum(["de", "fr", "it", "rm", "en"]);
 export type Language = z.infer<typeof Language>;
 
-/** Layers a viewer can select. QUAKES only appears when an event occurred recently. */
+/** Layer states (one payload each). Topics (`topics/`) select which layers they render. */
 export const LayerId = z.enum([
   "weather",
   "hydrology",
@@ -44,6 +44,11 @@ export const LayerId = z.enum([
   "traffic",
   "air",
   "energy",
+  "events",
+  "hazards",
+  "aviation",
+  "politics",
+  "stats",
 ]);
 export type LayerId = z.infer<typeof LayerId>;
 

@@ -37,6 +37,16 @@ export const layerAccent = {
   air: "#7A6E8C",
   energy: "#9AA83A",
   seismic: "#E0742D",
+  // expansion topics (2026-09-08); values provisional until checked on device
+  hazards: "#C4452B", // quakes, avalanche, forest fire, hail
+  events: "#2A2C33", // events are typographic: near-ink, the map stays the picture
+  aviation: "#5F7D8C",
+  politics: "#7A4E9A", // votes: a diverging yes/no ramp around 50 %
+  population: "#3F6F8E",
+  housing: "#8C6A3F",
+  economy: "#4F7D4A",
+  tourism: "#B0703A",
+  trade: "#6D6F8C",
 } as const;
 export type LayerAccentKey = keyof typeof layerAccent;
 
@@ -78,6 +88,16 @@ export const scaleStops = {
     [3, "#E8A23A"],
     [4, "#D9552B"],
     [5, "#8E1B1B"],
+  ],
+  /** Share of yes votes in %, diverging around 50 (paper). */
+  yesShare: [
+    [20, "#8E1B1B"],
+    [35, "#D9552B"],
+    [45, "#E8C4A8"],
+    [50, "#F4F3EF"],
+    [55, "#BFC8D9"],
+    [65, "#5F7FB5"],
+    [80, "#2B2D6B"],
   ],
   /** Delay in seconds → grey to Swiss red. */
   delay: [
