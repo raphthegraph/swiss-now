@@ -1,28 +1,40 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Map as MapLibreMap } from "maplibre-gl";
 import type { HydrologyState, RailState, SeismicState, WeatherState } from "@swiss-now/core";
+import { figuresFor, presenceFor, type TopicId } from "@swiss-now/core/topics";
 import { QuakeLayer, type QuakeHover } from "./QuakeLayer";
 import { QuakeHoverCard } from "./QuakeHoverCard";
 import { TrainLayer, type TrainHover } from "./TrainLayer";
 import { TrainHoverCard } from "./TrainHoverCard";
 import { RailLegend } from "../hud/RailLegend";
 import { useLayerState } from "@/lib/use-layer-state";
-import { LayerRail } from "../hud/LayerRail";
-import type { ActiveLayer } from "@/lib/layers";
+import { useViewState } from "@/lib/use-view-state";
 import { useHomePlace } from "@/lib/use-home-place";
 import type { Place } from "@/lib/places";
 import { HomePlace } from "../hud/HomePlace";
-import { LiveMap } from "./LiveMap";
+import { LiveMap, type LayerPresence } from "./LiveMap";
 import { WindParticles } from "./WindParticles";
 import { RadarScrubber } from "../hud/RadarScrubber";
 import { useRadarTimeline } from "@/lib/use-radar-timeline";
 import { useSnapshotPing } from "@/lib/use-snapshot-ping";
-
-import { SummaryStrip } from "../hud/SummaryStrip";
+import { TopicRail } from "../hud/TopicRail";
+import { ModeSwitcher } from "../hud/ModeSwitcher";
+import { Masthead } from "../hud/Masthead";
+import { FigureStrip } from "../hud/FigureStrip";
 import { FpsMeter } from "../hud/FpsMeter";
+
+/** Which layers each topic renders (from the registry); used for presence and for polling. */
+function presenceOf(topic: TopicId): LayerPresence {
+  return {
+    weather: presenceFor(topic, "weather"),
+    hydrology: presenceFor(topic, "hydrology"),
+    rail: presenceFor(topic, "rail"),
+    seismic: presenceFor(topic, "seismic"),
+  };
+}
 
 export function MapPage({
   initial,
@@ -35,17 +47,30 @@ export function MapPage({
   initialRail?: RailState | undefined;
   initialSeismic?: SeismicState | undefined;
 }) {
+  const { view, setTopic, setMode } = useViewState();
+  const { topic, mode } = view;
+  const presence = useMemo(() => presenceOf(topic), [topic]);
+  // poll only what is on screen (the masthead clock always needs weather)
   const weather = useLayerState("/api/state/weather", initial, 300_000);
-  const hydrology = useLayerState("/api/state/hydrology", initialHydrology, 600_000);
-  const rail = useLayerState("/api/state/rail", initialRail, 60_000);
-  const seismic = useLayerState("/api/state/seismic", initialSeismic, 120_000);
+  const hydrology = useLayerState(
+    "/api/state/hydrology",
+    initialHydrology,
+    600_000,
+    presence.hydrology !== "off",
+  );
+  const rail = useLayerState("/api/state/rail", initialRail, 60_000, presence.rail !== "off");
+  const seismic = useLayerState(
+    "/api/state/seismic",
+    initialSeismic,
+    120_000,
+    presence.seismic !== "off",
+  );
   const [quakeHover, setQuakeHover] = useState<QuakeHover | null>(null);
-  // QUAKES joins the rail only when a magnitude ≥ 2.0 event happened in the window
+  // HAZARDS (quakes only for now) joins the rail when a magnitude ≥ 2.0 event happened in the window
   const quakesNotable = (seismic?.events ?? []).some((e) => (e.magnitude ?? 0) >= 2);
   const [trainHover, setTrainHover] = useState<TrainHover | null>(null);
   const [railProgress, setRailProgress] = useState({ loaded: 0, needed: 0 });
   const stopNames = useStopNames(rail);
-  const [active, setActive] = useState<ActiveLayer>("now");
   const { home, setHome } = useHomePlace();
   const [focus, setFocus] = useState<
     { lonLat: [number, number]; zoom: number; key: string } | null | undefined
@@ -58,64 +83,61 @@ export function MapPage({
   // visitor-driven persistence: keeps the day's snapshots (the story's input) written while someone watches
   useSnapshotPing();
   const radar = useRadarTimeline(weather);
-  // the radar timeline is a WEATHER instrument; elsewhere the map shows the latest frame only
+  // the radar timeline is the WEATHER topic's TIMELINE instrument; elsewhere the map shows the latest frame
+  const radarOn = topic === "weather" && mode === "timeline";
   const radarReset = radar.reset;
   useEffect(() => {
-    if (active !== "weather") radarReset();
+    if (!radarOn) radarReset();
     // eslint-disable-next-line react-hooks/exhaustive-deps -- reset only when the view changes
-  }, [active]);
+  }, [radarOn]);
+  const figures = useMemo(
+    () => figuresFor(topic, { weather, hydrology, rail, seismic }),
+    [topic, weather, hydrology, rail, seismic],
+  );
   return (
     <>
       <LiveMap
         weather={weather}
         hydrology={hydrology}
         disruptions={rail?.disruptions}
-        active={active}
+        presence={presence}
+        muted={topic === "rail" || topic === "hazards"}
+        focus={focus}
         radarFrame={radar.frame}
         onMapReady={setMap}
       />
-      {active === "now" || active === "weather" ? (
-        <WindParticles map={map} weather={weather} />
-      ) : null}
-      {active === "now" || active === "rail" ? (
+      {presence.weather !== "off" ? <WindParticles map={map} weather={weather} /> : null}
+      {presence.rail !== "off" ? (
         <TrainLayer
           map={map}
           rail={rail}
-          mode={active === "rail" ? "full" : "quiet"}
+          mode={presence.rail === "full" ? "full" : "quiet"}
           onHover={setTrainHover}
           onProgress={(loaded, needed) => setRailProgress({ loaded, needed })}
         />
       ) : null}
-      {active === "rail" && trainHover && rail ? (
+      {topic === "rail" && trainHover && rail ? (
         <div className="hover-anchor">
           <TrainHoverCard hover={trainHover} freshness={rail.freshness} stopName={stopNames} />
         </div>
       ) : null}
-      {active === "now" || active === "quakes" ? (
+      {presence.seismic !== "off" ? (
         <QuakeLayer
           map={map}
           seismic={seismic}
-          mode={active === "quakes" ? "full" : "quiet"}
+          mode={presence.seismic === "full" ? "full" : "quiet"}
           onHover={setQuakeHover}
         />
       ) : null}
-      {active === "quakes" && quakeHover ? (
+      {topic === "hazards" && quakeHover ? (
         <div className="hover-anchor">
           <QuakeHoverCard hover={quakeHover} />
         </div>
       ) : null}
-      <LayerRail active={active} onChange={setActive} hidden={quakesNotable ? [] : ["quakes"]} />
-      <SummaryStrip
-        state={weather}
-        hydrology={hydrology}
-        rail={rail}
-        seismic={seismic}
-        active={active}
-        legend={
-          active === "rail" ? (
-            <RailLegend loaded={railProgress.loaded} needed={railProgress.needed} />
-          ) : null
-        }
+      <TopicRail view={view} onSelect={setTopic} hidden={quakesNotable ? [] : ["hazards"]} />
+      <ModeSwitcher view={view} onChange={setMode} />
+      <Masthead
+        clock={{ observedAt: weather.observedAt, freshness: weather.freshness }}
         home={
           <HomePlace
             home={home}
@@ -128,8 +150,17 @@ export function MapPage({
             hydrology={hydrology}
           />
         }
+      />
+      <FigureStrip
+        topic={topic}
+        figures={figures}
+        legend={
+          topic === "rail" ? (
+            <RailLegend loaded={railProgress.loaded} needed={railProgress.needed} />
+          ) : null
+        }
       >
-        {active === "weather" ? (
+        {radarOn ? (
           <RadarScrubber
             frames={radar.frames}
             index={radar.index}
@@ -138,7 +169,7 @@ export function MapPage({
             onTogglePlay={radar.togglePlay}
           />
         ) : null}
-      </SummaryStrip>
+      </FigureStrip>
       {showFps ? <FpsMeter /> : null}
     </>
   );

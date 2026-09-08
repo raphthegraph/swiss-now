@@ -39,3 +39,14 @@ describe("topic accents", () => {
       expect(layerAccent[TOPICS[id].accent as keyof typeof layerAccent]).toMatch(/^#/);
   });
 });
+
+describe("formatNumber", () => {
+  it("formats deterministically in the Swiss convention", async () => {
+    const { formatNumber } = await import("../src/format");
+    expect(formatNumber(1101)).toBe("1’101");
+    expect(formatNumber(1234567.891, 1)).toBe("1’234’567.9");
+    expect(formatNumber(-4.25, 2)).toBe("−4.25");
+    expect(formatNumber(0.5, 0)).toBe("1");
+    expect(formatNumber(NaN)).toBe("–");
+  });
+});

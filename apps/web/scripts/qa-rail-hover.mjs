@@ -42,9 +42,15 @@ page.on("pageerror", (e) => console.log("pageerror:", e.message));
 page.on("console", (m) => m.type() === "error" && console.log("console error:", m.text()));
 await page.goto(`${base}/`, { waitUntil: "domcontentloaded", timeout: 90_000 });
 await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 90_000 });
+// IA: topics rail with groups, mode switcher, view state in the URL
+const railGroups = await page.locator("nav[aria-label='Topics'] .rail__group").allInnerTexts();
+const modeCount = await page.locator("nav[aria-label='View'] .modes__item").count();
+console.log("rail groups:", railGroups.join("/"), "| modes:", modeCount);
 const webgl = await page.evaluate(() => !!document.createElement("canvas").getContext("webgl2"));
 console.log("webgl2:", webgl, "canvas:", await page.locator("canvas.maplibregl-canvas").count());
 await page.getByRole("button", { name: "Rail" }).click();
+const railUrl = new URL(page.url()).searchParams.get("topic") === "rail";
+console.log("url topic=rail:", railUrl);
 await page.waitForFunction(
   () => Array.isArray(window.__swissNowTrains) && window.__swissNowTrains.length > 50,
   null,
@@ -80,6 +86,22 @@ console.log(
   scrubber > 0,
 );
 await page.screenshot({ path: "/tmp/sn/qa-rail.png" });
+// WEATHER: the radar scrubber is the TIMELINE instrument, absent in MAP
+await page.getByRole("button", { name: "Weather" }).click();
+await page.waitForTimeout(500);
+const scrubMap = await page.locator(".scrubber").count();
+await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Timeline$/i }).click();
+await page.waitForTimeout(800);
+const scrubTimeline = await page.locator(".scrubber").count();
+const modeUrl = new URL(page.url()).searchParams.get("mode") === "timeline";
+const timelineOk = scrubMap === 0 && scrubTimeline === 1 && modeUrl;
+console.log("weather scrubber map/timeline:", scrubMap, scrubTimeline, "| url mode:", modeUrl, "| ok:", timelineOk);
+// deep link
+await page.goto(`${base}/?topic=water`, { waitUntil: "domcontentloaded", timeout: 90_000 });
+await page.getByRole("button", { name: "Water" }).waitFor({ timeout: 60_000 });
+const waterCurrent = (await page.getByRole("button", { name: "Water" }).getAttribute("aria-current")) === "true";
+console.log("deep link topic=water current:", waterCurrent);
+
 // Today story: chapters render and the first headline is real
 await page.goto(`${base}/today`, { waitUntil: "domcontentloaded", timeout: 90_000 });
 await page.locator(".chapter__headline").first().waitFor({ timeout: 60_000 });
@@ -105,7 +127,7 @@ await page.screenshot({ path: "/tmp/sn/qa-today-player.png" });
 await page.goto(`${base}/`, { waitUntil: "domcontentloaded", timeout: 90_000 });
 await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 90_000 });
 // QUAKES view (present only when a magnitude ≥ 2 event is in the window)
-const quakesButton = page.getByRole("button", { name: "Quakes" });
+const quakesButton = page.getByRole("button", { name: "Hazards" });
 let quakesOk = true;
 if ((await quakesButton.count()) > 0) {
   await quakesButton.click();
@@ -116,4 +138,8 @@ if ((await quakesButton.count()) > 0) {
   await page.screenshot({ path: "/tmp/sn/qa-quakes.png" });
 } else console.log("QUAKES not in rail (no M≥2 event in window)");
 await browser.close();
-process.exit(shown && railFigures && quakesOk && todayOk && playerOk ? 0 : 1);
+process.exit(
+  shown && railFigures && quakesOk && todayOk && playerOk && railUrl && timelineOk && waterCurrent
+    ? 0
+    : 1,
+);

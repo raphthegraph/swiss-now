@@ -8,3 +8,4 @@ export * from "./tokens/index";
 export * from "./scales/index";
 export * from "./math/index";
 export * from "./specs/index";
+export * from "./format";

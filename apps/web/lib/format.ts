@@ -8,9 +8,9 @@ export function formatTime(iso: string, locale = "de-CH"): string {
   }).format(new Date(iso));
 }
 
-export function formatNumber(value: number, decimals = 1, locale = "de-CH"): string {
-  return new Intl.NumberFormat(locale, {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-  }).format(value);
+import { formatNumber as formatDeterministic } from "@swiss-now/motion";
+
+/** Deterministic Swiss formatting (’ thousands separator): identical on server and client. */
+export function formatNumber(value: number, decimals = 1): string {
+  return formatDeterministic(value, decimals);
 }

@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import { fontFamily, tabularFigures, typeScale, type TypeScaleKey } from "../tokens/type";
 import { ground } from "../tokens/color";
 import { easeHouse, lerp } from "../math/easing";
+import { formatNumber } from "../format";
 
 export interface MetricProps {
   /** Final value to display. */
@@ -19,15 +20,11 @@ export interface MetricProps {
   x?: number;
   y?: number;
   textAnchor?: "start" | "middle" | "end";
-  /** Locale for number formatting; Swiss German uses ’ as thousands separator. */
-  locale?: string;
 }
 
-export function formatMetric(value: number, decimals = 0, locale = "de-CH"): string {
-  return new Intl.NumberFormat(locale, {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-  }).format(value);
+/** Kept for callers of the old name; formatting is deterministic (see ../format). */
+export function formatMetric(value: number, decimals = 0): string {
+  return formatNumber(value, decimals);
 }
 
 /**
@@ -46,7 +43,6 @@ export function Metric({
   x = 0,
   y = 0,
   textAnchor = "start",
-  locale = "de-CH",
 }: MetricProps) {
   const t = typeScale[size];
   const shown = lerp(from, value, easeHouse(progress));
@@ -73,7 +69,7 @@ export function Metric({
         </text>
       ) : null}
       <text style={numberStyle} textAnchor={textAnchor}>
-        {formatMetric(shown, decimals, locale)}
+        {formatMetric(shown, decimals)}
         {unit ? (
           <tspan style={{ fontSize: t.size * 0.55, fill: ground.graphite }} dx={t.size * 0.12}>
             {unit}

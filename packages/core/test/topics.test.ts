@@ -46,10 +46,10 @@ describe("view state", () => {
     expect(parseViewState({})).toEqual(DEFAULT_VIEW);
     expect(serializeViewState(DEFAULT_VIEW)).toBe("");
     const v = parseViewState(
-      new URLSearchParams("topic=rail&mode=timeline&t=20260908T1200&place=ZH"),
+      new URLSearchParams("topic=weather&mode=timeline&t=20260908T1200&place=ZH"),
     );
-    expect(v).toEqual({ topic: "rail", mode: "timeline", t: "20260908T1200", place: "ZH" });
-    expect(serializeViewState(v)).toBe("topic=rail&mode=timeline&t=20260908T1200&place=ZH");
+    expect(v).toEqual({ topic: "weather", mode: "timeline", t: "20260908T1200", place: "ZH" });
+    expect(serializeViewState(v)).toBe("topic=weather&mode=timeline&t=20260908T1200&place=ZH");
   });
   it("falls back for unknown topics, unbuilt topics and unsupported modes", () => {
     expect(parseViewState({ topic: "nope" }).topic).toBe("now");
@@ -60,10 +60,25 @@ describe("view state", () => {
   });
   it("keeps the mode across topics when supported", () => {
     const v = { topic: "weather", mode: "timeline", t: "x" } as const;
-    expect(switchTopic(v, "water")).toEqual({ topic: "water", mode: "timeline" });
-    expect(switchTopic({ topic: "weather", mode: "compare" }, "rail")).toEqual({
+    expect(switchTopic(v, "water")).toEqual({ topic: "water", mode: "map" });
+    expect(switchTopic({ topic: "now", mode: "map" }, "rail")).toEqual({
       topic: "rail",
       mode: "map",
     });
+  });
+});
+
+describe("presence", () => {
+  it("renders the selected topic in full and NOW contributors quietly", async () => {
+    const { presenceFor, layersNeeded } = await import("../src/topics/index");
+    expect(presenceFor("rail", "rail")).toBe("full");
+    expect(presenceFor("rail", "weather")).toBe("off");
+    expect(presenceFor("now", "rail")).toBe("quiet");
+    expect(presenceFor("now", "seismic")).toBe("quiet");
+    expect(presenceFor("now", "politics")).toBe("off");
+    expect(layersNeeded("water")).toEqual(["hydrology"]);
+    expect(layersNeeded("now")).toEqual(
+      expect.arrayContaining(["weather", "hydrology", "rail", "seismic"]),
+    );
   });
 });

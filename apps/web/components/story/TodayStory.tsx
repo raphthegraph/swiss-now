@@ -16,7 +16,7 @@ import { LiveMap } from "@/components/map/LiveMap";
 import { QuakeLayer } from "@/components/map/QuakeLayer";
 import { TrainLayer } from "@/components/map/TrainLayer";
 import type { Map as MapLibreMap } from "maplibre-gl";
-import type { ActiveLayer } from "@/lib/layers";
+import { presenceFor, type TopicId } from "@swiss-now/core/topics";
 import { useLayerState } from "@/lib/use-layer-state";
 import { chapterFigures } from "@swiss-now/core/story";
 import { formatNumber } from "@/lib/format";
@@ -27,9 +27,9 @@ const StoryPlayer = dynamic(() => import("./StoryPlayer").then((m) => m.StoryPla
   ssr: false,
 });
 
-function layerFor(c: Chapter): ActiveLayer {
+function topicFor(c: Chapter): TopicId {
   return c.layer === "seismic"
-    ? "quakes"
+    ? "hazards"
     : c.layer === "hydrology"
       ? "water"
       : c.layer === "rail"
@@ -72,7 +72,7 @@ export function TodayStory({
   }, [story.chapters.length]);
 
   const chapter = story.chapters[current] ?? story.chapters[0]!;
-  const active = layerFor(chapter);
+  const topic = topicFor(chapter);
   const focus = {
     lonLat: chapter.camera.center as [number, number],
     zoom: chapter.camera.zoom,
@@ -86,12 +86,17 @@ export function TodayStory({
           weather={weather}
           hydrology={hydrology}
           disruptions={rail?.disruptions}
-          active={active}
+          presence={{
+            weather: presenceFor(topic, "weather"),
+            hydrology: presenceFor(topic, "hydrology"),
+            rail: presenceFor(topic, "rail"),
+          }}
+          muted={topic === "rail" || topic === "hazards"}
           focus={focus}
           onMapReady={setMap}
         />
-        {active === "rail" ? <TrainLayer map={map} rail={rail} mode="quiet" /> : null}
-        {active === "quakes" ? <QuakeLayer map={map} seismic={seismic} mode="full" /> : null}
+        {topic === "rail" ? <TrainLayer map={map} rail={rail} mode="quiet" /> : null}
+        {topic === "hazards" ? <QuakeLayer map={map} seismic={seismic} mode="full" /> : null}
       </div>
       <header className="hud hud--top">
         <h1>

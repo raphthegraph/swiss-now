@@ -14,7 +14,10 @@ export const TOPIC_GROUPS: { id: TopicGroup; label: LocalizedText }[] = [
   { id: "switzerland", label: t("Schweiz", "Switzerland", "Suisse", "Svizzera") },
 ];
 
-/** Declaration order = rail order within a group. */
+/**
+ * Declaration order = rail order within a group. `modes` lists what is implemented today and
+ * grows stage by stage (docs/IA.md); the switcher dims the rest.
+ */
 export const TOPICS: Record<TopicId, TopicSpec> = {
   now: {
     id: "now",
@@ -25,7 +28,7 @@ export const TOPICS: Record<TopicId, TopicSpec> = {
     sources: ["meteoswiss-smn", "geoadmin-messwerte"],
     cadenceSeconds: 10 * MIN,
     geoLevel: "point",
-    modes: ["map", "timeline"],
+    modes: ["map"],
     freshnessKind: "clock",
     built: true,
   },
@@ -38,7 +41,7 @@ export const TOPICS: Record<TopicId, TopicSpec> = {
     sources: ["meteoswiss-smn", "meteoswiss-radar", "geoadmin-messwerte"],
     cadenceSeconds: 10 * MIN,
     geoLevel: "point",
-    modes: ["map", "timeline", "charts", "compare"],
+    modes: ["map", "timeline"],
     freshnessKind: "clock",
     now: "always",
     built: true,
@@ -52,7 +55,7 @@ export const TOPICS: Record<TopicId, TopicSpec> = {
     sources: ["bafu-lindas-hydro", "geoadmin-hydroweb"],
     cadenceSeconds: 10 * MIN,
     geoLevel: "point",
-    modes: ["map", "timeline", "charts", "compare"],
+    modes: ["map"],
     freshnessKind: "clock",
     now: "notable",
     built: true,
@@ -80,7 +83,7 @@ export const TOPICS: Record<TopicId, TopicSpec> = {
     sources: ["sed-fdsn", "slf-bulletin", "slf-imis", "bafu-fire-danger", "meteoswiss-hail"],
     cadenceSeconds: 2 * MIN,
     geoLevel: "point",
-    modes: ["map", "timeline", "charts"],
+    modes: ["map"],
     freshnessKind: "clock",
     now: "notable",
     built: true,
@@ -108,7 +111,7 @@ export const TOPICS: Record<TopicId, TopicSpec> = {
     sources: ["otd-gtfs-static", "otd-gtfs-rt", "sbb-rail-traffic-info", "sbb-line-geometry"],
     cadenceSeconds: MIN,
     geoLevel: "network",
-    modes: ["map", "timeline", "charts"],
+    modes: ["map"],
     freshnessKind: "clock",
     now: "always",
     built: true,
@@ -149,7 +152,7 @@ export const TOPICS: Record<TopicId, TopicSpec> = {
     sources: ["bfs-pxweb", "swissvotes", "lindas-politics", "swisstopo"],
     cadenceSeconds: 7 * DAY,
     geoLevel: "municipality",
-    modes: ["map", "charts", "timeline", "compare"],
+    modes: ["map", "timeline"],
     freshnessKind: "vintage",
     now: "vote-sunday",
     built: false,

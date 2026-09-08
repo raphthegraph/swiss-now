@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 /**
  * Visibility-aware poller for a /api/state/* route. Starts from the server-rendered state so the
  * map has data on first paint; refetches at the source cadence (with jitter) only while the tab is
- * visible. Errors keep the last good state.
+ * visible. Errors keep the last good state. `enabled=false` pauses polling (topics not on screen).
  */
-export function useLayerState<T>(url: string, initial: T, intervalMs: number): T {
+export function useLayerState<T>(url: string, initial: T, intervalMs: number, enabled = true): T {
   const [state, setState] = useState(initial);
 
   useEffect(() => {
+    if (!enabled) return;
     let cancelled = false;
     let timer: ReturnType<typeof setTimeout> | undefined;
     let lastFetch = Date.now();
@@ -48,7 +49,7 @@ export function useLayerState<T>(url: string, initial: T, intervalMs: number): T
       if (timer) clearTimeout(timer);
       document.removeEventListener("visibilitychange", onVisible);
     };
-  }, [url, intervalMs]);
+  }, [url, intervalMs, enabled]);
 
   return state;
 }
