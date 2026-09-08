@@ -73,9 +73,9 @@ export function WindParticles({
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
     const full = emphasis === "full";
     const maxParticles = Math.round(
-      (isMobile ? MAX_PARTICLES_MOBILE : MAX_PARTICLES_DESKTOP) * (full ? 1.6 : 1),
+      (isMobile ? MAX_PARTICLES_MOBILE : MAX_PARTICLES_DESKTOP) * (full ? 1.25 : 1),
     );
-    const trailFade = full ? 0.955 : TRAIL_FADE;
+    const trailFade = full ? 0.945 : TRAIL_FADE;
     const rng = seededRandom(Date.now());
     let particles = createParticles(maxParticles, SWITZERLAND_BBOX, rng() * 1e9);
     let prev = new Float32Array(particles.length);
@@ -122,10 +122,10 @@ export function WindParticles({
         timeScale: 700 * Math.pow(2, 7 - map.getZoom()),
       });
 
-      ctx.lineWidth = full ? 1.8 : 1.1;
+      ctx.lineWidth = full ? 1.4 : 1.1;
       ctx.lineCap = "round";
-      ctx.strokeStyle = full ? ground.ink : layerAccent.wind;
-      ctx.globalAlpha = full ? 0.75 : 0.55;
+      ctx.strokeStyle = layerAccent.wind;
+      ctx.globalAlpha = full ? 0.5 : 0.55;
       ctx.beginPath();
       for (let i = 0; i < active; i += 3) {
         if (particles[i + 2]! === 0) continue; // just respawned: no segment
@@ -159,7 +159,7 @@ export function WindParticles({
             y0 = p.y - (dy * len) / 2 + dy * creep;
           const x1 = x0 + dx * len,
             y1 = y0 + dy * len;
-          ctx.globalAlpha = Math.min(0.9, 0.45 + s.speedKmh / 60);
+          ctx.globalAlpha = Math.min(0.85, 0.4 + s.speedKmh / 60);
           ctx.beginPath();
           ctx.moveTo(x0, y0);
           ctx.lineTo(x1, y1);
