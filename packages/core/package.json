@@ -19,7 +19,9 @@
     "./data-sources/earthquakes": "./src/data-sources/earthquakes/index.ts",
     "./snapshot": "./src/snapshot/index.ts",
     "./story": "./src/story/index.ts",
-    "./topics": "./src/topics/index.ts"
+    "./topics": "./src/topics/index.ts",
+    "./data-sources/bfs-pxweb": "./src/data-sources/bfs-pxweb/index.ts",
+    "./data-sources/politics": "./src/data-sources/politics/index.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -28,7 +30,8 @@
     "test:watch": "vitest",
     "build-gtfs": "tsx src/cli/build-gtfs.ts",
     "build-rail-paths": "tsx src/cli/build-rail-paths.ts",
-    "upload-rail": "tsx src/cli/upload-rail.ts"
+    "upload-rail": "tsx src/cli/upload-rail.ts",
+    "build-data": "tsx src/cli/build-data.ts"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0",

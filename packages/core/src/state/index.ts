@@ -5,3 +5,4 @@ export * from "./summary";
 export * from "./story";
 export * from "./swiss-now-state";
 export * from "./geo";
+export * from "./politics";
