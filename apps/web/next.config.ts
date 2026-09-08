@@ -5,6 +5,14 @@ const nextConfig: NextConfig = {
   // workspace packages are consumed from src/ (just-in-time); Next transpiles them
   transpilePackages: ["@swiss-now/core", "@swiss-now/motion"],
   poweredByHeader: false,
+  // the generated rail files (≈ 20 k JSON files) are read at runtime by name; never trace them into
+  // the function bundles — on Vercel they move to Blob (docs/FREE_TIER_ARCHITECTURE.md)
+  outputFileTracingExcludes: {
+    "/api/rail/active-paths": ["./public/rail/**"],
+    "/api/state/rail": ["./public/rail/**"],
+    "/": ["./public/rail/**"],
+    "/status": ["./public/rail/**"],
+  },
   async headers() {
     return [
       {
