@@ -4,14 +4,19 @@ The interactive web experience: Next.js 16 App Router, MapLibre GL (Spike A next
 
 ## Routes
 
-| Route                       | What                                                                                                                                                    |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                         | Summary strip from live MeteoSwiss data (warmest, coldest, strongest gust, share of stations reporting rain). The full-screen map arrives with Spike A. |
-| `/status`                   | Freshness of live layers and the source register (licence, attribution, cadence, commercial use).                                                       |
-| `/api/state/weather`        | `WeatherState` JSON. Pull-through cached: Next Data Cache `revalidate=300` + `Cache-Control: s-maxage=300, stale-while-revalidate=1500`, `ETag`.        |
-| `/api/meta/sources`         | Source metadata for credits and video end cards.                                                                                                        |
-| `/map/vendor/*`             | MapLibre worker + shared chunk, copied on `predev`/`prebuild` (bundlers mis-resolve the worker's `import.meta.url`).                                    |
-| `/map/swiss-now-light.json` | Forked swisstopo `lightbasemap.vt` style (regenerate with `pnpm --filter @swiss-now/geo-build fork-style`).                                             |
+| Route                                   | What                                                                                                                                                    |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                                     | Summary strip from live MeteoSwiss data (warmest, coldest, strongest gust, share of stations reporting rain). The full-screen map arrives with Spike A. |
+| `/status`                               | Freshness of live layers and the source register (licence, attribution, cadence, commercial use).                                                       |
+| `/api/state/weather`                    | `WeatherState` JSON. Pull-through cached: Next Data Cache `revalidate=300` + `Cache-Control: s-maxage=300, stale-while-revalidate=1500`, `ETag`.        |
+| `/api/state/seismic`                    | `SeismicState`: SED reviewed catalogue, last 30 days, earthquakes only. 2 min.                                                                          |
+| `POST /api/snapshot`                    | Writes the current 10-minute composite snapshot if missing (visitor-driven on the free tier; a scheduled ping once deployed).                           |
+| `/api/snapshots`, `/api/snapshots/{id}` | Snapshot list (48 h) and immutable snapshot files for the timeline.                                                                                     |
+| `/api/story/today`                      | `StorySpec` ranked from today's snapshots (also the Remotion input).                                                                                    |
+| `/today`                                | The web-native story: scroll-driven chapters steering the live map.                                                                                     |
+| `/api/meta/sources`                     | Source metadata for credits and video end cards.                                                                                                        |
+| `/map/vendor/*`                         | MapLibre worker + shared chunk, copied on `predev`/`prebuild` (bundlers mis-resolve the worker's `import.meta.url`).                                    |
+| `/map/swiss-now-light.json`             | Forked swisstopo `lightbasemap.vt` style (regenerate with `pnpm --filter @swiss-now/geo-build fork-style`).                                             |
 
 ## Run
 

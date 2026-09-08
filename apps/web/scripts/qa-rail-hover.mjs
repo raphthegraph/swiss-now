@@ -80,6 +80,16 @@ console.log(
   scrubber > 0,
 );
 await page.screenshot({ path: "/tmp/sn/qa-rail.png" });
+// Today story: chapters render and the first headline is real
+await page.goto(`${base}/today`, { waitUntil: "domcontentloaded", timeout: 90_000 });
+await page.locator(".chapter__headline").first().waitFor({ timeout: 60_000 });
+const chapters = await page.locator(".chapter__headline").count();
+const firstHeadline = await page.locator(".chapter__headline").first().innerText();
+const todayOk = chapters >= 1 && firstHeadline.length > 10;
+console.log("today chapters:", chapters, "|", firstHeadline.slice(0, 80), "| ok:", todayOk);
+await page.screenshot({ path: "/tmp/sn/qa-today.png" });
+await page.goto(`${base}/`, { waitUntil: "domcontentloaded", timeout: 90_000 });
+await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 90_000 });
 // QUAKES view (present only when a magnitude ≥ 2 event is in the window)
 const quakesButton = page.getByRole("button", { name: "Quakes" });
 let quakesOk = true;
@@ -92,4 +102,4 @@ if ((await quakesButton.count()) > 0) {
   await page.screenshot({ path: "/tmp/sn/qa-quakes.png" });
 } else console.log("QUAKES not in rail (no M≥2 event in window)");
 await browser.close();
-process.exit(shown && railFigures && quakesOk ? 0 : 1);
+process.exit(shown && railFigures && quakesOk && todayOk ? 0 : 1);

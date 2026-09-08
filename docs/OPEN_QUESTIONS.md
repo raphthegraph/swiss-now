@@ -36,7 +36,7 @@
 ## 3. Free-tier verification
 
 - [ ] Exact **Vercel Blob Hobby** included quotas (storage, simple/advanced operations, data transfer); the pricing pages fetched list only Pro examples. Check the dashboard after creating the store. [P0]
-- [ ] Whether Supabase counts scheduled REST/Postgres writes from GitHub Actions as "activity" against the 1-week pause. [P3]
+- [x] Supabase not needed for the MVP: snapshots and the story are JSON files (local dir / Vercel Blob) and daily aggregates can be derived from them. Revisit only for multi-month baselines. [P3]
 - [ ] Measured edge requests and fast data transfer per visitor-hour (model assumes 80–110 requests, ~4 MB). [P1]
 - [ ] Measured active CPU of one GTFS-RT TripUpdates parse in a Vercel function (model assumes ~0.3 s). [P2]
 - [ ] GitHub Actions: public vs private repository decision (unlimited minutes vs 2 000/month) and the 60-day inactivity auto-disable handling. [P0]
@@ -50,7 +50,7 @@
 - [ ] MVP UI languages: EN + DE proposed; FR/IT timing. [P1]
 - [ ] Thresholds for the NOW composite (when does a delay pulse, a danger level, a rain cell earn a place by default). [P1]
 - [ ] Commute-hour promotion rules and how "home place" influences the summary strip. [P1]
-- [ ] Story ranking heuristics and copy templates; whether any AI copywriting is ever needed (default: no). [P3]
+- [~] Story ranking heuristics implemented (weather summary always; extremes, rainfall, gust/snow, rail, river, quake by score). Copy is templated English; DE/FR/IT and any AI copywriting remain open (default: no AI). [P3]
 - [ ] Video formats and lengths for each platform; end-card attribution layout. [P4]
 - [ ] Product name and domain availability (swissnow.ch / .swiss / .app). [P0]
 
