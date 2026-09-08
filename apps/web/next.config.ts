@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
         headers: [{ key: "Cache-Control", value: "public, max-age=3600, s-maxage=86400" }],
       },
       {
+        // boundaries and the municipality register change once a year (vintage in the file name)
+        source: "/geo/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400, s-maxage=604800" }],
+      },
+      {
         // rail files are immutable per GTFS build (rebuilt Mon/Thu); paths are fetched per train
         source: "/rail/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=3600, s-maxage=86400" }],

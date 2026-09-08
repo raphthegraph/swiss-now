@@ -2,10 +2,22 @@
   "name": "@swiss-now/geo-build",
   "version": "0.0.1",
   "private": true,
-  "description": "Build-time geo scripts: swissBOUNDARIES3D \u2192 simplified GeoJSON, SBB/BAV rail lines \u2192 route paths, RDS-TMC lookup. Runs in GitHub Actions or locally, never in the app.",
+  "description": "Build-time geo scripts, pure JavaScript (no GDAL): the forked swisstopo basemap style and the geo spine (swissBOUNDARIES3D \u2192 TopoJSON, BFS municipality register). Runs locally or in GitHub Actions, never in the app.",
   "type": "module",
   "scripts": {
-    "test": "echo \"no tests yet\"",
-    "fork-style": "node scripts/fork-basemap-style.mjs"
+    "test": "vitest run",
+    "fork-style": "node scripts/fork-basemap-style.mjs",
+    "build-boundaries": "node scripts/build-boundaries.mjs"
+  },
+  "dependencies": {
+    "node-stream-zip": "^1.16.0",
+    "proj4": "^2.22.0",
+    "shapefile": "^0.6.6",
+    "topojson-client": "^3.1.0",
+    "topojson-server": "^3.0.1",
+    "topojson-simplify": "^3.0.3"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
   }
 }
