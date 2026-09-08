@@ -48,7 +48,8 @@ and the free GTFS-RT token in `apps/web/.env.local` as `OTD_API_KEY=…` (regist
 The in-app and headless browsers used by the assistant cannot render WebGL, so map behaviour is checked with Chromium's software renderer:
 
 ```bash
-node scripts/qa-rail-hover.mjs            # switches to RAIL, hovers a drawn train, expects the hover card; screenshot in /tmp/sn/qa-rail.png
+node scripts/qa-rail-hover.mjs            # rail hover card, every topic and mode, timelines, compare, the gate, /today; then a 1280×720 pass (rail above the strip, ? help), a 390×844 pass (horizontal rail, four figures, tap opens and closes a card) and reduced motion
+node scripts/qa-i18n.mjs                  # ?lang=de/fr/it: rail, figures, legend, modes, charts title, story headline; the FR switch and its stored choice
 ```
 
 It needs a cached Playwright Chromium (`~/Library/Caches/ms-playwright/chromium-*`) and the server on port 3100.

@@ -1,5 +1,6 @@
 "use client";
 
+import { cancelFrame, nextFrame } from "@/lib/reduced-motion";
 import { useEffect, useRef } from "react";
 import type { Map as MapLibreMap } from "maplibre-gl";
 import type { AviationState } from "@swiss-now/core";
@@ -97,12 +98,12 @@ export function AircraftLayer({ map, aviation }: AircraftLayerProps) {
           }
         }
       }
-      raf = requestAnimationFrame(draw);
+      raf = nextFrame(draw);
     };
-    raf = requestAnimationFrame(draw);
+    raf = nextFrame(draw);
     return () => {
       running = false;
-      cancelAnimationFrame(raf);
+      cancelFrame(raf);
       map.off("resize", resize);
     };
   }, [map]);

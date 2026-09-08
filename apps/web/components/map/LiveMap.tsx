@@ -135,6 +135,7 @@ export function LiveMap({
       if (hoverBound.current.has(id)) continue;
       hoverBound.current.add(id);
       map.on("mousemove", id, h.onMove);
+      map.on("click", id, h.onMove);
       map.on("mouseleave", id, h.onLeave);
     }
   };
@@ -235,6 +236,11 @@ export function LiveMap({
         setHovered(null);
       };
       hoverHandlers.current = { onMove, onLeave };
+      // touch: a tap on a feature opens its card (the layer handlers above); a tap elsewhere closes it
+      map.on("click", (e) => {
+        const layers = [...hoverBound.current].filter((id) => map.getLayer(id));
+        if (!layers.length || !map.queryRenderedFeatures(e.point, { layers }).length) onLeave();
+      });
       // keep the card anchored while the camera moves
       map.on("move", () => {
         setHovered((h) => (h ? { ...h, point: map.project(h.lonLat) } : h));

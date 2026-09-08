@@ -47,10 +47,10 @@
 - [x] Laptop frame rate: 60 fps, min 60 (2026-09-07). [P0]
 - [ ] Phone frame rate (mid-range device, `?fps=1` via LAN); target ≥ 30 fps. [P1]
 - [ ] Typeface and final palette; behaviour of the daylight-driven environmental state (automatic vs user toggle). [P0]
-- [ ] MVP UI languages: EN + DE proposed; FR/IT timing. [P1]
+- [x] Interface languages: German, French, Italian and English from Stage 7 (2026-09-08); `?lang=`, stored choice, browser language, English fallback. The status page stays English. [P1]
 - [ ] Thresholds for the NOW composite (when does a delay pulse, a danger level, a rain cell earn a place by default). [P1]
 - [ ] Commute-hour promotion rules and how "home place" influences the summary strip. [P1]
-- [~] Story ranking heuristics implemented (weather summary always; extremes, rainfall, gust/snow, rail, river, quake by score). Copy is templated English; DE/FR/IT and any AI copywriting remain open (default: no AI). [P3]
+- [x] Story ranking heuristics implemented (weather summary always; extremes, rainfall, gust/snow, rail, river, quake, energy, events, hazard, air, vote by score). Copy is templated in the four languages; no AI copywriting (decision: none). [P3]
 - [ ] Video formats and lengths for each platform; end-card attribution layout. [P4]
 - [ ] Product name and domain availability (swissnow.ch / .swiss / .app). [P0]
 

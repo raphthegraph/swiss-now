@@ -34,6 +34,8 @@ export const reducedMotion = {
   particles: false,
   flows: "static-dash",
   pulses: "ring-only",
+  /** Canvas layers redraw at this interval instead of every frame. */
+  frameIntervalMs: 1000,
 } as const;
 
 /** Periods for looping data motion, in ms. */

@@ -23,7 +23,7 @@ Status: deployed on Vercel (free tier) at https://swiss-now.vercel.app with fift
 | **/today**                                            | The day's story: chapters ranked from 10-minute snapshots across the live topics (extremes, rainfall, delays, rivers, quakes, energy flows, hazards, events, air) and the latest vote in the week after a vote Sunday, scroll-driven over the live map, plus the video in a Remotion Player.                                                   | 10 min         |
 | **/status**                                           | Freshness and source health.                                                                                                                                                                                                                                                                                                                   |                |
 
-Topics sit in a rail (NOW · LIVE · SYSTEMS · SWITZERLAND) and are independent of the view mode (MAP · CHARTS · TIMELINE · COMPARE); the view is a URL (`?topic=politics&mode=timeline&t=6860`, `?topic=population&mode=compare&place=261,351`). TIMELINE scrubs the last 48 hours of 10-minute snapshots for the live topics, radar frames for weather, votes and vintages for the statistics; COMPARE puts two places side by side with the same figures. Keyboard: `[` `]` topics, `1`–`4` modes, `Esc` back to NOW, `/` place search. See [`docs/IA.md`](docs/IA.md). Every value carries an observation time and a source; freshness (`live · aging · stale · outage`) changes the rendering. A home place (stored locally, no account) makes the summary strip local.
+Topics sit in a rail (NOW · LIVE · SYSTEMS · SWITZERLAND) and are independent of the view mode (MAP · CHARTS · TIMELINE · COMPARE); the view is a URL (`?topic=politics&mode=timeline&t=6860`, `?topic=population&mode=compare&place=261,351`). TIMELINE scrubs the last 48 hours of 10-minute snapshots for the live topics, radar frames for weather, votes and vintages for the statistics; COMPARE puts two places side by side with the same figures. Keyboard: `[` `]` topics, `1`–`4` modes, `Esc` back to NOW, `/` place search, `?` help. The interface speaks German, French, Italian and English (`?lang=de`, the switch in the colophon, or the browser language); topic and figure labels, story headlines and the video follow the choice. On touch screens a tap opens the card a hover would; the OS reduced-motion preference stops the ambient motion. See [`docs/IA.md`](docs/IA.md). Every value carries an observation time and a source; freshness (`live · aging · stale · outage`) changes the rendering. A home place (stored locally, no account) makes the summary strip local.
 
 ## How it works
 
@@ -116,7 +116,7 @@ Details and the landscape variant: [`apps/video/README.md`](apps/video/README.md
 pnpm typecheck && pnpm test && pnpm format:check
 ```
 
-Map behaviour is verified against a production build with Chromium's software WebGL renderer: `node apps/web/scripts/qa-rail-hover.mjs` (rail groups and modes, hover cards, choropleths, timelines, compare, the licence gate, Today page and the embedded Player). See [`apps/web/README.md`](apps/web/README.md).
+Map behaviour is verified against a production build with Chromium's software WebGL renderer: `node apps/web/scripts/qa-rail-hover.mjs` (rail groups and modes, hover cards, choropleths, timelines, compare, the licence gate, Today page and the embedded Player, short and mobile viewports, tap-to-card, reduced motion) and `node apps/web/scripts/qa-i18n.mjs` (the four languages across rail, figures, legends, charts and the story). See [`apps/web/README.md`](apps/web/README.md).
 
 ## Data sources and attribution
 
@@ -126,16 +126,16 @@ Interpolated train positions are estimates from the timetable and published dela
 
 ## Roadmap
 
-| Phase | Scope                                                                                                                                                                              | Status  |
-| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| 0     | Workspace, contracts, tokens, forked basemap, first cached handler, spikes                                                                                                         | done    |
-| 1     | Weather and water layers, radar, wind, HUD, home place                                                                                                                             | done    |
-| 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                                                                                         | done    |
-| 3     | Quakes, snapshots, story builder, `/today`                                                                                                                                         | done    |
-| 4     | "Switzerland Today" composition, local rendering, Player on `/today`                                                                                                               | done    |
-| E1–E6 | Expansion: topics × modes IA, geo spine, Politics · Energy + Events · Air + Hazards · Statistics + CHARTS · TIMELINE + COMPARE · story/video across the new topics, gated Aviation | done    |
-| —     | Deployment: Vercel Hobby live; Blob store, rail token and ping variable per `docs/DEPLOYMENT.md`                                                                                   | live    |
-| E7    | Polish, mobile, languages, docs                                                                                                                                                    | planned |
+| Phase | Scope                                                                                                                                                                              | Status |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| 0     | Workspace, contracts, tokens, forked basemap, first cached handler, spikes                                                                                                         | done   |
+| 1     | Weather and water layers, radar, wind, HUD, home place                                                                                                                             | done   |
+| 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                                                                                         | done   |
+| 3     | Quakes, snapshots, story builder, `/today`                                                                                                                                         | done   |
+| 4     | "Switzerland Today" composition, local rendering, Player on `/today`                                                                                                               | done   |
+| E1–E6 | Expansion: topics × modes IA, geo spine, Politics · Energy + Events · Air + Hazards · Statistics + CHARTS · TIMELINE + COMPARE · story/video across the new topics, gated Aviation | done   |
+| —     | Deployment: Vercel Hobby live; Blob store, rail token and ping variable per `docs/DEPLOYMENT.md`                                                                                   | live   |
+| E7    | Polish: four interface languages, short and mobile viewports, touch cards, reduced motion, keyboard help, docs                                                                     | done   |
 
 ## Licence
 

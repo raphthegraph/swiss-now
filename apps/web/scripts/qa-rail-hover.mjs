@@ -40,6 +40,13 @@ const browser = await chromium.launch({
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 page.on("pageerror", (e) => console.log("pageerror:", e.message));
 page.on("console", (m) => m.type() === "error" && console.log("console error:", m.text()));
+const seen404 = new Set();
+page.on("response", (r) => {
+  if (r.status() >= 400 && !seen404.has(r.url())) {
+    seen404.add(r.url());
+    console.log("http", r.status(), r.url().replace(base, ""));
+  }
+});
 await page.goto(`${base}/`, { waitUntil: "domcontentloaded", timeout: 90_000 });
 await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 90_000 });
 // IA: topics rail with groups, mode switcher, view state in the URL
@@ -354,6 +361,55 @@ if ((await quakesButton.count()) > 0) {
   console.log("strip in QUAKES:", quakeStrip.slice(0, 140), "| ok:", quakesOk);
   await page.screenshot({ path: "/tmp/sn/qa-quakes.png" });
 } else console.log("QUAKES not in rail (no M≥2 event in window)");
+// Stage 7: short viewport, keyboard help, mobile layout, tap-to-card, reduced motion
+await page.setViewportSize({ width: 1280, height: 720 });
+await page.goto(`${base}/?topic=weather`, { waitUntil: "domcontentloaded", timeout: 90_000 });
+await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 60_000 });
+await page.waitForTimeout(600);
+const railBox = await page.locator("nav[aria-label='Topics']").boundingBox();
+const stripBox = await page.locator(".hud--bottom").boundingBox();
+const shortOk = !!railBox && !!stripBox && railBox.y + railBox.height <= stripBox.y + 1;
+console.log("short viewport: rail bottom", Math.round(railBox?.y + railBox?.height), "strip top", Math.round(stripBox?.y), "| ok:", shortOk);
+await page.keyboard.press("?");
+const helpOpen = (await page.locator("[role='dialog']").count()) === 1;
+await page.keyboard.press("Escape");
+const helpOk = helpOpen && (await page.locator("[role='dialog']").count()) === 0 && new URL(page.url()).searchParams.get("topic") === "weather";
+console.log("keyboard help open/close keeps topic:", helpOk);
+await page.setViewportSize({ width: 390, height: 844 });
+await page.goto(`${base}/?topic=weather`, { waitUntil: "domcontentloaded", timeout: 90_000 });
+await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 60_000 });
+await page.waitForTimeout(800);
+const railM = await page.locator("nav[aria-label='Topics']").boundingBox();
+const stripM = await page.locator(".hud--bottom").boundingBox();
+const metricsM = await page.locator(".metric--hud").evaluateAll((els) => els.filter((e) => e.getClientRects().length && getComputedStyle(e).display !== "none").length);
+const mobileOk = !!railM && !!stripM && railM.height < 80 && railM.y + railM.height <= stripM.y + 1 && metricsM >= 3;
+console.log("mobile: rail h", Math.round(railM?.height), "rail bottom", Math.round(railM?.y + railM?.height), "strip top", Math.round(stripM?.y), "figures", metricsM, "| ok:", mobileOk);
+await page.waitForFunction(() => { const m = window.__swissNowMap; return m && m.loaded() && m.queryRenderedFeatures().some((f) => f.geometry.type === "Point" && f.layer.id === "weather-temp-circles"); }, null, { timeout: 60_000 });
+const tapAt = await page.evaluate(() => { const m = window.__swissNowMap; const f = m.queryRenderedFeatures().find((x) => x.geometry.type === "Point" && x.layer.id === "weather-temp-circles"); const p = m.project(f.geometry.coordinates); return { x: p.x, y: p.y, layer: f.layer.id }; });
+await page.mouse.click(tapAt.x, tapAt.y);
+await page.waitForTimeout(300);
+const tapOk = (await page.locator(".hover-card").count()) >= 1;
+console.log("tap on", tapAt.layer, "opens a card:", tapOk);
+// a tap on open water (no station there) must close the card; pick a lake that is on screen and clear of the HUD
+const lake = await page.evaluate(({ top, bottom }) => {
+  const m = window.__swissNowMap;
+  for (const ll of [[6.55, 46.45], [6.85, 46.9], [9.4, 47.6], [8.55, 47.25], [8.3, 46.95]]) {
+    const p = m.project(ll);
+    if (p.x > 20 && p.x < innerWidth - 20 && p.y > top && p.y < bottom) return { x: p.x, y: p.y };
+  }
+  return null;
+}, { top: 130, bottom: (stripM?.y ?? 600) - 60 });
+if (lake) await page.mouse.click(lake.x, lake.y);
+await page.waitForTimeout(300);
+const tapCloseOk = (await page.locator(".hover-card").count()) === 0;
+console.log("tap elsewhere closes it:", tapCloseOk);
+await page.emulateMedia({ reducedMotion: "reduce" });
+await page.reload({ waitUntil: "domcontentloaded" });
+await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 60_000 });
+const reducedOk = await page.evaluate(() => { const d = getComputedStyle(document.querySelector(".rail__item")).transitionDuration; return d.endsWith("ms") ? parseFloat(d) <= 0.01 : parseFloat(d) <= 0.00001; });
+console.log("reduced motion: chrome transitions off:", reducedOk);
+await page.emulateMedia({ reducedMotion: "no-preference" });
+await page.screenshot({ path: "/tmp/sn/qa-mobile.png" });
 await browser.close();
 process.exit(
   shown &&
@@ -373,7 +429,13 @@ process.exit(
   snapshotOk &&
   compareOk &&
   keyTopic === "housing" &&
-  aviationOk
+  aviationOk &&
+  shortOk &&
+  helpOk &&
+  mobileOk &&
+  tapOk &&
+  tapCloseOk &&
+  reducedOk
     ? 0
     : 1,
 );

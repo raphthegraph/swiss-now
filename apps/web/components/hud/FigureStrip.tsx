@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { duration } from "@swiss-now/motion/tokens";
 import { getSource } from "@swiss-now/core/sources";
@@ -35,8 +35,24 @@ function credits(topic: TopicId): string[] {
 /** The bottom HUD: instrument, legend, key figures and colophon. */
 export function FigureStrip({ topic, figures, children, legend }: FigureStripProps) {
   const { t, l } = useT();
+  const ref = useRef<HTMLElement>(null);
+  // the strip's height drives where the horizontal rail and the charts sheet end on small screens
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      if (entry)
+        document.documentElement.style.setProperty(
+          "--sn-strip-h",
+          `${Math.round(entry.contentRect.height)}px`,
+        );
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
   return (
     <motion.section
+      ref={ref}
       className="hud hud--bottom"
       aria-label={t("keyFigures")}
       initial={{ opacity: 0, y: 12 }}

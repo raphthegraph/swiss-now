@@ -56,13 +56,13 @@ Fits every source whose raw payload is < 2 MB and whose "current state" is self-
 
 GitHub Actions workflows run Node scripts from `packages/core/src/cli`:
 
-| Workflow                     | Schedule                                                                                         | Why it cannot be pull-through                                               | Output                                                                                                                                                                                                                                                                                                                           |
-| ---------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `gtfs.yml`                   | Mon, Thu 16:30 CET (after the 15:00 RT switch)                                                   | 248 MB zip, ≈ 3 min streaming; BAV XTF + SBB lines → stitched graph, ≈ 40 s | `rail/{meta,stops,routes,patterns,distances}.json`, `rail/days/YYYYMMDD.json` (≈ 4.5 MB, ≈ 21 k trips), `rail/paths/{pathId}.json` (one per unique stop sequence, 20 m simplified, 9 k files / 41 MB) → workflow artifact; uploaded to Vercel Blob when the token secret exists; the web reads `RAIL_DATA_URL` or `public/rail/` |
-| `snapshot.yml`               | not yet scheduled (Phase 3 ships visitor-driven `POST /api/snapshot`; a 10-min ping is optional) | history must exist when nobody is watching                                  | `snapshots/{slot}.json` → local dir or Blob; story and baselines are computed from the snapshot files, so Supabase is deferred                                                                                                                                                                                                   |
-| `story.yml`                  | daily 21:30 CET                                                                                  | ranking over the day's snapshots                                            | `story/{date}.json` → Blob                                                                                                                                                                                                                                                                                                       |
-| `forecast.yml`               | hourly                                                                                           | local-forecast files up to 33 MB                                            | `forecast/daily.json` → Blob                                                                                                                                                                                                                                                                                                     |
-| `render.yml` (later, manual) | on demand                                                                                        | headless Chromium                                                           | `video/{date}.mp4` → Blob                                                                                                                                                                                                                                                                                                        |
+| Workflow                     | Schedule                                                                                                                  | Why it cannot be pull-through                                               | Output                                                                                                                                                                                                                                                                                                                           |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gtfs.yml`                   | Mon, Thu 16:30 CET (after the 15:00 RT switch)                                                                            | 248 MB zip, ≈ 3 min streaming; BAV XTF + SBB lines → stitched graph, ≈ 40 s | `rail/{meta,stops,routes,patterns,distances}.json`, `rail/days/YYYYMMDD.json` (≈ 4.5 MB, ≈ 21 k trips), `rail/paths/{pathId}.json` (one per unique stop sequence, 20 m simplified, 9 k files / 41 MB) → workflow artifact; uploaded to Vercel Blob when the token secret exists; the web reads `RAIL_DATA_URL` or `public/rail/` |
+| `snapshot.yml`               | every 10 min (GitHub Actions) against the URL in the repository variable `SWISS_NOW_URL`; visitors trigger the same write | history must exist when nobody is watching                                  | `snapshots/{slot}.json` → local dir or Blob; story and baselines are computed from the snapshot files, so Supabase is deferred                                                                                                                                                                                                   |
+| `story.yml`                  | daily 21:30 CET                                                                                                           | ranking over the day's snapshots                                            | `story/{date}.json` → Blob                                                                                                                                                                                                                                                                                                       |
+| `forecast.yml`               | hourly                                                                                                                    | local-forecast files up to 33 MB                                            | `forecast/daily.json` → Blob                                                                                                                                                                                                                                                                                                     |
+| `render.yml` (later, manual) | on demand                                                                                                                 | headless Chromium                                                           | `video/{date}.mp4` → Blob                                                                                                                                                                                                                                                                                                        |
 
 Constraints: GitHub's 5-minute floor and hour-start jitter; scheduled workflows are disabled after 60 days without repository activity on public repos → keep committing or add a keep-alive commit step. Secrets live in GitHub Actions secrets.
 
@@ -192,7 +192,7 @@ type RailState = LayerBase & {
 };
 type SeismicState = LayerBase & { events: Event[] };
 type TrafficState = LayerBase & { segments: Segment[]; incidents: Event[] }; // Phase 5, derived only
-type AirState = LayerBase & { stations: Station[]; observations: Observation[]; index?: number }; // Phase 5
+type AirState = LayerBase & { stations: Station[]; observations: Observation[]; index?: number }; // Stage 3, see state/layers.ts
 type EnergyState = LayerBase & {
   load?: number;
   generationByType?: Record<string, number>;
@@ -242,18 +242,20 @@ swiss-now/
 ├─ apps/
 │  ├─ web/                                  Next.js 16 App Router — the interactive experience
 │  │  ├─ app/
-│  │  │  ├─ (map)/page.tsx                  full-screen map shell (client tree, static HTML shell)
-│  │  │  ├─ today/page.tsx                  web-native story + optional Remotion <Player>
-│  │  │  ├─ status/page.tsx                 freshness / source health
-│  │  │  └─ api/state/[layer]/route.ts      Mode 1 handlers; api/meta/sources
+│  │  │  ├─ page.tsx                        full-screen map shell (server seed, client tree)
+│  │  │  ├─ today/page.tsx                  web-native story + Remotion <Player> on demand
+│  │  │  ├─ status/page.tsx                 freshness / source register
+│  │  │  └─ api/{state/<layer>,snapshot,snapshots,story/today,radar,hail,hazards,rail}/  Mode 1 handlers
 │  │  ├─ components/
-│  │  │  ├─ map/                            LiveMap.tsx, layers/{WeatherField,RainField,WindParticles,RailLayer,TrainMarks,
-│  │  │  │                                   RiverFlow,QuakeRings,CantonFocus}.tsx  (MapLibre + deck.gl + WebGL)
-│  │  │  ├─ hud/                            SummaryStrip, LayerRail, Timeline, Legend, HoverCard, PlaceFocus (React + Motion/GSAP)
-│  │  │  └─ story/                          TodayStory, Chapter*.tsx (React + Motion, scroll-driven)
-│  │  └─ lib/                               queries (TanStack Query), polling policy, map style loader, daylight state
+│  │  │  ├─ map/                            MapPage (wiring), LiveMap (contributions, hover/tap), TrainLayer, QuakeLayer,
+│  │  │  │                                   FlowLayer, AircraftLayer, WindParticles, EventMarkers, hover cards (MapLibre + canvas)
+│  │  │  ├─ hud/                            Masthead, FigureStrip, TopicRail, ModeSwitcher, HomePlace, PlaceSearch, LangSwitch,
+│  │  │  │                                   legends, Radar/Vote/Period/Snapshot scrubbers (React + Motion)
+│  │  │  ├─ views/                          ChartsView, StatsCharts, CompareView (Observable Plot)
+│  │  │  └─ story/                          TodayStory, StoryPlayer (scroll-driven; Player mounted on demand)
+│  │  └─ lib/                               state loaders + caching, map contributions, view state (URL), i18n, snapshots, format
 │  └─ video/                                Remotion 4.x — registers compositions, renders locally
-│     ├─ src/Root.tsx                       SwitzerlandToday (1080×1920), SwitzerlandTodayWide, the Phase 0 spike
+│     ├─ src/Root.tsx                       SwitzerlandToday (1080×1920), SwitzerlandTodayWide, SwitzerlandTodaySample, the Phase 0 spike
 │     ├─ scripts/fetch-story.mjs            saves /api/story/today as a fixture
 │     └─ fixtures/                          saved StorySpec / WeatherState JSON days (deterministic renders)
 ├─ packages/

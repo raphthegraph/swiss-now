@@ -1,5 +1,6 @@
 "use client";
 
+import { cancelFrame, nextFrame } from "@/lib/reduced-motion";
 import { useEffect, useRef } from "react";
 import type { Map as MapLibreMap } from "maplibre-gl";
 import type { Event, SeismicState } from "@swiss-now/core";
@@ -61,7 +62,7 @@ export function QuakeLayer({
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     const frame = (nowMs: number) => {
-      raf = requestAnimationFrame(frame);
+      raf = nextFrame(frame);
       if (document.hidden) return;
       const w = canvas.width / dpr;
       const h = canvas.height / dpr;
@@ -133,12 +134,14 @@ export function QuakeLayer({
     resize();
     map.on("resize", resize);
     map.on("mousemove", onMove);
+    map.on("click", onMove);
     map.getCanvas().addEventListener("mouseleave", onLeave);
-    raf = requestAnimationFrame(frame);
+    raf = nextFrame(frame);
     return () => {
-      cancelAnimationFrame(raf);
+      cancelFrame(raf);
       map.off("resize", resize);
       map.off("mousemove", onMove);
+      map.off("click", onMove);
       map.getCanvas().removeEventListener("mouseleave", onLeave);
     };
   }, [map]);

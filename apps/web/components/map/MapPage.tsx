@@ -391,6 +391,7 @@ export function MapPage({
   const params = useSearchParams();
   const showFps = params.get("fps") === "1";
   const [map, setMap] = useState<MapLibreMap | null>(null);
+  const [help, setHelp] = useState(false);
   // visitor-driven persistence: keeps the day's snapshots (the story's input) written while someone watches
   useSnapshotPing();
   // keyboard: [ ] topics · 1–4 modes · Esc back to NOW (docs/IA.md)
@@ -407,15 +408,18 @@ export function MapPage({
       const i = order.indexOf(topic);
       if (e.key === "]") setTopic(order[(i + 1) % order.length]!);
       else if (e.key === "[") setTopic(order[(i - 1 + order.length) % order.length]!);
-      else if (e.key === "Escape") setTopic("now");
-      else if (/^[1-4]$/.test(e.key)) {
+      else if (e.key === "?") setHelp((h) => !h);
+      else if (e.key === "Escape") {
+        if (help) setHelp(false);
+        else setTopic("now");
+      } else if (/^[1-4]$/.test(e.key)) {
         const m = Mode.options[Number(e.key) - 1]!;
         if (TOPICS[topic].modes.includes(m)) setMode(m);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [topic, setTopic, setMode]);
+  }, [topic, setTopic, setMode, help]);
   const radar = useRadarTimeline(weather);
   // the radar timeline is the WEATHER topic's TIMELINE instrument; elsewhere the map shows the latest frame
   const radarOn = topic === "weather" && mode === "timeline";
@@ -615,6 +619,12 @@ export function MapPage({
       ) : null}
       <TopicRail view={view} onSelect={setTopic} />
       <ModeSwitcher view={view} onChange={setMode} />
+      {help ? (
+        <div className="hud hud--help" role="dialog" aria-label={t("shortcuts")}>
+          <span className="label">{t("shortcuts")}</span>
+          <span className="tnum">{t("shortcutsHelp")}</span>
+        </div>
+      ) : null}
       <Masthead
         status={voteStatus}
         clock={{ observedAt: weather.observedAt, freshness: weather.freshness }}

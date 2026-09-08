@@ -29,7 +29,9 @@ export function PlaceSearch({
   const { t } = useT();
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(0);
   const ref = useRef<HTMLInputElement>(null);
+  const listId = `place-${label}-list`;
   const options = useMemo(() => {
     if (!register || q.trim().length < 2) return [];
     const needle = q.trim().toLowerCase();
@@ -74,24 +76,56 @@ export function PlaceSearch({
         id={`place-${label}`}
         ref={ref}
         className="place-search__input"
+        role="combobox"
+        aria-expanded={open && options.length > 0}
+        aria-controls={listId}
+        aria-autocomplete="list"
+        aria-activedescendant={
+          open && options[active]
+            ? `${listId}-${options[active].kind}-${options[active].key}`
+            : undefined
+        }
         value={open ? q : (value?.name ?? q)}
         placeholder={t("municipalityOrCanton")}
         onChange={(e) => {
           setQ(e.target.value);
+          setActive(0);
           setOpen(true);
         }}
         onFocus={() => setOpen(true)}
         onBlur={() => setTimeout(() => setOpen(false), 150)}
+        onKeyDown={(e) => {
+          if (!open || !options.length) return;
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            setActive((i) => Math.min(options.length - 1, i + 1));
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            setActive((i) => Math.max(0, i - 1));
+          } else if (e.key === "Enter") {
+            const o = options[active];
+            if (!o) return;
+            e.preventDefault();
+            onPick(o);
+            setQ("");
+            setOpen(false);
+          } else if (e.key === "Escape") setOpen(false);
+        }}
         autoComplete="off"
       />
       {open && options.length ? (
-        <ul className="place-search__list" role="listbox">
-          {options.map((o) => (
+        <ul className="place-search__list" role="listbox" id={listId}>
+          {options.map((o, i) => (
             <li key={`${o.kind}-${o.key}`}>
               <button
                 type="button"
+                id={`${listId}-${o.kind}-${o.key}`}
+                role="option"
+                aria-selected={i === active}
                 className="place-search__option"
+                data-active={i === active ? "true" : undefined}
                 onMouseDown={(e) => e.preventDefault()}
+                onMouseEnter={() => setActive(i)}
                 onClick={() => {
                   onPick(o);
                   setQ("");

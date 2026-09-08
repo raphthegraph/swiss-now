@@ -35,7 +35,17 @@ export function HomePlace({ home, onChange, onFocus, weather, hydrology }: HomeP
     const onDoc = (e: MouseEvent) => {
       if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
     };
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+      const root = rootRef.current;
+      if (!root) return;
+      const items = [...root.querySelectorAll<HTMLElement>(".home__popover button")];
+      const i = items.indexOf(document.activeElement as HTMLElement);
+      const next = e.key === "ArrowDown" ? Math.min(items.length - 1, i + 1) : Math.max(0, i - 1);
+      items[next]?.focus();
+      e.preventDefault();
+    };
     document.addEventListener("mousedown", onDoc);
     document.addEventListener("keydown", onKey);
     return () => {

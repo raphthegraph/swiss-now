@@ -11,6 +11,7 @@ import {
 } from "react";
 import type { LocalizedText } from "@swiss-now/core/state";
 import { isUiLang, pick, type UiLang } from "@swiss-now/core/i18n";
+import { MotionConfig } from "motion/react";
 import { STRINGS, type StringKey } from "./strings";
 
 const KEY = "swiss-now:lang";
@@ -63,7 +64,11 @@ export function LangProvider({ children }: { children: ReactNode }) {
     }
   }, []);
   const value = useMemo(() => ({ lang, setLang }), [lang, setLang]);
-  return <LangContext.Provider value={value}>{children}</LangContext.Provider>;
+  return (
+    <LangContext.Provider value={value}>
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </LangContext.Provider>
+  );
 }
 
 export function useLang(): LangContextValue {
