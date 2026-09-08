@@ -19,6 +19,8 @@ import { LiveMap } from "./LiveMap";
 import { WindParticles } from "./WindParticles";
 import { RadarScrubber } from "../hud/RadarScrubber";
 import { useRadarTimeline } from "@/lib/use-radar-timeline";
+import { useTimeline } from "@/lib/use-timeline";
+import { TimelineScrubber } from "../hud/TimelineScrubber";
 import { SummaryStrip } from "../hud/SummaryStrip";
 import { FpsMeter } from "../hud/FpsMeter";
 
@@ -53,7 +55,12 @@ export function MapPage({
   const params = useSearchParams();
   const showFps = params.get("fps") === "1";
   const [map, setMap] = useState<MapLibreMap | null>(null);
-  const radar = useRadarTimeline(weather);
+  const timeline = useTimeline();
+  // when scrubbed back in time, the weather and water views show the snapshot's state
+  const viewWeather = timeline.snapshot?.weather ?? weather;
+  const viewHydrology = timeline.snapshot?.hydrology ?? hydrology;
+  const viewing = timeline.snapshot !== null;
+  const radar = useRadarTimeline(viewWeather);
   // the radar timeline is a WEATHER instrument; elsewhere the map shows the latest frame only
   const radarReset = radar.reset;
   useEffect(() => {
@@ -63,15 +70,15 @@ export function MapPage({
   return (
     <>
       <LiveMap
-        weather={weather}
-        hydrology={hydrology}
+        weather={viewWeather}
+        hydrology={viewHydrology}
         disruptions={rail?.disruptions}
         active={active}
         radarFrame={radar.frame}
         onMapReady={setMap}
       />
       {active === "now" || active === "weather" ? (
-        <WindParticles map={map} weather={weather} />
+        <WindParticles map={map} weather={viewWeather} />
       ) : null}
       {active === "now" || active === "rail" ? (
         <TrainLayer
@@ -102,8 +109,8 @@ export function MapPage({
       ) : null}
       <LayerRail active={active} onChange={setActive} hidden={quakesNotable ? [] : ["quakes"]} />
       <SummaryStrip
-        state={weather}
-        hydrology={hydrology}
+        state={viewWeather}
+        hydrology={viewHydrology}
         rail={rail}
         seismic={seismic}
         active={active}
@@ -125,7 +132,15 @@ export function MapPage({
           />
         }
       >
-        {active === "weather" ? (
+        {active === "now" || active === "weather" || active === "water" ? (
+          <TimelineScrubber
+            snapshots={timeline.snapshots}
+            index={timeline.index}
+            marks={timeline.marks}
+            onChange={timeline.setIndex}
+          />
+        ) : null}
+        {active === "weather" && !viewing ? (
           <RadarScrubber
             frames={radar.frames}
             index={radar.index}
