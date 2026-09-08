@@ -94,14 +94,14 @@ Interpolated train positions are estimates derived from schedules and published 
 
 ## Roadmap
 
-| Phase | Scope                                                                                                       | Status      |
-| ----- | ----------------------------------------------------------------------------------------------------------- | ----------- |
-| 0     | Workspace, state contracts, tokens, forked map style, first cached handler, performance and Remotion spikes | in progress |
-| 1     | Weather + Water layers, HUD, place focus, NOW composite                                                     |             |
-| 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                  |             |
-| 3     | Quakes, snapshots and timeline, Today story, seasonal layers                                                |             |
-| 4     | Remotion "Switzerland Today" compositions, local rendering, Player on `/today`                              |             |
-| 5     | Traffic (FEDRO), city air quality, energy flows, polish                                                     |             |
+| Phase | Scope                                                                                                       | Status                                           |
+| ----- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| 0     | Workspace, state contracts, tokens, forked map style, first cached handler, performance and Remotion spikes | in progress                                      |
+| 1     | Weather + Water layers, HUD, place focus, NOW composite                                                     |                                                  |
+| 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                  | done (Blob hosting waits for the Vercel project) |
+| 3     | Quakes, snapshots and timeline, Today story, seasonal layers                                                |                                                  |
+| 4     | Remotion "Switzerland Today" compositions, local rendering, Player on `/today`                              |                                                  |
+| 5     | Traffic (FEDRO), city air quality, energy flows, polish                                                     |                                                  |
 
 ## Licence
 
