@@ -94,12 +94,52 @@ export function SummaryStrip({
       where: `${state.stations.length} stations`,
     });
 
+  const trains: typeof items = [];
+  if (rail) {
+    const running = rail.activeTrips.filter((t) => !t.cancelled);
+    trains.push({
+      label: "Trains running",
+      value: String(running.length),
+      unit: "",
+      where: "positions estimated from timetable + live delays",
+    });
+    if (rail.onTimeIndex !== undefined)
+      trains.push({
+        label: "On time",
+        value: formatNumber(rail.onTimeIndex * 100, 0),
+        unit: "%",
+        where: "< 3 min at the last stop passed",
+      });
+    const nowMs = Date.now();
+    let worst: { trip: (typeof running)[number]; delay: number } | undefined;
+    for (const t of running) {
+      const d = currentDelay(t, nowMs);
+      if (!worst || d > worst.delay) worst = { trip: t, delay: d };
+    }
+    if (worst && worst.delay >= 180)
+      trains.push({
+        label: "Largest delay",
+        value: formatNumber(worst.delay / 60, 0),
+        unit: "min",
+        where: `${worst.trip.routeShortName} → ${worst.trip.headsign ?? ""}`.trim(),
+      });
+    const cancelled = rail.activeTrips.length - running.length;
+    if (cancelled > 0)
+      trains.push({
+        label: "Cancelled",
+        value: String(cancelled),
+        unit: cancelled === 1 ? "train" : "trains",
+        where: "in the current window",
+      });
+  }
   const shown =
     active === "water"
       ? water
       : active === "weather"
         ? items
-        : [...items.slice(0, 3), ...water.slice(0, 1)];
+        : active === "rail"
+          ? trains
+          : [...items.slice(0, 2), ...trains.slice(1, 2), ...water.slice(0, 1)];
   return (
     <>
       <motion.header

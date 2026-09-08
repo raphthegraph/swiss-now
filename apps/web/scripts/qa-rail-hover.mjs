@@ -68,6 +68,9 @@ console.log(
   shown,
   shown ? (await card.first().innerText()).replace(/\n/g, " | ") : "",
 );
+const stripText = (await page.locator(".strip").innerText()).replace(/\n/g, " | ");
+console.log("strip in RAIL:", stripText.slice(0, 160));
+const railFigures = /Trains running/i.test(stripText);
 const legend = await page.locator(".legend").count();
 const scrubber = await page.locator(".scrubber").count();
 console.log(
@@ -78,4 +81,4 @@ console.log(
 );
 await page.screenshot({ path: "/tmp/sn/qa-rail.png" });
 await browser.close();
-process.exit(shown ? 0 : 1);
+process.exit(shown && railFigures ? 0 : 1);
