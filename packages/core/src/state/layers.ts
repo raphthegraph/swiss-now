@@ -105,11 +105,55 @@ export const AirState = LayerBase.extend({
 });
 export type AirState = z.infer<typeof AirState>;
 
-/** Phase 5. Hourly at best (ENTSO-E); SFOE daily series feed the story only. */
+/** Positive = import into Switzerland. */
+export const BorderCode = z.enum(["AT", "DE", "FR", "IT"]);
+export type BorderCode = z.infer<typeof BorderCode>;
+
+/** Swiss production types as reported by Energy-Charts for the CH bidding zone. */
+export const GenerationType = z.enum([
+  "nuclear",
+  "runOfRiver",
+  "reservoir",
+  "pumpedStorage",
+  "wind",
+  "solar",
+  "others",
+  "crossBorder",
+]);
+export type GenerationType = z.infer<typeof GenerationType>;
+
+/**
+ * Energy (expansion stage 2): Swissgrid live border flows and grid frequency (20-min delayed,
+ * undocumented feeds), Energy-Charts hourly production mix and day-ahead price (CC BY 4.0).
+ */
 export const EnergyState = LayerBase.extend({
-  loadMW: z.number().optional(),
-  generationByTypeMW: z.record(z.string(), z.number()).optional(),
-  /** Positive = import into Switzerland, keyed by neighbour ISO code. */
-  crossBorderFlowMW: z.partialRecord(z.enum(["AT", "DE", "FR", "IT"]), z.number()).optional(),
+  /** MW per border, positive = import into Switzerland. */
+  borderFlows: z.partialRecord(BorderCode, z.number()),
+  netImportMW: z.number().optional(),
+  flowsObservedAt: ISODateTime.optional(),
+  frequencyHz: z.number().optional(),
+  gridTimeDeviationS: z.number().optional(),
+  frequencyObservedAt: ISODateTime.optional(),
+  generation: z
+    .object({
+      observedAt: ISODateTime,
+      byTypeMW: z.partialRecord(GenerationType, z.number()),
+      renewableSharePct: z.number().optional(),
+    })
+    .optional(),
+  /** Hourly series of the last day for the mix chart. */
+  generationSeries: z
+    .object({
+      unixSeconds: z.array(z.number()),
+      byTypeMW: z.partialRecord(GenerationType, z.array(z.number().nullable())),
+    })
+    .optional(),
+  price: z
+    .object({
+      eurPerMWh: z.number(),
+      hour: ISODateTime,
+      validUntil: ISODateTime.optional(),
+    })
+    .optional(),
 });
 export type EnergyState = z.infer<typeof EnergyState>;

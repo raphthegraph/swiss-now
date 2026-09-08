@@ -1,0 +1,18 @@
+{
+  "schema_version": "2.0",
+  "endpoint": "price_current",
+  "country": "ch",
+  "bidding_zone": "CH",
+  "timezone": "Europe/Zurich",
+  "resolution": "PT1H",
+  "interval_minutes": 60,
+  "unit": "EUR / MWh",
+  "generated_at": "2026-09-08T17:03:22+02:00",
+  "available_from": "2026-09-08T17:00:00+02:00",
+  "available_until": "2026-09-08T17:00:00+02:00",
+  "series": [{ "id": "day_ahead_price", "name": "Day-ahead spot market price" }],
+  "data": [{ "timestamp": "2026-09-08T17:00:00+02:00", "values": { "day_ahead_price": 156.99 } }],
+  "attributes": { "valid_until": "2026-09-08T18:00:00+02:00" },
+  "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de",
+  "deprecated": false
+}

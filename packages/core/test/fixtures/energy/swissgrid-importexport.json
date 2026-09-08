@@ -1,0 +1,108 @@
+{
+  "config": {
+    "cacheDurationInSeconds": 10,
+    "asyncIntervalInSeconds": 10,
+    "isDynamic": true,
+    "scrollTop": 57,
+    "scrollLeft": 55,
+    "tablePosition": "top"
+  },
+  "data": {
+    "table": [
+      {
+        "id": "total",
+        "label": "Balance Sheet Export: 8 MW",
+        "value": "",
+        "mergeColumns": false,
+        "isLabelBold": false,
+        "isValueBold": false
+      },
+      {
+        "id": "timestamp",
+        "label": "Date \/ time of the values 08.09.2026 16:42:32",
+        "value": "",
+        "mergeColumns": false,
+        "isLabelBold": false,
+        "isValueBold": false
+      },
+      {
+        "id": "refresh",
+        "label": "Data delayed by 20 minutes",
+        "value": "",
+        "mergeColumns": false,
+        "isLabelBold": false,
+        "isValueBold": false
+      }
+    ],
+    "marker": [
+      {
+        "id": "de",
+        "x": 45,
+        "y": 13,
+        "text1": "DE",
+        "text2": "409 MW",
+        "textColor": "#000000",
+        "backgroundColor": "#ffffff",
+        "borderColor": "#000000",
+        "type": "locationArrow",
+        "direction": "down",
+        "rotation": null,
+        "opacity": 1,
+        "fontSizeDesktop": "24px",
+        "fontSizeTablet": "14px",
+        "fontSizePhone": "12px"
+      },
+      {
+        "id": "at",
+        "x": 90,
+        "y": 50,
+        "text1": "AT",
+        "text2": "509 MW",
+        "textColor": "#000000",
+        "backgroundColor": "#ffffff",
+        "borderColor": "#000000",
+        "type": "locationArrow",
+        "direction": "left",
+        "rotation": null,
+        "opacity": 1,
+        "fontSizeDesktop": "24px",
+        "fontSizeTablet": "14px",
+        "fontSizePhone": "12px"
+      },
+      {
+        "id": "it",
+        "x": 38,
+        "y": 88,
+        "text1": "IT",
+        "text2": "2464 MW",
+        "textColor": "#000000",
+        "backgroundColor": "#ffffff",
+        "borderColor": "#000000",
+        "type": "locationArrow",
+        "direction": "down",
+        "rotation": null,
+        "opacity": 1,
+        "fontSizeDesktop": "24px",
+        "fontSizeTablet": "14px",
+        "fontSizePhone": "12px"
+      },
+      {
+        "id": "fr",
+        "x": 12,
+        "y": 45,
+        "text1": "FR",
+        "text2": "1538 MW",
+        "textColor": "#000000",
+        "backgroundColor": "#ffffff",
+        "borderColor": "#000000",
+        "type": "locationArrow",
+        "direction": "right",
+        "rotation": null,
+        "opacity": 1,
+        "fontSizeDesktop": "24px",
+        "fontSizeTablet": "14px",
+        "fontSizePhone": "12px"
+      }
+    ]
+  }
+}

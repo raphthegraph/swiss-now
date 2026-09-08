@@ -20,7 +20,7 @@ const shapefile = require("shapefile");
 const proj4 = require("proj4");
 const { topology } = require("topojson-server");
 const { presimplify, simplify, quantile, filter, filterAttached } = require("topojson-simplify");
-const { quantize } = require("topojson-client");
+const { quantize, feature } = require("topojson-client");
 
 const args = Object.fromEntries(
   process.argv.slice(2).map((a, i, all) => (a.startsWith("--") ? [a.slice(2), all[i + 1] ?? "true"] : [])).filter((x) => x.length),
@@ -147,6 +147,18 @@ const topoJson = JSON.stringify(topo);
 writeFileSync(topoPath, topoJson);
 log(`${topoPath}: ${(topoJson.length / 1024).toFixed(0)} KB raw · ${(gzipSync(topoJson).length / 1024).toFixed(0)} KB gz (quantile ${q}, quantization ${quant})`);
 
+// centroids (vertex mean of the largest ring) for labels and for placing events by municipality
+function centroid(geometry) {
+  const rings = geometry.type === "Polygon" ? [geometry.coordinates[0]] : geometry.coordinates.map((p) => p[0]);
+  const ring = rings.reduce((a, b) => (b.length > a.length ? b : a));
+  let x = 0, y = 0;
+  for (const [lon, lat] of ring) (x += lon), (y += lat);
+  return [Math.round((x / ring.length) * 1e5) / 1e5, Math.round((y / ring.length) * 1e5) / 1e5];
+}
+const muniCentroid = new Map(
+  feature(topo, topo.objects.municipalities).features.map((f) => [f.id, centroid(f.geometry)]),
+);
+
 // the BFS register: the join spine (bfs number → name, canton, district) as of 1 January of the vintage
 const date = `01-01-${vintage}`;
 const regFile = join(cacheDir, `communes-${vintage}.csv`);
@@ -161,7 +173,10 @@ const register = {
   source: "BFS municipality register (agvchapp)",
   attribution: "Source: BFS",
   cantons: Object.fromEntries(
-    cantons.features.map((f) => [f.id, { num: f.properties.num, name: f.properties.name }]),
+    cantons.features.map((f) => [
+      f.id,
+      { num: f.properties.num, name: f.properties.name, lonLat: centroid(f.geometry) },
+    ]),
   ),
   municipalities: rows
     .map((r) => ({
@@ -170,6 +185,7 @@ const register = {
       canton: CANTON_BY_NUM[Number(r[col("CantonId")])],
       district: Number(r[col("DistrictId")]),
       districtName: r[col("District")],
+      lonLat: muniCentroid.get(Number(r[col("BfsCode")])),
     }))
     .filter((m) => Number.isFinite(m.bfs) && m.canton)
     .sort((a, b) => a.bfs - b.bfs),

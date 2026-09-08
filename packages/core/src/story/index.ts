@@ -370,6 +370,50 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
     }
   }
 
+  // 7. energy: the day's largest net import or export, with the price of that hour
+  const energies = sorted
+    .map((s) => s.energy)
+    .filter((e): e is NonNullable<typeof e> => Boolean(e));
+  if (energies.length) {
+    credits.add("Source: Swissgrid");
+    credits.add("Source: Energy-Charts.info (Fraunhofer ISE)");
+    const peak = energies.reduce<(typeof energies)[number] | undefined>(
+      (b, e) =>
+        e.netImportMW !== undefined &&
+        (!b || Math.abs(e.netImportMW) > Math.abs(b.netImportMW ?? 0))
+          ? e
+          : b,
+      undefined,
+    );
+    if (peak?.netImportMW !== undefined) {
+      const imp = peak.netImportMW >= 0;
+      const mw = Math.round(Math.abs(peak.netImportMW));
+      const at = new Intl.DateTimeFormat("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "Europe/Zurich",
+      }).format(new Date(peak.observedAt));
+      const headline = `Switzerland ${imp ? "imported" : "exported"} ${mw} MW at ${at}${peak.priceEurPerMWh !== undefined ? ` · ${Math.round(peak.priceEurPerMWh)} €/MWh` : ""}`;
+      chapters.push({
+        id: "energy",
+        type: "energy",
+        layer: "energy",
+        headline: { de: headline, en: headline },
+        highlights: [],
+        markers: [],
+        data: {
+          netImportMW: peak.netImportMW,
+          priceEurPerMWh: peak.priceEurPerMWh,
+          frequencyHz: peak.frequencyHz,
+          renewableSharePct: peak.renewableSharePct,
+        },
+        camera: { ...NATIONAL },
+        durationHint: 5,
+        score: Math.min(1, mw / 4000),
+      });
+    }
+  }
+
   credits.add("© swisstopo");
   const [summary, ...rest] = chapters;
   const ranked = rest
@@ -463,6 +507,11 @@ export function chapterFigures(c: Chapter): ChapterFigure[] {
       push("Depth", typeof e?.depthKm === "number" ? e.depthKm : undefined, 0, "km");
       break;
     }
+    case "energy":
+      push("Net flow", num("netImportMW"), 0, "MW");
+      push("Price", num("priceEurPerMWh"), 0, "€/MWh");
+      push("Renewable", num("renewableSharePct"), 0, "%");
+      break;
     case "stat":
       push("Gust", obs("gust"), 0, "km/h");
       break;

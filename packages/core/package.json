@@ -21,7 +21,11 @@
     "./story": "./src/story/index.ts",
     "./topics": "./src/topics/index.ts",
     "./data-sources/bfs-pxweb": "./src/data-sources/bfs-pxweb/index.ts",
-    "./data-sources/politics": "./src/data-sources/politics/index.ts"
+    "./data-sources/politics": "./src/data-sources/politics/index.ts",
+    "./data-sources/energy": "./src/data-sources/energy/index.ts",
+    "./data-sources/news": "./src/data-sources/news/index.ts",
+    "./data-sources/swissgrid": "./src/data-sources/swissgrid/index.ts",
+    "./data-sources/energy-charts": "./src/data-sources/energy-charts/index.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -36,6 +40,7 @@
   "dependencies": {
     "@vercel/blob": "^2.8.0",
     "csv-parse": "^7.0.2",
+    "fast-xml-parser": "^5.2.5",
     "gtfs-realtime-bindings": "^2.2.0",
     "h5wasm": "^0.10.3",
     "node-stream-zip": "^1.16.0",

@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Map as MapLibreMap } from "maplibre-gl";
 import type {
+  EnergyState,
+  EventsState,
   HydrologyState,
   PoliticsState,
   RailState,
@@ -18,6 +20,9 @@ import { dataUrl } from "@/lib/data-url";
 import { formatDate } from "@/lib/format";
 import { RampLegend } from "../hud/RampLegend";
 import { VoteScrubber } from "../hud/VoteScrubber";
+import { FlowLayer } from "./FlowLayer";
+import { EventMarkers } from "./EventMarkers";
+import { ChartsView } from "../views/ChartsView";
 import { QuakeLayer, type QuakeHover } from "./QuakeLayer";
 import { QuakeHoverCard } from "./QuakeHoverCard";
 import { TrainLayer, type TrainHover } from "./TrainLayer";
@@ -47,6 +52,8 @@ function presenceOf(topic: TopicId): LayerPresence {
     rail: presenceFor(topic, "rail"),
     seismic: presenceFor(topic, "seismic"),
     politics: presenceFor(topic, "politics"),
+    energy: presenceFor(topic, "energy"),
+    events: presenceFor(topic, "events"),
   };
 }
 
@@ -115,6 +122,18 @@ export function MapPage({
     3_600_000,
     presence.politics !== "off",
   );
+  const energy = useLayerState<EnergyState | undefined>(
+    "/api/state/energy",
+    undefined,
+    60_000,
+    presence.energy !== "off",
+  );
+  const events = useLayerState<EventsState | undefined>(
+    "/api/state/events",
+    undefined,
+    300_000,
+    presence.events !== "off",
+  );
   const voteId =
     view.t && politics?.index.some((v) => v.id === view.t) ? view.t : politics?.latest[0]?.meta.id;
   const vote = useVoteResult(voteId, politics);
@@ -169,8 +188,8 @@ export function MapPage({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- reset only when the view changes
   }, [radarOn]);
   const figures = useMemo(
-    () => figuresFor(topic, { weather, hydrology, rail, seismic, politics, vote }),
-    [topic, weather, hydrology, rail, seismic, politics, vote],
+    () => figuresFor(topic, { weather, hydrology, rail, seismic, politics, vote, energy, events }),
+    [topic, weather, hydrology, rail, seismic, politics, vote, energy, events],
   );
   const voteStatus =
     topic === "politics" && vote ? (
@@ -185,7 +204,7 @@ export function MapPage({
         hydrology={hydrology}
         disruptions={rail?.disruptions}
         presence={presence}
-        muted={topic === "rail" || topic === "hazards"}
+        muted={topic === "rail" || topic === "hazards" || topic === "events" || mode === "charts"}
         focus={focus}
         radarFrame={radar.frame}
         contributions={contributions}
@@ -196,6 +215,17 @@ export function MapPage({
         }}
       />
       {presence.weather !== "off" ? <WindParticles map={map} weather={weather} /> : null}
+      {presence.energy !== "off" ? (
+        <FlowLayer map={map} energy={energy} mode={presence.energy === "full" ? "full" : "quiet"} />
+      ) : null}
+      {presence.events !== "off" ? (
+        <EventMarkers
+          map={map}
+          events={events}
+          mode={presence.events === "full" ? "full" : "quiet"}
+        />
+      ) : null}
+      {mode === "charts" ? <ChartsView topic={topic} energy={energy} /> : null}
       {presence.rail !== "off" ? (
         <TrainLayer
           map={map}

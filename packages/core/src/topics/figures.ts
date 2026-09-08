@@ -5,6 +5,8 @@
  */
 import type { HydrologyState, RailState, SeismicState, WeatherState } from "../state/layers";
 import type { PoliticsState, VoteResult } from "../state/politics";
+import type { EnergyState } from "../state/layers";
+import type { EventsState } from "../state/events";
 import { currentDelay } from "../data-sources/transit/rail-state";
 import type { TopicId } from "./spec";
 
@@ -26,6 +28,8 @@ export interface TopicStates {
   rail?: RailState | undefined;
   seismic?: SeismicState | undefined;
   politics?: PoliticsState | undefined;
+  energy?: EnergyState | undefined;
+  events?: EventsState | undefined;
   /** the vote currently shown (latest or the timeline selection) */
   vote?: VoteResult | undefined;
 }
@@ -248,6 +252,70 @@ export function politicsFigures(
   return out;
 }
 
+export function energyFigures(e: EnergyState | undefined): Figure[] {
+  if (!e) return [];
+  const out: Figure[] = [];
+  if (e.netImportMW !== undefined) {
+    const imp = e.netImportMW >= 0;
+    const parts = (Object.entries(e.borderFlows) as [string, number][])
+      .filter(([, v]) => (imp ? v > 0 : v < 0))
+      .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]))
+      .map(([k, v]) => `${k} ${Math.round(Math.abs(v))}`);
+    out.push(
+      fig("net-flow", imp ? "Net import" : "Net export", Math.abs(e.netImportMW), 0, {
+        unit: "MW",
+        where: `${parts.join(" · ")} · 20 min delayed`,
+      }),
+    );
+  }
+  if (e.frequencyHz !== undefined)
+    out.push(
+      fig("frequency", "Grid frequency", e.frequencyHz, 3, {
+        unit: "Hz",
+        where:
+          e.gridTimeDeviationS !== undefined
+            ? `grid time ${e.gridTimeDeviationS > 0 ? "+" : ""}${e.gridTimeDeviationS.toFixed(2)} s`
+            : "Swissgrid",
+      }),
+    );
+  if (e.price)
+    out.push(
+      fig("price", "Day-ahead price", e.price.eurPerMWh, 0, {
+        unit: "€/MWh",
+        where: "this hour · Energy-Charts",
+      }),
+    );
+  if (e.generation?.renewableSharePct !== undefined)
+    out.push(
+      fig("renewable", "Renewable share", e.generation.renewableSharePct, 0, {
+        unit: "%",
+        where: `of generation · nuclear ${Math.round((e.generation.byTypeMW.nuclear ?? 0) / 100) / 10} GW`,
+      }),
+    );
+  return out;
+}
+
+export function eventsFigures(ev: EventsState | undefined, nowMs: number): Figure[] {
+  if (!ev) return [];
+  const sixH = ev.events.filter((e) => nowMs - new Date(e.publishedAt).getTime() < 6 * 3_600_000);
+  const placed = ev.events.filter((e) => e.place && e.place.confidence >= 0.6);
+  const byCanton = new Map<string, number>();
+  for (const e of placed)
+    if (e.place?.cantonCode)
+      byCanton.set(e.place.cantonCode, (byCanton.get(e.place.cantonCode) ?? 0) + 1);
+  const top = [...byCanton.entries()].sort((a, b) => b[1] - a[1])[0];
+  const out: Figure[] = [
+    fig("events-6h", "Events, 6 h", sixH.length, 0, {
+      where: `${ev.events.length} in ${ev.windowHours} h · police and SRF`,
+    }),
+    fig("placed", "Placed on the map", placed.length, 0, {
+      where: `${Math.round((placed.length / Math.max(1, ev.events.length)) * 100)} % geocoded`,
+    }),
+  ];
+  if (top) out.push(fig("top-canton", "Most events", top[1], 0, { where: `canton ${top[0]}` }));
+  return out;
+}
+
 /** Figures for a topic; NOW composes the leads of its contributors. */
 export function figuresFor(topic: TopicId, s: TopicStates, nowMs = Date.now()): Figure[] {
   switch (topic) {
@@ -261,11 +329,16 @@ export function figuresFor(topic: TopicId, s: TopicStates, nowMs = Date.now()): 
       return quakeFigures(s.seismic, nowMs);
     case "politics":
       return politicsFigures(s.politics, s.vote, nowMs);
+    case "energy":
+      return energyFigures(s.energy);
+    case "events":
+      return eventsFigures(s.events, nowMs);
     case "now":
       return [
         ...weatherFigures(s.weather).slice(0, 2),
         ...railFigures(s.rail, nowMs).filter((f) => f.id === "on-time"),
         ...waterFigures(s.hydrology).slice(0, 1),
+        ...energyFigures(s.energy).slice(0, 1),
       ];
     default:
       return [];

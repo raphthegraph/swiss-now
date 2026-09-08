@@ -457,6 +457,117 @@ table.sources th {
 .scrubber--votes .scrubber__time {
   white-space: normal;
 }
+/* ---- energy flows and event markers ---- */
+.flow-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.event-marker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  border: none;
+  color: var(--sn-ground-ink);
+  white-space: nowrap;
+  animation: event-in var(--sn-duration-panel) var(--sn-ease-house) both;
+}
+@keyframes event-in {
+  from {
+    transform: translateY(4px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .event-marker {
+    animation: none;
+  }
+}
+.event-marker__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sn-accent-events);
+  box-shadow: 0 0 0 2px var(--sn-ground-paper);
+  flex: none;
+}
+.event-marker--canton .event-marker__dot {
+  display: none;
+}
+.event-marker__label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  background: rgba(244, 243, 239, 0.86);
+  padding: 1px 4px;
+}
+.event-marker__cat {
+  font-size: 9px;
+  letter-spacing: var(--sn-type-label-tracking);
+  text-transform: uppercase;
+  color: var(--sn-ground-graphite);
+}
+.event-marker__place {
+  font-size: var(--sn-type-caption-size);
+  font-weight: 500;
+}
+.event-marker[data-category="fire"] .event-marker__dot,
+.event-marker[data-category="natural-hazard"] .event-marker__dot,
+.event-marker[data-category="avalanche"] .event-marker__dot {
+  background: var(--sn-accent-hazards);
+}
+.event-marker:hover .event-marker__label {
+  background: var(--sn-ground-ink);
+  color: var(--sn-ground-paper);
+}
+.event-marker:hover .event-marker__cat {
+  color: var(--sn-ground-mist);
+}
+
+/* ---- CHARTS mode: a paper sheet over the muted map ---- */
+.charts-view {
+  position: absolute;
+  left: var(--sn-hud-margin-regular);
+  right: var(--sn-hud-margin-regular);
+  top: calc(var(--sn-hud-margin-regular) + 96px);
+  bottom: 220px;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: var(--sn-space-5) var(--sn-space-6);
+  background: rgba(244, 243, 239, 0.96);
+  border-top: 2px solid var(--sn-ground-ink);
+  overflow: auto;
+}
+.charts__title {
+  margin: 0;
+  font-size: var(--sn-type-metric-size);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.charts__meta {
+  margin: var(--sn-space-1) 0 var(--sn-space-4);
+  color: var(--sn-ground-graphite);
+}
+.plot-figure {
+  margin: 0;
+}
+.plot-figure svg {
+  max-width: 100%;
+  height: auto;
+}
+@media (max-width: 767px) {
+  .charts-view {
+    left: var(--sn-hud-margin-compact);
+    right: var(--sn-hud-margin-compact);
+    top: calc(var(--sn-hud-margin-compact) + 96px);
+    bottom: 160px;
+    padding: var(--sn-space-4);
+  }
+}
 .rail__item {
   appearance: none;
   background: transparent;

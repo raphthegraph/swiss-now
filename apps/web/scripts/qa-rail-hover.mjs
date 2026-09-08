@@ -96,6 +96,36 @@ const scrubTimeline = await page.locator(".scrubber").count();
 const modeUrl = new URL(page.url()).searchParams.get("mode") === "timeline";
 const timelineOk = scrubMap === 0 && scrubTimeline === 1 && modeUrl;
 console.log("weather scrubber map/timeline:", scrubMap, scrubTimeline, "| url mode:", modeUrl, "| ok:", timelineOk);
+// ENERGY: border-flow arrows on the canvas, figures, CHARTS mode with an SVG plot
+await page.getByRole("button", { name: "Energy" }).click();
+await page.waitForFunction(() => /net (import|export)/i.test(document.querySelector(".strip")?.textContent ?? ""), null, { timeout: 60_000 });
+const energyApi = await page.evaluate(async () => {
+  const r = await fetch("/api/state/energy");
+  const j = await r.json();
+  return { status: r.status, flows: Object.keys(j.borderFlows ?? {}).length, hz: j.frequencyHz, price: j.price?.eurPerMWh, series: j.generationSeries?.unixSeconds?.length };
+});
+const flowCanvas = await page.locator(".flow-canvas").count();
+await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Charts$/i }).click();
+await page.locator(".charts-view svg.plot").waitFor({ timeout: 30_000 });
+const chartOk = (await page.locator(".charts-view svg.plot").count()) === 1;
+const energyOk = energyApi.status === 200 && energyApi.flows === 4 && flowCanvas === 1 && chartOk;
+console.log("energy api:", JSON.stringify(energyApi), "| flow canvas:", flowCanvas, "| chart:", chartOk, "| ok:", energyOk);
+await page.screenshot({ path: "/tmp/sn/qa-energy-charts.png" });
+await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Map$/i }).click();
+await page.waitForTimeout(600);
+await page.screenshot({ path: "/tmp/sn/qa-energy.png" });
+
+// EVENTS: geocoded markers with confidence
+await page.getByRole("button", { name: "Events" }).click();
+await page.locator(".event-marker").first().waitFor({ timeout: 60_000 });
+await page.waitForTimeout(800);
+const markerCount = await page.locator(".event-marker").count();
+const confident = await page.locator(".event-marker[data-confidence='0.95']").count();
+const eventsStrip = await page.locator(".strip").innerText();
+const eventsOk = markerCount >= 5 && confident >= 1 && /events/i.test(eventsStrip);
+console.log("event markers:", markerCount, "| confidence 0.95:", confident, "| strip:", eventsStrip.replace(/\n/g, " | ").slice(0, 80), "| ok:", eventsOk);
+await page.screenshot({ path: "/tmp/sn/qa-events.png" });
+
 // POLITICS: choropleth from the geo spine with feature-state values, hover card, vote timeline
 await page.getByRole("button", { name: "Politics" }).click();
 await page.locator(".legend--ramp").waitFor({ timeout: 60_000 });
@@ -205,7 +235,9 @@ process.exit(
   railUrl &&
   timelineOk &&
   waterCurrent &&
-  politicsOk
+  politicsOk &&
+  energyOk &&
+  eventsOk
     ? 0
     : 1,
 );

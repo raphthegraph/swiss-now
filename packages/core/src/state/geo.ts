@@ -4,7 +4,7 @@
  * Polygons live in `public/geo/ch-<vintage>.topo.json` (TopoJSON built from swissBOUNDARIES3D).
  */
 import { z } from "zod";
-import { CantonCode, LocalizedText } from "./common";
+import { CantonCode, LocalizedText, LonLat } from "./common";
 
 export const MunicipalityRef = z.object({
   /** BFS municipality number. */
@@ -13,6 +13,8 @@ export const MunicipalityRef = z.object({
   canton: CantonCode,
   district: z.number().int(),
   districtName: z.string().optional(),
+  /** polygon centroid, WGS84 */
+  lonLat: LonLat.optional(),
 });
 export type MunicipalityRef = z.infer<typeof MunicipalityRef>;
 
@@ -22,7 +24,10 @@ export const GeoRegister = z.object({
   date: z.string(),
   source: z.string(),
   attribution: z.string(),
-  cantons: z.record(z.string(), z.object({ num: z.number().int(), name: z.string() })),
+  cantons: z.record(
+    z.string(),
+    z.object({ num: z.number().int(), name: z.string(), lonLat: LonLat.optional() }),
+  ),
   municipalities: z.array(MunicipalityRef),
 });
 export type GeoRegister = z.infer<typeof GeoRegister>;
