@@ -99,6 +99,15 @@ export const scaleStops = {
     [65, "#5F7FB5"],
     [80, "#2B2D6B"],
   ],
+  /** Short-term air quality index 1 (good) … 6 (very poor). */
+  airIndex: [
+    [1, "#7FB59A"],
+    [2, "#B9CF8E"],
+    [3, "#E3D26F"],
+    [4, "#E8A23A"],
+    [5, "#D9552B"],
+    [6, "#7A1B14"],
+  ],
   /** Delay in seconds → grey to Swiss red. */
   delay: [
     [0, "#8A8F98"],

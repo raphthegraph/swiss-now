@@ -4,8 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Map as MapLibreMap } from "maplibre-gl";
 import type {
+  AirState,
   EnergyState,
   EventsState,
+  HazardsState,
   HydrologyState,
   PoliticsState,
   RailState,
@@ -16,6 +18,8 @@ import type {
 import { VoteResult as VoteResultSchema } from "@swiss-now/core/state";
 import { figuresFor, presenceFor, type TopicId } from "@swiss-now/core/topics";
 import { choroplethContribution } from "@/lib/map/contributions/choropleth";
+import { airContribution } from "@/lib/map/contributions/air";
+import { hazardsContribution } from "@/lib/map/contributions/hazards";
 import { dataUrl } from "@/lib/data-url";
 import { formatDate } from "@/lib/format";
 import { RampLegend } from "../hud/RampLegend";
@@ -54,6 +58,8 @@ function presenceOf(topic: TopicId): LayerPresence {
     politics: presenceFor(topic, "politics"),
     energy: presenceFor(topic, "energy"),
     events: presenceFor(topic, "events"),
+    air: presenceFor(topic, "air"),
+    hazards: presenceFor(topic, "hazards"),
   };
 }
 
@@ -134,6 +140,20 @@ export function MapPage({
     300_000,
     presence.events !== "off",
   );
+  const air = useLayerState<AirState | undefined>(
+    "/api/state/air",
+    undefined,
+    300_000,
+    presence.air !== "off",
+  );
+  const hazards = useLayerState<HazardsState | undefined>(
+    "/api/state/hazards",
+    undefined,
+    600_000,
+    presence.hazards !== "off",
+  );
+  const [airLayer] = useState(() => airContribution(undefined));
+  const [hazardsLayer] = useState(() => hazardsContribution(undefined));
   const voteId =
     view.t && politics?.index.some((v) => v.id === view.t) ? view.t : politics?.latest[0]?.meta.id;
   const vote = useVoteResult(voteId, politics);
@@ -159,12 +179,14 @@ export function MapPage({
     [vote],
   );
   const contributions = useMemo(
-    () => [{ contribution: choropleth, state: choroState }],
-    [choropleth, choroState],
+    () => [
+      { contribution: choropleth, state: choroState },
+      { contribution: airLayer, state: air },
+      { contribution: hazardsLayer, state: hazards },
+    ],
+    [choropleth, choroState, airLayer, air, hazardsLayer, hazards],
   );
   const [quakeHover, setQuakeHover] = useState<QuakeHover | null>(null);
-  // HAZARDS (quakes only for now) joins the rail when a magnitude ≥ 2.0 event happened in the window
-  const quakesNotable = (seismic?.events ?? []).some((e) => (e.magnitude ?? 0) >= 2);
   const [trainHover, setTrainHover] = useState<TrainHover | null>(null);
   const [railProgress, setRailProgress] = useState({ loaded: 0, needed: 0 });
   const stopNames = useStopNames(rail);
@@ -188,8 +210,20 @@ export function MapPage({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- reset only when the view changes
   }, [radarOn]);
   const figures = useMemo(
-    () => figuresFor(topic, { weather, hydrology, rail, seismic, politics, vote, energy, events }),
-    [topic, weather, hydrology, rail, seismic, politics, vote, energy, events],
+    () =>
+      figuresFor(topic, {
+        weather,
+        hydrology,
+        rail,
+        seismic,
+        politics,
+        vote,
+        energy,
+        events,
+        air,
+        hazards,
+      }),
+    [topic, weather, hydrology, rail, seismic, politics, vote, energy, events, air, hazards],
   );
   const voteStatus =
     topic === "politics" && vote ? (
@@ -253,7 +287,7 @@ export function MapPage({
           <QuakeHoverCard hover={quakeHover} />
         </div>
       ) : null}
-      <TopicRail view={view} onSelect={setTopic} hidden={quakesNotable ? [] : ["hazards"]} />
+      <TopicRail view={view} onSelect={setTopic} />
       <ModeSwitcher view={view} onChange={setMode} />
       <Masthead
         status={voteStatus}
@@ -279,6 +313,10 @@ export function MapPage({
             <RailLegend loaded={railProgress.loaded} needed={railProgress.needed} />
           ) : topic === "politics" ? (
             <RampLegend scale="yesShare" label="Yes share" unit=" %" />
+          ) : topic === "air" ? (
+            <RampLegend scale="airIndex" label="Air index" />
+          ) : topic === "hazards" ? (
+            <RampLegend scale="dangerLevel" label="Danger level" />
           ) : null
         }
       >

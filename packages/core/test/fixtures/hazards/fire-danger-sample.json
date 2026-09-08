@@ -1,0 +1,180 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "id": 174521,
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [2607356.04, 1185118.13],
+              [2607653.7, 1186044.17],
+              [2607190.68, 1186705.63],
+              [2606992.24, 1188491.57],
+              [2606595.37, 1189616.05],
+              [2606066.2, 1189946.78],
+              [2605735.47, 1191865.01],
+              [2606132.34, 1192559.55],
+              [2605822.42, 1195232.27],
+              [2606098.91, 1195449.62],
+              [2606360.32, 1195194.79],
+              [2606770.34, 1195341.96]
+            ],
+            [
+              [2608154.9, 1186730.92],
+              [2608120.4, 1186064.02],
+              [2608298.56, 1186033.05],
+              [2608220.0, 1186262.64],
+              [2608559.08, 1186838.54],
+              [2608426.16, 1187052.83],
+              [2608154.9, 1186730.92]
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "region_id": 350,
+        "canton": "BE",
+        "level": 3,
+        "name_de": "Aaretal (BE)",
+        "name_fr": "Aaretal (BE)",
+        "name_it": "Aaretal (BE)",
+        "name_en": "Aaretal (BE)",
+        "title_de": "Erhebliche Gefahr",
+        "title_fr": "Danger marqu\u00e9",
+        "title_it": "Pericolo marcato",
+        "title_en": "Considerable danger",
+        "valid_from": "2026-08-28T12:02:41.105+02:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 174523,
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [2570291.55, 1241811.04],
+              [2571155.32, 1242683.58],
+              [2570902.53, 1242741.43],
+              [2571613.75, 1243729.19],
+              [2571054.91, 1244126.36],
+              [2570696.73, 1244157.93],
+              [2570848.81, 1244834.8],
+              [2570633.9, 1245691.3],
+              [2570121.49, 1246010.3],
+              [2569613.04, 1245944.24],
+              [2569444.04, 1246616.3],
+              [2568365.41, 1246715.91]
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "region_id": 1100,
+        "canton": "JU",
+        "level": 3,
+        "name_de": "Ajoie (JU)",
+        "name_fr": "Ajoie (JU)",
+        "name_it": "Ajoie (JU)",
+        "name_en": "Ajoie (JU)",
+        "title_de": "Erhebliche Gefahr",
+        "title_fr": "Danger marqu\u00e9",
+        "title_it": "Pericolo marcato",
+        "title_en": "Considerable danger",
+        "valid_from": "2026-09-08T12:02:35.711+02:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 174563,
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [2640992.71, 1146565.71],
+              [2641329.47, 1146379.03],
+              [2641762.53, 1146457.12],
+              [2642491.56, 1146235.15],
+              [2643452.88, 1147327.65],
+              [2644679.67, 1147575.74],
+              [2645272.9, 1147169.63],
+              [2646761.89, 1145089.58],
+              [2647151.89, 1144894.58],
+              [2647661.89, 1145249.58],
+              [2649811.87, 1143324.55],
+              [2650386.86, 1142426.54]
+            ],
+            [
+              [2643259.38, 1135648.88],
+              [2643472.89, 1135585.76],
+              [2643565.69, 1136111.15],
+              [2643372.08, 1136550.97],
+              [2643363.37, 1136115.48],
+              [2643259.38, 1135648.88]
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "region_id": 2422,
+        "canton": "VS",
+        "level": 4,
+        "name_de": "Aletsch (VS)",
+        "name_fr": "Aletsch (VS)",
+        "name_it": "Aletsch (VS)",
+        "name_en": "Aletsch (VS)",
+        "title_de": "Grosse Gefahr",
+        "title_fr": "Danger fort",
+        "title_it": "Pericolo forte",
+        "title_en": "High danger",
+        "valid_from": "2026-08-28T12:02:41.105+02:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 174609,
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [2718789.65, 1239929.21],
+              [2718378.64, 1240266.5],
+              [2718113.62, 1241144.49],
+              [2717483.6, 1241909.49],
+              [2716893.32, 1242118.12],
+              [2716319.67, 1242938.88],
+              [2716432.94, 1244152.1],
+              [2715960.61, 1244357.07],
+              [2716044.23, 1245192.72],
+              [2715833.97, 1245761.43],
+              [2715500.89, 1245949.56],
+              [2714963.39, 1245875.19]
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "region_id": 1601,
+        "canton": "SG",
+        "level": 4,
+        "name_de": "Alttoggenburg (SG)",
+        "name_fr": "Alttoggenburg (SG)",
+        "name_it": "Alttoggenburg (SG)",
+        "name_en": "Alttoggenburg (SG)",
+        "title_de": "Grosse Gefahr",
+        "title_fr": "Danger fort",
+        "title_it": "Pericolo forte",
+        "title_en": "High danger",
+        "valid_from": "2026-09-08T12:02:35.711+02:00"
+      }
+    }
+  ],
+  "type": "FeatureCollection",
+  "crs": { "type": "name", "properties": { "name": "EPSG:2056" } },
+  "name": "waldbrandwarnungen"
+}

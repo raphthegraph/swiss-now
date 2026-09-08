@@ -1,8 +1,10 @@
 import {
   buildSnapshot,
   snapshotSlot,
+  summarizeAir,
   summarizeEnergy,
   summarizeEvents,
+  summarizeHazards,
   summarizeRail,
   type SnapshotMeta,
 } from "@swiss-now/core/snapshot";
@@ -13,6 +15,8 @@ import { getRailState } from "@/lib/state/rail";
 import { getSeismicState } from "@/lib/state/seismic";
 import { getEnergyState } from "@/lib/state/energy";
 import { getEventsState } from "@/lib/state/events";
+import { getAirState } from "@/lib/state/air";
+import { getHazardsState } from "@/lib/state/hazards";
 import { snapshotStore } from "./store";
 
 let inFlight: Promise<SnapshotMeta | undefined> | undefined;
@@ -31,13 +35,15 @@ export async function maybeWriteSnapshot(
   if (latest && new Date(latest.at).getTime() >= slot.getTime()) return { written: false, latest };
   if (!inFlight) {
     inFlight = (async () => {
-      const [w, h, r, q, en, ev] = await Promise.allSettled([
+      const [w, h, r, q, en, ev, ai, hz] = await Promise.allSettled([
         getWeatherState(),
         getHydrologyState(),
         getRailState(),
         getSeismicState(),
         getEnergyState(),
         getEventsState(),
+        getAirState(),
+        getHazardsState(),
       ]);
       const snap = buildSnapshot({
         now,
@@ -47,6 +53,8 @@ export async function maybeWriteSnapshot(
         seismic: q.status === "fulfilled" ? q.value : undefined,
         energy: en.status === "fulfilled" ? summarizeEnergy(en.value) : undefined,
         events: ev.status === "fulfilled" ? summarizeEvents(ev.value) : undefined,
+        air: ai.status === "fulfilled" ? summarizeAir(ai.value) : undefined,
+        hazards: hz.status === "fulfilled" ? summarizeHazards(hz.value) : undefined,
       });
       return store.write(snap);
     })().finally(() => {

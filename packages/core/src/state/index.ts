@@ -7,3 +7,4 @@ export * from "./swiss-now-state";
 export * from "./geo";
 export * from "./politics";
 export * from "./events";
+export * from "./hazards";

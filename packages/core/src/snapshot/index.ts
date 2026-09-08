@@ -8,6 +8,8 @@ import { z } from "zod";
 import { Freshness, ISODateTime, SCHEMA_VERSION } from "../state/common";
 import type { EnergyState } from "../state/layers";
 import type { EventsState } from "../state/events";
+import type { AirState } from "../state/layers";
+import type { HazardsState } from "../state/hazards";
 import { Event } from "../state/entities";
 import { HydrologyState, SeismicState, WeatherState } from "../state/layers";
 import type { RailState } from "../state/layers";
@@ -56,6 +58,24 @@ export const EventsSummary = z.object({
 });
 export type EventsSummary = z.infer<typeof EventsSummary>;
 
+export const AirSummary = z.object({
+  observedAt: ISODateTime,
+  freshness: Freshness,
+  worstIndex: z.number().int().min(1).max(6).optional(),
+  referenceStations: z.number().int(),
+  citizenSensors: z.number().int(),
+});
+export type AirSummary = z.infer<typeof AirSummary>;
+export const HazardsSummary = z.object({
+  observedAt: ISODateTime,
+  freshness: Freshness,
+  fireMaxLevel: z.number().int().optional(),
+  fireRegionsAt3Plus: z.number().int(),
+  avalancheMaxLevel: z.number().int().optional(),
+  hail: z.boolean(),
+});
+export type HazardsSummary = z.infer<typeof HazardsSummary>;
+
 export const Snapshot = z.object({
   schemaVersion: z.literal(SCHEMA_VERSION),
   /** snapshot time, rounded down to the 10-minute slot (UTC) */
@@ -67,6 +87,8 @@ export const Snapshot = z.object({
   seismic: SeismicState.optional(),
   energy: EnergySummary.optional(),
   events: EventsSummary.optional(),
+  air: AirSummary.optional(),
+  hazards: HazardsSummary.optional(),
 });
 export type Snapshot = z.infer<typeof Snapshot>;
 
@@ -130,6 +152,8 @@ export interface BuildSnapshotInputs {
   seismic?: SeismicState | undefined;
   energy?: EnergySummary | undefined;
   events?: EventsSummary | undefined;
+  air?: AirSummary | undefined;
+  hazards?: HazardsSummary | undefined;
 }
 
 /** Assembles a snapshot; the weather keeps only its newest radar frame to stay small. */
@@ -147,6 +171,29 @@ export function summarizeEnergy(e: EnergyState): EnergySummary {
   return out;
 }
 
+export function summarizeAir(a: AirState): AirSummary {
+  const out: AirSummary = {
+    observedAt: a.observedAt,
+    freshness: a.freshness,
+    referenceStations: a.stations.filter((s) => s.tier === "reference").length,
+    citizenSensors: a.stations.filter((s) => s.tier === "citizen").length,
+  };
+  if (a.worstIndex !== undefined) out.worstIndex = a.worstIndex;
+  return out;
+}
+export function summarizeHazards(h: HazardsState): HazardsSummary {
+  const fireMax = h.fireDanger.regions.reduce((m, r) => Math.max(m, r.level), 0);
+  const avMax = h.avalanche.regions.reduce((m, r) => Math.max(m, r.level), 0);
+  const out: HazardsSummary = {
+    observedAt: h.observedAt,
+    freshness: h.freshness,
+    fireRegionsAt3Plus: h.fireDanger.regions.filter((r) => r.level >= 3).length,
+    hail: Boolean(h.hail),
+  };
+  if (fireMax) out.fireMaxLevel = fireMax;
+  if (avMax) out.avalancheMaxLevel = avMax;
+  return out;
+}
 export function summarizeEvents(ev: EventsState): EventsSummary {
   const byCategory: Record<string, number> = {};
   for (const e of ev.events) byCategory[e.category] = (byCategory[e.category] ?? 0) + 1;
@@ -174,6 +221,8 @@ export function buildSnapshot(i: BuildSnapshotInputs): Snapshot {
   if (i.rail) snap.rail = i.rail;
   if (i.energy) snap.energy = i.energy;
   if (i.events) snap.events = i.events;
+  if (i.air) snap.air = i.air;
+  if (i.hazards) snap.hazards = i.hazards;
   if (i.seismic) snap.seismic = { ...i.seismic, events: i.seismic.events.slice(0, 50) };
   return snap;
 }

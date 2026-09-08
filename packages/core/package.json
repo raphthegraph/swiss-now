@@ -25,7 +25,15 @@
     "./data-sources/energy": "./src/data-sources/energy/index.ts",
     "./data-sources/news": "./src/data-sources/news/index.ts",
     "./data-sources/swissgrid": "./src/data-sources/swissgrid/index.ts",
-    "./data-sources/energy-charts": "./src/data-sources/energy-charts/index.ts"
+    "./data-sources/energy-charts": "./src/data-sources/energy-charts/index.ts",
+    "./data-sources/ugz-air": "./src/data-sources/ugz-air/index.ts",
+    "./data-sources/sensor-community": "./src/data-sources/sensor-community/index.ts",
+    "./data-sources/meteoswiss/pollen": "./src/data-sources/meteoswiss/pollen/index.ts",
+    "./data-sources/air": "./src/data-sources/air/index.ts",
+    "./data-sources/slf": "./src/data-sources/slf/index.ts",
+    "./data-sources/bafu-fire": "./src/data-sources/bafu-fire/index.ts",
+    "./data-sources/meteoswiss/hail": "./src/data-sources/meteoswiss/hail/index.ts",
+    "./data-sources/hazards": "./src/data-sources/hazards/index.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

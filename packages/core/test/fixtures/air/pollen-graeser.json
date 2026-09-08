@@ -1,0 +1,287 @@
+{
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:2056"
+    }
+  },
+  "license": "https://www.meteoschweiz.admin.ch/ueber-uns/rechtliches.html",
+  "mapname": "ch.meteoschweiz.messwerte-pollen-graeser-1h",
+  "map_long_name": "Messwerte Gräser, mittlere stündliche Pollenkonzentration",
+  "map_short_name": "Pollen Gräser, 1 h",
+  "map_abstract": "Messwerte Gräser, mittlere stündliche Pollenkonzentration [Pollen pro Kubikmeter Luft]. Daten werden stündlich aktualisiert. Der Datensatz enthält alle Messstationen des automatischen nationalen Pollenmessnetzes.",
+  "creation_time": "08.09.2026 17:57",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2704158.0, 1114348.0]
+      },
+      "id": "PLO",
+      "properties": {
+        "station_name": "Locarno / Monti",
+        "station_symbol": 1,
+        "value": 20,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "394.00",
+        "measurement_height": "18.00 m (auf 16.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Locarno / Monti (PLO)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>20 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>394.00 m (Höhe ü. Boden: 18.00 m (auf 16.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PLO\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2610935.0, 1267909.0]
+      },
+      "id": "PBS",
+      "properties": {
+        "station_name": "Basel",
+        "station_symbol": 1,
+        "value": 20,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "288.00",
+        "measurement_height": "32.00 m (auf 30.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Basel (PBS)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>20 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>288.00 m (Höhe ü. Boden: 32.00 m (auf 30.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PBS\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2598936.0, 1199918.0]
+      },
+      "id": "PBE",
+      "properties": {
+        "station_name": "Bern",
+        "station_symbol": 1,
+        "value": 69,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "568.00",
+        "measurement_height": "22.00 m (auf 20.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Bern (PBE)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>69 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>568.00 m (Höhe ü. Boden: 22.00 m (auf 20.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PBE\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2754181.0, 1226699.0]
+      },
+      "id": "PBU",
+      "properties": {
+        "station_name": "Buchs, SG",
+        "station_symbol": 1,
+        "value": 75,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "460.00",
+        "measurement_height": "14.00 m (auf 12.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Buchs, SG (PBU)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>75 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>460.00 m (Höhe ü. Boden: 14.00 m (auf 12.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PBU\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2784374.0, 1189278.0]
+      },
+      "id": "PDS",
+      "properties": {
+        "station_name": "Davos / Wolfgang",
+        "station_symbol": 1,
+        "value": 3,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "1613.00",
+        "measurement_height": "22.00 m (auf 20.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Davos / Wolfgang (PDS)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>3 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>1613.00 m (Höhe ü. Boden: 22.00 m (auf 20.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PDS\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2717898.0, 1095885.0]
+      },
+      "id": "PLU",
+      "properties": {
+        "station_name": "Lugano",
+        "station_symbol": 1,
+        "value": 14,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "311.00",
+        "measurement_height": "36.00 m (auf 34.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Lugano (PLU)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>14 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>311.00 m (Höhe ü. Boden: 36.00 m (auf 34.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PLU\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2665198.0, 1212207.0]
+      },
+      "id": "PLZ",
+      "properties": {
+        "station_name": "Luzern",
+        "station_symbol": 1,
+        "value": 54,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "499.00",
+        "measurement_height": "36.00 m (auf 34.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Luzern (PLZ)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>54 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>499.00 m (Höhe ü. Boden: 36.00 m (auf 34.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PLZ\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2735151.0, 1277053.0]
+      },
+      "id": "PMU",
+      "properties": {
+        "station_name": "Münsterlingen",
+        "station_symbol": 1,
+        "value": 80,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "429.00",
+        "measurement_height": "14.00 m (auf 12.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Münsterlingen (PMU)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>80 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>429.00 m (Höhe ü. Boden: 14.00 m (auf 12.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PMU\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2562850.79, 1205628.42]
+      },
+      "id": "PNE",
+      "properties": {
+        "station_name": "Neuchâtel",
+        "station_symbol": 1,
+        "value": 99999,
+        "unit": "No/m³",
+        "reference_ts": "-",
+        "altitude": "508.50",
+        "measurement_height": "19.50 m (auf 18.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Neuchâtel (PNE)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td class='text-nowrap'><strong>Pollen Gräser</strong></td><td>-</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>508.50 m (Höhe ü. Boden: 19.50 m (auf 18.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PNE\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2685110.0, 1248099.0]
+      },
+      "id": "PZH",
+      "properties": {
+        "station_name": "Zürich",
+        "station_symbol": 1,
+        "value": 31,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "581.00",
+        "measurement_height": "22.00 m (auf 20.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Zürich (PZH)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>31 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>581.00 m (Höhe ü. Boden: 22.00 m (auf 20.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PZH\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2500330.0, 1116432.0]
+      },
+      "id": "PGE",
+      "properties": {
+        "station_name": "Genève",
+        "station_symbol": 1,
+        "value": 17,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "421.00",
+        "measurement_height": "42.00 m (auf 40.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Genève (PGE)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>17 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>421.00 m (Höhe ü. Boden: 42.00 m (auf 40.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PGE\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2553959.0, 1218236.0]
+      },
+      "id": "PCF",
+      "properties": {
+        "station_name": "La Chaux-de-Fonds",
+        "station_symbol": 1,
+        "value": 66,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "1062.00",
+        "measurement_height": "25.00 m (auf 23.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>La Chaux-de-Fonds (PCF)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>66 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>1062.00 m (Höhe ü. Boden: 25.00 m (auf 23.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PCF\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2539091.0, 1152842.0]
+      },
+      "id": "PLS",
+      "properties": {
+        "station_name": "Lausanne",
+        "station_symbol": 1,
+        "value": 20,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "628.00",
+        "measurement_height": "52.00 m (auf 50.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Lausanne (PLS)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>20 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>628.00 m (Höhe ü. Boden: 52.00 m (auf 50.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PLS\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2562168.0, 1184814.0]
+      },
+      "id": "PPY",
+      "properties": {
+        "station_name": "Payerne",
+        "station_symbol": 1,
+        "value": 14,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "499.00",
+        "measurement_height": "9.00 m (auf 7.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Payerne (PPY)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>14 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>499.00 m (Höhe ü. Boden: 9.00 m (auf 7.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PPY\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2595832.0, 1120442.0]
+      },
+      "id": "PSN",
+      "properties": {
+        "station_name": "Sion",
+        "station_symbol": 1,
+        "value": 94,
+        "unit": "No/m³",
+        "reference_ts": "2026-09-08T15:00:00Z",
+        "altitude": "511.00",
+        "measurement_height": "17.00 m (auf 15.00 m Dach)",
+        "description": "<table><tbody><tr><td class='text-nowrap'><strong>Stationsname</strong></td><td>Sion (PSN)</td></tr><tr><td class='text-nowrap'><strong>Stationstyp</strong></td><td>Pollen&nbspautom.</td></tr><tr><td class='text-nowrap'><strong>Eigentümer</strong></td><td>MeteoSchweiz</td></tr><tr><td><strong>Pollen Gräser</strong></td><td>94 No/m³ (08.09.2026 17:00)</td></tr><tr><td class='text-nowrap'><strong>Messhöhe</strong></td><td>511.00 m (Höhe ü. Boden: 17.00 m (auf 15.00 m Dach))</td></tr><tr><td class='text-nowrap'><strong>Link</strong></td><td><a target=\"_blank\" href=\"https://www.meteoschweiz.admin.ch/service-und-publikationen/applikationen/messwerte-und-messnetze.html#param=messwerte-pollen-graeser-1h&station=PSN\">Informationen zu dieser Station</a></td></tr></tbody></table>"
+      }
+    }
+  ]
+}

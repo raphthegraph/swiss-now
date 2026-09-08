@@ -7,6 +7,8 @@ import type { HydrologyState, RailState, SeismicState, WeatherState } from "../s
 import type { PoliticsState, VoteResult } from "../state/politics";
 import type { EnergyState } from "../state/layers";
 import type { EventsState } from "../state/events";
+import type { AirState } from "../state/layers";
+import type { HazardsState } from "../state/hazards";
 import { currentDelay } from "../data-sources/transit/rail-state";
 import type { TopicId } from "./spec";
 
@@ -30,6 +32,8 @@ export interface TopicStates {
   politics?: PoliticsState | undefined;
   energy?: EnergyState | undefined;
   events?: EventsState | undefined;
+  air?: AirState | undefined;
+  hazards?: HazardsState | undefined;
   /** the vote currently shown (latest or the timeline selection) */
   vote?: VoteResult | undefined;
 }
@@ -316,6 +320,115 @@ export function eventsFigures(ev: EventsState | undefined, nowMs: number): Figur
   return out;
 }
 
+const INDEX_LABEL = ["", "good", "fair", "moderate", "poor", "very poor", "hazardous"];
+const PARAM_LABEL: Record<string, string> = {
+  pollenGrasses: "grasses",
+  pollenBirch: "birch",
+  pollenHazel: "hazel",
+  pollenAlder: "alder",
+  pollenAsh: "ash",
+  pollenBeech: "beech",
+  pollenOak: "oak",
+};
+
+export function airFigures(a: AirState | undefined): Figure[] {
+  if (!a) return [];
+  const out: Figure[] = [];
+  const name = (id: string) => a.stations.find((s) => s.id === id)?.name.en ?? id;
+  if (a.worstIndex !== undefined) {
+    const worst = Object.entries(a.indexByStation)
+      .filter(([id]) => a.stations.find((s) => s.id === id)?.tier === "reference")
+      .sort((x, y) => y[1] - x[1])[0];
+    out.push(
+      fig("air-index", "Air quality", a.worstIndex, 0, {
+        text: `${a.worstIndex} · ${INDEX_LABEL[a.worstIndex]}`,
+        where: worst ? `worst at ${name(worst[0])} · Zürich UGZ` : "Zürich UGZ",
+      }),
+    );
+  }
+  const pm = a.observations.filter(
+    (o) =>
+      o.parameter === "pm25" && a.stations.find((s) => s.id === o.stationId)?.tier === "reference",
+  );
+  const pmMax = pm.reduce<(typeof pm)[number] | undefined>(
+    (b, o) => (!b || o.value > b.value ? o : b),
+    undefined,
+  );
+  if (pmMax)
+    out.push(
+      fig("pm25", "PM2.5", pmMax.value, 1, {
+        unit: "µg/m³",
+        where: `${name(pmMax.stationId)} · hourly`,
+      }),
+    );
+  const citizen = a.stations.filter((s) => s.tier === "citizen").length;
+  if (citizen)
+    out.push(
+      fig("citizen", "Citizen sensors", citizen, 0, {
+        where: "Sensor.Community, PM only, low-cost hardware",
+      }),
+    );
+  const pollen = a.pollen.observations.reduce<(typeof a.pollen.observations)[number] | undefined>(
+    (b, o) => (!b || o.value > b.value ? o : b),
+    undefined,
+  );
+  if (pollen && pollen.value > 0) {
+    const st = a.pollen.stations.find((s) => s.id === pollen.stationId);
+    out.push(
+      fig("pollen", "Pollen", pollen.value, 0, {
+        unit: "/m³",
+        where: `${PARAM_LABEL[pollen.parameter] ?? pollen.parameter} · ${st?.name.en ?? ""}`,
+      }),
+    );
+  }
+  return out;
+}
+
+export function hazardsFigures(
+  h: HazardsState | undefined,
+  q: SeismicState | undefined,
+  nowMs: number,
+): Figure[] {
+  const out: Figure[] = [];
+  if (h) {
+    const fire = h.fireDanger.regions;
+    const max = fire.reduce((m, r) => Math.max(m, r.level), 0);
+    if (fire.length)
+      out.push(
+        fig("fire", "Forest-fire danger", max, 0, {
+          text: `level ${max}`,
+          where: `${fire.filter((r) => r.level >= 3).length} of ${fire.length} regions at 3 or more`,
+        }),
+      );
+    const av = h.avalanche.regions.reduce((m, r) => Math.max(m, r.level), 0);
+    if (h.avalanche.inSeason)
+      out.push(
+        fig("avalanche", "Avalanche danger", av, 0, {
+          text: av ? `level ${av}` : "—",
+          where: `${h.avalanche.regions.length} regions · SLF bulletin`,
+        }),
+      );
+    const snow = h.snow.observations
+      .filter((o) => o.parameter === "snowDepth")
+      .reduce<{ v: number; id: string } | undefined>(
+        (b, o) => (!b || o.value > b.v ? { v: o.value, id: o.stationId } : b),
+        undefined,
+      );
+    if (snow && snow.v > 0)
+      out.push(
+        fig("snow", "Deepest snow", snow.v, 0, {
+          unit: "cm",
+          where: `${h.snow.stations.find((s) => s.id === snow.id)?.name.en ?? ""} · IMIS`,
+        }),
+      );
+    if (h.hail)
+      out.push(
+        fig("hail", "Hail", 1, 0, { text: "detected", where: "MeteoSwiss radar, last hour" }),
+      );
+  }
+  return [...out, ...quakeFigures(q, nowMs).slice(0, 2)];
+}
+
 /** Figures for a topic; NOW composes the leads of its contributors. */
 export function figuresFor(topic: TopicId, s: TopicStates, nowMs = Date.now()): Figure[] {
   switch (topic) {
@@ -326,7 +439,9 @@ export function figuresFor(topic: TopicId, s: TopicStates, nowMs = Date.now()): 
     case "rail":
       return railFigures(s.rail, nowMs);
     case "hazards":
-      return quakeFigures(s.seismic, nowMs);
+      return hazardsFigures(s.hazards, s.seismic, nowMs);
+    case "air":
+      return airFigures(s.air);
     case "politics":
       return politicsFigures(s.politics, s.vote, nowMs);
     case "energy":

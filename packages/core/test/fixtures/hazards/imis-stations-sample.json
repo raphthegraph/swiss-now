@@ -1,0 +1,22 @@
+[
+  {
+    "code": "ZNZ1",
+    "label": "Sarsura Pitschen",
+    "lon": 9.9976221513,
+    "lat": 46.7042518299,
+    "elevation": 3133.0,
+    "country_code": "CH",
+    "canton_code": "GR",
+    "type": "WIND"
+  },
+  {
+    "code": "ZER4",
+    "label": "Stafelalp",
+    "lon": 7.7023907351,
+    "lat": 45.9979893991,
+    "elevation": 2408.0,
+    "country_code": "CH",
+    "canton_code": "VS",
+    "type": "SNOW_FLAT"
+  }
+]

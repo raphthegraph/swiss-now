@@ -532,6 +532,11 @@ table.sources th {
   color: var(--sn-ground-mist);
 }
 
+.hover-card--air .hover-card__value .label,
+.hover-card--hazard .hover-card__value .label {
+  font-size: var(--sn-type-label-size);
+}
+
 /* ---- CHARTS mode: a paper sheet over the muted map ---- */
 .charts-view {
   position: absolute;

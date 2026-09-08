@@ -96,12 +96,21 @@ export const TrafficState = LayerBase.extend({
 });
 export type TrafficState = z.infer<typeof TrafficState>;
 
-/** Phase 5, city-scale (NABEL has no feed). */
+/** Air index 1 (good) … 6 (very poor), Cercl'Air short-term thresholds applied per station. */
+export const AirIndex = z.number().int().min(1).max(6);
+export type AirIndex = z.infer<typeof AirIndex>;
+
+/**
+ * Air (expansion stage 3): Zürich UGZ hourly reference stations (CC0), Sensor.Community citizen
+ * particulate sensors (ODbL, tier "citizen"), MeteoSwiss pollen (hourly).
+ */
 export const AirState = LayerBase.extend({
   stations: z.array(Station),
   observations: z.array(Observation),
-  /** Computed Cercl'Air short-term index, 1–6, if available. */
-  index: z.number().int().min(1).max(6).optional(),
+  /** short-term index per station id */
+  indexByStation: z.record(z.string(), AirIndex),
+  worstIndex: AirIndex.optional(),
+  pollen: z.object({ stations: z.array(Station), observations: z.array(Observation) }),
 });
 export type AirState = z.infer<typeof AirState>;
 

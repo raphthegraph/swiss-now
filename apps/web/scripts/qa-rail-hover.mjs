@@ -129,6 +129,35 @@ const eventsOk = markerCount >= 5 && confident >= 1 && markerXs >= 5 && /events/
 console.log("event markers:", markerCount, "| distinct x:", markerXs, "| confidence 0.95:", confident, "| strip:", eventsStrip.replace(/\n/g, " | ").slice(0, 80), "| ok:", eventsOk);
 await page.screenshot({ path: "/tmp/sn/qa-events.png" });
 
+// AIR: reference stations on the index ramp, citizen sensors, pollen; hover card
+await page.getByRole("button", { name: "Air" }).click();
+await page.locator(".legend--ramp").waitFor({ timeout: 60_000 });
+await page.waitForFunction(() => /air quality|citizen/i.test(document.querySelector(".strip")?.textContent ?? ""), null, { timeout: 60_000 });
+await page.waitForTimeout(1500);
+const airCounts = await page.evaluate(() => {
+  const m = window.__swissNowMap;
+  const feats = m.querySourceFeatures("air-stations");
+  const ids = new Set(feats.map((f) => f.id));
+  return { stations: ids.size, citizen: feats.filter((f) => f.properties.tier === "citizen").length, pollen: new Set(m.querySourceFeatures("pollen-stations").map((f) => f.id)).size };
+});
+const airStrip = await page.locator(".strip").innerText();
+const airOk = airCounts.stations >= 5 && airCounts.pollen >= 5 && /air quality/i.test(airStrip);
+console.log("air stations/citizen/pollen:", airCounts.stations, airCounts.citizen, airCounts.pollen, "| strip:", airStrip.replace(/\n/g, " | ").slice(0, 80), "| ok:", airOk);
+await page.screenshot({ path: "/tmp/sn/qa-air.png" });
+
+// HAZARDS: fire regions from the region route, snow stations, quakes; figures
+await page.getByRole("button", { name: "Hazards" }).click();
+await page.waitForFunction(() => /forest-fire|earthquake/i.test(document.querySelector(".strip")?.textContent ?? ""), null, { timeout: 60_000 });
+await page.waitForFunction(() => { const m = window.__swissNowMap; return m && m.getSource("hazard-fire-regions") && m.querySourceFeatures("hazard-fire-regions").length > 10; }, null, { timeout: 60_000 });
+const hazCounts = await page.evaluate(() => {
+  const m = window.__swissNowMap;
+  return { fire: new Set(m.querySourceFeatures("hazard-fire-regions").map((f) => f.id)).size, snow: new Set(m.querySourceFeatures("hazard-snow-stations").map((f) => f.id)).size, fireVisible: m.getLayoutProperty("hazard-fire-fill", "visibility") };
+});
+const hazStrip = await page.locator(".strip").innerText();
+const hazardsOk = hazCounts.fire >= 10 && hazCounts.fireVisible === "visible" && /forest-fire/i.test(hazStrip);
+console.log("hazards fire regions/snow:", hazCounts.fire, hazCounts.snow, hazCounts.fireVisible, "| strip:", hazStrip.replace(/\n/g, " | ").slice(0, 90), "| ok:", hazardsOk);
+await page.screenshot({ path: "/tmp/sn/qa-hazards.png" });
+
 // POLITICS: choropleth from the geo spine with feature-state values, hover card, vote timeline
 await page.getByRole("button", { name: "Politics" }).click();
 await page.locator(".legend--ramp").waitFor({ timeout: 60_000 });
@@ -224,7 +253,7 @@ if ((await quakesButton.count()) > 0) {
   await quakesButton.click();
   await page.waitForTimeout(800);
   const quakeStrip = (await page.locator(".strip").innerText()).replace(/\n/g, " | ");
-  quakesOk = /Last earthquake/i.test(quakeStrip);
+  quakesOk = /earthquake|forest-fire/i.test(quakeStrip);
   console.log("strip in QUAKES:", quakeStrip.slice(0, 140), "| ok:", quakesOk);
   await page.screenshot({ path: "/tmp/sn/qa-quakes.png" });
 } else console.log("QUAKES not in rail (no M≥2 event in window)");
@@ -240,7 +269,9 @@ process.exit(
   waterCurrent &&
   politicsOk &&
   energyOk &&
-  eventsOk
+  eventsOk &&
+  airOk &&
+  hazardsOk
     ? 0
     : 1,
 );

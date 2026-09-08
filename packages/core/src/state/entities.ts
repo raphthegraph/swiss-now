@@ -25,6 +25,14 @@ export const Parameter = z.enum([
   "snowDepth", // cm
   "newSnow24h", // cm
   "foehnIndex", // 0 | 1 | 2
+  // pollen (grains per m³, hourly)
+  "pollenGrasses",
+  "pollenBirch",
+  "pollenHazel",
+  "pollenAlder",
+  "pollenAsh",
+  "pollenBeech",
+  "pollenOak",
   // hydrology
   "waterLevel", // m a.s.l.
   "discharge", // m³/s
@@ -50,6 +58,13 @@ export const PARAMETER_UNITS: Record<Parameter, string> = {
   precipitation24h: "mm",
   windSpeed: "km/h",
   windGust: "km/h",
+  pollenGrasses: "No/m³",
+  pollenBirch: "No/m³",
+  pollenHazel: "No/m³",
+  pollenAlder: "No/m³",
+  pollenAsh: "No/m³",
+  pollenBeech: "No/m³",
+  pollenOak: "No/m³",
   windDirection: "°",
   pressureQFE: "hPa",
   pressureQNH: "hPa",
@@ -78,6 +93,8 @@ export const Station = z.object({
   id: z.string().min(1),
   name: LocalizedText,
   kind: StationKind,
+  /** reference = official network; citizen = low-cost community hardware (never merged into an official index) */
+  tier: z.enum(["reference", "citizen"]).optional(),
   lonLat: LonLat,
   elevation: z.number().optional(),
   cantonCode: CantonCode.optional(),
@@ -103,7 +120,7 @@ export type Observation = z.infer<typeof Observation>;
 /** A gridded raster (radar frame, interpolated temperature) published as an image on Blob. */
 export const Field = z.object({
   id: z.string().min(1),
-  kind: z.enum(["radar-rain-rate", "radar-rain-1h", "temperature-grid"]),
+  kind: z.enum(["radar-rain-rate", "radar-rain-1h", "temperature-grid", "hail-meshs"]),
   bounds: BBox,
   width: z.number().int().positive(),
   height: z.number().int().positive(),
