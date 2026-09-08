@@ -19,14 +19,8 @@ import { LiveMap } from "./LiveMap";
 import { WindParticles } from "./WindParticles";
 import { RadarScrubber } from "../hud/RadarScrubber";
 import { useRadarTimeline } from "@/lib/use-radar-timeline";
-import { useTimeline } from "@/lib/use-timeline";
-import { TimelineScrubber } from "../hud/TimelineScrubber";
+import { useSnapshotPing } from "@/lib/use-snapshot-ping";
 
-function spanMs(snapshots: { at: string }[]): number {
-  if (snapshots.length < 2) return 0;
-  const ts = snapshots.map((s) => new Date(s.at).getTime());
-  return Math.max(...ts) - Math.min(...ts);
-}
 import { SummaryStrip } from "../hud/SummaryStrip";
 import { FpsMeter } from "../hud/FpsMeter";
 
@@ -61,19 +55,9 @@ export function MapPage({
   const params = useSearchParams();
   const showFps = params.get("fps") === "1";
   const [map, setMap] = useState<MapLibreMap | null>(null);
-  const timeline = useTimeline();
-  // when scrubbed back in time, the weather and water views show the snapshot's state
-  const viewWeather = timeline.snapshot?.weather ?? weather;
-  const viewHydrology = timeline.snapshot?.hydrology ?? hydrology;
-  const viewing = timeline.snapshot !== null;
-  // The timeline is an instrument of the layer views, never of the NOW composite (the hero view
-  // stays uncluttered), and only once there is an hour of history to scrub through.
-  const showTimeline =
-    (active === "weather" || active === "water") && spanMs(timeline.snapshots) >= 60 * 60_000;
-  useEffect(() => {
-    if (!showTimeline && timeline.index !== null) timeline.setIndex(null);
-  }, [showTimeline, timeline]);
-  const radar = useRadarTimeline(viewWeather);
+  // visitor-driven persistence: keeps the day's snapshots (the story's input) written while someone watches
+  useSnapshotPing();
+  const radar = useRadarTimeline(weather);
   // the radar timeline is a WEATHER instrument; elsewhere the map shows the latest frame only
   const radarReset = radar.reset;
   useEffect(() => {
@@ -83,15 +67,15 @@ export function MapPage({
   return (
     <>
       <LiveMap
-        weather={viewWeather}
-        hydrology={viewHydrology}
+        weather={weather}
+        hydrology={hydrology}
         disruptions={rail?.disruptions}
         active={active}
         radarFrame={radar.frame}
         onMapReady={setMap}
       />
       {active === "now" || active === "weather" ? (
-        <WindParticles map={map} weather={viewWeather} />
+        <WindParticles map={map} weather={weather} />
       ) : null}
       {active === "now" || active === "rail" ? (
         <TrainLayer
@@ -122,8 +106,8 @@ export function MapPage({
       ) : null}
       <LayerRail active={active} onChange={setActive} hidden={quakesNotable ? [] : ["quakes"]} />
       <SummaryStrip
-        state={viewWeather}
-        hydrology={viewHydrology}
+        state={weather}
+        hydrology={hydrology}
         rail={rail}
         seismic={seismic}
         active={active}
@@ -145,15 +129,7 @@ export function MapPage({
           />
         }
       >
-        {showTimeline ? (
-          <TimelineScrubber
-            snapshots={timeline.snapshots}
-            index={timeline.index}
-            marks={timeline.marks}
-            onChange={timeline.setIndex}
-          />
-        ) : null}
-        {active === "weather" && !viewing ? (
+        {active === "weather" ? (
           <RadarScrubber
             frames={radar.frames}
             index={radar.index}

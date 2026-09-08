@@ -83,7 +83,7 @@ Constraints: GitHub's 5-minute floor and hour-start jitter; scheduled workflows 
 | ENTSO-E CH                                                    | 1                    | 900 s         | XML                      | token server-side                                    |
 | sharedmobility GBFS                                           | 1                    | 60 s          | ~1 MB                    | Phase 5 optional                                     |
 | FEDRO DATEX II                                                | 2 (archive)          | 5 min         | XML                      | Phase 5; derived values only in the public API       |
-| Composite snapshot                                            | 2                    | 10 min        | 200–500 KB gz            | timeline + story input                               |
+| Composite snapshot                                            | 2                    | 10 min        | 200–500 KB gz            | story input (timeline UI dropped)                    |
 
 ## 3. The Swiss Now State (data contracts)
 

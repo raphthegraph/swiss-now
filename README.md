@@ -24,7 +24,7 @@ Design direction: Swiss modernism, strong typography, cartographic beauty, restr
 | **WATER**   | FOEN hydrology: river discharge and level, lake level, water temperature, flood danger levels                                                                               | 10 min         |
 | **RAIL**    | Trains interpolated from GTFS schedules and live delays (Switzerland publishes no vehicle positions — every position is labelled _interpolated_), delay pulses, disruptions | 60 s           |
 | **QUAKES**  | Swiss Seismological Service catalogue                                                                                                                                       | event-driven   |
-| **NOW**     | the curated composite and a national summary strip, nothing else; the WEATHER and WATER views add a timeline over the day's snapshots, `/today` tells the story             | —              |
+| **NOW**     | the curated composite and a national summary strip, nothing else; `/today` tells the day's story from the 10-minute snapshots                                               | —              |
 
 Traffic (FEDRO), city-scale air quality and energy follow in later phases. See [`docs/MVP_PLAN.md`](docs/MVP_PLAN.md) for the reasoning and [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md) for the 48-row scored data-source matrix.
 
@@ -111,7 +111,7 @@ On `/today` the same composition plays in a Remotion `<Player>` (mounted on dema
 | 0     | Workspace, state contracts, tokens, forked map style, first cached handler, performance and Remotion spikes | done                                             |
 | 1     | Weather + Water layers, HUD, place focus, NOW composite                                                     |                                                  |
 | 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                  | done (Blob hosting waits for the Vercel project) |
-| 3     | Quakes, snapshots and timeline, Today story, seasonal layers                                                | done                                             |
+| 3     | Quakes, snapshots (story input), Today story, seasonal layers                                               | done                                             |
 | 4     | Remotion "Switzerland Today" compositions, local rendering, Player on `/today`                              | done                                             |
 | 5     | Traffic (FEDRO), city air quality, energy flows, polish                                                     |                                                  |
 

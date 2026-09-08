@@ -114,6 +114,8 @@ Click a canton or city (or set your home place): the camera glides in, the summa
 
 `NOW ← 1h ← 3h ← 6h ← 12h ← TODAY`, a GSAP-driven scrubber. Backed by 10-minute snapshots. Scrubbing animates the field (temperature warms, rain moves, rivers rise) rather than swapping numbers. Only layers with snapshot history expose it.
 
+> Dropped from the UI on 2026-09-08: built in Phase 3, it crowded the map without earning its place (with a day of 10-minute snapshots there is little to scrub). The snapshots remain as the Today story's input; the timeline may return as a `/today` feature rather than a map instrument.
+
 ### 5.7 Today — the story mode
 
 A web-native, scroll-driven sequence of chapters assembled automatically from ranked anomalies and superlatives: weather summary, hottest and coldest place, biggest rainfall, worst delay, unusual river or flood condition, earthquake if any, one statistic of the day. Each chapter moves the map camera and highlights the relevant layer. The same `StorySpec` drives the Remotion composition, so the video is the story rendered on a clock instead of a scroll.

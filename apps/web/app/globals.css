@@ -590,39 +590,6 @@ table.sources th {
   border-left-color: var(--sn-accent-seismic);
 }
 
-/* ---- timeline ---- */
-.scrubber--timeline {
-  max-width: 820px;
-  margin-bottom: var(--sn-space-2);
-}
-.timeline__track {
-  position: relative;
-  padding-bottom: 14px;
-}
-.timeline__marks {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 18px;
-  height: 14px;
-}
-.timeline__mark {
-  position: absolute;
-  transform: translateX(-50%);
-  appearance: none;
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: var(--sn-ground-graphite);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.timeline__mark:hover {
-  color: var(--sn-ground-ink);
-}
-
 /* ---- today story ---- */
 .today {
   position: relative;
