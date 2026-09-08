@@ -23,31 +23,33 @@ export function VoteMenu({
   const yes = vote?.national.yesPct;
   const accepted = vote?.meta.national?.accepted;
   return (
-    <div className="vote-menu">
-      <label className="vote-menu__field">
-        <span className="label">{t("vote")}</span>
-        <select
-          className="vote-menu__select"
-          value={selectedId}
-          onChange={(e) => onChange(e.target.value)}
-        >
-          {votes.map((v) => (
-            <option key={v.id} value={v.id}>
-              {formatDate(v.date, lang)} · {l(v.title)}
-            </option>
-          ))}
-        </select>
-      </label>
+    <>
+      <div className="instrument instrument--top vote-menu">
+        <label className="vote-menu__field">
+          <span className="label">{t("vote")}</span>
+          <select
+            className="vote-menu__select"
+            value={selectedId}
+            onChange={(e) => onChange(e.target.value)}
+          >
+            {votes.map((v) => (
+              <option key={v.id} value={v.id}>
+                {formatDate(v.date, lang)} · {l(v.title)}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
       {yes !== undefined && yes !== null ? (
-        <span className="vote-menu__result tnum">
+        <div className="instrument instrument--top instrument--top-2 vote-menu__result tnum">
           <strong>{formatNumber(yes, 1)} %</strong> {t("yes")}
           {accepted !== undefined ? (
             <span className={`vote-menu__badge${accepted ? " vote-menu__badge--yes" : ""}`}>
               {accepted ? t("accepted") : t("rejected")}
             </span>
           ) : null}
-        </span>
+        </div>
       ) : null}
-    </div>
+    </>
   );
 }

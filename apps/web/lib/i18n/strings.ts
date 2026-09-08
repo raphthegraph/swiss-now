@@ -13,6 +13,13 @@ export const STRINGS = {
   status: t("Status", "Status", "État", "Stato"),
   keyFigures: t("Kennzahlen", "Key figures", "Chiffres clés", "Cifre chiave"),
   wind: t("Wind", "Wind", "Vent", "Vento"),
+  realSpeed: t("Echte Geschwindigkeit", "Real speed", "Vitesse réelle", "Velocità reale"),
+  accelerated: t(
+    "Züge für die Anzeige {k}× beschleunigt · Positionen laufen der Schätzung voraus",
+    "trains accelerated {k}× for display · marks run ahead of the estimated position",
+    "trains accélérés {k}× pour l'affichage · les marques précèdent la position estimée",
+    "treni accelerati {k}× per la visualizzazione · i segni precedono la posizione stimata",
+  ),
   zoomIn: t("Hineinzoomen", "Zoom in", "Zoomer", "Ingrandisci"),
   zoomOut: t("Herauszoomen", "Zoom out", "Dézoomer", "Riduci"),
   mapOfSwitzerland: t(

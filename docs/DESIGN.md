@@ -32,7 +32,8 @@ are 28 px semibold with tabular figures; the unit sits at half size in graphite.
 
 Both are the owner's artwork, kept as transparent PNGs trimmed to their ink: `public/brand/
 wordmark.png` (1200 × 181, shown 22 px tall in the top bar) and `public/brand/mark.png` (640 px, the
-contour map with the red dot, shown 72 px in the bottom bar and as the favicon `app/icon.png`).
+contour map with the red dot, shown 72 px in the bottom bar). The favicon and touch icon
+(`app/icon.png`, `app/apple-icon.png`) are the owner's navy app tile with the white contours.
 `components/brand/{Wordmark,Mark}.tsx` render them. A generated SVG twin of the mark
 (`packages/geo-build/scripts/build-mark.mjs` → `public/brand/mark.svg`, `lib/brand/mark.ts`) is
 built from the real border for the video and for any place that needs a recolourable vector.
@@ -79,16 +80,19 @@ a fifth of the screen. A tap opens the card a hover would; a tap on open water c
 
 ## Motion on the map
 
-- **Trains** move at their real interpolated speed, so at national zoom they shift about a pixel a
-  minute; a tail along the train's real path over the last three minutes, thinning into the past,
-  shows where it came from and grows visible as you zoom in. Nothing is drawn where a train is not.
+- **Trains** on RAIL run on an accelerated display clock by default (owner's decision, 2026-09-09):
+  12× at the national zoom, easing to real time by zoom 10, in 45-second loops that fade at the
+  wrap. The legend says "trains accelerated 12× for display · marks run ahead of the estimated
+  position" in Swiss red, and a "Real speed" switch in the top-left pill restores honest positions
+  (kept in the browser). NOW keeps real speed. Each train draws a tail along its path over the last
+  three minutes.
 - **Rain** drifts: outside the weather timeline the map cycles through the radar frames of the last
   40 minutes (650 ms per frame, a pause on the newest), so the rain field is never a still image.
 - **Wind** particles are quiet on NOW and full on WEATHER and AIR (more, longer trails in graphite);
   on WEATHER and AIR stations with 8 km/h or more carry a graphite arrow whose length follows the
-  speed and which creeps forward in the wind's direction. A WIND switch in the pill at the top left
-  of the map turns both off; the choice is kept in the browser. AIR shows the wind because it
-  carries the pollutants.
+  speed and which creeps forward in the wind's direction. Wind is off by default on these two topics;
+  the WIND switch in the pill at the top left of the map turns it on (kept in the browser). NOW keeps
+  its quiet particles. AIR shows the wind because it carries the pollutants.
 - **POLITICS** puts the vote selector in the same top-left pill (date · title, yes share, result
   badge), on the mode switcher's line; the yes-share legend stays in the bottom-left card.
 - **Chrome**: the live dots in the top bar and the sidebar pulse gently; figure cells show shimmering

@@ -61,7 +61,7 @@ await page.getByRole("button", { name: "Rail" }).click();
 const railUrl = new URL(page.url()).searchParams.get("topic") === "rail";
 console.log("url topic=rail:", railUrl);
 await page.waitForFunction(
-  () => Array.isArray(window.__swissNowTrains) && window.__swissNowTrains.length > 50,
+  () => Array.isArray(window.__swissNowTrains) && window.__swissNowTrains.length > 5, // night service runs few trains
   null,
   { timeout: 60_000 },
 );

@@ -407,7 +407,10 @@ export function MapPage({
   const [help, setHelp] = useState(false);
   // visitor-driven persistence: keeps the day's snapshots (the story's input) written while someone watches
   useSnapshotPing();
-  const [windOn, setWindOn] = useWindPreference();
+  // wind off by default; trains accelerated for display by default (the switch restores real speed)
+  const [windOn, setWindOn] = useStoredToggle("swiss-now:wind", false);
+  const [realSpeed, setRealSpeed] = useStoredToggle("swiss-now:train-real-speed", false);
+  const accelerated = topic === "rail" && !realSpeed;
   // keyboard: [ ] topics · 1–4 modes · Esc back to NOW (docs/IA.md)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -544,7 +547,11 @@ export function MapPage({
   ) : undefined;
   const instrument =
     topic === "rail" ? (
-      <RailLegend loaded={railProgress.loaded} needed={railProgress.needed} />
+      <RailLegend
+        loaded={railProgress.loaded}
+        needed={railProgress.needed}
+        accelerated={accelerated}
+      />
     ) : topic === "politics" ? (
       <RampLegend scale="yesShare" label={t("yesShare")} unit=" %" />
     ) : topic === "air" ? (
@@ -695,6 +702,7 @@ export function MapPage({
             mode={presence.rail === "full" ? "full" : "quiet"}
             onHover={setTrainHover}
             onProgress={(loaded, needed) => setRailProgress({ loaded, needed })}
+            accelerate={accelerated}
           />
         ) : null}
         {topic === "rail" && trainHover && rail ? (
@@ -717,9 +725,7 @@ export function MapPage({
         ) : null}
         <ModeSwitcher view={view} onChange={setMode} />
         {topic === "politics" && mode !== "timeline" && politics && voteId ? (
-          <div className="instrument instrument--top">
-            <VoteMenu votes={politics.index} selectedId={voteId} vote={vote} onChange={setTime} />
-          </div>
+          <VoteMenu votes={politics.index} selectedId={voteId} vote={vote} onChange={setTime} />
         ) : null}
         {topic === "weather" || topic === "air" ? (
           <div className="instrument instrument--top">
@@ -731,6 +737,19 @@ export function MapPage({
             >
               <span className="toggle__knob" aria-hidden="true" />
               {t("wind")}
+            </button>
+          </div>
+        ) : null}
+        {topic === "rail" ? (
+          <div className="instrument instrument--top">
+            <button
+              type="button"
+              className="toggle"
+              aria-pressed={realSpeed}
+              onClick={() => setRealSpeed(!realSpeed)}
+            >
+              <span className="toggle__knob" aria-hidden="true" />
+              {t("realSpeed")}
             </button>
           </div>
         ) : null}
@@ -779,20 +798,21 @@ function useStopNames(rail: RailState | undefined): (id: string) => string {
   return (id: string) => names[id] ?? id;
 }
 
-/** Wind on WEATHER and AIR can be switched off; the choice is kept in the browser. */
-function useWindPreference(): [boolean, (on: boolean) => void] {
-  const [on, setOnState] = useState(true);
+/** A yes/no preference kept in the browser (wind, real train speed); the default applies until the viewer decides. */
+function useStoredToggle(key: string, initial: boolean): [boolean, (on: boolean) => void] {
+  const [on, setOnState] = useState(initial);
   useEffect(() => {
     try {
-      if (window.localStorage.getItem("swiss-now:wind") === "off") setOnState(false);
+      const v = window.localStorage.getItem(key);
+      if (v === "on" || v === "off") setOnState(v === "on");
     } catch {
       // no storage
     }
-  }, []);
+  }, [key]);
   const setOn = (next: boolean) => {
     setOnState(next);
     try {
-      window.localStorage.setItem("swiss-now:wind", next ? "on" : "off");
+      window.localStorage.setItem(key, next ? "on" : "off");
     } catch {
       // no storage
     }

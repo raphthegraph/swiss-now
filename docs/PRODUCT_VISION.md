@@ -147,7 +147,9 @@ Remotion with the chapter markers drawn on a fixed map plate, and plays on the p
 Hover reveals value, time and source in a small typographic card. Nothing pops in; everything fades
 or slides on a shared timing scale, and the reduced-motion preference stops the ambient motion.
 Freshness is visible: aging values desaturate, stale layers dim with a "last update" tag, outages
-show a calm notice. Interpolated positions are labelled as such. Every source is named in the strip
+show a calm notice. Interpolated positions are labelled as such; the one deliberate departure is the
+RAIL view, where trains run on an accelerated display clock so the country-scale view moves — the
+legend says so in red and a switch restores real speed (docs/DESIGN.md). Every source is named in the strip
 and the credits, and a source that cannot be used commercially is not shown at all.
 
 ## 6. What it must not be

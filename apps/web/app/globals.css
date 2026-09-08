@@ -497,9 +497,22 @@ table.sources th {
   box-shadow: none;
   max-width: min(640px, calc(100% - 420px));
 }
-.instrument--top .vote-menu {
+.instrument--top.vote-menu {
   flex-wrap: nowrap;
   gap: var(--sn-space-3);
+  display: flex;
+  align-items: center;
+}
+.instrument--top-2 {
+  top: calc(var(--sn-space-3) + 36px + var(--sn-space-2));
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sn-space-2);
+  padding: 0 var(--sn-space-3) 0 var(--sn-space-4);
+  font-size: var(--sn-type-caption-size);
+  color: var(--sn-ground-graphite);
+  max-width: none;
+  width: max-content;
 }
 .instrument--top .vote-menu__field .label {
   white-space: nowrap;
@@ -909,6 +922,9 @@ table.sources th {
   display: inline-flex;
   align-items: center;
   gap: var(--sn-space-2);
+}
+.legend__item--note {
+  color: var(--sn-brand-swiss-red);
 }
 .legend__train {
   display: inline-block;
@@ -1353,8 +1369,9 @@ table.sources th {
     right: 60px;
     padding: 0 var(--sn-space-2) 0 var(--sn-space-3);
   }
-  .instrument--top .vote-menu__result {
-    display: none;
+  .instrument--top-2 {
+    top: calc(60px + 44px);
+    right: auto;
   }
   .instrument--top .vote-menu__select {
     max-width: 100%;

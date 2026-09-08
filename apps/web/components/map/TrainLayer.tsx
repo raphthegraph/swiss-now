@@ -28,17 +28,38 @@ export interface TrainLayerProps {
   onHover?: (hover: TrainHover | null) => void;
   /** loaded route paths vs. paths needed, for the loading indicator */
   onProgress?: (loaded: number, needed: number) => void;
+  /**
+   * Display acceleration (RAIL view, off by the "real speed" switch): the clock the positions are
+   * computed for runs ACCELERATION× faster over a short loop, so trains visibly travel their routes
+   * at the national zoom. Marks are then ahead of the estimated real position; the legend says so.
+   */
+  accelerate?: boolean;
 }
+
+/** Acceleration at the national zoom; eases back to real time by zoom 10. */
+export const ACCELERATION = 12;
+const ACCEL_LOOP_MS = 45_000;
+const ACCEL_FADE_MS = 700;
 
 /**
  * Trains as motion. Every position is interpolated from the schedule plus live delays with the
  * shared `positionAlongTrip()` — Switzerland publishes no vehicle positions — and drawn as soft,
  * elongated marks so they never read as GPS dots. Delays ≥ 3 min pulse in Swiss red.
  */
-export function TrainLayer({ map, rail, mode, onHover, onProgress }: TrainLayerProps) {
+export function TrainLayer({
+  map,
+  rail,
+  mode,
+  onHover,
+  onProgress,
+  accelerate = false,
+}: TrainLayerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const railRef = useRef(rail);
   const modeRef = useRef(mode);
+  const accelRef = useRef(accelerate);
+  const anchorRef = useRef(Date.now());
+  accelRef.current = accelerate;
   const storeRef = useRef<RailPathStore | null>(null);
   const [store, setStore] = useState<RailPathStore | null>(null);
   /** last drawn frame: screen positions for hit-testing */
@@ -92,7 +113,15 @@ export function TrainLayer({ map, rail, mode, onHover, onProgress }: TrainLayerP
       if (!state || !s) return;
       const quiet = modeRef.current === "quiet";
       const zoom = map.getZoom();
-      const t = Date.now();
+      // accelerated display clock: a short loop that runs ACCELERATION× and fades at the wrap
+      const realNow = Date.now();
+      const k = accelRef.current
+        ? Math.max(1, ACCELERATION - (Math.max(0, zoom - 8) * (ACCELERATION - 1)) / 2)
+        : 1;
+      const elapsed = (realNow - anchorRef.current) % ACCEL_LOOP_MS;
+      const t = k > 1 ? realNow + elapsed * (k - 1) : realNow;
+      const wrapFade =
+        k > 1 ? Math.min(1, elapsed / ACCEL_FADE_MS, (ACCEL_LOOP_MS - elapsed) / ACCEL_FADE_MS) : 1;
       // marks stay legible at national zoom and grow with zoom
       const len = Math.max(7, Math.min(18, 4 + (zoom - 6) * 3));
       const thick = Math.max(2.4, Math.min(6, 1.6 + (zoom - 6) * 0.9));
@@ -121,7 +150,7 @@ export function TrainLayer({ map, rail, mode, onHover, onProgress }: TrainLayerP
           ctx.arc(pt.x, pt.y, r * (0.45 + 0.55 * (1 - env)), 0, Math.PI * 2);
           ctx.strokeStyle = layerAccent.railDelay;
           ctx.lineWidth = 1;
-          ctx.globalAlpha = 0.55 * env;
+          ctx.globalAlpha = 0.55 * env * wrapFade;
           ctx.stroke();
         }
         // where the train was over the last three minutes: a tail along its real path, thinning into the past
@@ -133,7 +162,7 @@ export function TrainLayer({ map, rail, mode, onHover, onProgress }: TrainLayerP
             if (!past.active) break;
             const to = map.project(past.lonLat);
             const fade = 1 - (k - 1) / TRAIL_SAMPLES;
-            ctx.globalAlpha = 0.4 * fade;
+            ctx.globalAlpha = 0.4 * fade * wrapFade;
             ctx.lineWidth = Math.max(0.8, thick * 0.6 * fade);
             ctx.strokeStyle = delayed ? delayColor(p.delaySeconds) : layerAccent.rail;
             ctx.beginPath();
@@ -144,7 +173,7 @@ export function TrainLayer({ map, rail, mode, onHover, onProgress }: TrainLayerP
           }
         }
         // the train: a short capsule along the bearing, with a paper halo so it stays visible on the ground
-        ctx.globalAlpha = quiet && !delayed ? 0.45 : 0.95;
+        ctx.globalAlpha = (quiet && !delayed ? 0.45 : 0.95) * wrapFade;
         const a = ((p.bearing - 90) * Math.PI) / 180;
         ctx.save();
         ctx.translate(pt.x, pt.y);
