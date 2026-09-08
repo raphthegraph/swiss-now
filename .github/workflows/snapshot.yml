@@ -1,0 +1,22 @@
+name: Snapshot ping
+
+# Asks the deployed app to write the current 10-minute snapshot (docs/FREE_TIER_ARCHITECTURE.md,
+# Mode 2). Visitors trigger the same write; this keeps the timeline and the daily story complete
+# on quiet days. Vercel Hobby crons run once a day, so the scheduler lives here. Skipped until
+# the repository variable SWISS_NOW_URL names the production deployment.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: POST /api/snapshot
+        env:
+          BASE_URL: ${{ vars.SWISS_NOW_URL }}
+        run: |
+          if [ -z "$BASE_URL" ]; then echo "SWISS_NOW_URL not set — skipping"; exit 0; fi
+          curl -sS -m 120 -X POST "${BASE_URL%/}/api/snapshot" -o out.json -w "status %{http_code}\n"
+          cat out.json

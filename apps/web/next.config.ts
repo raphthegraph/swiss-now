@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
     "/": ["./public/rail/**"],
     "/status": ["./public/rail/**"],
   },
+  // small static data read from disk by route handlers (until DATA_BASE_URL points at Blob):
+  // the vote files and the municipality register used by the events geocoder
+  outputFileTracingIncludes: {
+    "/api/state/politics": ["./public/data/politics/**"],
+    "/api/state/events": ["./public/geo/municipalities-2026.json"],
+    "/api/snapshot": ["./public/data/politics/**", "./public/geo/municipalities-2026.json"],
+    "/api/story/today": ["./public/data/politics/**"],
+  },
   async headers() {
     return [
       {
