@@ -23,7 +23,10 @@ import {
 export const RAIL_TTL_SECONDS = 60;
 /** Where the GTFS build wrote its files (docs/ARCHITECTURE.md §2.2). Vercel Blob later. */
 const RAIL_DIR = process.env["RAIL_DATA_DIR"] ?? join(process.cwd(), "public", "rail");
-const PATHS_URL = "/rail/paths";
+/** Where the browser fetches single paths: next to the rail files when they come from a public URL. */
+const PATHS_URL = process.env["RAIL_DATA_URL"]
+  ? `${process.env["RAIL_DATA_URL"].replace(/\/$/, "")}/paths`
+  : "/rail/paths";
 
 // Module-level caches survive across warm invocations of the same function instance.
 const fileCache = new Map<string, { mtime: number; value: unknown }>();

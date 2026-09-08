@@ -47,11 +47,9 @@
     "test:watch": "vitest",
     "build-gtfs": "tsx src/cli/build-gtfs.ts",
     "build-rail-paths": "tsx src/cli/build-rail-paths.ts",
-    "upload-rail": "tsx src/cli/upload-rail.ts",
     "build-data": "tsx src/cli/build-data.ts"
   },
   "dependencies": {
-    "@vercel/blob": "^2.8.0",
     "csv-parse": "^7.0.2",
     "fast-xml-parser": "^5.2.5",
     "gtfs-realtime-bindings": "^2.2.0",

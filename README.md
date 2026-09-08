@@ -80,15 +80,15 @@ pnpm --filter @swiss-now/core build-rail-paths -- --rail apps/web/public/rail   
 
 Environment variables:
 
-| Variable                | Used by              | Purpose                                                                       |
-| ----------------------- | -------------------- | ----------------------------------------------------------------------------- |
-| `OTD_API_KEY`           | web                  | GTFS-RT delays. Without it trains follow the timetable and are marked stale.  |
-| `RAIL_DATA_DIR`         | web                  | Generated rail files; default `apps/web/public/rail`.                         |
-| `RAIL_DATA_URL`         | web                  | Read rail files from a public URL (Vercel Blob) instead of the directory.     |
-| `SNAPSHOT_DIR`          | web                  | Local snapshot directory; default `apps/web/public/snapshots`.                |
-| `BLOB_READ_WRITE_TOKEN` | web, `gtfs.yml`, CLI | Vercel Blob for snapshots and rail files once deployed.                       |
-| `DATA_BASE_URL`         | web                  | Read the statistics files from a public URL instead of `public/data`.         |
-| `SWISS_NOW_ALLOW`       | web                  | Comma-separated source ids to enable despite the licence policy (local only). |
+| Variable                | Used by | Purpose                                                                                        |
+| ----------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `OTD_API_KEY`           | web     | GTFS-RT delays. Without it trains follow the timetable and are marked stale.                   |
+| `RAIL_DATA_DIR`         | web     | Generated rail files; default `apps/web/public/rail`.                                          |
+| `RAIL_DATA_URL`         | web     | Read rail files from a public URL (GitHub Pages, `rail-data` branch) instead of the directory. |
+| `SNAPSHOT_DIR`          | web     | Local snapshot directory; default `apps/web/public/snapshots`.                                 |
+| `BLOB_READ_WRITE_TOKEN` | web     | Vercel Blob for the 10-minute snapshots once deployed (added by the store).                    |
+| `DATA_BASE_URL`         | web     | Read the statistics files from a public URL instead of `public/data`.                          |
+| `SWISS_NOW_ALLOW`       | web     | Comma-separated source ids to enable despite the licence policy (local only).                  |
 
 ### Statistics data
 

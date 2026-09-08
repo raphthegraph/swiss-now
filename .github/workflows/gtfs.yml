@@ -2,15 +2,16 @@ name: Rail data build (GTFS)
 
 # Mode 2 job (docs/ARCHITECTURE.md §2.2): the Swiss GTFS is published Monday and Thursday around
 # 09:00–10:00 CET and the realtime feed switches to it at 15:00. We build at 16:30 CET so the
-# rail files always match the feed. Output is uploaded as a workflow artifact until Vercel Blob
-# is wired in (FREE_TIER_ARCHITECTURE.md); the local dev setup runs the same two commands.
+# rail files always match the feed. Output is published to the orphan branch `rail-data`, which
+# GitHub Pages serves at https://raphthegraph.github.io/swiss-now/ (the web reads RAIL_DATA_URL);
+# no Blob operations, so the Hobby quota stays for the snapshots. Local dev runs the same two commands.
 on:
   schedule:
     - cron: "30 14 * * 1,4" # 16:30 CEST / 15:30 CET
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -28,10 +29,18 @@ jobs:
         run: pnpm --filter @swiss-now/core build-gtfs -- --out "$GITHUB_WORKSPACE/out/rail" --days 7
       - name: Build route paths on the BAV railway network
         run: pnpm --filter @swiss-now/core build-rail-paths -- --rail "$GITHUB_WORKSPACE/out/rail" --network bav
-      - name: Upload to Vercel Blob (skipped until BLOB_READ_WRITE_TOKEN is configured)
+      - name: Publish to the rail-data branch (served by GitHub Pages)
         env:
-          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
-        run: pnpm --filter @swiss-now/core upload-rail -- --rail "$GITHUB_WORKSPACE/out/rail"
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd "$GITHUB_WORKSPACE/out/rail"
+          touch .nojekyll
+          git init -q -b rail-data
+          git config user.name "swiss-now-data"
+          git config user.email "data@users.noreply.github.com"
+          git add -A
+          git commit -qm "rail data $(date -u +%F) · $(node -e 'console.log(require("./meta.json").feedVersion)')"
+          git push -qf "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" rail-data
       - name: Summary
         run: |
           cat out/rail/meta.json
