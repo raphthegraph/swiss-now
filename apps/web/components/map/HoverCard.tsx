@@ -6,8 +6,17 @@ import type { HydroFeatureProps } from "@/lib/map/hydro-geojson";
 import type { DisruptionFeatureProps } from "@/lib/map/disruptions-geojson";
 import { formatNumber, formatTime } from "@/lib/format";
 
+/** A municipality of a choropleth: properties from the geo spine plus its feature state. */
+export interface ChoroplethHoverProps {
+  name: string;
+  canton: string;
+  value: number | null;
+  turnout?: number | null;
+  choropleth: { label: string; unit: string; source: string };
+}
+
 export interface Hovered {
-  props: StationFeatureProps | HydroFeatureProps | DisruptionFeatureProps;
+  props: StationFeatureProps | HydroFeatureProps | DisruptionFeatureProps | ChoroplethHoverProps;
   lonLat: [number, number];
   point: { x: number; y: number };
 }
@@ -15,6 +24,29 @@ export interface Hovered {
 /** value · time · source — the honesty rule made visible (docs/PRODUCT_VISION.md §5.8). */
 export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness: Freshness }) {
   const { props, point } = hovered;
+  if ("choropleth" in props) {
+    const c = props;
+    return (
+      <div
+        className="hover-card hover-card--vote"
+        style={{ transform: `translate(${point.x + 14}px, ${point.y - 12}px)` }}
+      >
+        <div className="hover-card__name">
+          {c.name} <span className="label">{c.canton}</span>
+        </div>
+        <div className="hover-card__value tnum">
+          {c.value === null ? "—" : `${formatNumber(c.value, 1)} ${c.choropleth.unit}`}
+          <span className="label"> {c.choropleth.label}</span>
+        </div>
+        <div className="hover-card__meta tnum">
+          {c.turnout !== undefined && c.turnout !== null
+            ? `turnout ${formatNumber(c.turnout, 1)} %`
+            : null}
+          {` · ${c.choropleth.source}`}
+        </div>
+      </div>
+    );
+  }
   if ("disruption" in props) {
     const d = props;
     return (

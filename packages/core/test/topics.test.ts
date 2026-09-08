@@ -76,6 +76,8 @@ describe("presence", () => {
     expect(presenceFor("now", "rail")).toBe("quiet");
     expect(presenceFor("now", "seismic")).toBe("quiet");
     expect(presenceFor("now", "politics")).toBe("off");
+    expect(presenceFor("now", "politics", { voteSunday: true })).toBe("quiet");
+    expect(presenceFor("politics", "politics")).toBe("full");
     expect(layersNeeded("water")).toEqual(["hydrology"]);
     expect(layersNeeded("now")).toEqual(
       expect.arrayContaining(["weather", "hydrology", "rail", "seismic"]),

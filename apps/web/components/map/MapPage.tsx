@@ -3,8 +3,21 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Map as MapLibreMap } from "maplibre-gl";
-import type { HydrologyState, RailState, SeismicState, WeatherState } from "@swiss-now/core";
+import type {
+  HydrologyState,
+  PoliticsState,
+  RailState,
+  SeismicState,
+  VoteResult,
+  WeatherState,
+} from "@swiss-now/core";
+import { VoteResult as VoteResultSchema } from "@swiss-now/core/state";
 import { figuresFor, presenceFor, type TopicId } from "@swiss-now/core/topics";
+import { choroplethContribution } from "@/lib/map/contributions/choropleth";
+import { dataUrl } from "@/lib/data-url";
+import { formatDate } from "@/lib/format";
+import { RampLegend } from "../hud/RampLegend";
+import { VoteScrubber } from "../hud/VoteScrubber";
 import { QuakeLayer, type QuakeHover } from "./QuakeLayer";
 import { QuakeHoverCard } from "./QuakeHoverCard";
 import { TrainLayer, type TrainHover } from "./TrainLayer";
@@ -33,7 +46,38 @@ function presenceOf(topic: TopicId): LayerPresence {
     hydrology: presenceFor(topic, "hydrology"),
     rail: presenceFor(topic, "rail"),
     seismic: presenceFor(topic, "seismic"),
+    politics: presenceFor(topic, "politics"),
   };
+}
+
+/** The vote to show: the timeline selection when it is in the index, else the latest Sunday's first. */
+function useVoteResult(
+  id: string | undefined,
+  politics: PoliticsState | undefined,
+): VoteResult | undefined {
+  const [cache] = useState(() => new Map<string, VoteResult>());
+  const [result, setResult] = useState<VoteResult | undefined>(undefined);
+  useEffect(() => {
+    if (!id) return setResult(undefined);
+    const known = politics?.latest.find((v) => v.meta.id === id) ?? cache.get(id);
+    if (known) return setResult(known);
+    let cancelled = false;
+    fetch(dataUrl(`politics/votes/${id}.json`))
+      .then((r) => (r.ok ? r.json() : undefined))
+      .then((j: unknown) => {
+        if (cancelled || !j) return;
+        const parsed = VoteResultSchema.safeParse(j);
+        if (parsed.success) {
+          cache.set(id, parsed.data);
+          setResult(parsed.data);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [id, politics, cache]);
+  return result;
 }
 
 export function MapPage({
@@ -47,7 +91,7 @@ export function MapPage({
   initialRail?: RailState | undefined;
   initialSeismic?: SeismicState | undefined;
 }) {
-  const { view, setTopic, setMode } = useViewState();
+  const { view, setTopic, setMode, setTime } = useViewState();
   const { topic, mode } = view;
   const presence = useMemo(() => presenceOf(topic), [topic]);
   // poll only what is on screen (the masthead clock always needs weather)
@@ -64,6 +108,40 @@ export function MapPage({
     initialSeismic,
     120_000,
     presence.seismic !== "off",
+  );
+  const politics = useLayerState<PoliticsState | undefined>(
+    "/api/state/politics",
+    undefined,
+    3_600_000,
+    presence.politics !== "off",
+  );
+  const voteId =
+    view.t && politics?.index.some((v) => v.id === view.t) ? view.t : politics?.latest[0]?.meta.id;
+  const vote = useVoteResult(voteId, politics);
+  const [choropleth] = useState(() =>
+    choroplethContribution({
+      id: "politics",
+      layer: "politics",
+      topoUrl: "/geo/ch-2026.topo.json",
+      scale: "yesShare",
+      hoverExtras: { choropleth: { label: "yes", unit: "%", source: "Source: BFS" } },
+    }),
+  );
+  const choroState = useMemo(
+    () =>
+      vote
+        ? Object.fromEntries(
+            Object.entries(vote.byMunicipality).map(([bfs, sh]) => [
+              bfs,
+              { value: sh.yesPct, turnout: sh.turnoutPct },
+            ]),
+          )
+        : undefined,
+    [vote],
+  );
+  const contributions = useMemo(
+    () => [{ contribution: choropleth, state: choroState }],
+    [choropleth, choroState],
   );
   const [quakeHover, setQuakeHover] = useState<QuakeHover | null>(null);
   // HAZARDS (quakes only for now) joins the rail when a magnitude ≥ 2.0 event happened in the window
@@ -91,9 +169,15 @@ export function MapPage({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- reset only when the view changes
   }, [radarOn]);
   const figures = useMemo(
-    () => figuresFor(topic, { weather, hydrology, rail, seismic }),
-    [topic, weather, hydrology, rail, seismic],
+    () => figuresFor(topic, { weather, hydrology, rail, seismic, politics, vote }),
+    [topic, weather, hydrology, rail, seismic, politics, vote],
   );
+  const voteStatus =
+    topic === "politics" && vote ? (
+      <span className="label tnum">
+        Vote of {formatDate(vote.meta.date)} · {vote.status} · Source: BFS
+      </span>
+    ) : undefined;
   return (
     <>
       <LiveMap
@@ -104,7 +188,12 @@ export function MapPage({
         muted={topic === "rail" || topic === "hazards"}
         focus={focus}
         radarFrame={radar.frame}
-        onMapReady={setMap}
+        contributions={contributions}
+        onMapReady={(m) => {
+          setMap(m);
+          // QA hook: the software-WebGL harness reads sources and feature state through it
+          (window as unknown as { __swissNowMap?: MapLibreMap }).__swissNowMap = m;
+        }}
       />
       {presence.weather !== "off" ? <WindParticles map={map} weather={weather} /> : null}
       {presence.rail !== "off" ? (
@@ -137,6 +226,7 @@ export function MapPage({
       <TopicRail view={view} onSelect={setTopic} hidden={quakesNotable ? [] : ["hazards"]} />
       <ModeSwitcher view={view} onChange={setMode} />
       <Masthead
+        status={voteStatus}
         clock={{ observedAt: weather.observedAt, freshness: weather.freshness }}
         home={
           <HomePlace
@@ -157,9 +247,14 @@ export function MapPage({
         legend={
           topic === "rail" ? (
             <RailLegend loaded={railProgress.loaded} needed={railProgress.needed} />
+          ) : topic === "politics" ? (
+            <RampLegend scale="yesShare" label="Yes share" unit=" %" />
           ) : null
         }
       >
+        {topic === "politics" && mode === "timeline" && politics && voteId ? (
+          <VoteScrubber votes={politics.index} selectedId={voteId} onChange={setTime} />
+        ) : null}
         {radarOn ? (
           <RadarScrubber
             frames={radar.frames}

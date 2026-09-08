@@ -16,6 +16,8 @@ export interface MapContribution<S = unknown> {
   setPresence(map: MapLibreMap, presence: Presence): void;
   /** Layers whose features raise the shared hover card. */
   hoverLayers?: string[];
+  /** Static fields merged into hovered features of those layers (what the values mean). */
+  hoverExtras?: Record<string, unknown>;
 }
 
 export function show(map: MapLibreMap, id: string, on: boolean): void {

@@ -12,10 +12,18 @@ export function ownerOf(layer: LayerId): TopicId | undefined {
   );
 }
 
-export function presenceFor(topic: TopicId, layer: LayerId): Presence {
+export interface PresenceContext {
+  /** today is a scheduled federal vote Sunday (politics joins NOW) */
+  voteSunday?: boolean;
+}
+
+export function presenceFor(topic: TopicId, layer: LayerId, ctx: PresenceContext = {}): Presence {
   if (topic !== "now") return TOPICS[topic].layerIds.includes(layer) ? "full" : "off";
   const owner = ownerOf(layer);
-  return owner && TOPICS[owner].now ? "quiet" : "off";
+  const when = owner && TOPICS[owner].now;
+  if (!when) return "off";
+  if (when === "vote-sunday") return ctx.voteSunday ? "quiet" : "off";
+  return "quiet";
 }
 
 /** Layers a topic needs loaded at all (its own plus, in NOW, every quiet contributor). */

@@ -114,15 +114,22 @@ export function LiveMap({
   const installed = useRef(new Set<string>());
   const lastState = useRef(new Map<string, unknown>());
   const hoverBound = useRef(new Set<string>());
+  /** static props merged into hovered features per hover layer (e.g. what a choropleth shows) */
+  const hoverExtras = useRef(new Map<string, Record<string, unknown>>());
   const hoverHandlers = useRef<{
     onMove: (e: MapMouseEvent & { features?: MapGeoJSONFeature[] }) => void;
     onLeave: () => void;
   } | null>(null);
 
-  const bindHover = (map: MapLibreMap, layers: string[] | undefined) => {
+  const bindHover = (
+    map: MapLibreMap,
+    layers: string[] | undefined,
+    extras?: Record<string, unknown>,
+  ) => {
     const h = hoverHandlers.current;
     if (!h || !layers) return;
     for (const id of layers) {
+      if (extras) hoverExtras.current.set(id, extras);
       if (hoverBound.current.has(id)) continue;
       hoverBound.current.add(id);
       map.on("mousemove", id, h.onMove);
@@ -133,7 +140,7 @@ export function LiveMap({
     if (installed.current.has(c.id)) return;
     installed.current.add(c.id);
     c.install(map, { beforeId: firstSymbolLayerId(map) });
-    bindHover(map, c.hoverLayers);
+    bindHover(map, c.hoverLayers, c.hoverExtras);
   };
 
   // create the map once
@@ -210,7 +217,9 @@ export function LiveMap({
         hoveredSource = f.source;
         map.setFeatureState({ source: f.source, id: f.id as string }, { hover: true });
         map.getCanvas().style.cursor = "crosshair";
-        const p = f.properties as StationFeatureProps | HydroFeatureProps | DisruptionFeatureProps;
+        // feature state carries choropleth values; the contribution may attach card metadata
+        const extra = hoverExtras.current.get(f.layer.id);
+        const p = { ...f.properties, ...(f.state ?? {}), ...(extra ?? {}) } as Hovered["props"];
         const coords = (
           f.geometry.type === "Point"
             ? (f.geometry as Point).coordinates

@@ -155,7 +155,7 @@ export const TOPICS: Record<TopicId, TopicSpec> = {
     modes: ["map", "timeline"],
     freshnessKind: "vintage",
     now: "vote-sunday",
-    built: false,
+    built: true,
   },
   population: {
     id: "population",

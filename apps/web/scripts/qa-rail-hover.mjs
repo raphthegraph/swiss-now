@@ -96,6 +96,64 @@ const scrubTimeline = await page.locator(".scrubber").count();
 const modeUrl = new URL(page.url()).searchParams.get("mode") === "timeline";
 const timelineOk = scrubMap === 0 && scrubTimeline === 1 && modeUrl;
 console.log("weather scrubber map/timeline:", scrubMap, scrubTimeline, "| url mode:", modeUrl, "| ok:", timelineOk);
+// POLITICS: choropleth from the geo spine with feature-state values, hover card, vote timeline
+await page.getByRole("button", { name: "Politics" }).click();
+await page.locator(".legend--ramp").waitFor({ timeout: 60_000 });
+await page.waitForFunction(
+  () => {
+    const m = window.__swissNowMap;
+    return (
+      m &&
+      m.getSource("politics-municipalities") &&
+      m.querySourceFeatures("politics-municipalities").length > 100
+    );
+  },
+  null,
+  { timeout: 90_000 },
+);
+await page.waitForTimeout(1500);
+const filled = await page.evaluate(() => {
+  const m = window.__swissNowMap;
+  const seen = new Set();
+  let n = 0;
+  for (const f of m.querySourceFeatures("politics-municipalities")) {
+    if (seen.has(f.id)) continue;
+    seen.add(f.id);
+    const st = m.getFeatureState({ source: "politics-municipalities", id: f.id });
+    if (st && typeof st.value === "number") n++;
+  }
+  return { features: seen.size, filled: n };
+});
+const stripPolitics = await page.locator(".strip").innerText();
+const bern = await page.evaluate(() => {
+  const p = window.__swissNowMap.project([7.44, 46.95]);
+  return { x: p.x, y: p.y };
+});
+await page.mouse.move(bern.x, bern.y);
+await page.waitForTimeout(500);
+const voteCard = await page.locator(".hover-card--vote").count();
+const cardText = voteCard ? await page.locator(".hover-card--vote").innerText() : "";
+await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Timeline$/i }).click();
+await page.locator(".scrubber--votes").waitFor({ timeout: 20_000 });
+await page.locator(".scrubber--votes .scrubber__play").first().click();
+await page.waitForTimeout(800);
+const tParam = new URL(page.url()).searchParams.get("t");
+const politicsOk = filled.filled > 100 && /yes/i.test(stripPolitics) && voteCard === 1 && !!tParam;
+console.log(
+  "politics features/filled:",
+  filled.features,
+  filled.filled,
+  "| strip:",
+  stripPolitics.replace(/\n/g, " | ").slice(0, 90),
+  "| hover:",
+  cardText.replace(/\n/g, " | ").slice(0, 80),
+  "| timeline t:",
+  tParam,
+  "| ok:",
+  politicsOk,
+);
+await page.screenshot({ path: "/tmp/sn/qa-politics.png" });
+
 // deep link
 await page.goto(`${base}/?topic=water`, { waitUntil: "domcontentloaded", timeout: 90_000 });
 await page.getByRole("button", { name: "Water" }).waitFor({ timeout: 60_000 });
@@ -139,7 +197,15 @@ if ((await quakesButton.count()) > 0) {
 } else console.log("QUAKES not in rail (no M≥2 event in window)");
 await browser.close();
 process.exit(
-  shown && railFigures && quakesOk && todayOk && playerOk && railUrl && timelineOk && waterCurrent
+  shown &&
+  railFigures &&
+  quakesOk &&
+  todayOk &&
+  playerOk &&
+  railUrl &&
+  timelineOk &&
+  waterCurrent &&
+  politicsOk
     ? 0
     : 1,
 );

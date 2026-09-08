@@ -42,6 +42,8 @@ export function useLayerState<T>(url: string, initial: T, intervalMs: number, en
       if (document.visibilityState === "visible" && Date.now() - lastFetch > intervalMs)
         void refetch();
     };
+    // no server-rendered seed (a topic loaded on demand): fetch now, then poll
+    if (state === undefined) void refetch();
     schedule();
     document.addEventListener("visibilitychange", onVisible);
     return () => {
@@ -49,6 +51,7 @@ export function useLayerState<T>(url: string, initial: T, intervalMs: number, en
       if (timer) clearTimeout(timer);
       document.removeEventListener("visibilitychange", onVisible);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- `state` only decides the initial fetch
   }, [url, intervalMs, enabled]);
 
   return state;

@@ -4,6 +4,7 @@
  * renderer's job; `text` carries values that are not numbers (e.g. `M2.5`).
  */
 import type { HydrologyState, RailState, SeismicState, WeatherState } from "../state/layers";
+import type { PoliticsState, VoteResult } from "../state/politics";
 import { currentDelay } from "../data-sources/transit/rail-state";
 import type { TopicId } from "./spec";
 
@@ -24,6 +25,9 @@ export interface TopicStates {
   hydrology?: HydrologyState | undefined;
   rail?: RailState | undefined;
   seismic?: SeismicState | undefined;
+  politics?: PoliticsState | undefined;
+  /** the vote currently shown (latest or the timeline selection) */
+  vote?: VoteResult | undefined;
 }
 
 const fig = (
@@ -194,6 +198,56 @@ export function quakeFigures(q: SeismicState | undefined, nowMs: number): Figure
   return out;
 }
 
+export function politicsFigures(
+  p: PoliticsState | undefined,
+  vote: VoteResult | undefined,
+  nowMs: number,
+): Figure[] {
+  const out: Figure[] = [];
+  if (vote) {
+    const title = vote.meta.title.en ?? vote.meta.title.de;
+    if (vote.national.yesPct !== null)
+      out.push(
+        fig("yes", "Yes", vote.national.yesPct, 1, {
+          unit: "%",
+          where:
+            vote.meta.national?.accepted === undefined
+              ? title
+              : `${vote.meta.national.accepted ? "accepted" : "rejected"} · ${title}`,
+        }),
+      );
+    if (vote.national.turnoutPct !== null)
+      out.push(
+        fig("turnout", "Turnout", vote.national.turnoutPct, 1, {
+          unit: "%",
+          where: `${Object.keys(vote.byMunicipality).length} municipalities`,
+        }),
+      );
+    const n = vote.meta.national;
+    if (n?.cantonsYes !== undefined && n.cantonsNo !== undefined)
+      out.push(
+        fig("cantons", "Cantons", n.cantonsYes, 1, {
+          text: `${n.cantonsYes} : ${n.cantonsNo}`,
+          where: "yes : no (half cantons count ½)",
+        }),
+      );
+  }
+  const next = p?.upcoming[0];
+  if (next) {
+    const days = Math.max(
+      0,
+      Math.round((new Date(`${next.date}T12:00:00+02:00`).getTime() - nowMs) / 86_400_000),
+    );
+    out.push(
+      fig("next-vote", "Next vote Sunday", days, 0, {
+        unit: days === 1 ? "day" : "days",
+        where: `${next.date}${next.proposals ? ` · ${next.proposals} proposals` : ""}`,
+      }),
+    );
+  }
+  return out;
+}
+
 /** Figures for a topic; NOW composes the leads of its contributors. */
 export function figuresFor(topic: TopicId, s: TopicStates, nowMs = Date.now()): Figure[] {
   switch (topic) {
@@ -205,6 +259,8 @@ export function figuresFor(topic: TopicId, s: TopicStates, nowMs = Date.now()): 
       return railFigures(s.rail, nowMs);
     case "hazards":
       return quakeFigures(s.seismic, nowMs);
+    case "politics":
+      return politicsFigures(s.politics, s.vote, nowMs);
     case "now":
       return [
         ...weatherFigures(s.weather).slice(0, 2),

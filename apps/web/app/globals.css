@@ -434,6 +434,29 @@ table.sources th {
   color: var(--sn-ground-mist);
   cursor: default;
 }
+/* ---- choropleth legend and vote hover ---- */
+.legend--ramp {
+  align-items: center;
+}
+.ramp {
+  width: 240px;
+}
+.ramp__bar {
+  height: 8px;
+}
+.ramp__ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--sn-type-caption-size);
+  color: var(--sn-ground-graphite);
+  margin-top: 2px;
+}
+.hover-card--vote .hover-card__value .label {
+  font-size: var(--sn-type-label-size);
+}
+.scrubber--votes .scrubber__time {
+  white-space: normal;
+}
 .rail__item {
   appearance: none;
   background: transparent;
