@@ -2,7 +2,7 @@
 
 A living, near-real-time map of Switzerland. Official Swiss open data is normalized into one state model that drives two renderers: an interactive web map and a Remotion video, "Switzerland Today".
 
-Status: runs locally with fifteen topics across four groups, the daily story and the video. Deployment to Vercel is the next step. CI: typecheck, tests, formatting on every push.
+Status: deployed on Vercel (free tier) at https://swiss-now.vercel.app with fifteen topics across four groups, the daily story and the video. CI: typecheck, tests, formatting on every push; every push to `main` deploys.
 
 ## What it does
 
@@ -40,7 +40,7 @@ Swiss open data → adapters (packages/core) → SwissNowState → tokens + moti
 - **Statistics.** SWITZERLAND topics are static JSON built by `build-data` (BFS PxWeb and SDMX, swissvotes, LINDAS) and joined to the map through the geo spine: municipality polygons from swissBOUNDARIES3D and the BFS register, keyed by BFS number (`packages/geo-build`).
 - **Cost.** Free tiers only: Vercel Hobby, Vercel Blob, GitHub Actions, Remotion free licence. See `docs/FREE_TIER_ARCHITECTURE.md`.
 
-Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/MOTION_SYSTEM.md`](docs/MOTION_SYSTEM.md), [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md).
+Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md), [`docs/MOTION_SYSTEM.md`](docs/MOTION_SYSTEM.md), [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md).
 
 ## Repository layout
 
@@ -53,8 +53,8 @@ packages/
   motion/         @swiss-now/motion design tokens, scales, deterministic animation math, SVG primitives
   story-video/    @swiss-now/story-video  the "Switzerland Today" composition (the only package that imports Remotion)
   geo-build/      build-time geo scripts, pure JS: forked basemap style, boundaries + register (geo spine)
-docs/             product vision, data-source matrix, architecture, free-tier plan, motion system, MVP plan, open questions
-.github/          ci.yml (checks), gtfs.yml (rail data build), data.yml (weekly statistics build)
+docs/             product vision, data-source matrix, architecture, free-tier plan, deployment, motion system, IA, open questions
+.github/          ci.yml (checks), gtfs.yml (rail data build), data.yml (weekly statistics build), snapshot.yml (10-minute snapshot ping)
 ```
 
 Dependency rules: `core` and `motion` never import React DOM, MapLibre, Motion or Remotion. `apps/web` and `apps/video` never import each other; shared code lives in packages. Workspace packages are consumed from `src/` without a build step.
@@ -80,13 +80,15 @@ pnpm --filter @swiss-now/core build-rail-paths -- --rail apps/web/public/rail   
 
 Environment variables:
 
-| Variable                | Used by              | Purpose                                                                      |
-| ----------------------- | -------------------- | ---------------------------------------------------------------------------- |
-| `OTD_API_KEY`           | web                  | GTFS-RT delays. Without it trains follow the timetable and are marked stale. |
-| `RAIL_DATA_DIR`         | web                  | Generated rail files; default `apps/web/public/rail`.                        |
-| `RAIL_DATA_URL`         | web                  | Read rail files from a public URL (Vercel Blob) instead of the directory.    |
-| `SNAPSHOT_DIR`          | web                  | Local snapshot directory; default `apps/web/public/snapshots`.               |
-| `BLOB_READ_WRITE_TOKEN` | web, `gtfs.yml`, CLI | Vercel Blob for snapshots and rail files once deployed.                      |
+| Variable                | Used by              | Purpose                                                                       |
+| ----------------------- | -------------------- | ----------------------------------------------------------------------------- |
+| `OTD_API_KEY`           | web                  | GTFS-RT delays. Without it trains follow the timetable and are marked stale.  |
+| `RAIL_DATA_DIR`         | web                  | Generated rail files; default `apps/web/public/rail`.                         |
+| `RAIL_DATA_URL`         | web                  | Read rail files from a public URL (Vercel Blob) instead of the directory.     |
+| `SNAPSHOT_DIR`          | web                  | Local snapshot directory; default `apps/web/public/snapshots`.                |
+| `BLOB_READ_WRITE_TOKEN` | web, `gtfs.yml`, CLI | Vercel Blob for snapshots and rail files once deployed.                       |
+| `DATA_BASE_URL`         | web                  | Read the statistics files from a public URL instead of `public/data`.         |
+| `SWISS_NOW_ALLOW`       | web                  | Comma-separated source ids to enable despite the licence policy (local only). |
 
 ### Statistics data
 
@@ -132,7 +134,7 @@ Interpolated train positions are estimates from the timetable and published dela
 | 3     | Quakes, snapshots, story builder, `/today`                                                                                                                                         | done    |
 | 4     | "Switzerland Today" composition, local rendering, Player on `/today`                                                                                                               | done    |
 | E1–E6 | Expansion: topics × modes IA, geo spine, Politics · Energy + Events · Air + Hazards · Statistics + CHARTS · TIMELINE + COMPARE · story/video across the new topics, gated Aviation | done    |
-| —     | Deployment: Vercel Hobby, Blob store, scheduled snapshot ping                                                                                                                      | next    |
+| —     | Deployment: Vercel Hobby live; Blob store, rail token and ping variable per `docs/DEPLOYMENT.md`                                                                                   | live    |
 | E7    | Polish, mobile, languages, docs                                                                                                                                                    | planned |
 
 ## Licence
