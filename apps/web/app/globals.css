@@ -335,7 +335,8 @@ table.sources th {
     top: var(--sn-hud-margin-compact);
   }
   .hud--bottom {
-    bottom: var(--sn-hud-margin-compact);
+    /* clear the map attribution line at the very bottom */
+    bottom: calc(var(--sn-hud-margin-compact) + 22px);
   }
   .hud--bottom {
     gap: var(--sn-space-2);
