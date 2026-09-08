@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
         source: "/map/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=3600, s-maxage=86400" }],
       },
+      {
+        // rail files are immutable per GTFS build (rebuilt Mon/Thu); paths are fetched per train
+        source: "/rail/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=3600, s-maxage=86400" }],
+      },
     ];
   },
 };
