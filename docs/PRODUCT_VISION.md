@@ -60,69 +60,95 @@ Languages: the data model carries DE/FR/IT/EN names and labels from day one. MVP
 6. **Respect the sources.** Server-side ingestion only, cadence-matched polling, visible attribution for every provider, no redistribution where terms forbid it.
 7. **Free until it matters.** The MVP runs entirely on free tiers and open data; paid infrastructure is introduced only when traffic or commercial use forces it (see FREE_TIER_ARCHITECTURE).
 
-## 5. Proposed experience
+## 5. The experience as built
+
+Rewritten 2026-09-08 after the expansion (docs/IA.md). Sections 5.1–5.8 describe what ships; the
+original proposal is in the git history.
 
 ### 5.1 The stage
 
-A full-bleed MapLibre map on swisstopo's vector base map, restyled to a quiet monochrome ground with vector hillshade. Switzerland is the frame; neighbouring countries are dimmed. The camera rests on the whole country; it glides, never jumps.
+A full-bleed MapLibre map on swisstopo's vector basemap, restyled to a quiet monochrome ground with
+hillshade. Switzerland is the frame, the neighbours are dimmed, the camera rests on the whole
+country and glides only when a place is chosen. Data is drawn in the house palette on top of it:
+fields and rasters behind, polygons in the middle, points, arrows and typographic markers in front.
 
-The environmental state is derived from sun altitude over Bern: dawn, day, dusk and night grounds. At night the map darkens and lights of data (stations, trains) become the primary luminance.
+### 5.2 Topics and modes
 
-### 5.2 Layer rail
-
-A vertical typographic rail (no icon-only buttons):
+Two independent choices, both in the URL (`?topic=…&mode=…&t=…&place=…`):
 
 ```
-NOW
-WEATHER
-TRAFFIC        (Phase 5)
-RAIL
-WATER
-AIR            (Phase 5, city-scale)
-ENERGY         (Phase 5, daily)
-QUAKES         (appears only when an event occurred in the last 30 days)
+NOW                                       the composite (home)
+LIVE         WEATHER · WATER · AIR · HAZARDS · EVENTS
+SYSTEMS      RAIL · ENERGY · (AVIATION, gated)
+SWITZERLAND  POLITICS · POPULATION · HOUSING · ECONOMY · TOURISM · (TRADE, planned)
+
+MAP · CHARTS · TIMELINE · COMPARE          top right of the canvas
 ```
 
-Selecting a layer _reduces_ the composite to that system and unlocks its detail: legend, national ranking ("warmest: Magadino 27.1°, coldest: Jungfraujoch −3.4°"), hover on stations/segments, layer-specific timeline.
+The rail is typographic, grouped by the time nature of the data (seconds to hours, networks and
+flows, months to years). A topic that has nothing to show right now (no quake above M 2, no
+avalanche bulletin in summer) is still listed but rendered quiet. The mode switcher never changes
+shape: a mode a topic cannot offer is dimmed, not removed. Switching topic keeps the mode when the
+new topic supports it. Keyboard: `[` `]` topics, `1`–`4` modes, `Esc` home, `/` place search.
 
-### 5.3 NOW — the default composite
+### 5.3 NOW, the composite
 
-Curated, not everything at once. Visible by default:
+Curated, not everything at once. Each topic declares a quiet presence and the composite shows the
+union: temperature field and radar where it rains, sparse wind, trains as faint marks with delay
+pulses, flood danger from level 2, quake rings for 24 hours, energy border arrows, forest-fire
+regions from danger level 4 at low opacity, high-confidence events as small typographic marks,
+and on a vote Sunday the country's yes share. Nothing else: no legends, no instruments, no
+per-station values. The masthead carries the clock and freshness, the figure strip four national
+figures (warmest, coldest, Rhine at Basel, net export, or the local equivalents once a home place
+is set).
 
-- Temperature colour field, subtle, behind everything.
-- Live precipitation radar, only where it is raining (transparent elsewhere).
-- Wind particles, sparse, speed-scaled; density increases with wind.
-- Rail delay pulses only where delay exceeds a threshold; trains as faint moving marks; promoted in commute hours.
-- Flood danger only for stations at level ≥ 2.
-- Earthquake ring if an event occurred in the last 24 hours.
-- **Summary strip** (top or bottom edge): "Switzerland · 21:07 · 14.2° in Zürich · raining over 18 % of the country · 91 % of trains on time · Rhine at Basel 1 010 m³/s, normal · last quake M1.5 Bourg-Saint-Pierre, 11:21"
+### 5.4 Topic views
 
-Hidden by default: station labels, legends, per-station values, traffic counters, energy flows.
+- **LIVE.** Weather (station values, wind particles, the 5-minute radar with its scrubber,
+  extremes), Water (discharge-scaled rivers, lake levels, danger levels), Air (a short-term index on
+  the reference stations, citizen sensors hollow, pollen), Hazards (forest fire and avalanche
+  regions, snow stations, radar hail, quakes), Events (police communiqués and SRF headlines
+  geocoded to municipalities with a confidence, headline and link only).
+- **SYSTEMS.** Rail (interpolated trains, honestly labelled, delays, disruptions, on-time index),
+  Energy (four border arrows whose width and dash speed follow the megawatts, grid frequency,
+  production mix and price in CHARTS). Aviation is built but hidden until a commercially clean feed
+  exists.
+- **SWITZERLAND.** Politics (yes share per municipality for the latest federal votes, the calendar
+  of coming vote Sundays), Population, Housing, Economy and Tourism as quantile-scaled choropleths on
+  the municipality and canton geometry, each with CHARTS (rankings and national courses).
 
-### 5.4 Layer views (MVP)
+### 5.5 Modes
 
-- **WEATHER** — temperature field with station values on hover; wind particles at full density; precipitation radar with the last 3 hours scrubbable; extremes ranking; snow depth where present.
-- **WATER** — rivers drawn with animated flow whose speed encodes discharge relative to normal; lake levels; water temperature; flood danger stations pulsing by level; national flood warning polygons when active.
-- **RAIL** — the rail network drawn; trains moving along their routes **interpolated** from schedule and live delay (rendered as soft marks, distinct from any "reported position" style); delay pulses sized by minutes late; disruptions as text cards anchored to lines; national on-time index with baseline from yesterday.
-- **QUAKES** — expanding rings sized by magnitude, fading over hours; list of the last 30 days.
+- **MAP** shows geography at the selected time.
+- **CHARTS** shows rankings and series in the house style (Observable Plot, paper and ink,
+  hairlines), never a dashboard grid.
+- **TIMELINE** is MAP with a time cursor: 10-minute snapshots for the live topics (48 hours), radar
+  frames for weather, vote dates and vintages for the statistics. It returned after being dropped
+  from the MVP because the expanded data gives it something to scrub; it stays a mode, never a
+  permanent instrument on the map.
+- **COMPARE** puts two places side by side with the same figures (value, rank, change for a
+  statistic; yes share against the country for a vote; nearest stations for weather and water).
 
-### 5.5 Place focus
+### 5.6 Place focus
 
-Click a canton or city (or set your home place): the camera glides in, the summary strip becomes local, rankings recompute for the region, and the layer rail's detail follows. Stored in `localStorage`; no account.
+A home place (municipality or canton, stored locally, no account) makes the figure strip local and
+sets the camera. The place search reads the municipality register and falls back to the swisstopo
+gazetteer. In COMPARE the second place comes from the same search.
 
-### 5.6 Timeline
+### 5.7 Today, the story
 
-`NOW ← 1h ← 3h ← 6h ← 12h ← TODAY`, a GSAP-driven scrubber. Backed by 10-minute snapshots. Scrubbing animates the field (temperature warms, rain moves, rivers rise) rather than swapping numbers. Only layers with snapshot history expose it.
+`/today` assembles chapters from the day's snapshots: weather summary, extremes, rainfall, delays,
+rivers, quakes, energy flows, hazards, events, air and, after a vote Sunday, the vote. Scrolling
+moves the map beneath the text. The same story renders as the vertical "Switzerland Today" video in
+Remotion with the chapter markers drawn on a fixed map plate, and plays on the page.
 
-> Dropped from the UI on 2026-09-08: built in Phase 3, it crowded the map without earning its place (with a day of 10-minute snapshots there is little to scrub). The snapshots remain as the Today story's input; the timeline may return as a `/today` feature rather than a map instrument.
+### 5.8 Micro-interactions and honesty
 
-### 5.7 Today — the story mode
-
-A web-native, scroll-driven sequence of chapters assembled automatically from ranked anomalies and superlatives: weather summary, hottest and coldest place, biggest rainfall, worst delay, unusual river or flood condition, earthquake if any, one statistic of the day. Each chapter moves the map camera and highlights the relevant layer. The same `StorySpec` drives the Remotion composition, so the video is the story rendered on a clock instead of a scroll.
-
-### 5.8 Micro-interactions
-
-Hover reveals value, time and source in a small typographic card. Nothing pops in; everything fades or slides on a shared timing scale. Freshness is visible: aging values desaturate, stale layers dim with a "last update 14:20" tag, outages show a calm notice, never a red error.
+Hover reveals value, time and source in a small typographic card. Nothing pops in; everything fades
+or slides on a shared timing scale, and the reduced-motion preference stops the ambient motion.
+Freshness is visible: aging values desaturate, stale layers dim with a "last update" tag, outages
+show a calm notice. Interpolated positions are labelled as such. Every source is named in the strip
+and the credits, and a source that cannot be used commercially is not shown at all.
 
 ## 6. What it must not be
 
