@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Inter, Montserrat } from "next/font/google";
+import { Inter } from "next/font/google";
 import { cssVariablesBlock } from "@swiss-now/motion/tokens";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
@@ -12,13 +12,6 @@ const inter = Inter({
   display: "swap",
   variable: "--sn-font-loaded",
 });
-// the wordmark only: SWISS in bold, NOW in light (docs/DESIGN.md)
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["300", "700"],
-  display: "swap",
-  variable: "--sn-font-brand-loaded",
-});
 
 export const metadata: Metadata = {
   title: "Swiss Now",
@@ -26,13 +19,14 @@ export const metadata: Metadata = {
 };
 
 // Design tokens as CSS custom properties, generated once at build/render time from @swiss-now/motion.
-const tokenCss = cssVariablesBlock(":root")
-  .replace("--sn-font-sans:", "--sn-font-sans: var(--sn-font-loaded), ")
-  .replace("--sn-font-brand:", "--sn-font-brand: var(--sn-font-brand-loaded), ");
+const tokenCss = cssVariablesBlock(":root").replace(
+  "--sn-font-sans:",
+  "--sn-font-sans: var(--sn-font-loaded), ",
+);
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
+    <html lang="en" className={inter.variable}>
       <head>
         <style dangerouslySetInnerHTML={{ __html: tokenCss }} />
       </head>

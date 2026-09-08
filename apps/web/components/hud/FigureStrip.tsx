@@ -77,7 +77,16 @@ export function FigureStrip({ topic, figures }: FigureStripProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: duration.layerSwitch / 1000, ease: EASE, delay: 0.08 }}
     >
-      <div className="strip">
+      <div className="strip" aria-busy={figures.length === 0}>
+        {figures.length === 0
+          ? [0, 1, 2, 3].map((i) => (
+              <div className="metric metric--hud metric--skeleton" key={`s${i}`} aria-hidden="true">
+                <div className="skeleton skeleton--label" />
+                <div className="skeleton skeleton--value" />
+                <div className="skeleton skeleton--where" />
+              </div>
+            ))
+          : null}
         <AnimatePresence mode="popLayout" initial={false}>
           {figures.map((f) => (
             <motion.div

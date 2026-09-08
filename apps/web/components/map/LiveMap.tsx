@@ -73,6 +73,8 @@ export interface LiveMapProps {
   muted?: boolean | undefined;
   /** Camera target; changing it glides the camera with the house easing. `null` = whole country. */
   focus?: { lonLat: [number, number]; zoom: number; key: string } | null | undefined;
+  /** Whenever this changes (e.g. the topic), the camera returns to the whole country. */
+  fitKey?: string | undefined;
   /** Radar frame to show; defaults to the newest in `weather.fields`. */
   radarFrame?: Field | undefined;
   /** Additional topic contributions (installed once, updated when their state changes). */
@@ -95,6 +97,7 @@ export function LiveMap({
   presence,
   muted,
   focus,
+  fitKey,
   radarFrame,
   contributions,
   onFrame,
@@ -335,6 +338,23 @@ export function LiveMap({
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps -- the key is the change trigger
   }, [focus?.key, ready]);
+
+  // a new topic starts from the whole country
+  const firstFit = useRef(true);
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready || fitKey === undefined) return;
+    if (firstFit.current) {
+      firstFit.current = false;
+      return;
+    }
+    map.fitBounds(SWITZERLAND_BBOX as [number, number, number, number], {
+      padding: FIT_PADDING,
+      duration: duration.cameraGlide,
+      easing: easeHouse,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- the key is the change trigger
+  }, [fitKey, ready]);
 
   // crossfade to the requested radar frame
   useEffect(() => {

@@ -54,10 +54,12 @@ export function WindParticles({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gridRef = useRef<WindGrid | null>(null);
+  const samplesRef = useRef<WindSample[]>([]);
 
   // rebuild the field whenever observations change
   useEffect(() => {
     const samples = windSamplesFromState(weather);
+    samplesRef.current = samples;
     gridRef.current = samples.length >= 3 ? buildWindGrid(samples, SWITZERLAND_BBOX, 64, 40) : null;
   }, [weather]);
 
@@ -120,10 +122,10 @@ export function WindParticles({
         timeScale: 700 * Math.pow(2, 7 - map.getZoom()),
       });
 
-      ctx.lineWidth = full ? 1.5 : 1.1;
+      ctx.lineWidth = full ? 1.8 : 1.1;
       ctx.lineCap = "round";
       ctx.strokeStyle = full ? ground.ink : layerAccent.wind;
-      ctx.globalAlpha = full ? 0.7 : 0.55;
+      ctx.globalAlpha = full ? 0.75 : 0.55;
       ctx.beginPath();
       for (let i = 0; i < active; i += 3) {
         if (particles[i + 2]! === 0) continue; // just respawned: no segment
@@ -135,6 +137,43 @@ export function WindParticles({
       }
       ctx.stroke();
       ctx.globalAlpha = 1;
+
+      // full emphasis: an arrow per station, length by speed, creeping forward so the wind reads as motion
+      if (full) {
+        const zoom = map.getZoom();
+        const scale = Math.max(0.8, Math.min(1.8, 0.6 + (zoom - 6) * 0.35));
+        const creep = ((now / 1500) % 1) * 6;
+        ctx.lineWidth = 1.6;
+        ctx.lineJoin = "round";
+        ctx.strokeStyle = ground.ink;
+        ctx.fillStyle = ground.ink;
+        for (const s of samplesRef.current) {
+          if (s.speedKmh < 3) continue;
+          const p = map.project(s.lonLat);
+          if (p.x < 0 || p.y < 0 || p.x > w || p.y > h) continue;
+          const len = Math.min(34, 10 + s.speedKmh * 0.55) * scale;
+          const to = ((s.directionDeg + 180) * Math.PI) / 180; // meteorological FROM → TO
+          const dx = Math.sin(to),
+            dy = -Math.cos(to);
+          const x0 = p.x - (dx * len) / 2 + dx * creep,
+            y0 = p.y - (dy * len) / 2 + dy * creep;
+          const x1 = x0 + dx * len,
+            y1 = y0 + dy * len;
+          ctx.globalAlpha = Math.min(0.9, 0.45 + s.speedKmh / 60);
+          ctx.beginPath();
+          ctx.moveTo(x0, y0);
+          ctx.lineTo(x1, y1);
+          ctx.stroke();
+          const head = 4 * scale;
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x1 - dx * head * 1.8 - dy * head, y1 - dy * head * 1.8 + dx * head);
+          ctx.lineTo(x1 - dx * head * 1.8 + dy * head, y1 - dy * head * 1.8 - dx * head);
+          ctx.closePath();
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
     };
 
     resize();

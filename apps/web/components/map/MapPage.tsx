@@ -25,7 +25,10 @@ import { formatAgo, formatTime } from "@/lib/format";
 import { useT } from "@/lib/i18n/lang";
 import { FL } from "@swiss-now/core/i18n";
 import { indicatorPlaceFigures, votePlaceFigures, type Figure } from "@swiss-now/core/topics";
-import { CompareView } from "../views/CompareView";
+import dynamic from "next/dynamic";
+const CompareView = dynamic(() => import("../views/CompareView").then((m) => m.CompareView), {
+  ssr: false,
+});
 import type { PlacePick } from "../hud/PlaceSearch";
 import { localSummary } from "@/lib/local-summary";
 import { Mode } from "@swiss-now/core/topics";
@@ -47,7 +50,9 @@ import { VoteMenu } from "../hud/VoteMenu";
 import { FlowLayer } from "./FlowLayer";
 import { AircraftLayer } from "./AircraftLayer";
 import { EventMarkers } from "./EventMarkers";
-import { ChartsView } from "../views/ChartsView";
+const ChartsView = dynamic(() => import("../views/ChartsView").then((m) => m.ChartsView), {
+  ssr: false,
+});
 import { QuakeLayer, type QuakeHover } from "./QuakeLayer";
 import { QuakeHoverCard } from "./QuakeHoverCard";
 import { TrainLayer, type TrainHover } from "./TrainLayer";
@@ -171,7 +176,13 @@ export function MapPage({
     600_000,
     presence.hydrology !== "off",
   );
-  const rail = useLayerState("/api/state/rail", initialRail, 60_000, presence.rail !== "off");
+  // the rail state is the heaviest payload (≈ 320 KB gzipped): every minute when RAIL is selected, every two when trains only accompany NOW
+  const rail = useLayerState(
+    "/api/state/rail",
+    initialRail,
+    presence.rail === "full" ? 60_000 : 120_000,
+    presence.rail !== "off",
+  );
   const seismic = useLayerState(
     "/api/state/seismic",
     initialSeismic,
@@ -623,6 +634,7 @@ export function MapPage({
             compareMode
           }
           focus={focus}
+          fitKey={topic}
           radarFrame={radar.frame}
           contributions={contributions}
           onMapReady={(m) => {

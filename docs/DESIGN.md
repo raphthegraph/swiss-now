@@ -85,8 +85,25 @@ a fifth of the screen. A tap opens the card a hover would; a tap on open water c
 - **Rain** drifts: outside the weather timeline the map cycles through the radar frames of the last
   40 minutes (650 ms per frame, a pause on the newest), so the rain field is never a still image.
 - **Wind** particles are quiet on NOW and full on WEATHER and AIR (more particles, longer and darker
-  trails); AIR shows the wind because it carries the pollutants.
+  trails); on WEATHER and AIR every station also carries an arrow whose length follows the speed and
+  which creeps forward in the wind's direction. AIR shows the wind because it carries the pollutants.
+- **Chrome**: the live dots in the top bar and the sidebar pulse gently; figure cells show shimmering
+  placeholders while a topic's data loads; switching topics glides the camera back to the whole
+  country.
 - Everything above stops under the reduced-motion preference.
+
+## Performance notes (2026-09-09)
+
+- Home page JavaScript ≈ 620 KB gzipped, of which MapLibre GL is ≈ 350 KB; the charts and compare
+  views (Observable Plot) load on demand, as does the Remotion Player on /today.
+- Pollers run only for the layers on screen and pause while the tab is hidden. Live payloads are
+  small (weather 22 KB, hydrology 15 KB, politics 40 KB gzipped) except rail (≈ 320 KB gzipped per
+  fetch), which polls every minute when RAIL is selected and every two minutes when trains only
+  accompany NOW.
+- Radar frames are 720 px PNGs of ≈ 120 KB, prefetched and crossfaded between two image sources;
+  the ambient loop reuses them.
+- Five canvas layers (wind, trains, quakes, flows, aircraft) each run one animation frame loop that
+  skips hidden tabs and drops to one frame a second under reduced motion.
 
 ## Motion and access
 
