@@ -195,7 +195,16 @@ await page.getByRole("button", { name: "Tourism" }).click();
 await page.waitForFunction(
   () => {
     const m = window.__swissNowMap;
-    return m && m.getSource("stats-canton-municipalities") && m.getLayoutProperty("stats-canton-fill", "visibility") === "visible";
+    if (
+      !m ||
+      !m.getSource("stats-canton-municipalities") ||
+      m.getLayoutProperty("stats-canton-fill", "visibility") !== "visible"
+    )
+      return false;
+    const fs = m.querySourceFeatures("stats-canton-municipalities");
+    return fs.some(
+      (f) => typeof m.getFeatureState({ source: "stats-canton-municipalities", id: f.id }).value === "number",
+    );
   },
   null,
   { timeout: 60_000 },

@@ -62,14 +62,16 @@ export function choroplethContribution(
       ["interpolate", ["linear"], ["feature-state", "value"], ...stops],
     ] as never;
 
+  // municipality ids are BFS numbers; canton ids are codes promoted from a property
+  const fid = (id: string) => (object === "cantons" ? id : Number(id));
   const apply = (map: MapLibreMap, state: ChoroplethState) => {
     const next = new Set<string>();
     for (const [id, cell] of Object.entries(state)) {
-      map.setFeatureState({ source: SRC, id: Number(id) }, cell);
+      map.setFeatureState({ source: SRC, id: fid(id) }, cell);
       next.add(id);
     }
     for (const id of applied)
-      if (!next.has(id)) map.removeFeatureState({ source: SRC, id: Number(id) });
+      if (!next.has(id)) map.removeFeatureState({ source: SRC, id: fid(id) });
     applied = next;
   };
 
@@ -85,7 +87,13 @@ export function choroplethContribution(
           if (!map.getStyle()) return;
           const munis = feature(topo, topo.objects[object] as GeometryCollection);
           const cantons = feature(topo, topo.objects["cantons"] as GeometryCollection);
-          map.addSource(SRC, { type: "geojson", data: munis });
+          // feature state needs integer ids; canton codes are strings, so promote them from a property
+          for (const f of munis.features) f.properties = { ...f.properties, code: String(f.id) };
+          map.addSource(SRC, {
+            type: "geojson",
+            data: munis,
+            ...(object === "cantons" ? { promoteId: "code" } : {}),
+          });
           map.addSource(SRC_CANTONS, { type: "geojson", data: cantons });
           const before = beforeId && map.getLayer(beforeId) ? beforeId : undefined;
           map.addLayer(
