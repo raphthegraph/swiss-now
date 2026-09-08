@@ -4,6 +4,7 @@ import { Inter_Tight } from "next/font/google";
 import { cssVariablesBlock } from "@swiss-now/motion/tokens";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
+import { LangProvider } from "@/lib/i18n/lang";
 
 const interTight = Inter_Tight({
   subsets: ["latin", "latin-ext"],
@@ -29,7 +30,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <style dangerouslySetInnerHTML={{ __html: tokenCss }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <LangProvider>{children}</LangProvider>
+      </body>
     </html>
   );
 }

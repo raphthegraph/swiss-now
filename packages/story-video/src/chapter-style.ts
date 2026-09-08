@@ -47,7 +47,3 @@ export function chapterCredit(c: Chapter): string {
   const s = CREDIT[c.layer];
   return s ? `${s} · © swisstopo` : "© swisstopo";
 }
-
-export function layerLabel(c: Chapter): string {
-  return c.layer === "hydrology" ? "water" : c.layer === "seismic" ? "hazards" : c.layer;
-}

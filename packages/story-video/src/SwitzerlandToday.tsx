@@ -9,6 +9,7 @@ import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
 // the state subpath only: the package root also exports Node-only adapters (h5wasm, pngjs)
 import { StorySpec } from "@swiss-now/core/state";
+import type { UiLang } from "@swiss-now/core/i18n";
 import { easeHouse, projectOnPlate } from "@swiss-now/motion/math";
 import { SWITZERLAND_CAMERA, VIDEO_FPS } from "@swiss-now/motion/specs";
 import { fontFamily, ground } from "@swiss-now/motion/tokens";
@@ -36,6 +37,8 @@ export type SwitzerlandTodayProps = {
   /** When set, `calculateMetadata` fetches the story from here (e.g. /api/story/today) and replaces `story`. */
   storyUrl?: string | null;
   assets?: MapAssets;
+  /** Language of the fixed phrases and of the localized story text; English by default. */
+  lang?: UiLang;
 };
 
 /** Same public layout as the web app, so the Player on /today needs no configuration. */
@@ -82,7 +85,11 @@ export const calculateSwitzerlandTodayMetadata: CalculateMetadataFunction<
  * "Switzerland Today": title → ranked chapters → credits, over one fixed MapLibre plate that jumps
  * at each cut under a dip to paper. Data markers are SVG projected through the plate transform.
  */
-export function SwitzerlandToday({ story, assets = DEFAULT_ASSETS }: SwitzerlandTodayProps) {
+export function SwitzerlandToday({
+  story,
+  assets = DEFAULT_ASSETS,
+  lang = "en",
+}: SwitzerlandTodayProps) {
   const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
   const tl = useMemo(() => storyTimeline(story, fps), [story, fps]);
@@ -168,11 +175,16 @@ export function SwitzerlandToday({ story, assets = DEFAULT_ASSETS }: Switzerland
         {tl.sequences.flatMap((s, i) => {
           const content =
             s.kind === "title" ? (
-              <TitleCard story={story} />
+              <TitleCard story={story} lang={lang} />
             ) : s.kind === "credits" ? (
-              <CreditsCard story={story} />
+              <CreditsCard story={story} lang={lang} />
             ) : (
-              <ChapterHud chapter={s.chapter} index={s.chapterIndex} total={chapters.length} />
+              <ChapterHud
+                chapter={s.chapter}
+                index={s.chapterIndex}
+                total={chapters.length}
+                lang={lang}
+              />
             );
           const items = [
             <TransitionSeries.Sequence key={`s${i}`} durationInFrames={s.durationInFrames}>
@@ -234,7 +246,7 @@ export function SwitzerlandToday({ story, assets = DEFAULT_ASSETS }: Switzerland
               color: ground.graphite,
             }}
           >
-            {formatStoryDate(story.date)}
+            {formatStoryDate(story.date, lang)}
           </span>
         </div>
         <div style={{ height: 2, background: ground.mist }}>

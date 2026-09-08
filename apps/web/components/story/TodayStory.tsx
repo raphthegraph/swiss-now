@@ -19,7 +19,10 @@ import type { Map as MapLibreMap } from "maplibre-gl";
 import { presenceFor, type TopicId } from "@swiss-now/core/topics";
 import { useLayerState } from "@/lib/use-layer-state";
 import { chapterFigures } from "@swiss-now/core/story";
-import { formatNumber } from "@/lib/format";
+import { formatDateTime, formatNumber } from "@/lib/format";
+import { useT } from "@/lib/i18n/lang";
+import { TOPICS } from "@swiss-now/core/topics";
+import { LangSwitch } from "@/components/hud/LangSwitch";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 // Remotion Player + MapLibre plate: browser-only, loaded when the section renders
@@ -64,6 +67,7 @@ export function TodayStory({
   hydrology?: HydrologyState | undefined;
   seismic?: SeismicState | undefined;
 }) {
+  const { t, l, lang } = useT();
   const [map, setMap] = useState<MapLibreMap | null>(null);
   // rail is ≈ 1.8 MB per state; load it in the browser instead of inlining it into the HTML
   const rail = useLayerState<RailState | undefined>("/api/state/rail", undefined, 60_000);
@@ -114,7 +118,7 @@ export function TodayStory({
         <h1>
           <Link href="/">Swiss Now</Link>
         </h1>
-        <span className="label">{story.title.en ?? story.title.de}</span>
+        <span className="label">{l(story.title)}</span>
       </header>
       <main className="today__chapters">
         <div className="today__spacer" aria-hidden="true" />
@@ -133,29 +137,26 @@ export function TodayStory({
             transition={{ duration: 0.48, ease: EASE }}
           >
             <div className="label">
-              {i + 1} / {story.chapters.length} · {c.layer}
+              {i + 1} / {story.chapters.length} · {l(TOPICS[topicFor(c)].label)}
             </div>
-            <h2 className="chapter__headline">{c.headline.en ?? c.headline.de}</h2>
-            {c.body ? <p className="chapter__body">{c.body.en ?? c.body.de}</p> : null}
+            <h2 className="chapter__headline">{l(c.headline)}</h2>
+            {c.body ? <p className="chapter__body">{l(c.body)}</p> : null}
             <ChapterFigures c={c} />
           </motion.section>
         ))}
         <section className="chapter chapter--video">
-          <div className="label">The video version</div>
-          <p className="chapter__body">
-            The same chapters as a vertical "Switzerland Today" video: one Remotion composition fed
-            by this story, rendered locally for social media and playable here.
-          </p>
-          <StoryPlayer story={story} />
+          <div className="label">{t("videoVersion")}</div>
+          <p className="chapter__body">{t("videoBlurb")}</p>
+          <StoryPlayer story={story} lang={lang} />
         </section>
         <footer className="chapter chapter--credits">
-          <div className="label">Credits</div>
+          <div className="label">{t("credits")}</div>
           <p className="chapter__body">{story.credits.join(" · ")}</p>
           <p className="chapter__body">
-            Generated{" "}
-            {new Date(story.generatedAt).toLocaleString("de-CH", { timeZone: "Europe/Zurich" })}{" "}
-            from today's snapshots. Positions of trains are estimated from timetable and live
-            delays.
+            {t("generatedNote", { when: formatDateTime(story.generatedAt, lang) })}
+          </p>
+          <p className="chapter__body">
+            <LangSwitch />
           </p>
         </footer>
         <div className="today__spacer" aria-hidden="true" />
@@ -165,13 +166,14 @@ export function TodayStory({
 }
 
 function ChapterFigures({ c }: { c: Chapter }) {
+  const { l } = useT();
   const items = chapterFigures(c);
   if (!items.length) return null;
   return (
     <div className="strip chapter__figures">
       {items.map((f) => (
-        <div className="metric metric--hud" key={f.label}>
-          <div className="label">{f.label}</div>
+        <div className="metric metric--hud" key={f.label.en ?? f.label.de}>
+          <div className="label">{l(f.label)}</div>
           <div className="value tnum">
             {formatNumber(f.value, f.decimals)}
             {f.unit ? <span className="unit">{f.unit}</span> : null}

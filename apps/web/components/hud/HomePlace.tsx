@@ -7,6 +7,7 @@ import { cssEasing, duration } from "@swiss-now/motion/tokens";
 import { nearestPlace, PLACES, type Place } from "@/lib/places";
 import { localSummary } from "@/lib/local-summary";
 import { formatNumber } from "@/lib/format";
+import { useT } from "@/lib/i18n/lang";
 
 const ease = cssEasing.house
   .replace("cubic-bezier(", "")
@@ -24,6 +25,7 @@ export interface HomePlaceProps {
 
 /** Masthead control: your Switzerland in one line, and the picker to choose it. */
 export function HomePlace({ home, onChange, onFocus, weather, hydrology }: HomePlaceProps) {
+  const { t } = useT();
   const [open, setOpen] = useState(false);
   const [locating, setLocating] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -79,11 +81,11 @@ export function HomePlace({ home, onChange, onFocus, weather, hydrology }: HomeP
                 {summary.temperature !== undefined ? ` ${formatNumber(summary.temperature)}°` : ""}
                 {summary.rain10min !== undefined
                   ? summary.rain10min > 0
-                    ? ` · raining ${formatNumber(summary.rain10min)} mm`
-                    : " · dry"
+                    ? ` · ${t("raining", { mm: formatNumber(summary.rain10min) })}`
+                    : ` · ${t("dry")}`
                   : ""}
                 {summary.gustKmh !== undefined && summary.gustKmh >= 20
-                  ? ` · gusts ${formatNumber(summary.gustKmh, 0)} km/h`
+                  ? ` · ${t("gusts", { v: formatNumber(summary.gustKmh, 0) })}`
                   : ""}
                 {summary.river?.discharge !== undefined
                   ? ` · ${summary.river.waterBody ?? summary.river.name} ${formatNumber(summary.river.discharge, 0)} m³/s`
@@ -92,7 +94,7 @@ export function HomePlace({ home, onChange, onFocus, weather, hydrology }: HomeP
             ) : null}
           </>
         ) : (
-          <span className="label">Set your home place</span>
+          <span className="label">{t("setHome")}</span>
         )}
       </button>
 
@@ -101,14 +103,14 @@ export function HomePlace({ home, onChange, onFocus, weather, hydrology }: HomeP
           <motion.div
             className="home__popover"
             role="listbox"
-            aria-label="Home place"
+            aria-label={t("homePlace")}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: duration.panel / 1000, ease }}
           >
             <button type="button" className="home__action" onClick={locate} disabled={locating}>
-              {locating ? "Locating…" : "Use my location"}
+              {locating ? t("locating") : t("useLocation")}
             </button>
             <ul>
               {PLACES.map((p) => (
@@ -138,7 +140,7 @@ export function HomePlace({ home, onChange, onFocus, weather, hydrology }: HomeP
                   setOpen(false);
                 }}
               >
-                Clear home place
+                {t("clearHome")}
               </button>
             ) : null}
           </motion.div>
@@ -146,7 +148,7 @@ export function HomePlace({ home, onChange, onFocus, weather, hydrology }: HomeP
       </AnimatePresence>
       {summary && home ? (
         <span className="home__meta label">
-          nearest station {summary.stationName} · {summary.distanceKm} km
+          {t("nearestStation", { name: summary.stationName, km: summary.distanceKm })}
         </span>
       ) : null}
     </div>

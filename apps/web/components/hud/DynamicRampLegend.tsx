@@ -1,4 +1,7 @@
+"use client";
+
 import { formatNumber } from "@/lib/format";
+import { useT } from "@/lib/i18n/lang";
 
 /** A colour ramp with data-driven stops (quantile scales). */
 export function DynamicRampLegend({
@@ -12,10 +15,11 @@ export function DynamicRampLegend({
   unit?: string;
   decimals?: number;
 }) {
+  const { t } = useT();
   if (stops.length < 2) return null;
   const gradient = `linear-gradient(90deg, ${stops.map((s, i) => `${s[1]} ${(i / (stops.length - 1)) * 100}%`).join(", ")})`;
   return (
-    <div className="legend legend--ramp" aria-label={`${label} legend`}>
+    <div className="legend legend--ramp" aria-label={t("legend", { label })}>
       <span className="label">{label}</span>
       <div className="ramp">
         <div className="ramp__bar" style={{ background: gradient }} />

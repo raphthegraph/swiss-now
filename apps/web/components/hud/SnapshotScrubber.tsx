@@ -2,6 +2,7 @@
 
 import type { SnapshotMeta } from "@swiss-now/core/snapshot";
 import { formatTime } from "@/lib/format";
+import { useT } from "@/lib/i18n/lang";
 
 export interface SnapshotScrubberProps {
   slots: SnapshotMeta[];
@@ -19,24 +20,21 @@ export function SnapshotScrubber({
   onChange,
   onTogglePlay,
 }: SnapshotScrubberProps) {
+  const { t, lang } = useT();
   if (slots.length < 2)
-    return (
-      <div className="scrubber scrubber--snapshots label">
-        Not enough snapshots yet — they accumulate while the map is open.
-      </div>
-    );
+    return <div className="scrubber scrubber--snapshots label">{t("notEnoughSnapshots")}</div>;
   const last = slots.length - 1;
   const pos = index ?? last;
   const current = slots[pos]!;
   return (
-    <div className="scrubber scrubber--snapshots" role="group" aria-label="Snapshot timeline">
+    <div className="scrubber scrubber--snapshots" role="group" aria-label={t("snapshotTimeline")}>
       <button
         type="button"
         className="scrubber__play"
         onClick={onTogglePlay}
         aria-pressed={playing}
       >
-        {playing ? "Pause" : "Play"}
+        {playing ? t("pause") : t("play")}
       </button>
       <input
         className="scrubber__range"
@@ -49,13 +47,13 @@ export function SnapshotScrubber({
           const i = Number(e.target.value);
           onChange(i === last ? null : i);
         }}
-        aria-label="Snapshot"
-        aria-valuetext={formatTime(current.at)}
+        aria-label={t("snapshot")}
+        aria-valuetext={formatTime(current.at, lang)}
       />
       <span className="scrubber__time tnum">
-        <span className="label">Since</span> {formatTime(slots[0]!.at)} ·{" "}
-        <strong>{index === null ? "now" : formatTime(current.at)}</strong>
-        {index !== null ? <span className="label"> · snapshot</span> : null}
+        <span className="label">{t("since")}</span> {formatTime(slots[0]!.at, lang)} ·{" "}
+        <strong>{index === null ? t("now") : formatTime(current.at, lang)}</strong>
+        {index !== null ? <span className="label"> · {t("snapshot")}</span> : null}
       </span>
     </div>
   );

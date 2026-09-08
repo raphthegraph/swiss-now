@@ -1,5 +1,6 @@
 "use client";
 
+import { useT } from "@/lib/i18n/lang";
 import { useEffect, useRef, useState } from "react";
 import {
   Map as MapLibreMap,
@@ -99,6 +100,7 @@ export function LiveMap({
   onFrame,
   onMapReady,
 }: LiveMapProps) {
+  const { t } = useT();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const [ready, setReady] = useState(false);
@@ -149,9 +151,7 @@ export function LiveMap({
     // MapLibre 6 requires WebGL2. Degrade honestly instead of taking the page down.
     const probe = document.createElement("canvas");
     if (!probe.getContext("webgl2")) {
-      setUnsupported(
-        "This browser has no WebGL2, so the live map cannot render here. The summary below is still live.",
-      );
+      setUnsupported(t("noWebgl"));
       return;
     }
     let map: MapLibreMap;
@@ -172,7 +172,7 @@ export function LiveMap({
         canvasContextAttributes: { antialias: true },
       });
     } catch (e) {
-      setUnsupported(`The map could not start: ${e instanceof Error ? e.message : String(e)}`);
+      setUnsupported(t("mapFailed", { error: e instanceof Error ? e.message : String(e) }));
       return;
     }
     mapRef.current = map;
@@ -353,7 +353,12 @@ export function LiveMap({
 
   return (
     <div className="map-root">
-      <div ref={containerRef} className="map-canvas" aria-label="Map of Switzerland" role="img" />
+      <div
+        ref={containerRef}
+        className="map-canvas"
+        aria-label={t("mapOfSwitzerland")}
+        role="img"
+      />
       {unsupported ? (
         <div className="map-unsupported" role="status">
           <span className="label">Map unavailable</span>

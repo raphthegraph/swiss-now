@@ -218,6 +218,26 @@ table.sources th {
   border-top: none;
   padding-top: 0;
 }
+.lang {
+  display: inline-flex;
+  gap: var(--sn-space-2);
+  margin-left: auto;
+}
+.lang__item {
+  font: inherit;
+  font-size: var(--sn-type-caption-size);
+  letter-spacing: 0.08em;
+  color: var(--sn-ground-graphite);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.lang__item[aria-pressed="true"] {
+  color: var(--sn-ground-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .hover-card {
   position: absolute;
   top: 0;

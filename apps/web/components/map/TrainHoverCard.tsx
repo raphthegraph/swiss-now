@@ -3,6 +3,7 @@
 import type { Freshness } from "@swiss-now/core";
 import type { TrainHover } from "./TrainLayer";
 import { formatNumber, formatTime } from "@/lib/format";
+import { useT } from "@/lib/i18n/lang";
 
 /** Line · train · destination · delay · next stop · how the position was derived. */
 export function TrainHoverCard({
@@ -14,6 +15,7 @@ export function TrainHoverCard({
   freshness: Freshness;
   stopName: (id: string) => string;
 }) {
+  const { t, lang } = useT();
   const { trip, position: p, point } = hover;
   const next = trip.stops[p.lastStopIndex + 1] ?? trip.stops[trip.stops.length - 1];
   const delayMin = p.delaySeconds / 60;
@@ -35,19 +37,19 @@ export function TrainHoverCard({
           ? `+${formatNumber(delayMin, 0)} min`
           : p.delaySeconds <= -60
             ? `${formatNumber(delayMin, 0)} min`
-            : "on time"}
+            : t("onTime")}
       </div>
       <div className="hover-card__meta tnum">
-        {p.dwelling ? "at " : "next "}
+        {p.dwelling ? t("atStop") : t("nextStop")}
         {next ? stopName(next.stopId) : "—"}
         {next
-          ? ` · ${formatTime(next.scheduledArrival)}${next.delaySeconds >= 60 ? ` (+${Math.round(next.delaySeconds / 60)})` : ""}`
+          ? ` · ${formatTime(next.scheduledArrival, lang)}${next.delaySeconds >= 60 ? ` (+${Math.round(next.delaySeconds / 60)})` : ""}`
           : ""}
       </div>
       <div className="hover-card__meta">
-        position interpolated from timetable + live delays ·{" "}
+        {t("interpolatedNote")} ·{" "}
         <span className="freshness" data-state={freshness}>
-          {freshness}
+          {t(`fresh.${freshness}`)}
         </span>
       </div>
     </div>

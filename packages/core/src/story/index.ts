@@ -3,6 +3,8 @@
  * the web "Today" mode and the Remotion composition (docs/PRODUCT_VISION.md §5.7).
  * Heuristic scores 0–1 per chapter; chapters below `minScore` are cut; the summary always leads.
  */
+import { EVENT_CATEGORY, FL, pick, t, type UiLang } from "../i18n";
+import type { LocalizedText } from "../state/common";
 import type { Snapshot } from "../snapshot/index";
 import type { Chapter, StoryMarker, StorySpec } from "../state/story";
 import type { LonLat } from "../state/common";
@@ -84,18 +86,48 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
     const cold = w.extremes.coldest;
     const rain = w.rainingAreaShare ?? w.rainingShare ?? 0;
     const dayMax = Math.max(...sorted.map((s) => s.weather?.extremes.warmest?.value ?? -99));
-    const text =
+    const pct = Math.round(rain * 100);
+    const tail =
+      rain >= 0.05
+        ? t(
+            `, Regen über ${pct} % des Landes`,
+            `, rain over ${pct} % of the country`,
+            `, pluie sur ${pct} % du pays`,
+            `, pioggia sul ${pct} % del Paese`,
+          )
+        : rain > 0
+          ? t(", vereinzelt Schauer", ", a few showers", ", quelques averses", ", qualche rovescio")
+          : t(", überall trocken", ", dry everywhere", ", sec partout", ", asciutto ovunque");
+    const summaryHeadline: LocalizedText =
       warm && cold
-        ? `${fmt(warm.value)}° in ${name(latest, warm.stationId)}, ${fmt(cold.value)}° on ${name(latest, cold.stationId)}${rain >= 0.05 ? `, rain over ${Math.round(rain * 100)} % of the country` : rain > 0 ? ", a few showers" : ", dry everywhere"}`
-        : "Switzerland right now";
+        ? (() => {
+            const wn = name(latest, warm.stationId);
+            const cn = name(latest, cold.stationId);
+            const wv = fmt(warm.value);
+            const cv = fmt(cold.value);
+            return t(
+              `${wv}° in ${wn}, ${cv}° auf ${cn}${tail.de}`,
+              `${wv}° in ${wn}, ${cv}° on ${cn}${tail.en}`,
+              `${wv}° à ${wn}, ${cv}° à ${cn}${tail.fr}`,
+              `${wv}° a ${wn}, ${cv}° a ${cn}${tail.it}`,
+            );
+          })()
+        : t(
+            "Die Schweiz jetzt",
+            "Switzerland right now",
+            "La Suisse maintenant",
+            "La Svizzera adesso",
+          );
     chapters.push({
       id: "weather-summary",
       type: "weather-summary",
       layer: "weather",
-      headline: { de: text, en: text },
+      headline: summaryHeadline,
       body: {
-        de: `Peak of the day so far: ${fmt(dayMax)}°`,
+        de: `Tageshöchstwert bisher: ${fmt(dayMax)}°`,
         en: `Peak of the day so far: ${fmt(dayMax)}°`,
+        fr: `Maximum du jour jusqu'ici : ${fmt(dayMax)}°`,
+        it: `Massima del giorno finora: ${fmt(dayMax)}°`,
       },
       highlights: [warm?.stationId, cold?.stationId].filter((x): x is string => Boolean(x)),
       data: { warmest: warm, coldest: cold, rainingShare: rain, stations: w.stations.length },
@@ -120,8 +152,10 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         type: "extremes",
         layer: "weather",
         headline: {
-          de: `${fmt(spread, 0)} degrees between ${name(latest, warm.stationId)} and ${name(latest, cold.stationId)}`,
+          de: `${fmt(spread, 0)} Grad zwischen ${name(latest, warm.stationId)} und ${name(latest, cold.stationId)}`,
           en: `${fmt(spread, 0)} degrees between ${name(latest, warm.stationId)} and ${name(latest, cold.stationId)}`,
+          fr: `${fmt(spread, 0)} degrés entre ${name(latest, warm.stationId)} et ${name(latest, cold.stationId)}`,
+          it: `${fmt(spread, 0)} gradi tra ${name(latest, warm.stationId)} e ${name(latest, cold.stationId)}`,
         },
         highlights: [warm.stationId, cold.stationId],
         data: { warmest: warm, coldest: cold, spread },
@@ -150,8 +184,10 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         type: "rainfall",
         layer: "weather",
         headline: {
-          de: `${fmt(wet.value, 0)} mm of rain in ${name(latest, wet.stationId)} in 24 hours`,
+          de: `${fmt(wet.value, 0)} mm Regen in ${name(latest, wet.stationId)} in 24 Stunden`,
           en: `${fmt(wet.value, 0)} mm of rain in ${name(latest, wet.stationId)} in 24 hours`,
+          fr: `${fmt(wet.value, 0)} mm de pluie à ${name(latest, wet.stationId)} en 24 heures`,
+          it: `${fmt(wet.value, 0)} mm di pioggia a ${name(latest, wet.stationId)} in 24 ore`,
         },
         highlights: [wet.stationId],
         data: { wettest24h: wet, rainingShare: rain },
@@ -172,8 +208,10 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         type: "stat",
         layer: "weather",
         headline: {
-          de: `Gusts of ${fmt(gust.value, 0)} km/h on ${name(latest, gust.stationId)}`,
+          de: `Böen von ${fmt(gust.value, 0)} km/h auf ${name(latest, gust.stationId)}`,
           en: `Gusts of ${fmt(gust.value, 0)} km/h on ${name(latest, gust.stationId)}`,
+          fr: `Rafales de ${fmt(gust.value, 0)} km/h à ${name(latest, gust.stationId)}`,
+          it: `Raffiche di ${fmt(gust.value, 0)} km/h a ${name(latest, gust.stationId)}`,
         },
         highlights: [gust.stationId],
         data: { gust },
@@ -194,8 +232,10 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         type: "snow",
         layer: "weather",
         headline: {
-          de: `${fmt(snow.value, 0)} cm of snow on ${name(latest, snow.stationId)}`,
+          de: `${fmt(snow.value, 0)} cm Schnee auf ${name(latest, snow.stationId)}`,
           en: `${fmt(snow.value, 0)} cm of snow on ${name(latest, snow.stationId)}`,
+          fr: `${fmt(snow.value, 0)} cm de neige à ${name(latest, snow.stationId)}`,
+          it: `${fmt(snow.value, 0)} cm di neve a ${name(latest, snow.stationId)}`,
         },
         highlights: [snow.stationId],
         data: { snow },
@@ -219,11 +259,35 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
     for (const r of rails)
       for (const x of r.worst) if (!worst || x.delaySeconds > worst.delaySeconds) worst = x;
     const disruptions = rails[rails.length - 1]!.disruptions;
-    const headline = worst
-      ? `${worst.line}${worst.headsign ? ` to ${worst.headsign}` : ""} was ${Math.round(worst.delaySeconds / 60)} minutes late${worstOnTime !== undefined ? ` · ${Math.round(worstOnTime * 100)} % of trains on time at the worst moment` : ""}`
-      : worstOnTime !== undefined
-        ? `${Math.round(worstOnTime * 100)} % of trains on time at the worst moment`
-        : "Trains ran on time";
+    const pctOnTime = worstOnTime !== undefined ? Math.round(worstOnTime * 100) : undefined;
+    const onTimeText =
+      pctOnTime !== undefined
+        ? t(
+            `${pctOnTime} % der Züge pünktlich im schlechtesten Moment`,
+            `${pctOnTime} % of trains on time at the worst moment`,
+            `${pctOnTime} % des trains à l'heure au pire moment`,
+            `${pctOnTime} % dei treni in orario nel momento peggiore`,
+          )
+        : undefined;
+    const headline: LocalizedText = worst
+      ? (() => {
+          const min = Math.round(worst.delaySeconds / 60);
+          const h = worst.headsign;
+          const sep = onTimeText ? " · " : "";
+          return t(
+            `${worst.line}${h ? ` nach ${h}` : ""} hatte ${min} Minuten Verspätung${sep}${onTimeText?.de ?? ""}`,
+            `${worst.line}${h ? ` to ${h}` : ""} was ${min} minutes late${sep}${onTimeText?.en ?? ""}`,
+            `${worst.line}${h ? ` vers ${h}` : ""} avait ${min} minutes de retard${sep}${onTimeText?.fr ?? ""}`,
+            `${worst.line}${h ? ` per ${h}` : ""} aveva ${min} minuti di ritardo${sep}${onTimeText?.it ?? ""}`,
+          );
+        })()
+      : (onTimeText ??
+        t(
+          "Die Züge fuhren pünktlich",
+          "Trains ran on time",
+          "Les trains étaient à l'heure",
+          "I treni erano in orario",
+        ));
     const dis = disruptions[0];
     const disCam =
       dis && dis.geometry.type === "LineString"
@@ -235,10 +299,8 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
       id: "rail",
       type: "rail",
       layer: "rail",
-      headline: { de: headline, en: headline },
-      body: disruptions.length
-        ? { de: dis!.headline.de, en: dis!.headline.en ?? dis!.headline.de }
-        : undefined,
+      headline,
+      body: disruptions.length ? dis!.headline : undefined,
       highlights: [],
       data: {
         worstOnTime,
@@ -297,14 +359,26 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
           : undefined;
     if (st) {
       const isDanger = Boolean(danger && danger[1] >= 2);
-      const headline = isDanger
-        ? `Flood danger level ${danger![1]} on the ${st.waterBody ?? "river"} at ${st.name.de}`
-        : `${st.waterBody ?? "River"} at ${st.name.de}: ${fmt(q!.value, 0)} m³/s, the largest flow in the country`;
+      const wb = st.waterBody;
+      const nm = st.name.de;
+      const headline: LocalizedText = isDanger
+        ? t(
+            `Hochwassergefahr Stufe ${danger![1]}: ${wb ?? "Fluss"} bei ${nm}`,
+            `Flood danger level ${danger![1]} on the ${wb ?? "river"} at ${nm}`,
+            `Danger de crue niveau ${danger![1]} : ${wb ?? "rivière"} à ${nm}`,
+            `Pericolo di piena grado ${danger![1]}: ${wb ?? "fiume"} a ${nm}`,
+          )
+        : t(
+            `${wb ?? "Fluss"} bei ${nm}: ${fmt(q!.value, 0)} m³/s, der grösste Abfluss des Landes`,
+            `${wb ?? "River"} at ${nm}: ${fmt(q!.value, 0)} m³/s, the largest flow in the country`,
+            `${wb ?? "Rivière"} à ${nm} : ${fmt(q!.value, 0)} m³/s, le plus grand débit du pays`,
+            `${wb ?? "Fiume"} a ${nm}: ${fmt(q!.value, 0)} m³/s, il deflusso maggiore del Paese`,
+          );
       chapters.push({
         id: "river",
         type: "river",
         layer: "hydrology",
-        headline: { de: headline, en: headline },
+        headline,
         highlights: [st.id],
         data: {
           stationId: st.id,
@@ -353,7 +427,7 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         id: "quake",
         type: "quake",
         layer: "seismic",
-        headline: { de: chosen.headline.de, en: chosen.headline.en ?? chosen.headline.de },
+        headline: chosen.headline,
         highlights: [chosen.id],
         data: { event: chosen },
         markers: [
@@ -396,12 +470,19 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
         minute: "2-digit",
         timeZone: "Europe/Zurich",
       }).format(new Date(peak.observedAt));
-      const headline = `Switzerland ${imp ? "imported" : "exported"} ${mw} MW at ${at}${peak.priceEurPerMWh !== undefined ? ` · ${Math.round(peak.priceEurPerMWh)} €/MWh` : ""}`;
+      const price =
+        peak.priceEurPerMWh !== undefined ? ` · ${Math.round(peak.priceEurPerMWh)} €/MWh` : "";
+      const headline = t(
+        `Die Schweiz ${imp ? "importierte" : "exportierte"} ${mw} MW um ${at}${price}`,
+        `Switzerland ${imp ? "imported" : "exported"} ${mw} MW at ${at}${price}`,
+        `La Suisse ${imp ? "importait" : "exportait"} ${mw} MW à ${at}${price}`,
+        `La Svizzera ${imp ? "importava" : "esportava"} ${mw} MW alle ${at}${price}`,
+      );
       chapters.push({
         id: "energy",
         type: "energy",
         layer: "energy",
-        headline: { de: headline, en: headline },
+        headline,
         highlights: [],
         markers: [],
         data: {
@@ -423,22 +504,34 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
   if (ev && ev.count >= 10) {
     credits.add("Source: polizei.news");
     credits.add("Source: SRF");
-    const cats = Object.entries(ev.byCategory)
+    const top = Object.entries(ev.byCategory)
       .sort((a, b) => b[1] - a[1])
-      .slice(0, 2)
-      .map(
-        ([c, n]) =>
-          `${n} ${c === "natural-hazard" ? "natural hazards" : c === "crime" ? "police cases" : `${c}s`}`,
-      );
-    const headline = `${ev.count} events in 24 hours${cats.length ? ` · ${cats.join(", ")}` : ""}`;
+      .slice(0, 2);
+    const catText = (lang: UiLang) =>
+      top.length
+        ? ` · ${top
+            .map(([c, n]) => {
+              const cat = (EVENT_CATEGORY as Record<string, { many: LocalizedText }>)[c];
+              return `${n} ${cat ? pick(cat.many, lang) : c}`;
+            })
+            .join(", ")}`
+        : "";
+    const headline = t(
+      `${ev.count} Ereignisse in 24 Stunden${catText("de")}`,
+      `${ev.count} events in 24 hours${catText("en")}`,
+      `${ev.count} événements en 24 heures${catText("fr")}`,
+      `${ev.count} eventi in 24 ore${catText("it")}`,
+    );
     chapters.push({
       id: "events",
       type: "events",
       layer: "events",
-      headline: { de: headline, en: headline },
+      headline,
       body: {
-        de: `${ev.placed} placed on the map with high confidence`,
+        de: `${ev.placed} mit hoher Sicherheit auf der Karte verortet`,
         en: `${ev.placed} placed on the map with high confidence`,
+        fr: `${ev.placed} localisés sur la carte avec une confiance élevée`,
+        it: `${ev.placed} localizzati sulla carta con alta affidabilità`,
       },
       highlights: [],
       markers: [],
@@ -455,15 +548,26 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
     credits.add("Source: FOEN");
     if (hz.hail) credits.add("Source: MeteoSwiss");
     const level = hz.fireMaxLevel ?? 0;
+    const n = hz.fireRegionsAt3Plus;
     const headline =
       level >= 4
-        ? `Forest-fire danger level ${level} in ${hz.fireRegionsAt3Plus} regions${hz.hail ? " · hail detected" : ""}`
-        : "Hail detected by the radar";
+        ? t(
+            `Waldbrandgefahr Stufe ${level} in ${n} Regionen${hz.hail ? " · Hagel erkannt" : ""}`,
+            `Forest-fire danger level ${level} in ${n} regions${hz.hail ? " · hail detected" : ""}`,
+            `Danger d'incendie de forêt niveau ${level} dans ${n} régions${hz.hail ? " · grêle détectée" : ""}`,
+            `Pericolo d'incendio grado ${level} in ${n} regioni${hz.hail ? " · grandine rilevata" : ""}`,
+          )
+        : t(
+            "Hagel im Radar erkannt",
+            "Hail detected by the radar",
+            "Grêle détectée par le radar",
+            "Grandine rilevata dal radar",
+          );
     chapters.push({
       id: "hazard",
       type: "hazard",
       layer: "hazards",
-      headline: { de: headline, en: headline },
+      headline,
       highlights: [],
       markers: [],
       data: {
@@ -481,12 +585,17 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
   const air = latest?.air;
   if (air?.worstIndex !== undefined && air.worstIndex >= 4) {
     credits.add("Source: Stadt Zürich UGZ");
-    const headline = `Air quality index ${air.worstIndex} in Zürich`;
+    const headline = t(
+      `Luftqualitätsindex ${air.worstIndex} in Zürich`,
+      `Air quality index ${air.worstIndex} in Zürich`,
+      `Indice de qualité de l'air ${air.worstIndex} à Zurich`,
+      `Indice di qualità dell'aria ${air.worstIndex} a Zurigo`,
+    );
     chapters.push({
       id: "air",
       type: "air",
       layer: "air",
-      headline: { de: headline, en: headline },
+      headline,
       highlights: [],
       markers: [],
       data: {
@@ -508,13 +617,20 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
   ) {
     credits.add("Source: BFS");
     credits.add("Source: swissvotes.ch");
-    const title = vote.meta.title.en ?? vote.meta.title.de;
     const yes = vote.national.yesPct;
     const accepted = vote.meta.national?.accepted;
-    const headline =
-      yes === null
-        ? `Vote Sunday: ${title}`
-        : `${accepted === undefined ? "" : accepted ? "Accepted: " : "Rejected: "}${title} · ${yes.toFixed(1)} % yes`;
+    const voteLine = (lang: UiLang, pending: string, yesWord: string, acc: string, rej: string) => {
+      const title = pick(vote.meta.title, lang);
+      return yes === null
+        ? `${pending}${title}`
+        : `${accepted === undefined ? "" : accepted ? acc : rej}${title} · ${yes.toFixed(1)} ${yesWord}`;
+    };
+    const headline = t(
+      voteLine("de", "Abstimmungssonntag: ", "% Ja", "Angenommen: ", "Abgelehnt: "),
+      voteLine("en", "Vote Sunday: ", "% yes", "Accepted: ", "Rejected: "),
+      voteLine("fr", "Votation : ", "% de oui", "Acceptée : ", "Refusée : "),
+      voteLine("it", "Votazione: ", "% di sì", "Accettata: ", "Respinta: "),
+    );
     const byMunicipality: Record<string, number> = {};
     for (const [k, v] of Object.entries(vote.byMunicipality))
       if (v.yesPct !== null) byMunicipality[k] = v.yesPct;
@@ -522,7 +638,7 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
       id: `vote-${vote.meta.id}`,
       type: "vote",
       layer: "politics",
-      headline: { de: headline, en: headline },
+      headline,
       highlights: [],
       markers: [],
       data: {
@@ -549,7 +665,12 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
     schemaVersion: 1,
     date: opts.date,
     generatedAt: opts.now.toISOString(),
-    title: { de: `Die Schweiz heute — ${opts.date}`, en: `Switzerland today — ${opts.date}` },
+    title: t(
+      `Die Schweiz heute — ${opts.date}`,
+      `Switzerland today — ${opts.date}`,
+      `La Suisse aujourd'hui — ${opts.date}`,
+      `La Svizzera oggi — ${opts.date}`,
+    ),
     chapters: final.length ? final : [placeholder(opts.date)],
     credits: [...credits],
   };
@@ -560,7 +681,12 @@ function placeholder(date: string): Chapter {
     id: "empty",
     type: "stat",
     layer: "weather",
-    headline: { de: "Noch keine Daten für heute", en: "No data for today yet" },
+    headline: t(
+      "Noch keine Daten für heute",
+      "No data for today yet",
+      "Pas encore de données pour aujourd'hui",
+      "Ancora nessun dato per oggi",
+    ),
     highlights: [],
     markers: [],
     data: { date },
@@ -572,7 +698,7 @@ function placeholder(date: string): Chapter {
 
 /** A key figure a chapter renderer shows next to the headline; formatting is the renderer's job. */
 export interface ChapterFigure {
-  label: string;
+  label: LocalizedText;
   value: number;
   decimals: number;
   unit?: string;
@@ -591,79 +717,84 @@ export function chapterFigures(c: Chapter): ChapterFigure[] {
     return typeof o?.value === "number" ? o.value : undefined;
   };
   const out: ChapterFigure[] = [];
-  const push = (label: string, value: number | undefined, decimals: number, unit?: string) => {
+  const push = (
+    label: LocalizedText,
+    value: number | undefined,
+    decimals: number,
+    unit?: string,
+  ) => {
     if (value === undefined) return;
     out.push(unit ? { label, value, decimals, unit } : { label, value, decimals });
   };
   switch (c.type) {
     case "weather-summary":
     case "extremes": {
-      push("Warmest", obs("warmest"), 1, "°C");
-      push("Coldest", obs("coldest"), 1, "°C");
+      push(FL.warmest, obs("warmest"), 1, "°C");
+      push(FL.coldest, obs("coldest"), 1, "°C");
       const share = num("rainingShare");
       if (share !== undefined && c.type === "weather-summary")
-        push("Raining over", share * 100, 0, "%");
+        push(FL.rainingOver, share * 100, 0, "%");
       break;
     }
     case "rainfall":
-      push("24 h", obs("wettest24h"), 0, "mm");
+      push(FL.rain24h, obs("wettest24h"), 0, "mm");
       break;
     case "rail": {
       const w = num("worstOnTime");
-      push("Lowest on time", w === undefined ? undefined : w * 100, 0, "%");
+      push(FL.lowestOnTime, w === undefined ? undefined : w * 100, 0, "%");
       const worst = d["worst"] as { delaySeconds?: unknown } | undefined;
       push(
-        "Largest delay",
+        FL.largestDelay,
         typeof worst?.delaySeconds === "number" ? worst.delaySeconds / 60 : undefined,
         0,
         "min",
       );
-      push("Trains now", num("running"), 0);
+      push(FL.trainsNow, num("running"), 0);
       break;
     }
     case "river":
-      push("Discharge", num("discharge"), 0, "m³/s");
-      push("Danger level", num("dangerLevel"), 0);
+      push(FL.discharge, num("discharge"), 0, "m³/s");
+      push(FL.dangerLevel, num("dangerLevel"), 0);
       break;
     case "quake": {
       const e = d["event"] as { magnitude?: unknown; depthKm?: unknown } | undefined;
-      push("Magnitude", typeof e?.magnitude === "number" ? e.magnitude : undefined, 1);
-      push("Depth", typeof e?.depthKm === "number" ? e.depthKm : undefined, 0, "km");
+      push(FL.magnitude, typeof e?.magnitude === "number" ? e.magnitude : undefined, 1);
+      push(FL.depth, typeof e?.depthKm === "number" ? e.depthKm : undefined, 0, "km");
       break;
     }
     case "energy": {
       const net = num("netImportMW");
       push(
-        net !== undefined && net < 0 ? "Net export" : "Net import",
+        net !== undefined && net < 0 ? FL.netExport : FL.netImport,
         net === undefined ? undefined : Math.abs(net),
         0,
         "MW",
       );
-      push("Price", num("priceEurPerMWh"), 0, "€/MWh");
-      push("Renewable", num("renewableSharePct"), 0, "%");
+      push(FL.price, num("priceEurPerMWh"), 0, "€/MWh");
+      push(FL.renewable, num("renewableSharePct"), 0, "%");
       break;
     }
     case "stat":
-      push("Gust", obs("gust"), 0, "km/h");
+      push(FL.gust, obs("gust"), 0, "km/h");
       break;
     case "events":
-      push("Events, 24 h", num("count"), 0);
-      push("Placed", num("placed"), 0);
+      push(FL.events24h, num("count"), 0);
+      push(FL.placed, num("placed"), 0);
       break;
     case "hazard":
-      push("Fire danger", num("fireMaxLevel"), 0);
-      push("Regions ≥ 3", num("fireRegionsAt3Plus"), 0);
+      push(FL.fireDangerShort, num("fireMaxLevel"), 0);
+      push(FL.regions3, num("fireRegionsAt3Plus"), 0);
       break;
     case "air":
-      push("Air index", num("worstIndex"), 0);
-      push("Citizen sensors", num("citizenSensors"), 0);
+      push(FL.airIndex, num("worstIndex"), 0);
+      push(FL.citizenSensors, num("citizenSensors"), 0);
       break;
     case "vote":
-      push("Yes", num("yesPct"), 1, "%");
-      push("Turnout", num("turnoutPct"), 1, "%");
+      push(FL.yes, num("yesPct"), 1, "%");
+      push(FL.turnout, num("turnoutPct"), 1, "%");
       break;
     case "snow":
-      push("Snow depth", obs("snow"), 0, "cm");
+      push(FL.snowDepth, obs("snow"), 0, "cm");
       break;
     default:
       break;

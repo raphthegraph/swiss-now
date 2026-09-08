@@ -5,3 +5,4 @@ export * from "./geo/index";
 export * as dataSources from "./data-sources/index";
 export * from "./snapshot/index";
 export * from "./story/index";
+export * from "./i18n";

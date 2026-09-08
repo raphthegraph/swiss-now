@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildSnapshot, parseSnapshotId, snapshotId, snapshotSlot } from "../src/snapshot/index";
+import { FL } from "../src/i18n";
 
 describe("snapshots", () => {
   it("floors to 10-minute slots and round-trips ids", () => {
@@ -81,6 +82,6 @@ describe("snapshot figures", () => {
     expect(rail.map((f) => f.id)).toEqual(["running", "on-time", "largest-delay"]);
     expect(rail[2]!.value).toBe(20);
     const energy = figuresForSnapshot("energy", snap, 0);
-    expect(energy[0]).toMatchObject({ id: "net-flow", label: "Net export", value: 120 });
+    expect(energy[0]).toMatchObject({ id: "net-flow", label: FL.netExport, value: 120 });
   });
 });

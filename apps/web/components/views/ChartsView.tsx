@@ -8,17 +8,10 @@ import { PlotFigure } from "../charts/PlotFigure";
 import { StatsCharts } from "./StatsCharts";
 import type { GeoRegister, IndicatorSeries } from "@swiss-now/core";
 import { formatNumber } from "@/lib/format";
+import { useT, type Translate } from "@/lib/i18n/lang";
+import { LOCALE } from "@swiss-now/core/i18n";
 
-const TYPE_LABEL: Record<GenerationType, string> = {
-  nuclear: "Nuclear",
-  runOfRiver: "Run-of-river hydro",
-  reservoir: "Reservoir hydro",
-  pumpedStorage: "Pumped storage",
-  wind: "Wind",
-  solar: "Solar",
-  others: "Others",
-  crossBorder: "Net import",
-};
+const typeLabel = (t: Translate, type: GenerationType) => t(`gen.${type}`);
 const ORDER: GenerationType[] = [
   "nuclear",
   "runOfRiver",
@@ -42,6 +35,7 @@ const COLORS: Record<GenerationType, string> = {
 
 /** The CHARTS mode for ENERGY: the last day's production mix as stacked areas, hour by hour. */
 export function EnergyCharts({ energy }: { energy: EnergyState | undefined }) {
+  const { t, lang } = useT();
   const rows = useMemo(() => {
     const s = energy?.generationSeries;
     if (!s) return [];
@@ -52,13 +46,13 @@ export function EnergyCharts({ energy }: { energy: EnergyState | undefined }) {
         if (typeof v === "number")
           out.push({
             t: new Date(sec * 1000),
-            type: TYPE_LABEL[type],
+            type: typeLabel(t, type),
             mw: type === "crossBorder" ? Math.max(0, v) : v,
           });
       }
     });
     return out;
-  }, [energy]);
+  }, [energy, t]);
   const options = useMemo<Plot.PlotOptions>(
     () => ({
       height: 320,
@@ -68,14 +62,15 @@ export function EnergyCharts({ energy }: { energy: EnergyState | undefined }) {
         type: "time",
         label: null,
         tickFormat: (d: Date) =>
-          new Intl.DateTimeFormat("en-GB", { hour: "2-digit", timeZone: "Europe/Zurich" }).format(
-            d,
-          ),
+          new Intl.DateTimeFormat(LOCALE[lang], {
+            hour: "2-digit",
+            timeZone: "Europe/Zurich",
+          }).format(d),
       },
       y: { label: "MW", grid: true, tickFormat: (v: number) => formatNumber(v, 0) },
       color: {
-        domain: ORDER.map((t) => TYPE_LABEL[t]),
-        range: ORDER.map((t) => COLORS[t]),
+        domain: ORDER.map((x) => typeLabel(t, x)),
+        range: ORDER.map((x) => COLORS[x]),
         legend: true,
       },
       marks: [
@@ -83,34 +78,34 @@ export function EnergyCharts({ energy }: { energy: EnergyState | undefined }) {
           x: "t",
           y: "mw",
           fill: "type",
-          order: ORDER.map((t) => TYPE_LABEL[t]),
+          order: ORDER.map((x) => typeLabel(t, x)),
           curve: "step",
         }),
         Plot.ruleY([0], { stroke: ground.ink }),
       ],
     }),
-    [rows],
+    [rows, t, lang],
   );
-  if (!energy) return <p className="charts__empty label">Loading energy data…</p>;
+  if (!energy) return <p className="charts__empty label">{t("loadingEnergy")}</p>;
   return (
     <div className="charts">
       <header className="charts__header">
-        <h2 className="charts__title">Production mix, last 24 hours</h2>
+        <h2 className="charts__title">{t("productionMix")}</h2>
         <p className="charts__meta label">
-          Hourly, Swiss bidding zone · Energy-Charts.info (Fraunhofer ISE), CC BY 4.0
+          {t("hourlyNote")}
           {energy.generation
-            ? ` · latest hour ${new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Zurich" }).format(new Date(energy.generation.observedAt))}`
+            ? ` · ${t("latestHour", { time: new Intl.DateTimeFormat(LOCALE[lang], { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Zurich" }).format(new Date(energy.generation.observedAt)) })}`
             : ""}
         </p>
       </header>
       {rows.length ? (
-        <PlotFigure options={options} title="Swiss electricity production by type, last 24 hours" />
+        <PlotFigure options={options} title={t("productionChartTitle")} />
       ) : (
-        <p className="label">No hourly series available.</p>
+        <p className="label">{t("noSeries")}</p>
       )}
       {energy.price ? (
         <p className="charts__meta">
-          Day-ahead price this hour:{" "}
+          {t("dayAheadNow")}{" "}
           <strong className="tnum">{formatNumber(energy.price.eurPerMWh, 0)} €/MWh</strong>
         </p>
       ) : null}
@@ -133,14 +128,15 @@ export interface ChartsViewProps {
 }
 
 export function ChartsView({ topic, energy, stats }: ChartsViewProps) {
+  const { t } = useT();
   return (
-    <section className="charts-view" aria-label="Charts">
+    <section className="charts-view" aria-label={t("charts")}>
       {topic === "energy" ? (
         <EnergyCharts energy={energy} />
       ) : stats ? (
         <StatsCharts {...stats} />
       ) : (
-        <p className="label">No charts for this topic yet.</p>
+        <p className="label">{t("noChartsYet")}</p>
       )}
     </section>
   );

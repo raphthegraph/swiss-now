@@ -3,6 +3,7 @@ import { buildStory, chapterFigures } from "../src/story/index";
 import { buildAviationState, parseAdsb } from "../src/data-sources/adsb-fi/index";
 import { AviationState } from "../src/state/aviation";
 import { policyFromEnv, sourceAccess } from "../src/sources/policy";
+import { FL } from "../src/i18n";
 import { StorySpec } from "../src/state/story";
 
 const t = "2026-09-08T12:00:00Z";
@@ -79,7 +80,7 @@ describe("story candidates from the expansion", () => {
     const vote = story.chapters.find((c) => c.type === "vote")!;
     expect(vote.headline.en).toContain("Accepted: Test proposal");
     expect((vote.data as { byMunicipality: Record<string, number> }).byMunicipality["1"]).toBe(60);
-    expect(chapterFigures(vote)[0]).toEqual({ label: "Yes", value: 55.2, decimals: 1, unit: "%" });
+    expect(chapterFigures(vote)[0]).toEqual({ label: FL.yes, value: 55.2, decimals: 1, unit: "%" });
     expect(story.credits).toContain("Source: swissvotes.ch");
   });
 });

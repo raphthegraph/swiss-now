@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { GeoRegister } from "@swiss-now/core";
+import { useT } from "@/lib/i18n/lang";
 
 export interface PlacePick {
   key: string;
@@ -25,6 +26,7 @@ export function PlaceSearch({
   label: string;
   autoFocusKey?: boolean;
 }) {
+  const { t } = useT();
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
@@ -73,7 +75,7 @@ export function PlaceSearch({
         ref={ref}
         className="place-search__input"
         value={open ? q : (value?.name ?? q)}
-        placeholder="Municipality or canton"
+        placeholder={t("municipalityOrCanton")}
         onChange={(e) => {
           setQ(e.target.value);
           setOpen(true);
@@ -96,7 +98,8 @@ export function PlaceSearch({
                   setOpen(false);
                 }}
               >
-                {o.name} <span className="label">{o.kind === "canton" ? "canton" : o.canton}</span>
+                {o.name}{" "}
+                <span className="label">{o.kind === "canton" ? t("canton") : o.canton}</span>
               </button>
             </li>
           ))}

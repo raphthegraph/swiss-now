@@ -7,6 +7,8 @@ import { duration } from "@swiss-now/motion/tokens";
 import { getSource } from "@swiss-now/core/sources";
 import { TOPICS, type Figure, type TopicId } from "@swiss-now/core/topics";
 import { formatNumber } from "@/lib/format";
+import { useT } from "@/lib/i18n/lang";
+import { LangSwitch } from "./LangSwitch";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -22,7 +24,7 @@ export interface FigureStripProps {
 function credits(topic: TopicId): string[] {
   const ids =
     topic === "now"
-      ? ["weather", "water", "rail", "hazards"].flatMap((t) => TOPICS[t as TopicId].sources)
+      ? ["weather", "water", "rail", "hazards"].flatMap((x) => TOPICS[x as TopicId].sources)
       : TOPICS[topic].sources;
   const out = new Set<string>();
   for (const id of ids) out.add(getSource(id).attribution);
@@ -32,10 +34,11 @@ function credits(topic: TopicId): string[] {
 
 /** The bottom HUD: instrument, legend, key figures and colophon. */
 export function FigureStrip({ topic, figures, children, legend }: FigureStripProps) {
+  const { t, l } = useT();
   return (
     <motion.section
       className="hud hud--bottom"
-      aria-label="Key figures"
+      aria-label={t("keyFigures")}
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: duration.layerSwitch / 1000, ease: EASE, delay: 0.08 }}
@@ -54,7 +57,7 @@ export function FigureStrip({ topic, figures, children, legend }: FigureStripPro
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: duration.panel / 1000, ease: EASE }}
             >
-              <div className="label">{f.label}</div>
+              <div className="label">{l(f.label)}</div>
               <div className="value tnum">
                 {f.text ?? formatNumber(f.value, f.decimals)}
                 {f.unit ? <span className="unit">{f.unit}</span> : null}
@@ -68,7 +71,8 @@ export function FigureStrip({ topic, figures, children, legend }: FigureStripPro
         {credits(topic).map((c) => (
           <span key={c}>{c}</span>
         ))}
-        <Link href="/status">Status</Link>
+        <Link href="/status">{t("status")}</Link>
+        <LangSwitch />
       </div>
     </motion.section>
   );

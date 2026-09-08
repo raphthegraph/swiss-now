@@ -7,6 +7,7 @@ import type { DisruptionFeatureProps } from "@/lib/map/disruptions-geojson";
 import type { AirFeatureProps, PollenFeatureProps } from "@/lib/map/contributions/air";
 import type { RegionFeatureProps, SnowFeatureProps } from "@/lib/map/contributions/hazards";
 import { formatNumber, formatTime } from "@/lib/format";
+import { useT } from "@/lib/i18n/lang";
 
 /** A municipality of a choropleth: properties from the geo spine plus its feature state. */
 export interface ChoroplethHoverProps {
@@ -33,9 +34,18 @@ export interface Hovered {
 
 /** value · time · source — the honesty rule made visible (docs/PRODUCT_VISION.md §5.8). */
 export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness: Freshness }) {
+  const { t, lang } = useT();
   const { props, point } = hovered;
-  const at = (p: { observedAt?: string }) => (p.observedAt ? formatTime(p.observedAt) : "");
-  const INDEX = ["", "good", "fair", "moderate", "poor", "very poor", "hazardous"];
+  const at = (p: { observedAt?: string }) => (p.observedAt ? formatTime(p.observedAt, lang) : "");
+  const indexWord = (i: number) =>
+    i >= 1 && i <= 6
+      ? t(`index.${i}` as "index.1" | "index.2" | "index.3" | "index.4" | "index.5" | "index.6")
+      : "";
+  const fresh = (
+    <span className="freshness" data-state={freshness}>
+      {t(`fresh.${freshness}`)}
+    </span>
+  );
   if ("air" in props) {
     const a = props;
     const parts = [
@@ -50,18 +60,17 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
         style={{ transform: `translate(${point.x + 14}px, ${point.y - 12}px)` }}
       >
         <div className="hover-card__name">
-          {a.name} {a.tier === "citizen" ? <span className="label">citizen sensor</span> : null}
+          {a.name}{" "}
+          {a.tier === "citizen" ? <span className="label">{t("citizenSensor")}</span> : null}
         </div>
         <div className="hover-card__value tnum">
-          {a.index !== undefined ? `${a.index} · ${INDEX[a.index]}` : "—"}
-          <span className="label"> air index</span>
+          {a.index !== undefined ? `${a.index} · ${indexWord(a.index)}` : "—"}
+          <span className="label"> {t("airIndex")}</span>
         </div>
         <div className="hover-card__meta tnum">{parts.join(" · ")} µg/m³</div>
         <div className="hover-card__meta">
           <span className="tnum">{at(a)}</span>
-          {a.tier === "citizen"
-            ? " · low-cost hardware, indicative only · Sensor.Community"
-            : " · Source: Stadt Zürich UGZ"}
+          {a.tier === "citizen" ? ` · ${t("lowCostNote")}` : " · Source: Stadt Zürich UGZ"}
         </div>
       </div>
     );
@@ -78,7 +87,7 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
           {p.value !== undefined ? `${formatNumber(p.value, 0)} /m³` : "—"}
           <span className="label">
             {" "}
-            {p.top ? p.top.replace("pollen", "").toLowerCase() : "pollen"}
+            {p.top ? p.top.replace("pollen", "").toLowerCase() : t("pollen")}
           </span>
         </div>
         <div className="hover-card__meta">
@@ -98,10 +107,10 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
           {r.name} {r.canton ? <span className="label">{r.canton}</span> : null}
         </div>
         <div className="hover-card__value tnum">
-          level {r.level}
+          {t("level", { n: r.level })}
           <span className="label">
             {" "}
-            {r.region === "fire" ? "forest-fire danger" : "avalanche danger"}
+            {r.region === "fire" ? t("forestFireDanger") : t("avalancheDanger")}
           </span>
         </div>
         <div className="hover-card__meta">
@@ -125,10 +134,10 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
         </div>
         <div className="hover-card__value tnum">
           {sn.depth !== undefined ? `${formatNumber(sn.depth, 0)} cm` : "—"}
-          <span className="label"> snow depth</span>
+          <span className="label"> {t("snowDepth")}</span>
         </div>
         <div className="hover-card__meta tnum">
-          {sn.temp !== undefined ? `air ${formatNumber(sn.temp, 1)} °C · ` : ""}
+          {sn.temp !== undefined ? `${t("airTemp", { v: formatNumber(sn.temp, 1) })} · ` : ""}
           {at(sn)} · Source: SLF IMIS
         </div>
       </div>
@@ -152,7 +161,7 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
         </div>
         <div className="hover-card__meta tnum">
           {c.turnout !== undefined && c.turnout !== null
-            ? `turnout ${formatNumber(c.turnout, 1)} %`
+            ? t("turnout", { v: formatNumber(c.turnout, 1) })
             : null}
           {` · ${c.choropleth.source}`}
         </div>
@@ -171,8 +180,8 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
           <div className="hover-card__meta">{d.description.slice(0, 220)}</div>
         ) : null}
         <div className="hover-card__meta tnum">
-          {formatTime(d.startsAt)}
-          {d.endsAt ? ` – ${formatTime(d.endsAt)}` : ""}
+          {formatTime(d.startsAt, lang)}
+          {d.endsAt ? ` – ${formatTime(d.endsAt, lang)}` : ""}
           {" · Source: SBB"}
         </div>
       </div>
@@ -180,7 +189,7 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
   }
   if ("kind" in props) {
     const h = props;
-    const dangerText = h.danger >= 2 ? ` · danger level ${h.danger}` : "";
+    const dangerText = h.danger >= 2 ? ` · ${t("dangerLevel", { n: h.danger })}` : "";
     return (
       <div
         className="hover-card hover-card--water"
@@ -199,20 +208,18 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
         </div>
         <div className="hover-card__meta tnum">
           {h.level !== undefined && h.discharge !== undefined
-            ? `level ${formatNumber(h.level, 2)} m a.s.l.`
+            ? t("levelMasl", { v: formatNumber(h.level, 2) })
             : null}
           {h.level !== undefined && h.discharge !== undefined && h.temp !== undefined
             ? " · "
             : null}
-          {h.temp !== undefined ? `water ${formatNumber(h.temp)} °C` : null}
+          {h.temp !== undefined ? t("waterTemp", { v: formatNumber(h.temp) }) : null}
           {dangerText}
         </div>
         <div className="hover-card__meta">
-          <span className="tnum">{h.observedAt ? formatTime(h.observedAt) : ""}</span>
+          <span className="tnum">{h.observedAt ? formatTime(h.observedAt, lang) : ""}</span>
           {" · "}
-          <span className="freshness" data-state={freshness}>
-            {freshness}
-          </span>
+          {fresh}
           {" · Source: FOEN"}
         </div>
       </div>
@@ -233,16 +240,14 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
         {props.temp !== undefined ? `${formatNumber(props.temp)} °C` : "—"}
       </div>
       <div className="hover-card__meta tnum">
-        {props.gust !== undefined ? `gust ${formatNumber(props.gust, 0)} km/h` : null}
+        {props.gust !== undefined ? t("gust", { v: formatNumber(props.gust, 0) }) : null}
         {props.gust !== undefined && props.rain !== undefined ? " · " : null}
-        {props.rain !== undefined ? `rain ${formatNumber(props.rain)} mm/10 min` : null}
+        {props.rain !== undefined ? t("rain10", { v: formatNumber(props.rain) }) : null}
       </div>
       <div className="hover-card__meta">
-        <span className="tnum">{props.observedAt ? formatTime(props.observedAt) : ""}</span>
+        <span className="tnum">{props.observedAt ? formatTime(props.observedAt, lang) : ""}</span>
         {" · "}
-        <span className="freshness" data-state={freshness}>
-          {freshness}
-        </span>
+        {fresh}
         {" · Source: MeteoSwiss"}
       </div>
     </div>

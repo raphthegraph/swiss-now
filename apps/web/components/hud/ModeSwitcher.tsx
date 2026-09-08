@@ -1,13 +1,7 @@
 "use client";
 
 import { Mode, TOPICS, type ViewState } from "@swiss-now/core/topics";
-
-const LABEL: Record<Mode, string> = {
-  map: "Map",
-  charts: "Charts",
-  timeline: "Timeline",
-  compare: "Compare",
-};
+import { useT } from "@/lib/i18n/lang";
 
 /**
  * The view switcher (docs/IA.md §2): the same topic explored geographically, analytically,
@@ -15,9 +9,10 @@ const LABEL: Record<Mode, string> = {
  * never jumps.
  */
 export function ModeSwitcher({ view, onChange }: { view: ViewState; onChange: (m: Mode) => void }) {
+  const { t } = useT();
   const supported = TOPICS[view.topic].modes;
   return (
-    <nav className="hud hud--modes" aria-label="View">
+    <nav className="hud hud--modes" aria-label={t("view")}>
       {Mode.options.map((m) => {
         const ok = supported.includes(m);
         return (
@@ -29,7 +24,7 @@ export function ModeSwitcher({ view, onChange }: { view: ViewState; onChange: (m
             aria-disabled={ok ? undefined : "true"}
             onClick={() => ok && onChange(m)}
           >
-            {LABEL[m]}
+            {t(`mode.${m}`)}
           </button>
         );
       })}

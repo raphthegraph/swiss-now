@@ -2,9 +2,11 @@ import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remo
 import type { StorySpec } from "@swiss-now/core";
 import { easeHouse } from "@swiss-now/motion/math";
 import { ground } from "@swiss-now/motion/tokens";
+import type { UiLang } from "@swiss-now/core/i18n";
 import { layoutFor } from "./layout";
+import { formatClock, vs } from "./strings";
 
-export function CreditsCard({ story }: { story: StorySpec }) {
+export function CreditsCard({ story, lang = "en" }: { story: StorySpec; lang?: UiLang }) {
   const frame = useCurrentFrame();
   const { width, height, fps } = useVideoConfig();
   const L = layoutFor(width, height);
@@ -15,11 +17,7 @@ export function CreditsCard({ story }: { story: StorySpec }) {
         extrapolateRight: "clamp",
       }),
     );
-  const generated = new Intl.DateTimeFormat("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: "Europe/Zurich",
-  }).format(new Date(story.generatedAt));
+  const generated = formatClock(story.generatedAt, lang);
   return (
     <AbsoluteFill>
       <div
@@ -53,7 +51,7 @@ export function CreditsCard({ story }: { story: StorySpec }) {
             opacity: rise(0),
           }}
         >
-          Sources
+          {vs("sources", lang)}
         </div>
         <div
           style={{
@@ -85,9 +83,7 @@ export function CreditsCard({ story }: { story: StorySpec }) {
             opacity: rise(10 + story.credits.length * 4),
           }}
         >
-          Assembled automatically at {generated} from the day's snapshots. Train positions are
-          estimated from the timetable and live delays; values carry their observation time on the
-          website.
+          {vs("assembled", lang, { time: generated })}
         </div>
         <div
           style={{

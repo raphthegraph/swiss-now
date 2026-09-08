@@ -3,13 +3,15 @@
  * Full weather and water states are stored; the other layers keep summaries, so their figures
  * are a subset of the live ones.
  */
+import { FL } from "../i18n";
+import type { LocalizedText } from "../state/common";
 import type { Snapshot } from "../snapshot/index";
 import type { TopicId } from "./spec";
 import { quakeFigures, waterFigures, weatherFigures, type Figure } from "./figures";
 
 const fig = (
   id: string,
-  label: string,
+  label: LocalizedText,
   value: number,
   decimals: number,
   rest: { unit?: string; text?: string; where?: string } = {},
@@ -24,11 +26,11 @@ const fig = (
 export function railSummaryFigures(r: Snapshot["rail"]): Figure[] {
   if (!r) return [];
   const out: Figure[] = [
-    fig("running", "Trains running", r.running, 0, { where: "at snapshot time" }),
+    fig("running", FL.trainsRunning, r.running, 0, { where: "at snapshot time" }),
   ];
   if (r.onTimeIndex !== undefined)
     out.push(
-      fig("on-time", "On time", r.onTimeIndex * 100, 0, {
+      fig("on-time", FL.onTime, r.onTimeIndex * 100, 0, {
         unit: "%",
         where: "< 3 min at the last stop passed",
       }),
@@ -36,14 +38,14 @@ export function railSummaryFigures(r: Snapshot["rail"]): Figure[] {
   const worst = r.worst[0];
   if (worst && worst.delaySeconds >= 180)
     out.push(
-      fig("largest-delay", "Largest delay", worst.delaySeconds / 60, 0, {
+      fig("largest-delay", FL.largestDelay, worst.delaySeconds / 60, 0, {
         unit: "min",
         where: `${worst.line} → ${worst.headsign ?? ""}`.trim(),
       }),
     );
   if (r.disruptions.length)
     out.push(
-      fig("disruptions", "Disruptions", r.disruptions.length, 0, {
+      fig("disruptions", FL.disruptions, r.disruptions.length, 0, {
         unit: r.disruptions.length === 1 ? "section" : "sections",
       }),
     );
@@ -63,13 +65,13 @@ export function figuresForSnapshot(topic: TopicId, s: Snapshot, nowMs: number): 
       const h = s.hazards;
       if (h?.fireMaxLevel)
         out.push(
-          fig("fire", "Forest-fire danger", h.fireMaxLevel, 0, {
+          fig("fire", FL.fireDanger, h.fireMaxLevel, 0, {
             text: `level ${h.fireMaxLevel}`,
             where: `${h.fireRegionsAt3Plus} regions at 3 or more`,
           }),
         );
       if (h?.hail)
-        out.push(fig("hail", "Hail", 1, 0, { text: "detected", where: "MeteoSwiss radar" }));
+        out.push(fig("hail", FL.hail, 1, 0, { text: "detected", where: "MeteoSwiss radar" }));
       return [...out, ...quakeFigures(s.seismic, nowMs).slice(0, 2)];
     }
     case "energy": {
@@ -80,25 +82,25 @@ export function figuresForSnapshot(topic: TopicId, s: Snapshot, nowMs: number): 
         out.push(
           fig(
             "net-flow",
-            e.netImportMW >= 0 ? "Net import" : "Net export",
+            e.netImportMW >= 0 ? FL.netImport : FL.netExport,
             Math.abs(e.netImportMW),
             0,
             { unit: "MW", where: "Swissgrid, 20 min delayed" },
           ),
         );
       if (e.frequencyHz !== undefined)
-        out.push(fig("frequency", "Grid frequency", e.frequencyHz, 3, { unit: "Hz" }));
+        out.push(fig("frequency", FL.gridFrequency, e.frequencyHz, 3, { unit: "Hz" }));
       if (e.priceEurPerMWh !== undefined)
-        out.push(fig("price", "Day-ahead price", e.priceEurPerMWh, 0, { unit: "€/MWh" }));
+        out.push(fig("price", FL.dayAheadPrice, e.priceEurPerMWh, 0, { unit: "€/MWh" }));
       if (e.renewableSharePct !== undefined)
-        out.push(fig("renewable", "Renewable share", e.renewableSharePct, 0, { unit: "%" }));
+        out.push(fig("renewable", FL.renewableShare, e.renewableSharePct, 0, { unit: "%" }));
       return out;
     }
     case "events": {
       const ev = s.events;
       if (!ev) return [];
       return [
-        fig("events", "Events in the window", ev.count, 0, {
+        fig("events", FL.eventsInWindow, ev.count, 0, {
           where: `${ev.placed} placed with high confidence`,
         }),
       ];
@@ -109,12 +111,12 @@ export function figuresForSnapshot(topic: TopicId, s: Snapshot, nowMs: number): 
       const out: Figure[] = [];
       if (a.worstIndex !== undefined)
         out.push(
-          fig("air-index", "Air quality", a.worstIndex, 0, {
+          fig("air-index", FL.airQuality, a.worstIndex, 0, {
             text: String(a.worstIndex),
             where: `${a.referenceStations} reference stations`,
           }),
         );
-      out.push(fig("citizen", "Citizen sensors", a.citizenSensors, 0));
+      out.push(fig("citizen", FL.citizenSensors, a.citizenSensors, 0));
       return out;
     }
     case "now":

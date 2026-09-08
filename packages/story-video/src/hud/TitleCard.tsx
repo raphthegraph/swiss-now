@@ -2,20 +2,13 @@ import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remo
 import type { StorySpec } from "@swiss-now/core";
 import { easeHouse } from "@swiss-now/motion/math";
 import { ground } from "@swiss-now/motion/tokens";
-import { layerLabel } from "../chapter-style";
+import type { UiLang } from "@swiss-now/core/i18n";
 import { layoutFor } from "./layout";
+import { chapterTopicLabel, formatStoryDate, vs } from "./strings";
 
-export function formatStoryDate(date: string): string {
-  return new Intl.DateTimeFormat("en-GB", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "Europe/Zurich",
-  }).format(new Date(`${date}T12:00:00+02:00`));
-}
+export { formatStoryDate };
 
-export function TitleCard({ story }: { story: StorySpec }) {
+export function TitleCard({ story, lang = "en" }: { story: StorySpec; lang?: UiLang }) {
   const frame = useCurrentFrame();
   const { width, height, fps } = useVideoConfig();
   const L = layoutFor(width, height);
@@ -30,7 +23,7 @@ export function TitleCard({ story }: { story: StorySpec }) {
   const a2 = rise(10);
   const rule = rise(6);
   const size = L.portrait ? 128 : 112;
-  const layers = [...new Set(story.chapters.map(layerLabel))].join(" · ");
+  const layers = [...new Set(story.chapters.map((c) => chapterTopicLabel(c, lang)))].join(" · ");
   return (
     <AbsoluteFill>
       <div
@@ -65,7 +58,7 @@ export function TitleCard({ story }: { story: StorySpec }) {
             transform: `translateY(${(1 - a1) * 16}px)`,
           }}
         >
-          The day in {story.chapters.length} chapters · {layers}
+          {vs("dayIn", lang, { n: story.chapters.length })} · {layers}
         </div>
         <div
           style={{
@@ -85,9 +78,9 @@ export function TitleCard({ story }: { story: StorySpec }) {
             transform: `translateY(${(1 - a2) * 28}px)`,
           }}
         >
-          Switzerland
+          {vs("switzerland", lang)}
           <br />
-          <span style={{ color: ground.graphite }}>today</span>
+          <span style={{ color: ground.graphite }}>{vs("today", lang)}</span>
         </div>
       </div>
     </AbsoluteFill>

@@ -4,17 +4,20 @@ import { chapterFigures } from "@swiss-now/core/story";
 import { easeHouse } from "@swiss-now/motion/math";
 import { Metric } from "@swiss-now/motion/svg";
 import { ground } from "@swiss-now/motion/tokens";
-import { chapterAccent, chapterCredit, layerLabel } from "../chapter-style";
+import { chapterAccent, chapterCredit } from "../chapter-style";
+import { pick, type UiLang } from "@swiss-now/core/i18n";
+import { chapterTopicLabel } from "./strings";
 import { layoutFor } from "./layout";
 
 export interface ChapterHudProps {
   chapter: Chapter;
   index: number;
   total: number;
+  lang?: UiLang;
 }
 
 /** Typographic block for one chapter: label, headline, body, key figures, attribution. */
-export function ChapterHud({ chapter, index, total }: ChapterHudProps) {
+export function ChapterHud({ chapter, index, total, lang = "en" }: ChapterHudProps) {
   const frame = useCurrentFrame();
   const { width, height, fps } = useVideoConfig();
   const L = layoutFor(width, height);
@@ -37,8 +40,8 @@ export function ChapterHud({ chapter, index, total }: ChapterHudProps) {
   });
   const figW = L.column.width / Math.max(1, figures.length);
   const svgH = 150 * (L.metricScale / 2);
-  const headline = chapter.headline.en ?? chapter.headline.de;
-  const body = chapter.body?.en ?? chapter.body?.de;
+  const headline = pick(chapter.headline, lang);
+  const body = chapter.body ? pick(chapter.body, lang) : undefined;
   return (
     <AbsoluteFill>
       {/* paper gradient so type stays legible over the map (Swiss poster, not a card) */}
@@ -78,7 +81,7 @@ export function ChapterHud({ chapter, index, total }: ChapterHudProps) {
         >
           <span style={{ width: 14, height: 14, background: accent, display: "inline-block" }} />
           <span>
-            {index + 1} / {total} · {layerLabel(chapter)}
+            {index + 1} / {total} · {chapterTopicLabel(chapter, lang)}
           </span>
         </div>
         <div
@@ -117,10 +120,10 @@ export function ChapterHud({ chapter, index, total }: ChapterHudProps) {
           >
             {figures.map((f, i) => (
               <Metric
-                key={f.label}
+                key={f.label.en ?? f.label.de}
                 x={(i * figW) / L.metricScale}
                 y={(svgH / L.metricScale) * 0.82}
-                label={f.label}
+                label={pick(f.label, lang)}
                 value={f.value}
                 decimals={f.decimals}
                 {...(f.unit ? { unit: f.unit } : {})}

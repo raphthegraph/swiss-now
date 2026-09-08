@@ -22,6 +22,8 @@ import { figuresFor, figuresForSnapshot, presenceFor, type TopicId } from "@swis
 import { useSnapshotTimeline } from "@/lib/use-snapshot-timeline";
 import { SnapshotScrubber } from "../hud/SnapshotScrubber";
 import { formatAgo, formatTime } from "@/lib/format";
+import { useT } from "@/lib/i18n/lang";
+import { FL } from "@swiss-now/core/i18n";
 import { indicatorPlaceFigures, votePlaceFigures, type Figure } from "@swiss-now/core/topics";
 import { CompareView } from "../views/CompareView";
 import type { PlacePick } from "../hud/PlaceSearch";
@@ -155,6 +157,7 @@ export function MapPage({
   initialRail?: RailState | undefined;
   initialSeismic?: SeismicState | undefined;
 }) {
+  const { t, l, lang } = useT();
   const { view, setTopic, setMode, setTime, setPlace } = useViewState();
   const { topic, mode } = view;
   const presence = useMemo(() => presenceOf(topic), [topic]);
@@ -263,12 +266,12 @@ export function MapPage({
   useEffect(() => {
     if (!indicator) return;
     statsHover.choropleth = {
-      label: indicator.meta.label.en ?? indicator.meta.label.de,
+      label: l(indicator.meta.label),
       unit: indicator.meta.unit,
       source: indicator.meta.attribution,
       decimals: indicator.meta.decimals,
     };
-  }, [indicator, statsHover]);
+  }, [indicator, statsHover, l]);
   const [statsMuni] = useState(() =>
     choroplethContribution({
       id: "stats-muni",
@@ -334,7 +337,7 @@ export function MapPage({
       layer: "politics",
       topoUrl: "/geo/ch-2026.topo.json",
       scale: "yesShare",
-      hoverExtras: { choropleth: { label: "yes", unit: "%", source: "Source: BFS" } },
+      hoverExtras: { choropleth: { label: t("yes"), unit: "%", source: "Source: BFS" } },
     }),
   );
   const choroState = useMemo(
@@ -428,42 +431,42 @@ export function MapPage({
     if (isStats && indicator) return indicatorPlaceFigures(indicator, p.key, period);
     if (topic === "politics" && vote) return votePlaceFigures(vote, p.key);
     if ((topic === "weather" || topic === "water" || topic === "now") && p.lonLat) {
-      const l = localSummary(p.lonLat, weather, hydrology);
-      if (!l) return [];
+      const ls = localSummary(p.lonLat, weather, hydrology);
+      if (!ls) return [];
       const out: Figure[] = [];
-      if (l.temperature !== undefined)
+      if (ls.temperature !== undefined)
         out.push({
           id: "temp",
-          label: "Temperature",
-          value: l.temperature,
+          label: FL.temperature,
+          value: ls.temperature,
           decimals: 1,
           unit: "°C",
-          where: `${l.stationName} · ${l.distanceKm.toFixed(0)} km`,
+          where: `${ls.stationName} · ${ls.distanceKm.toFixed(0)} km`,
         });
-      if (l.gustKmh !== undefined)
-        out.push({ id: "gust", label: "Gust", value: l.gustKmh, decimals: 0, unit: "km/h" });
-      if (l.rain10min !== undefined)
+      if (ls.gustKmh !== undefined)
+        out.push({ id: "gust", label: FL.gust, value: ls.gustKmh, decimals: 0, unit: "km/h" });
+      if (ls.rain10min !== undefined)
         out.push({
           id: "rain",
-          label: "Rain, 10 min",
-          value: l.rain10min,
+          label: FL.rain10min,
+          value: ls.rain10min,
           decimals: 1,
           unit: "mm",
         });
-      if (l.river?.discharge !== undefined)
+      if (ls.river?.discharge !== undefined)
         out.push({
           id: "discharge",
-          label: "River",
-          value: l.river.discharge,
+          label: FL.river,
+          value: ls.river.discharge,
           decimals: 0,
           unit: "m³/s",
-          where: `${l.river.waterBody ?? ""} ${l.river.name}`.trim(),
+          where: `${ls.river.waterBody ?? ""} ${ls.river.name}`.trim(),
         });
-      if (l.river?.temp !== undefined)
+      if (ls.river?.temp !== undefined)
         out.push({
           id: "water-temp",
-          label: "Water",
-          value: l.river.temp,
+          label: FL.water,
+          value: ls.river.temp,
           decimals: 1,
           unit: "°C",
         });
@@ -506,19 +509,19 @@ export function MapPage({
   );
   const voteStatus = past ? (
     <span className="label tnum">
-      Snapshot · {formatTime(past.at)} ·{" "}
+      {t("snapshot")} · {formatTime(past.at, lang)} ·{" "}
       <span className="freshness" data-state="stale">
-        {formatAgo(Date.now() - new Date(past.at).getTime())}
+        {formatAgo(Date.now() - new Date(past.at).getTime(), lang)}
       </span>
     </span>
   ) : topic === "politics" && vote ? (
     <span className="label tnum">
-      Vote of {formatDate(vote.meta.date)} · {vote.status} · Source: BFS
+      {t("vote")} · {formatDate(vote.meta.date, lang)} · {vote.status} · Source: BFS
     </span>
   ) : isStats && indicator ? (
     <span className="label tnum">
-      {indicator.meta.label.en ?? indicator.meta.label.de} ·{" "}
-      {period ?? latestValues(indicator).period} · {indicator.meta.attribution}
+      {l(indicator.meta.label)} · {period ?? latestValues(indicator).period} ·{" "}
+      {indicator.meta.attribution}
     </span>
   ) : undefined;
   return (
@@ -569,7 +572,7 @@ export function MapPage({
           b={{ place: placeB, figures: compareFigures(placeB) }}
           onPickA={(p) => setPlaces(p.key, placeKeys[1])}
           onPickB={(p) => setPlaces(placeKeys[0], p.key)}
-          title={`Compare · ${TOPICS[topic].label.en ?? topic}`}
+          title={t("compareTitle", { topic: l(TOPICS[topic].label) })}
         />
       ) : null}
       {mode === "charts" ? (
@@ -635,15 +638,15 @@ export function MapPage({
           topic === "rail" ? (
             <RailLegend loaded={railProgress.loaded} needed={railProgress.needed} />
           ) : topic === "politics" ? (
-            <RampLegend scale="yesShare" label="Yes share" unit=" %" />
+            <RampLegend scale="yesShare" label={t("yesShare")} unit=" %" />
           ) : topic === "air" ? (
-            <RampLegend scale="airIndex" label="Air index" />
+            <RampLegend scale="airIndex" label={l(FL.airIndex)} />
           ) : topic === "hazards" ? (
-            <RampLegend scale="dangerLevel" label="Danger level" />
+            <RampLegend scale="dangerLevel" label={l(FL.dangerLevel)} />
           ) : isStats && statsUpdate && indicator ? (
             <DynamicRampLegend
               stops={statsUpdate.stops}
-              label={indicator.meta.label.en ?? indicator.meta.label.de}
+              label={l(indicator.meta.label)}
               unit={indicator.meta.unit ? ` ${indicator.meta.unit}` : ""}
               decimals={indicator.meta.decimals}
             />
@@ -677,7 +680,7 @@ export function MapPage({
             periods={indicator.periods}
             selected={period ?? latestValues(indicator).period}
             onChange={setTime}
-            label={indicator.meta.periodKind === "month" ? "Month" : "Year"}
+            label={indicator.meta.periodKind === "month" ? t("month") : t("year")}
           />
         ) : null}
         {topic === "politics" && mode === "timeline" && politics && voteId ? (

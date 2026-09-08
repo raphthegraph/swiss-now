@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Player } from "@remotion/player";
 import type { StorySpec } from "@swiss-now/core";
+import type { UiLang } from "@swiss-now/core/i18n";
+import { useT } from "@/lib/i18n/lang";
 import { VIDEO_FPS } from "@swiss-now/motion/specs";
 import { SwitzerlandToday, storyDurationInFrames } from "@swiss-now/story-video";
 
@@ -11,7 +13,8 @@ import { SwitzerlandToday, storyDurationInFrames } from "@swiss-now/story-video"
  * composition (docs/MOTION_SYSTEM.md). Mounted on demand so the page stays light — the plate
  * loads a second MapLibre instance and the tiles for every chapter.
  */
-export function StoryPlayer({ story }: { story: StorySpec }) {
+export function StoryPlayer({ story, lang }: { story: StorySpec; lang: UiLang }) {
+  const { t } = useT();
   const [open, setOpen] = useState(false);
   const duration = storyDurationInFrames(story, VIDEO_FPS);
   const seconds = Math.round(duration / VIDEO_FPS);
@@ -21,8 +24,8 @@ export function StoryPlayer({ story }: { story: StorySpec }) {
         <span className="video-poster__mark" aria-hidden="true">
           ▶
         </span>
-        <span>Play the {seconds}-second version</span>
-        <span className="label">1080 × 1920 · rendered in your browser</span>
+        <span>{t("playSeconds", { s: seconds })}</span>
+        <span className="label">{t("renderedInBrowser")}</span>
       </button>
     );
   }
@@ -30,7 +33,7 @@ export function StoryPlayer({ story }: { story: StorySpec }) {
     <div className="video-frame">
       <Player
         component={SwitzerlandToday}
-        inputProps={{ story }}
+        inputProps={{ story, lang }}
         durationInFrames={duration}
         fps={VIDEO_FPS}
         compositionWidth={1080}
@@ -39,7 +42,7 @@ export function StoryPlayer({ story }: { story: StorySpec }) {
         loop
         autoPlay
         style={{ width: "100%", aspectRatio: "9 / 16" }}
-        renderLoading={() => <div className="video-frame__loading label">Loading the map…</div>}
+        renderLoading={() => <div className="video-frame__loading label">{t("loadingMap")}</div>}
       />
     </div>
   );

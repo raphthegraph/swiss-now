@@ -2,17 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { Marker, type Map as MapLibreMap } from "maplibre-gl";
-import type { EventsState, NewsEvent } from "@swiss-now/core";
-
-const CATEGORY_LABEL: Record<NewsEvent["category"], string> = {
-  fire: "Fire",
-  accident: "Accident",
-  "natural-hazard": "Natural hazard",
-  avalanche: "Avalanche",
-  crime: "Police",
-  police: "Police",
-  news: "News",
-};
+import type { EventsState } from "@swiss-now/core";
+import { EVENT_CATEGORY, pick } from "@swiss-now/core/i18n";
+import { useLang } from "@/lib/i18n/lang";
 const MAX_MARKERS = 60;
 
 export interface EventMarkersProps {
@@ -28,6 +20,7 @@ export interface EventMarkersProps {
  */
 export function EventMarkers({ map, events, mode }: EventMarkersProps) {
   const markers = useRef(new Map<string, Marker>());
+  const { lang } = useLang();
 
   useEffect(() => {
     if (!map) return;
@@ -55,13 +48,16 @@ export function EventMarkers({ map, events, mode }: EventMarkersProps) {
         el.rel = "noopener";
         el.dataset["confidence"] = e.place!.confidence.toFixed(2);
         el.dataset["category"] = e.category;
-        el.title = e.headline.de;
-        el.innerHTML = `<span class="event-marker__dot"></span><span class="event-marker__label"><span class="event-marker__cat">${CATEGORY_LABEL[e.category]}</span><span class="event-marker__place">${escapeHtml(e.place!.name)}</span></span>`;
+        el.title = pick(e.headline, lang);
+        el.innerHTML = `<span class="event-marker__dot"></span><span class="event-marker__label"><span class="event-marker__cat">${escapeHtml(pick(EVENT_CATEGORY[e.category].one, lang))}</span><span class="event-marker__place">${escapeHtml(e.place!.name)}</span></span>`;
         el.style.animationDelay = `${Math.min(i, 20) * 40}ms`;
         m = new Marker({ element: el, anchor: "left", offset: [6, 0] })
           .setLngLat(e.place!.lonLat)
           .addTo(map);
         markers.current.set(e.id, m);
+      } else {
+        const cat = m.getElement().querySelector(".event-marker__cat");
+        if (cat) cat.textContent = pick(EVENT_CATEGORY[e.category].one, lang);
       }
       m.getElement().style.opacity = String(mode === "quiet" ? opacity * 0.85 : opacity);
       m.getElement().style.zIndex = String(1000 - Math.min(999, Math.round(age)));
@@ -69,7 +65,7 @@ export function EventMarkers({ map, events, mode }: EventMarkersProps) {
     return () => {
       if (!map.getStyle()) markers.current.clear();
     };
-  }, [map, events, mode]);
+  }, [map, events, mode, lang]);
 
   useEffect(
     () => () => {

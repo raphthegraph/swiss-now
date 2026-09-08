@@ -1,9 +1,10 @@
 "use client";
 
 import type { Figure } from "@swiss-now/core/topics";
-import type { GeoRegister } from "@swiss-now/core";
+import type { GeoRegister, LocalizedText } from "@swiss-now/core";
 import { PlaceSearch, type PlacePick } from "../hud/PlaceSearch";
 import { formatNumber } from "@/lib/format";
+import { useT } from "@/lib/i18n/lang";
 
 export interface CompareSide {
   place: PlacePick | undefined;
@@ -26,7 +27,8 @@ export function CompareView({
   onPickB: (p: PlacePick) => void;
   title: string;
 }) {
-  const rows = new Map<string, { label: string; a?: Figure; b?: Figure }>();
+  const { t, l } = useT();
+  const rows = new Map<string, { label: LocalizedText; a?: Figure; b?: Figure }>();
   for (const f of a.figures) rows.set(f.id, { label: f.label, a: f });
   for (const f of b.figures) rows.set(f.id, { ...(rows.get(f.id) ?? { label: f.label }), b: f });
   const show = (f: Figure | undefined) =>
@@ -34,12 +36,10 @@ export function CompareView({
       ? `${f.text ?? formatNumber(f.value, f.decimals)}${f.unit && !f.text ? ` ${f.unit}` : ""}`
       : "—";
   return (
-    <section className="charts-view compare-view" aria-label="Compare">
+    <section className="charts-view compare-view" aria-label={t("compare")}>
       <header className="charts__header">
         <h2 className="charts__title">{title}</h2>
-        <p className="charts__meta label">
-          Two places, the same figures. Type a municipality or a canton.
-        </p>
+        <p className="charts__meta label">{t("twoPlaces")}</p>
       </header>
       <div className="compare__pickers">
         <PlaceSearch register={register} value={a.place} onPick={onPickA} label="A" autoFocusKey />
@@ -54,9 +54,9 @@ export function CompareView({
           </tr>
         </thead>
         <tbody>
-          {[...rows.values()].map((r) => (
-            <tr key={r.label}>
-              <th className="label">{r.label}</th>
+          {[...rows.entries()].map(([id, r]) => (
+            <tr key={id}>
+              <th className="label">{l(r.label)}</th>
               <td className="tnum">
                 {show(r.a)}
                 {r.a?.where ? <div className="where">{r.a.where}</div> : null}
@@ -70,7 +70,7 @@ export function CompareView({
           {!rows.size ? (
             <tr>
               <td colSpan={3} className="label">
-                Pick two places to compare.
+                {t("pickTwo")}
               </td>
             </tr>
           ) : null}

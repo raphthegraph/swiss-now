@@ -2,6 +2,7 @@
 
 import type { Field } from "@swiss-now/core";
 import { formatTime } from "@/lib/format";
+import { useT } from "@/lib/i18n/lang";
 
 export interface RadarScrubberProps {
   /** oldest → newest */
@@ -14,8 +15,7 @@ export interface RadarScrubberProps {
 
 /**
  * The radar timeline: 5-minute composites over the last three hours. A hairline scrubber in the
- * HUD; playback loops the sequence at 4 frames/s. GSAP takes over for the full multi-layer
- * timeline in Phase 3 (docs/MOTION_SYSTEM.md §3).
+ * HUD; playback loops the sequence at 4 frames/s.
  */
 export function RadarScrubber({
   frames,
@@ -24,18 +24,19 @@ export function RadarScrubber({
   onChange,
   onTogglePlay,
 }: RadarScrubberProps) {
+  const { t, lang } = useT();
   if (frames.length < 2) return null;
   const current = frames[index] ?? frames[frames.length - 1]!;
   const isLatest = index === frames.length - 1;
   return (
-    <div className="scrubber" role="group" aria-label="Precipitation radar timeline">
+    <div className="scrubber" role="group" aria-label={t("radarTimeline")}>
       <button
         type="button"
         className="scrubber__play"
         onClick={onTogglePlay}
         aria-pressed={playing}
       >
-        {playing ? "Pause" : "Play"}
+        {playing ? t("pause") : t("play")}
       </button>
       <input
         className="scrubber__range"
@@ -45,15 +46,15 @@ export function RadarScrubber({
         step={1}
         value={index}
         onChange={(e) => onChange(Number(e.target.value))}
-        aria-label="Radar frame"
-        aria-valuetext={formatTime(current.validAt)}
+        aria-label={t("radarFrame")}
+        aria-valuetext={formatTime(current.validAt, lang)}
       />
       <span className="scrubber__time tnum">
-        <span className="label">Radar</span> {formatTime(frames[0]!.validAt)} –{" "}
-        {formatTime(frames[frames.length - 1]!.validAt)}
+        <span className="label">{t("radar")}</span> {formatTime(frames[0]!.validAt, lang)} –{" "}
+        {formatTime(frames[frames.length - 1]!.validAt, lang)}
         {" · "}
-        <strong>{formatTime(current.validAt)}</strong>
-        {isLatest ? <span className="label"> · latest</span> : null}
+        <strong>{formatTime(current.validAt, lang)}</strong>
+        {isLatest ? <span className="label"> · {t("latest")}</span> : null}
       </span>
     </div>
   );

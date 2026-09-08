@@ -1,21 +1,24 @@
+"use client";
+
+import { useT } from "@/lib/i18n/lang";
+
 /** What the marks mean (docs/PRODUCT_VISION.md §4: interpolation is always labelled). */
 export function RailLegend({ loaded, needed }: { loaded: number; needed: number }) {
+  const { t } = useT();
   const loading = needed > 0 && loaded < needed * 0.9;
   return (
-    <div className="legend" aria-label="Rail legend">
+    <div className="legend" aria-label={t("railLegend")}>
       <span className="legend__item">
-        <span className="legend__train" /> train, position estimated from timetable + live delays
+        <span className="legend__train" /> {t("trainEstimated")}
       </span>
       <span className="legend__item">
-        <span className="legend__ring" /> delayed ≥ 3 min · ring grows with the delay
+        <span className="legend__ring" /> {t("delayedRing")}
       </span>
       <span className="legend__item">
-        <span className="legend__disruption" /> disruption between the named stations (SBB)
+        <span className="legend__disruption" /> {t("disruptionBetween")}
       </span>
       {loading ? (
-        <span className="legend__item label">
-          loading routes {loaded} / {needed}
-        </span>
+        <span className="legend__item label">{t("loadingRoutes", { loaded, needed })}</span>
       ) : null}
     </div>
   );

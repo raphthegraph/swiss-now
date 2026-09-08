@@ -20,6 +20,7 @@
     "./snapshot": "./src/snapshot/index.ts",
     "./story": "./src/story/index.ts",
     "./topics": "./src/topics/index.ts",
+    "./i18n": "./src/i18n/index.ts",
     "./data-sources/bfs-pxweb": "./src/data-sources/bfs-pxweb/index.ts",
     "./data-sources/politics": "./src/data-sources/politics/index.ts",
     "./data-sources/energy": "./src/data-sources/energy/index.ts",

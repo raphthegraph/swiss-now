@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { buildStory, chapterFigures } from "../src/story/index";
 import type { Snapshot } from "../src/snapshot/index";
+import { FL } from "../src/i18n";
 
 const t = "2026-09-08T12:00:00Z";
 const snap: Snapshot = {
@@ -102,14 +103,14 @@ describe("story markers and figures", () => {
     expect(extremes.markers.map((m) => m.id).sort()).toEqual(["smn:CHU", "smn:JUN"]);
     expect(extremes.markers.every((m) => m.emphasis && m.kind === "temperature")).toBe(true);
     expect(chapterFigures(extremes)).toEqual([
-      { label: "Warmest", value: 31.5, decimals: 1, unit: "°C" },
-      { label: "Coldest", value: 4.3, decimals: 1, unit: "°C" },
+      { label: FL.warmest, value: 31.5, decimals: 1, unit: "°C" },
+      { label: FL.coldest, value: 4.3, decimals: 1, unit: "°C" },
     ]);
     const quake = story.chapters.find((c) => c.type === "quake")!;
     expect(quake.markers[0]).toMatchObject({ kind: "quake", lonLat: [9.6, 46.6], value: 2.5 });
-    expect(chapterFigures(quake)[0]).toEqual({ label: "Magnitude", value: 2.5, decimals: 1 });
+    expect(chapterFigures(quake)[0]).toEqual({ label: FL.magnitude, value: 2.5, decimals: 1 });
     const rail = story.chapters.find((c) => c.type === "rail")!;
-    expect(chapterFigures(rail).map((f) => f.label)).toEqual([
+    expect(chapterFigures(rail).map((f) => f.label.en)).toEqual([
       "Lowest on time",
       "Largest delay",
       "Trains now",

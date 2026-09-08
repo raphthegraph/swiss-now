@@ -7,6 +7,7 @@ import { latestValues } from "@swiss-now/core/state";
 import { ground } from "@swiss-now/motion/tokens";
 import { PlotFigure } from "../charts/PlotFigure";
 import { formatNumber } from "@/lib/format";
+import { useT } from "@/lib/i18n/lang";
 
 /** CHARTS for a statistics topic: a top-twelve ranking of the map's indicator and, when the series is long, its national course. */
 export function StatsCharts({
@@ -22,6 +23,7 @@ export function StatsCharts({
   accent: string;
   period: string | undefined;
 }) {
+  const { t, l } = useT();
   const ranking = useMemo(() => {
     if (!series) return [];
     const pi = period ? series.periods.indexOf(period) : -1;
@@ -99,25 +101,27 @@ export function StatsCharts({
     }),
     [course, accent, courseMeta],
   );
-  if (!series) return <p className="charts__empty label">Loading statistics…</p>;
-  const label = series.meta.label.en ?? series.meta.label.de;
+  if (!series) return <p className="charts__empty label">{t("loadingStats")}</p>;
+  const label = l(series.meta.label);
   return (
     <div className="charts">
       <header className="charts__header">
-        <h2 className="charts__title">{label}, top twelve</h2>
+        <h2 className="charts__title">{t("topTwelve", { label })}</h2>
         <p className="charts__meta label">
           {period ?? latestValues(series).period} · {series.meta.attribution}
         </p>
       </header>
-      {ranking.length ? <PlotFigure options={rankingOptions} title={`${label}: ranking`} /> : null}
+      {ranking.length ? (
+        <PlotFigure options={rankingOptions} title={t("ranking", { label })} />
+      ) : null}
       {course.length > 3 ? (
         <>
           <h3 className="charts__title charts__title--small">
-            {courseMeta?.meta.label.en ?? courseMeta?.meta.label.de}, Switzerland
+            {t("labelSwitzerland", { label: l(courseMeta?.meta.label) })}
           </h3>
           <PlotFigure
             options={courseOptions}
-            title={`${courseMeta?.meta.label.en}: national course`}
+            title={t("nationalCourse", { label: l(courseMeta?.meta.label) })}
           />
         </>
       ) : null}

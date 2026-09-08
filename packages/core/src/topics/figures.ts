@@ -12,10 +12,12 @@ import type { HazardsState } from "../state/hazards";
 import { latestValues, type IndicatorSeries } from "../state/stats";
 import { currentDelay } from "../data-sources/transit/rail-state";
 import type { TopicId } from "./spec";
+import type { LocalizedText } from "../state/common";
+import { FL, t, withSuffix } from "../i18n";
 
 export interface Figure {
   id: string;
-  label: string;
+  label: LocalizedText;
   value: number;
   decimals: number;
   unit?: string;
@@ -45,7 +47,7 @@ export interface TopicStates {
 
 const fig = (
   id: string,
-  label: string,
+  label: LocalizedText,
   value: number,
   decimals: number,
   rest: { unit?: string; text?: string; where?: string } = {},
@@ -64,28 +66,28 @@ export function weatherFigures(w: WeatherState | undefined): Figure[] {
   const x = w.extremes;
   if (x.warmest)
     out.push(
-      fig("warmest", "Warmest", x.warmest.value, 1, {
+      fig("warmest", FL.warmest, x.warmest.value, 1, {
         unit: "°C",
         where: name(x.warmest.stationId),
       }),
     );
   if (x.coldest)
     out.push(
-      fig("coldest", "Coldest", x.coldest.value, 1, {
+      fig("coldest", FL.coldest, x.coldest.value, 1, {
         unit: "°C",
         where: name(x.coldest.stationId),
       }),
     );
   if (x.windiestGust)
     out.push(
-      fig("gust", "Strongest gust", x.windiestGust.value, 0, {
+      fig("gust", FL.strongestGust, x.windiestGust.value, 0, {
         unit: "km/h",
         where: name(x.windiestGust.stationId),
       }),
     );
   if (w.rainingShare !== undefined)
     out.push(
-      fig("rain-share", "Stations reporting rain", w.rainingShare * 100, 0, {
+      fig("rain-share", FL.stationsRain, w.rainingShare * 100, 0, {
         unit: "%",
         where: `${w.stations.length} stations`,
       }),
@@ -101,14 +103,14 @@ export function waterFigures(h: HydrologyState | undefined): Figure[] {
   );
   if (basel)
     out.push(
-      fig("rhine-basel", "Rhine at Basel", basel.value, 0, {
+      fig("rhine-basel", FL.rhineBasel, basel.value, 0, {
         unit: "m³/s",
         where: "FOEN, Rheinhalle",
       }),
     );
   const elevated = Object.values(h.dangerLevels).filter((d) => d >= 2).length;
   out.push(
-    fig("flood-danger", "Flood danger", elevated, 0, {
+    fig("flood-danger", FL.floodDanger, elevated, 0, {
       unit: elevated === 1 ? "station ≥ level 2" : "stations ≥ level 2",
       where: `${Object.keys(h.dangerLevels).length} classified stations`,
     }),
@@ -121,7 +123,7 @@ export function waterFigures(h: HydrologyState | undefined): Figure[] {
   if (warmest) {
     const st = h.stations.find((s) => s.id === warmest.stationId);
     out.push(
-      fig("warmest-river", "Warmest river", warmest.value, 1, {
+      fig("warmest-river", FL.warmestRiver, warmest.value, 1, {
         unit: "°C",
         where: `${st?.waterBody ?? ""} ${st?.name.de ?? ""}`.trim(),
       }),
@@ -135,13 +137,13 @@ export function railFigures(rail: RailState | undefined, nowMs: number): Figure[
   const out: Figure[] = [];
   const running = rail.activeTrips.filter((t) => !t.cancelled);
   out.push(
-    fig("running", "Trains running", running.length, 0, {
+    fig("running", FL.trainsRunning, running.length, 0, {
       where: "positions estimated from timetable + live delays",
     }),
   );
   if (rail.onTimeIndex !== undefined)
     out.push(
-      fig("on-time", "On time", rail.onTimeIndex * 100, 0, {
+      fig("on-time", FL.onTime, rail.onTimeIndex * 100, 0, {
         unit: "%",
         where: "< 3 min at the last stop passed",
       }),
@@ -153,14 +155,14 @@ export function railFigures(rail: RailState | undefined, nowMs: number): Figure[
   }
   if (worst && worst.delay >= 180)
     out.push(
-      fig("largest-delay", "Largest delay", worst.delay / 60, 0, {
+      fig("largest-delay", FL.largestDelay, worst.delay / 60, 0, {
         unit: "min",
         where: `${worst.trip.routeShortName} → ${worst.trip.headsign ?? ""}`.trim(),
       }),
     );
   if (rail.disruptions.length > 0)
     out.push(
-      fig("disruptions", "Disruptions", rail.disruptions.length, 0, {
+      fig("disruptions", FL.disruptions, rail.disruptions.length, 0, {
         unit: rail.disruptions.length === 1 ? "section" : "sections",
         where: rail.disruptions[0]!.affects?.join(" – ") ?? rail.disruptions[0]!.headline.de,
       }),
@@ -168,7 +170,7 @@ export function railFigures(rail: RailState | undefined, nowMs: number): Figure[
   const cancelled = rail.activeTrips.length - running.length;
   if (cancelled > 0)
     out.push(
-      fig("cancelled", "Cancelled", cancelled, 0, {
+      fig("cancelled", FL.cancelled, cancelled, 0, {
         unit: cancelled === 1 ? "train" : "trains",
         where: "in the current window",
       }),
@@ -186,7 +188,7 @@ export function quakeFigures(q: SeismicState | undefined, nowMs: number): Figure
     const hours = (nowMs - new Date(latest.startsAt).getTime()) / 3_600_000;
     const m = latest.magnitude ?? 0;
     out.push(
-      fig("last-quake", "Last earthquake", m, 1, {
+      fig("last-quake", FL.lastQuake, m, 1, {
         text: `M${m.toFixed(1)}`,
         where: `${place(latest)} · ${hours < 48 ? `${Math.round(hours)} h ago` : `${Math.round(hours / 24)} days ago`}`,
       }),
@@ -194,9 +196,20 @@ export function quakeFigures(q: SeismicState | undefined, nowMs: number): Figure
   }
   const strong = q.events.filter((e) => (e.magnitude ?? 0) >= 2);
   out.push(
-    fig("quake-count", `Quakes, ${q.windowDays} days`, q.events.length, 0, {
-      where: `${strong.length} of magnitude 2 or more`,
-    }),
+    fig(
+      "quake-count",
+      t(
+        `Erdbeben, ${q.windowDays} Tage`,
+        `Quakes, ${q.windowDays} days`,
+        `Séismes, ${q.windowDays} jours`,
+        `Terremoti, ${q.windowDays} giorni`,
+      ),
+      q.events.length,
+      0,
+      {
+        where: `${strong.length} ≥ M 2`,
+      },
+    ),
   );
   const strongest = q.events.reduce<(typeof q.events)[number] | undefined>(
     (b, e) => (!b || (e.magnitude ?? 0) > (b.magnitude ?? 0) ? e : b),
@@ -205,7 +218,7 @@ export function quakeFigures(q: SeismicState | undefined, nowMs: number): Figure
   if (strongest && strongest !== latest) {
     const m = strongest.magnitude ?? 0;
     out.push(
-      fig("strongest", "Strongest", m, 1, { text: `M${m.toFixed(1)}`, where: place(strongest) }),
+      fig("strongest", FL.strongest, m, 1, { text: `M${m.toFixed(1)}`, where: place(strongest) }),
     );
   }
   return out;
@@ -221,7 +234,7 @@ export function politicsFigures(
     const title = vote.meta.title.en ?? vote.meta.title.de;
     if (vote.national.yesPct !== null)
       out.push(
-        fig("yes", "Yes", vote.national.yesPct, 1, {
+        fig("yes", FL.yes, vote.national.yesPct, 1, {
           unit: "%",
           where:
             vote.meta.national?.accepted === undefined
@@ -231,7 +244,7 @@ export function politicsFigures(
       );
     if (vote.national.turnoutPct !== null)
       out.push(
-        fig("turnout", "Turnout", vote.national.turnoutPct, 1, {
+        fig("turnout", FL.turnout, vote.national.turnoutPct, 1, {
           unit: "%",
           where: `${Object.keys(vote.byMunicipality).length} municipalities`,
         }),
@@ -239,7 +252,7 @@ export function politicsFigures(
     const n = vote.meta.national;
     if (n?.cantonsYes !== undefined && n.cantonsNo !== undefined)
       out.push(
-        fig("cantons", "Cantons", n.cantonsYes, 1, {
+        fig("cantons", FL.cantons, n.cantonsYes, 1, {
           text: `${n.cantonsYes} : ${n.cantonsNo}`,
           where: "yes : no (half cantons count ½)",
         }),
@@ -252,7 +265,7 @@ export function politicsFigures(
       Math.round((new Date(`${next.date}T12:00:00+02:00`).getTime() - nowMs) / 86_400_000),
     );
     out.push(
-      fig("next-vote", "Next vote Sunday", days, 0, {
+      fig("next-vote", FL.nextVote, days, 0, {
         unit: days === 1 ? "day" : "days",
         where: `${next.date}${next.proposals ? ` · ${next.proposals} proposals` : ""}`,
       }),
@@ -271,7 +284,7 @@ export function energyFigures(e: EnergyState | undefined): Figure[] {
       .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]))
       .map(([k, v]) => `${k} ${Math.round(Math.abs(v))}`);
     out.push(
-      fig("net-flow", imp ? "Net import" : "Net export", Math.abs(e.netImportMW), 0, {
+      fig("net-flow", imp ? FL.netImport : FL.netExport, Math.abs(e.netImportMW), 0, {
         unit: "MW",
         where: `${parts.join(" · ")} · 20 min delayed`,
       }),
@@ -279,7 +292,7 @@ export function energyFigures(e: EnergyState | undefined): Figure[] {
   }
   if (e.frequencyHz !== undefined)
     out.push(
-      fig("frequency", "Grid frequency", e.frequencyHz, 3, {
+      fig("frequency", FL.gridFrequency, e.frequencyHz, 3, {
         unit: "Hz",
         where:
           e.gridTimeDeviationS !== undefined
@@ -289,14 +302,14 @@ export function energyFigures(e: EnergyState | undefined): Figure[] {
     );
   if (e.price)
     out.push(
-      fig("price", "Day-ahead price", e.price.eurPerMWh, 0, {
+      fig("price", FL.dayAheadPrice, e.price.eurPerMWh, 0, {
         unit: "€/MWh",
         where: "this hour · Energy-Charts",
       }),
     );
   if (e.generation?.renewableSharePct !== undefined)
     out.push(
-      fig("renewable", "Renewable share", e.generation.renewableSharePct, 0, {
+      fig("renewable", FL.renewableShare, e.generation.renewableSharePct, 0, {
         unit: "%",
         where: `of generation · nuclear ${Math.round((e.generation.byTypeMW.nuclear ?? 0) / 100) / 10} GW`,
       }),
@@ -314,14 +327,14 @@ export function eventsFigures(ev: EventsState | undefined, nowMs: number): Figur
       byCanton.set(e.place.cantonCode, (byCanton.get(e.place.cantonCode) ?? 0) + 1);
   const top = [...byCanton.entries()].sort((a, b) => b[1] - a[1])[0];
   const out: Figure[] = [
-    fig("events-6h", "Events, 6 h", sixH.length, 0, {
+    fig("events-6h", FL.events6h, sixH.length, 0, {
       where: `${ev.events.length} in ${ev.windowHours} h · police and SRF`,
     }),
-    fig("placed", "Placed on the map", placed.length, 0, {
+    fig("placed", FL.placedOnMap, placed.length, 0, {
       where: `${Math.round((placed.length / Math.max(1, ev.events.length)) * 100)} % geocoded`,
     }),
   ];
-  if (top) out.push(fig("top-canton", "Most events", top[1], 0, { where: `canton ${top[0]}` }));
+  if (top) out.push(fig("top-canton", FL.mostEvents, top[1], 0, { where: `canton ${top[0]}` }));
   return out;
 }
 
@@ -345,7 +358,7 @@ export function airFigures(a: AirState | undefined): Figure[] {
       .filter(([id]) => a.stations.find((s) => s.id === id)?.tier === "reference")
       .sort((x, y) => y[1] - x[1])[0];
     out.push(
-      fig("air-index", "Air quality", a.worstIndex, 0, {
+      fig("air-index", FL.airQuality, a.worstIndex, 0, {
         text: `${a.worstIndex} · ${INDEX_LABEL[a.worstIndex]}`,
         where: worst ? `worst at ${name(worst[0])} · Zürich UGZ` : "Zürich UGZ",
       }),
@@ -361,7 +374,7 @@ export function airFigures(a: AirState | undefined): Figure[] {
   );
   if (pmMax)
     out.push(
-      fig("pm25", "PM2.5", pmMax.value, 1, {
+      fig("pm25", FL.pm25, pmMax.value, 1, {
         unit: "µg/m³",
         where: `${name(pmMax.stationId)} · hourly`,
       }),
@@ -369,7 +382,7 @@ export function airFigures(a: AirState | undefined): Figure[] {
   const citizen = a.stations.filter((s) => s.tier === "citizen").length;
   if (citizen)
     out.push(
-      fig("citizen", "Citizen sensors", citizen, 0, {
+      fig("citizen", FL.citizenSensors, citizen, 0, {
         where: "Sensor.Community, PM only, low-cost hardware",
       }),
     );
@@ -380,7 +393,7 @@ export function airFigures(a: AirState | undefined): Figure[] {
   if (pollen && pollen.value > 0) {
     const st = a.pollen.stations.find((s) => s.id === pollen.stationId);
     out.push(
-      fig("pollen", "Pollen", pollen.value, 0, {
+      fig("pollen", FL.pollen, pollen.value, 0, {
         unit: "/m³",
         where: `${PARAM_LABEL[pollen.parameter] ?? pollen.parameter} · ${st?.name.en ?? ""}`,
       }),
@@ -400,7 +413,7 @@ export function hazardsFigures(
     const max = fire.reduce((m, r) => Math.max(m, r.level), 0);
     if (fire.length)
       out.push(
-        fig("fire", "Forest-fire danger", max, 0, {
+        fig("fire", FL.fireDanger, max, 0, {
           text: `level ${max}`,
           where: `${fire.filter((r) => r.level >= 3).length} of ${fire.length} regions at 3 or more`,
         }),
@@ -408,7 +421,7 @@ export function hazardsFigures(
     const av = h.avalanche.regions.reduce((m, r) => Math.max(m, r.level), 0);
     if (h.avalanche.inSeason)
       out.push(
-        fig("avalanche", "Avalanche danger", av, 0, {
+        fig("avalanche", FL.avalancheDanger, av, 0, {
           text: av ? `level ${av}` : "—",
           where: `${h.avalanche.regions.length} regions · SLF bulletin`,
         }),
@@ -421,14 +434,14 @@ export function hazardsFigures(
       );
     if (snow && snow.v > 0)
       out.push(
-        fig("snow", "Deepest snow", snow.v, 0, {
+        fig("snow", FL.deepestSnow, snow.v, 0, {
           unit: "cm",
           where: `${h.snow.stations.find((s) => s.id === snow.id)?.name.en ?? ""} · IMIS`,
         }),
       );
     if (h.hail)
       out.push(
-        fig("hail", "Hail", 1, 0, { text: "detected", where: "MeteoSwiss radar, last hour" }),
+        fig("hail", FL.hail, 1, 0, { text: "detected", where: "MeteoSwiss radar, last hour" }),
       );
   }
   return [...out, ...quakeFigures(q, nowMs).slice(0, 2)];
@@ -452,10 +465,16 @@ export function statsFigures(st: TopicStates["stats"]): Figure[] {
   const unit = series.meta.unit || undefined;
   if (typeof vals["CH"] === "number")
     out.push(
-      fig("national", `${label}, Switzerland`, vals["CH"], series.meta.decimals, {
-        ...(unit ? { unit } : {}),
-        where: `${period} · ${series.meta.attribution}`,
-      }),
+      fig(
+        "national",
+        withSuffix(series.meta.label, t(", Schweiz", ", Switzerland", ", Suisse", ", Svizzera")),
+        vals["CH"],
+        series.meta.decimals,
+        {
+          ...(unit ? { unit } : {}),
+          where: `${period} · ${series.meta.attribution}`,
+        },
+      ),
     );
   const isCanton = (k: string) => /^[A-Z]{2}$/.test(k);
   const places = Object.entries(vals).filter(
@@ -464,7 +483,7 @@ export function statsFigures(st: TopicStates["stats"]): Figure[] {
   const top = places.sort((a, b) => b[1] - a[1])[0];
   if (top)
     out.push(
-      fig("top", "Highest", top[1], series.meta.decimals, {
+      fig("top", FL.highest, top[1], series.meta.decimals, {
         ...(unit ? { unit } : {}),
         where: nameOf(top[0]),
       }),
@@ -472,7 +491,7 @@ export function statsFigures(st: TopicStates["stats"]): Figure[] {
   const low = places[places.length - 1];
   if (low && places.length > 2)
     out.push(
-      fig("low", "Lowest", low[1], series.meta.decimals, {
+      fig("low", FL.lowest, low[1], series.meta.decimals, {
         ...(unit ? { unit } : {}),
         where: nameOf(low[0]),
       }),
@@ -480,7 +499,7 @@ export function statsFigures(st: TopicStates["stats"]): Figure[] {
   out.push(
     fig(
       "count",
-      series.meta.geoLevel === "canton" ? "Cantons" : "Municipalities",
+      series.meta.geoLevel === "canton" ? FL.cantons : FL.municipalities,
       places.length,
       0,
       { where: `with a value for ${period}` },
