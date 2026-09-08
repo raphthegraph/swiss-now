@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Map as MapLibreMap } from "maplibre-gl";
 import type { HydrologyState, RailState, WeatherState } from "@swiss-now/core";
-import { TrainLayer } from "./TrainLayer";
+import { TrainLayer, type TrainHover } from "./TrainLayer";
+import { TrainHoverCard } from "./TrainHoverCard";
+import { RailLegend } from "../hud/RailLegend";
 import { useLayerState } from "@/lib/use-layer-state";
 import { LayerRail } from "../hud/LayerRail";
 import type { ActiveLayer } from "@/lib/layers";
@@ -30,6 +32,9 @@ export function MapPage({
   const weather = useLayerState("/api/state/weather", initial, 300_000);
   const hydrology = useLayerState("/api/state/hydrology", initialHydrology, 600_000);
   const rail = useLayerState("/api/state/rail", initialRail, 60_000);
+  const [trainHover, setTrainHover] = useState<TrainHover | null>(null);
+  const [railProgress, setRailProgress] = useState({ loaded: 0, needed: 0 });
+  const stopNames = useStopNames(rail);
   const [active, setActive] = useState<ActiveLayer>("now");
   const { home, setHome } = useHomePlace();
   const [focus, setFocus] = useState<
@@ -62,6 +67,11 @@ export function MapPage({
         hydrology={hydrology}
         rail={rail}
         active={active}
+        legend={
+          active === "rail" ? (
+            <RailLegend loaded={railProgress.loaded} needed={railProgress.needed} />
+          ) : null
+        }
         home={
           <HomePlace
             home={home}
@@ -86,4 +96,26 @@ export function MapPage({
       {showFps ? <FpsMeter /> : null}
     </>
   );
+}
+
+/** Stop names for hover cards, from the (cached, immutable per build) stops file. */
+function useStopNames(rail: RailState | undefined): (id: string) => string {
+  const [names, setNames] = useState<Record<string, string>>({});
+  useEffect(() => {
+    if (!rail) return;
+    let cancelled = false;
+    fetch("/rail/stops.json")
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((stops: Record<string, [number, number, string]>) => {
+        if (cancelled) return;
+        const out: Record<string, string> = {};
+        for (const [id, v] of Object.entries(stops)) out[id] = v[2];
+        setNames(out);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [rail?.gtfsBuild]);
+  return (id: string) => names[id] ?? id;
 }

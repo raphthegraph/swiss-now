@@ -19,6 +19,7 @@ export function SummaryStrip({
   active = "now",
   children,
   home,
+  legend,
 }: {
   state: WeatherState;
   hydrology?: HydrologyState | undefined;
@@ -26,6 +27,7 @@ export function SummaryStrip({
   active?: ActiveLayer;
   children?: ReactNode;
   home?: ReactNode;
+  legend?: ReactNode;
 }) {
   const name = (id: string) => state.stations.find((s) => s.id === id)?.name.en ?? id;
   const items: { label: string; value: string; unit: string; where: string }[] = [];
@@ -123,6 +125,7 @@ export function SummaryStrip({
         transition={{ duration: duration.layerSwitch / 1000, ease: EASE, delay: 0.08 }}
       >
         {children}
+        {legend}
         <div className="strip">
           <AnimatePresence mode="popLayout" initial={false}>
             {shown.map((m) => (

@@ -540,3 +540,34 @@ table.sources th {
   inset: 0;
   pointer-events: none;
 }
+
+/* ---- rail legend & hover ---- */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sn-space-2) var(--sn-space-5);
+  font-size: var(--sn-type-caption-size);
+  color: var(--sn-ground-graphite);
+}
+.legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sn-space-2);
+}
+.legend__train {
+  display: inline-block;
+  width: 14px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--sn-accent-rail);
+}
+.legend__ring {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--sn-accent-rail-delay);
+}
+.hover-card--rail {
+  border-left-color: var(--sn-accent-rail);
+}

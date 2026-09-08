@@ -25,6 +25,11 @@ const fileCache = new Map<string, { mtime: number; value: unknown }>();
 let feedCache: { at: number; feed: TripUpdatesFeed } | undefined;
 let feedInFlight: Promise<TripUpdatesFeed> | undefined;
 
+/** Reads a rail file by relative name; the single dynamic argument keeps the bundler's file tracer from globbing 18 k paths. */
+export async function readRailJson<T>(name: string): Promise<T> {
+  return readJson<T>(name);
+}
+
 async function readJson<T>(name: string): Promise<T> {
   const path = join(RAIL_DIR, name);
   const cached = fileCache.get(path);
