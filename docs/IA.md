@@ -51,4 +51,4 @@ Each layer renders `full` (the selected topic's own layers), `quiet` (a NOW cont
 
 ## Status
 
-Stage 1 (2026-09-08): registry, policy, URL state, rail groups, mode switcher, map contributions, HUD split, geo spine, Politics (latest federal votes per municipality with a vote timeline). Next stages: Energy + Events, Air + Hazards, Statistics + CHARTS, TIMELINE + COMPARE, story/video + gated Aviation, polish and languages.
+Stage 1 (2026-09-08): registry, policy, URL state, rail groups, mode switcher, map contributions, HUD split, geo spine, Politics (latest federal votes per municipality with a vote timeline). Stage 2 (2026-09-08): live Energy (border-flow arrows, frequency, mix and price; the first CHARTS view), Events (geocoded police and SRF headlines as typographic markers). Next: Air + Hazards, Statistics + CHARTS, TIMELINE + COMPARE, story/video + gated Aviation, polish and languages.

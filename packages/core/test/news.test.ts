@@ -105,6 +105,7 @@ describe("geocoding", () => {
     expect(unknownPlace.cantonHint).toBe("SZ");
     const canton = geocodeWithRegister("Bundesgericht stützt Kanton Thurgau", [], idx);
     expect(canton.place?.method).toBe("canton-centroid");
+    expect(canton.place?.name).toBe("Thurgau");
   });
   it("reads gazetteer hits", () => {
     const p = parseGazetteer(

@@ -26,6 +26,7 @@ export interface GeocodeIndex {
   byName: Map<string, MunicipalityRef[]>;
   cantonCentroids: Partial<Record<CantonCode, LonLat>>;
   cantonByName: Map<string, CantonCode>;
+  cantonName: Partial<Record<CantonCode, string>>;
 }
 
 export function buildGeocodeIndex(register: GeoRegister): GeocodeIndex {
@@ -49,14 +50,16 @@ export function buildGeocodeIndex(register: GeoRegister): GeocodeIndex {
   }
   const cantonCentroids: Partial<Record<CantonCode, LonLat>> = {};
   const cantonByName = new Map<string, CantonCode>();
+  const cantonName: Partial<Record<CantonCode, string>> = {};
   for (const [code, c] of Object.entries(register.cantons)) {
     const parsed = CantonSchema.safeParse(code);
     if (!parsed.success) continue;
     if (c.lonLat) cantonCentroids[parsed.data] = c.lonLat;
+    cantonName[parsed.data] = c.name;
     for (const part of c.name.split("/")) cantonByName.set(normalizeName(part), parsed.data);
     cantonByName.set(normalizeName(code), parsed.data);
   }
-  return { byName, cantonCentroids, cantonByName };
+  return { byName, cantonCentroids, cantonByName, cantonName };
 }
 
 const place = (m: MunicipalityRef, confidence: number): EventPlace => ({
@@ -122,7 +125,7 @@ export function geocodeWithRegister(
       if (lonLat)
         return {
           place: {
-            name: name,
+            name: idx.cantonName[code] ?? code,
             cantonCode: code,
             lonLat,
             confidence: 0.3,

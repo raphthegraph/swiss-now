@@ -13,6 +13,8 @@ The interactive web experience: Next.js 16 App Router, MapLibre GL (Spike A next
 | `POST /api/snapshot`                    | Writes the current 10-minute composite snapshot if missing (visitor-driven on the free tier; a scheduled ping once deployed).                           |
 | `/api/snapshots`, `/api/snapshots/{id}` | Snapshot list (48 h) and immutable snapshot files (the story's input; no timeline UI).                                                                  |
 | `/api/story/today`                      | `StorySpec` ranked from today's snapshots (also the Remotion input).                                                                                    |
+| `/api/state/energy`                     | `EnergyState`: Swissgrid flows and frequency (1 min), Energy-Charts mix and price (15 min, proxied).                                                    |
+| `/api/state/events`                     | `EventsState`: geocoded police and SRF headlines, 24 h window. 5 min.                                                                                   |
 | `/api/state/politics`                   | `PoliticsState`: latest vote Sunday per municipality, recent votes, upcoming dates; static files from `public/data` or `DATA_BASE_URL`. 1 h.            |
 | `/geo/*`, `/data/*`                     | Geo spine (TopoJSON, register) and statistics files; long cache headers.                                                                                |
 | `/today`                                | The web-native story: scroll-driven chapters steering the live map.                                                                                     |
