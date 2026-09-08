@@ -24,7 +24,7 @@ Design direction: Swiss modernism, strong typography, cartographic beauty, restr
 | **WATER**   | FOEN hydrology: river discharge and level, lake level, water temperature, flood danger levels                                                                               | 10 min         |
 | **RAIL**    | Trains interpolated from GTFS schedules and live delays (Switzerland publishes no vehicle positions — every position is labelled _interpolated_), delay pulses, disruptions | 60 s           |
 | **QUAKES**  | Swiss Seismological Service catalogue                                                                                                                                       | event-driven   |
-| **NOW**     | the curated composite, a national summary strip, a timeline (`NOW ← 1h ← 3h ← 6h ← 12h ← TODAY`) and a web-native "Today" story                                             | —              |
+| **NOW**     | the curated composite and a national summary strip, nothing else; the WEATHER and WATER views add a timeline over the day's snapshots, `/today` tells the story             | —              |
 
 Traffic (FEDRO), city-scale air quality and energy follow in later phases. See [`docs/MVP_PLAN.md`](docs/MVP_PLAN.md) for the reasoning and [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md) for the 48-row scored data-source matrix.
 

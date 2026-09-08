@@ -21,6 +21,12 @@ import { RadarScrubber } from "../hud/RadarScrubber";
 import { useRadarTimeline } from "@/lib/use-radar-timeline";
 import { useTimeline } from "@/lib/use-timeline";
 import { TimelineScrubber } from "../hud/TimelineScrubber";
+
+function spanMs(snapshots: { at: string }[]): number {
+  if (snapshots.length < 2) return 0;
+  const ts = snapshots.map((s) => new Date(s.at).getTime());
+  return Math.max(...ts) - Math.min(...ts);
+}
 import { SummaryStrip } from "../hud/SummaryStrip";
 import { FpsMeter } from "../hud/FpsMeter";
 
@@ -60,6 +66,13 @@ export function MapPage({
   const viewWeather = timeline.snapshot?.weather ?? weather;
   const viewHydrology = timeline.snapshot?.hydrology ?? hydrology;
   const viewing = timeline.snapshot !== null;
+  // The timeline is an instrument of the layer views, never of the NOW composite (the hero view
+  // stays uncluttered), and only once there is an hour of history to scrub through.
+  const showTimeline =
+    (active === "weather" || active === "water") && spanMs(timeline.snapshots) >= 60 * 60_000;
+  useEffect(() => {
+    if (!showTimeline && timeline.index !== null) timeline.setIndex(null);
+  }, [showTimeline, timeline]);
   const radar = useRadarTimeline(viewWeather);
   // the radar timeline is a WEATHER instrument; elsewhere the map shows the latest frame only
   const radarReset = radar.reset;
@@ -132,7 +145,7 @@ export function MapPage({
           />
         }
       >
-        {active === "now" || active === "weather" || active === "water" ? (
+        {showTimeline ? (
           <TimelineScrubber
             snapshots={timeline.snapshots}
             index={timeline.index}
