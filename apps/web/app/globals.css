@@ -218,6 +218,55 @@ table.sources th {
   border-top: none;
   padding-top: 0;
 }
+.sources-button {
+  display: none;
+  font: inherit;
+  font-size: var(--sn-type-caption-size);
+  color: var(--sn-ground-graphite);
+  background: none;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 243, 239, 0.98);
+  border-top: 2px solid var(--sn-ground-ink);
+  padding: var(--sn-space-3) var(--sn-space-4) var(--sn-space-5);
+  font-size: var(--sn-type-caption-size);
+  color: var(--sn-ground-ink);
+  max-height: 60dvh;
+  overflow-y: auto;
+}
+.sheet__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--sn-space-2);
+}
+.sheet__close {
+  font: inherit;
+  font-size: var(--sn-type-caption-size);
+  letter-spacing: var(--sn-type-label-tracking);
+  text-transform: uppercase;
+  background: none;
+  border: 0;
+  padding: var(--sn-space-2) 0;
+  color: var(--sn-ground-ink);
+  cursor: pointer;
+}
+.sheet__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--sn-space-1);
+}
 .lang {
   display: inline-flex;
   gap: var(--sn-space-2);
@@ -288,26 +337,53 @@ table.sources th {
   .hud--bottom {
     bottom: var(--sn-hud-margin-compact);
   }
+  .hud--bottom {
+    gap: var(--sn-space-2);
+  }
+  /* one scrolling row of compact figures: the map stays the picture */
   .strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--sn-space-2) var(--sn-space-4);
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(132px, max-content);
+    gap: 0 var(--sn-space-4);
+    overflow-x: auto;
+    scrollbar-width: none;
+    touch-action: pan-x;
   }
   .metric--hud {
     min-width: 0;
+    padding-top: var(--sn-space-1);
   }
   .metric--hud .value {
-    font-size: calc(var(--sn-type-metric-size) * 0.72);
+    font-size: calc(var(--sn-type-metric-size) * 0.5);
+    line-height: 1.1;
   }
-  .hud--top {
-    flex-wrap: wrap;
+  .metric--hud .where {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
   }
-  .hud--top .home {
-    flex: 1 1 100%;
-    order: 3;
-    margin: var(--sn-space-1) 0 0;
+  .colophon--hud {
+    gap: var(--sn-space-2) var(--sn-space-4);
+    align-items: baseline;
   }
-  .home__meta {
+  .colophon--hud .credit {
     display: none;
+  }
+  .sources-button {
+    display: inline;
+  }
+  /* the home place is a desktop control; the phone masthead stays one line */
+  .hud--top .home {
+    display: none;
+  }
+  .rail__item,
+  .modes__item {
+    min-height: 40px;
+  }
+  .hud--rail {
+    touch-action: pan-x;
   }
 }
 .map-unsupported {
@@ -1058,5 +1134,16 @@ table.sources th {
   .today__chapters {
     margin: 0 var(--sn-hud-margin-compact);
     max-width: none;
+  }
+}
+
+/* phone: legends stay one scrolling line (after the base .legend rule so it wins) */
+@media (max-width: 767px) {
+  .legend {
+    flex-wrap: nowrap;
+    gap: var(--sn-space-4);
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
   }
 }

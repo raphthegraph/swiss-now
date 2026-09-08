@@ -34,6 +34,7 @@ jobs:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd "$GITHUB_WORKSPACE/out/rail"
+          rm -f ./*.zip   # the downloaded GTFS archive is not part of the published files
           touch .nojekyll
           git init -q -b rail-data
           git config user.name "swiss-now-data"

@@ -403,6 +403,31 @@ if (lake) await page.mouse.click(lake.x, lake.y);
 await page.waitForTimeout(300);
 const tapCloseOk = (await page.locator(".hover-card").count()) === 0;
 console.log("tap elsewhere closes it:", tapCloseOk);
+// a phone context: touch events and a mobile user agent; the bottom HUD must leave the map usable
+const mctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+const mp = await mctx.newPage();
+await mp.goto(`${base}/`, { waitUntil: "domcontentloaded", timeout: 90_000 });
+await mp.getByRole("button", { name: "Rail" }).waitFor({ timeout: 60_000 });
+await mp.waitForTimeout(800);
+const railT = await mp.locator("nav[aria-label='Topics']").boundingBox();
+const bottomShare = railT ? (844 - railT.y) / 844 : 1;
+await mp.getByRole("button", { name: "Water" }).tap();
+await mp.waitForFunction(() => new URL(location.href).searchParams.get("topic") === "water", null, { timeout: 10_000 }).catch(() => {});
+const tTopic = new URL(mp.url()).searchParams.get("topic");
+await mp.getByRole("button", { name: "Timeline" }).tap();
+await mp.waitForFunction(() => new URL(location.href).searchParams.get("mode") === "timeline", null, { timeout: 10_000 }).catch(() => {});
+const tMode = new URL(mp.url()).searchParams.get("mode");
+await mp.locator(".sources-button").tap();
+await mp.waitForTimeout(200);
+const sheetItems = await mp.locator(".sheet__list li").count();
+await mp.locator(".sheet__close").tap();
+await mp.waitForTimeout(200);
+const sheetClosed = (await mp.locator(".sheet").count()) === 0;
+const homeHidden = await mp.locator(".hud--top .home").evaluate((el) => getComputedStyle(el).display === "none").catch(() => true);
+await mp.screenshot({ path: "/tmp/sn/qa-phone.png" });
+const touchOk = bottomShare <= 0.36 && tTopic === "water" && tMode === "timeline" && sheetItems >= 3 && sheetClosed && homeHidden;
+console.log("phone: bottom HUD share", bottomShare.toFixed(2), "| tap topic", tTopic, "| tap mode", tMode, "| sources", sheetItems, "closed", sheetClosed, "| home hidden", homeHidden, "| ok:", touchOk);
+await mctx.close();
 await page.emulateMedia({ reducedMotion: "reduce" });
 await page.reload({ waitUntil: "domcontentloaded" });
 await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 60_000 });
@@ -435,6 +460,7 @@ process.exit(
   mobileOk &&
   tapOk &&
   tapCloseOk &&
+  touchOk &&
   reducedOk
     ? 0
     : 1,

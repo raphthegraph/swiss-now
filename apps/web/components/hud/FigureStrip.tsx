@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { duration } from "@swiss-now/motion/tokens";
 import { getSource } from "@swiss-now/core/sources";
@@ -36,6 +36,8 @@ function credits(topic: TopicId): string[] {
 export function FigureStrip({ topic, figures, children, legend }: FigureStripProps) {
   const { t, l } = useT();
   const ref = useRef<HTMLElement>(null);
+  const [sourcesOpen, setSourcesOpen] = useState(false);
+  const creditList = credits(topic);
   // the strip's height drives where the horizontal rail and the charts sheet end on small screens
   useEffect(() => {
     const el = ref.current;
@@ -84,12 +86,37 @@ export function FigureStrip({ topic, figures, children, legend }: FigureStripPro
         </AnimatePresence>
       </div>
       <div className="colophon colophon--hud">
-        {credits(topic).map((c) => (
-          <span key={c}>{c}</span>
+        {creditList.map((c) => (
+          <span className="credit" key={c}>
+            {c}
+          </span>
         ))}
+        <button
+          type="button"
+          className="sources-button"
+          aria-expanded={sourcesOpen}
+          onClick={() => setSourcesOpen((o) => !o)}
+        >
+          {t("sources", { n: creditList.length })}
+        </button>
         <Link href="/status">{t("status")}</Link>
         <LangSwitch />
       </div>
+      {sourcesOpen ? (
+        <div className="sheet" role="dialog" aria-label={t("sourcesTitle")}>
+          <div className="sheet__head">
+            <span className="label">{t("sourcesTitle")}</span>
+            <button type="button" className="sheet__close" onClick={() => setSourcesOpen(false)}>
+              {t("close")}
+            </button>
+          </div>
+          <ul className="sheet__list">
+            {creditList.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </motion.section>
   );
 }

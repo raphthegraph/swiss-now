@@ -341,6 +341,14 @@ export const STRINGS = {
     "Gli stessi capitoli come video verticale «La Svizzera oggi»: una composizione Remotion alimentata da questa storia, resa localmente per i social e riproducibile qui.",
   ),
   credits: t("Quellen", "Credits", "Crédits", "Fonti"),
+  sources: t("Quellen ({n})", "Sources ({n})", "Sources ({n})", "Fonti ({n})"),
+  sourcesTitle: t(
+    "Quellen dieser Ansicht",
+    "Sources of this view",
+    "Sources de cette vue",
+    "Fonti di questa vista",
+  ),
+  close: t("Schliessen", "Close", "Fermer", "Chiudi"),
   generatedNote: t(
     "Erstellt {when} aus den Momentaufnahmen des Tages. Zugpositionen sind aus Fahrplan und Live-Verspätungen geschätzt.",
     "Generated {when} from today's snapshots. Positions of trains are estimated from timetable and live delays.",
