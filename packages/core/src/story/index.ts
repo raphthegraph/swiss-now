@@ -202,8 +202,13 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
   if (h) {
     credits.add("Source: FOEN");
     const danger = Object.entries(h.dangerLevels).sort((a, b) => b[1] - a[1])[0];
+    // discharge without a water level comes from secondary computation stations (diversions, sometimes
+    // reported in l/s without a unit marker) — rankings use gauged main stations only
+    const withLevel = new Set(
+      h.observations.filter((o) => o.parameter === "waterLevel").map((o) => o.stationId),
+    );
     const q = h.observations
-      .filter((o) => o.parameter === "discharge")
+      .filter((o) => o.parameter === "discharge" && withLevel.has(o.stationId))
       .sort((a, b) => b.value - a.value)[0];
     const st =
       danger && danger[1] >= 2

@@ -60,8 +60,12 @@ export function hydroToGeoJSON(state: HydrologyState): FeatureCollection<Point, 
 export function riverWidthExpression(state: HydrologyState): unknown[] {
   const maxByBody = new Map<string, number>();
   const bodyByStation = new Map(state.stations.map((s) => [s.id, s.waterBody] as const));
+  // only gauged main stations (those with a water level); secondary computation stations may report l/s
+  const withLevel = new Set(
+    state.observations.filter((o) => o.parameter === "waterLevel").map((o) => o.stationId),
+  );
   for (const o of state.observations) {
-    if (o.parameter !== "discharge") continue;
+    if (o.parameter !== "discharge" || !withLevel.has(o.stationId)) continue;
     const body = bodyByStation.get(o.stationId);
     if (!body) continue;
     maxByBody.set(body, Math.max(maxByBody.get(body) ?? 0, o.value));
