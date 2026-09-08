@@ -1,120 +1,121 @@
 # Swiss Now
 
-**A living, near-real-time map of Switzerland.**
+A living, near-real-time map of Switzerland. Official Swiss open data is normalized into one state model that drives two renderers: an interactive web map and a Remotion video, "Switzerland Today".
 
-Open it and the country is already moving: rain drifting over the Jura, trains sliding through the Gotthard, the Rhine rising at Basel, a tremor pulsing in Valais. Swiss Now turns official Swiss open data into one normalized state that feeds two rendering targets — an interactive web map and Remotion story videos ("Switzerland Today in 30 seconds").
+Status: the MVP runs locally (weather, water, rail, earthquakes, the daily story and the video). Deployment to Vercel is the next step. CI: typecheck, tests, formatting on every push.
 
-> Status: **Phase 0 — foundations.** Planning is complete (see [`docs/`](docs/)); the workspace and the normalized state contracts exist; no UI yet.
+## What it does
+
+| View        | Content                                                                                                                                                                                               | Refresh        |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| **NOW**     | The composite: temperature field, live radar, trains, quakes, and a national summary strip. No further instruments.                                                                                   | —              |
+| **WEATHER** | MeteoSwiss SwissMetNet stations (temperature, wind, gusts, precipitation, snow), wind particles, a 5-minute precipitation radar with a scrubber, national extremes.                                   | 10 min / 5 min |
+| **WATER**   | FOEN hydrology: river discharge and level, lake level, water temperature, flood danger levels; river widths follow discharge.                                                                         | 10 min         |
+| **RAIL**    | Trains interpolated from the GTFS timetable and GTFS-RT delays (Switzerland publishes no vehicle positions; every position is labelled as interpolated), delay marks, SBB disruptions, on-time index. | 60 s           |
+| **QUAKES**  | Swiss Seismological Service reviewed catalogue, last 30 days; the view appears in the rail only when there is a M ≥ 2 event.                                                                          | 2 min          |
+| **/today**  | The day's story: chapters ranked from 10-minute snapshots (extremes, rainfall, delays, rivers, quakes), scroll-driven over the live map, plus the video in a Remotion Player.                         | 10 min         |
+| **/status** | Freshness and source health.                                                                                                                                                                          |                |
+
+Every value carries an observation time and a source; freshness (`live · aging · stale · outage`) changes the rendering. A home place (stored locally, no account) makes the summary strip local.
+
+## How it works
 
 ```
-Swiss open data  →  adapters  →  SwissNowState  →  shared visual & motion system  →  A. interactive web  |  B. Remotion video
+Swiss open data → adapters (packages/core) → SwissNowState → tokens + motion math (packages/motion)
+                                                            ├─ apps/web      React · MapLibre GL · WebGL · Motion
+                                                            └─ story-video   Remotion, rendered by apps/video and played on /today
 ```
 
-## Why
+- **Ingestion.** Small live sources are read through pull-through cached route handlers (`/api/state/*`): one upstream fetch per cadence, CDN `stale-while-revalidate` for everyone else, browsers never call Swiss APIs. Heavy work runs outside request time: the twice-weekly GTFS build (GitHub Actions, `gtfs.yml`) and the 10-minute composite snapshots (written by visitors on the free tier, optionally by a scheduled ping).
+- **Contracts.** `packages/core/src/state` holds the zod schemas: entities (`Station`, `Observation`, `Field`, `Event`, `TripSnapshot` with a mandatory `positionKind`), one state per layer, the composite `SwissNowState`, and `StorySpec`. Provider schemas never leave their adapter.
+- **Rendering split.** The map and its data layers are React, MapLibre GL and custom WebGL; UI transitions use Motion; Remotion is used only for the time-based composition. Web and video share contracts, design tokens and animation math, never a renderer.
+- **Video.** `packages/story-video` renders a `StorySpec` over a fixed MapLibre plate (the renderer camera moves only at cuts, under a dip to paper; motion within a chapter is a CSS transform). Chapter markers travel inside the story, so the video needs no state lookups. Renders run locally under the free Remotion licence.
+- **Cost.** Free tiers only: Vercel Hobby, Vercel Blob, GitHub Actions, Remotion free licence. See `docs/FREE_TIER_ARCHITECTURE.md`.
 
-Dashboards get one visit. Swiss Now is designed around daily moments: _what is it like out there right now_, _is my commute broken_, _something is happening_, _is the weekend plan on_, _show me Switzerland_, _what happened today_. The default view answers these without interaction; one personalisation lever (a home place, stored locally) makes it about your Switzerland; a daily auto-assembled story closes the loop.
-
-Design direction: Swiss modernism, strong typography, cartographic beauty, restrained colour, motion as information. Not a SaaS dashboard.
-
-## What it shows (MVP)
-
-| Layer       | Data                                                                                                                                                                        | Cadence        |
-| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| **WEATHER** | MeteoSwiss SwissMetNet stations (temperature, wind, precipitation, snow), 5-minute precipitation radar                                                                      | 10 min / 5 min |
-| **WATER**   | FOEN hydrology: river discharge and level, lake level, water temperature, flood danger levels                                                                               | 10 min         |
-| **RAIL**    | Trains interpolated from GTFS schedules and live delays (Switzerland publishes no vehicle positions — every position is labelled _interpolated_), delay pulses, disruptions | 60 s           |
-| **QUAKES**  | Swiss Seismological Service catalogue                                                                                                                                       | event-driven   |
-| **NOW**     | the curated composite and a national summary strip, nothing else; `/today` tells the day's story from the 10-minute snapshots                                               | —              |
-
-Traffic (FEDRO), city-scale air quality and energy follow in later phases. See [`docs/MVP_PLAN.md`](docs/MVP_PLAN.md) for the reasoning and [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md) for the 48-row scored data-source matrix.
-
-## Principles
-
-1. **The map is the hero.** UI recedes into a typographic HUD.
-2. **Motion is information.** Everything that moves encodes a real quantity.
-3. **Honest data.** Timestamp and source on every value; freshness states (`live · aging · stale · outage`) change the rendering; interpolation is always labelled.
-4. **One data model, two renderers.** Shared contracts and design tokens, rendering technology chosen per component.
-5. **Respect the sources.** One request per cadence from our servers; browsers never call Swiss APIs; attribution everywhere.
-6. **Free until it matters.** The MVP runs on free tiers only (Vercel Hobby, GitHub Actions, Vercel Blob, Supabase Free, Remotion free licence). See [`docs/FREE_TIER_ARCHITECTURE.md`](docs/FREE_TIER_ARCHITECTURE.md).
-
-## Architecture in one paragraph
-
-Small live sources are read through **pull-through cached route handlers** on Vercel: the Data Cache coalesces all traffic into one upstream fetch per cadence and the CDN serves everyone else with `stale-while-revalidate`. Heavy or always-on work (240 MB GTFS processing, 10-minute snapshots, the daily story) runs on **GitHub Actions** and writes to **Vercel Blob**. Every adapter converts provider schemas into the normalized **`SwissNowState`** (zod contracts in `packages/core`). The web app renders it with **React, MapLibre GL, deck.gl and custom WebGL**, with **Motion/GSAP** for UI; **Remotion** renders the same state and story spec into video, locally, under the free licence. Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/MOTION_SYSTEM.md`](docs/MOTION_SYSTEM.md).
+Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/MOTION_SYSTEM.md`](docs/MOTION_SYSTEM.md), [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md).
 
 ## Repository layout
 
 ```
-swiss-now/
-├─ apps/
-│  ├─ web/          Next.js 16 interactive experience: live map, HUD, /today story with the Remotion Player
-│  └─ video/        Remotion project: registers the compositions, keeps story fixtures, renders locally
-├─ packages/
-│  ├─ core/         @swiss-now/core — SwissNowState contracts (zod), freshness model, source registry, adapters
-│  ├─ motion/       @swiss-now/motion — tokens, scales, animation math, SVG primitives, scene specs
-│  ├─ story-video/  @swiss-now/story-video — the "Switzerland Today" Remotion composition (fixed map plate, chapters, markers)
-│  └─ geo-build/    build-time geodata conversion (swissBOUNDARIES3D, rail lines, TMC lookup)
-├─ docs/            planning documents (vision, data sources, architecture, free tier, motion, MVP plan, open questions)
-├─ .agents/skills/  official Remotion Agent Skills (installed via `npx skills add remotion-dev/skills`)
-└─ .github/         CI and, later, the scheduled data workflows
+apps/
+  web/            Next.js 16 app: map, HUD, /today, /status, API route handlers, snapshot store
+  video/          Remotion project: registers the compositions, story fixtures, local renders
+packages/
+  core/           @swiss-now/core   state contracts, source registry, freshness, adapters, snapshot + story builders, CLIs
+  motion/         @swiss-now/motion design tokens, scales, deterministic animation math, SVG primitives
+  story-video/    @swiss-now/story-video  the "Switzerland Today" composition (the only package that imports Remotion)
+  geo-build/      build-time geodata scripts (forked basemap style)
+docs/             product vision, data-source matrix, architecture, free-tier plan, motion system, MVP plan, open questions
+.github/          ci.yml (checks), gtfs.yml (rail data build)
 ```
 
-Dependency rules: `packages/core` and `packages/motion` never import React-DOM, MapLibre, GSAP, Motion or Remotion. `apps/web` and `apps/video` never import each other; anything both need moves into a package — which is why the composition lives in `packages/story-video`: the web Player and the renderer mount the same code.
+Dependency rules: `core` and `motion` never import React DOM, MapLibre, Motion or Remotion. `apps/web` and `apps/video` never import each other; shared code lives in packages. Workspace packages are consumed from `src/` without a build step.
 
-## The Swiss Now State
+## Getting started
 
-`packages/core/src/state` defines the contracts every renderer speaks:
-
-- **Primitives** — `LonLat` (WGS84 `[lon, lat]`), `ISODateTime` (offset required), `LocalizedText` (de/fr/it/rm/en), `LayerId`, `Freshness`, `CantonCode`.
-- **Entities** — `Station`, `Observation` (typed `Parameter` with fixed units), `Field` (raster frame on Blob), `Segment`, `Event` (incidents, floods, quakes, avalanches…), `TripSnapshot` with a **mandatory `positionKind: "interpolated" | "reported"`**.
-- **Layers** — `WeatherState`, `HydrologyState`, `RailState`, `SeismicState`, and Phase-5 `TrafficState`, `AirState`, `EnergyState`; each carries `schemaVersion`, `updatedAt`, `observedAt`, `freshness`, `sources`.
-- **Summary** — national and per-canton `KPI`s with baselines and anomaly scores.
-- **StorySpec** — ordered chapters with camera specs and duration hints; consumed by both the web "Today" mode and the Remotion compositions.
-- **SwissNowState** — the composite.
-
-`packages/core/src/sources/registry.ts` records licence, attribution string, commercial-use status and cadence for every source as verified on 2026-09-07. `packages/core/src/freshness` derives `live / aging / stale / outage` from observation age and source cadence.
-
-## Development
-
-Requirements: Node ≥ 22, pnpm 10 (via corepack: `corepack enable`).
+Requirements: Node 22, pnpm 10 (`corepack enable`).
 
 ```bash
 pnpm install
-pnpm typecheck
-pnpm test
+pnpm --filter @swiss-now/web dev        # http://localhost:3000
 ```
 
-Formatting: `pnpm format`. Tests use Vitest.
+Weather, water and quakes work without configuration. Rail needs a free API key and two generated files:
 
-Workspace packages are consumed **just-in-time** from `src/` (their `exports` point at TypeScript sources), so no build step is needed for development; Next.js (`transpilePackages`), Remotion's bundler, Vitest and `tsx` all handle TypeScript directly.
+```bash
+# apps/web/.env.local
+OTD_API_KEY=…                           # api-manager.opentransportdata.swiss, self-service
+
+pnpm --filter @swiss-now/core build-gtfs -- --out apps/web/public/rail --days 7   # downloads the 248 MB GTFS, ≈ 3 min
+pnpm --filter @swiss-now/core build-rail-paths -- --rail apps/web/public/rail     # SBB + BAV line graph → one path per stop sequence
+```
+
+Environment variables:
+
+| Variable                | Used by              | Purpose                                                                      |
+| ----------------------- | -------------------- | ---------------------------------------------------------------------------- |
+| `OTD_API_KEY`           | web                  | GTFS-RT delays. Without it trains follow the timetable and are marked stale. |
+| `RAIL_DATA_DIR`         | web                  | Generated rail files; default `apps/web/public/rail`.                        |
+| `RAIL_DATA_URL`         | web                  | Read rail files from a public URL (Vercel Blob) instead of the directory.    |
+| `SNAPSHOT_DIR`          | web                  | Local snapshot directory; default `apps/web/public/snapshots`.               |
+| `BLOB_READ_WRITE_TOKEN` | web, `gtfs.yml`, CLI | Vercel Blob for snapshots and rail files once deployed.                      |
+
+### Video
+
+```bash
+pnpm --filter @swiss-now/video story:fetch      # save today's story as apps/video/fixtures/story-<date>.json
+pnpm --filter @swiss-now/video render:today     # → apps/video/out/today.mp4 (1080×1920, ≈ 90 s for five chapters)
+pnpm --filter @swiss-now/video studio           # Remotion Studio
+```
+
+Details and the landscape variant: [`apps/video/README.md`](apps/video/README.md).
+
+### Checks
+
+```bash
+pnpm typecheck && pnpm test && pnpm format:check
+```
+
+Map behaviour is verified against a production build with Chromium's software WebGL renderer: `node apps/web/scripts/qa-rail-hover.mjs` (rail hover card, summary figures, quakes view, Today page and the embedded Player). See [`apps/web/README.md`](apps/web/README.md).
 
 ## Data sources and attribution
 
-All sources are official Swiss open data or free public services. Attribution strings are served from the source registry and shown in the app and in every video end card. Principal providers: MeteoSwiss (CC BY 4.0), Federal Office for the Environment FOEN, Federal Office of Topography swisstopo (© swisstopo), Open Data Platform Mobility Switzerland, SBB, Federal Office of Transport, Swiss Seismological Service at ETH Zurich, WSL Institute for Snow and Avalanche Research SLF, Swiss Federal Office of Energy, Federal Statistical Office. Licences and open questions per source are documented in [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md) and [`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md).
+MeteoSwiss (CC BY 4.0), Federal Office for the Environment FOEN via LINDAS, swisstopo (basemap, © swisstopo), Open Data Platform Mobility Switzerland (GTFS, GTFS-RT), SBB and the Federal Office of Transport (line geometry, disruptions), Swiss Seismological Service at ETH Zurich. Attribution strings are served from the source registry and shown in the app and in the video credits.
 
-Interpolated train positions are estimates derived from schedules and published delays; they are never GPS positions. Swiss Now is not an official warning channel.
-
-## The video
-
-`/api/story/today` ranks the day's snapshots into a `StorySpec`; the same spec drives the scroll-driven `/today` page and the Remotion composition `SwitzerlandToday` (1080 × 1920, plus a 1920 × 1080 variant). The composition renders title → chapters → credits over one fixed MapLibre plate of the forked swisstopo style: the renderer camera only jumps at cuts, hidden by a dip to paper, and the push-in within a chapter is a CSS transform (Remotion's render-stability technique). Chapter markers travel inside the story (coordinates included), so the video needs no state lookups. Renders happen locally under the free licence; a five-chapter story renders in about 90 s on a laptop:
-
-```bash
-pnpm --filter @swiss-now/video story:fetch      # save today's story as a fixture
-pnpm --filter @swiss-now/video render:today     # → apps/video/out/today.mp4
-```
-
-On `/today` the same composition plays in a Remotion `<Player>` (mounted on demand). Details in [`apps/video/README.md`](apps/video/README.md).
+Interpolated train positions are estimates from the timetable and published delays, never GPS. The SED catalogue is used under non-commercial terms pending clarification. Swiss Now is not an official warning channel. Licences and open points per source: [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md), [`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md).
 
 ## Roadmap
 
-| Phase | Scope                                                                                                       | Status                                           |
-| ----- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| 0     | Workspace, state contracts, tokens, forked map style, first cached handler, performance and Remotion spikes | done                                             |
-| 1     | Weather + Water layers, HUD, place focus, NOW composite                                                     |                                                  |
-| 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                  | done (Blob hosting waits for the Vercel project) |
-| 3     | Quakes, snapshots (story input), Today story, seasonal layers                                               | done                                             |
-| 4     | Remotion "Switzerland Today" compositions, local rendering, Player on `/today`                              | done                                             |
-| 5     | Traffic (FEDRO), city air quality, energy flows, polish                                                     |                                                  |
+| Phase | Scope                                                                                                          | Status  |
+| ----- | -------------------------------------------------------------------------------------------------------------- | ------- |
+| 0     | Workspace, contracts, tokens, forked basemap, first cached handler, spikes                                     | done    |
+| 1     | Weather and water layers, radar, wind, HUD, home place                                                         | done    |
+| 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                     | done    |
+| 3     | Quakes, snapshots, story builder, `/today`                                                                     | done    |
+| 4     | "Switzerland Today" composition, local rendering, Player on `/today`                                           | done    |
+| —     | Deployment: Vercel Hobby, Blob store, scheduled snapshot ping                                                  | next    |
+| 5     | City air quality, polish (performance, accessibility, FR/IT); traffic and energy once their access terms allow | planned |
 
 ## Licence
 
-Code: MIT. Data: per source, see above. Map data © swisstopo.
+Code: MIT. Data: per source as listed above. Map data © swisstopo.
