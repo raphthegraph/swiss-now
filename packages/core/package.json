@@ -17,7 +17,8 @@
     "./data-sources/transit": "./src/data-sources/transit/index.ts",
     "./data-sources/transit/build": "./src/data-sources/transit/build.ts",
     "./data-sources/earthquakes": "./src/data-sources/earthquakes/index.ts",
-    "./snapshot": "./src/snapshot/index.ts"
+    "./snapshot": "./src/snapshot/index.ts",
+    "./story": "./src/story/index.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
