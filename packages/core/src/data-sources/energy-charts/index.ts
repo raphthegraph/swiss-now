@@ -44,9 +44,7 @@ export function parsePublicPower(json: PublicPowerJson): GenerationSeries {
 }
 
 /** The last hour with a nuclear value (the series carries hours ahead as null). */
-export function latestGeneration(
-  s: GenerationSeries,
-):
+export function latestGeneration(s: GenerationSeries):
   | {
       observedAt: string;
       byTypeMW: Partial<Record<GenerationType, number>>;

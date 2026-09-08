@@ -121,9 +121,12 @@ await page.locator(".event-marker").first().waitFor({ timeout: 60_000 });
 await page.waitForTimeout(800);
 const markerCount = await page.locator(".event-marker").count();
 const confident = await page.locator(".event-marker[data-confidence='0.95']").count();
+const markerXs = await page.evaluate(() =>
+  new Set([...document.querySelectorAll(".event-marker")].map((el) => Math.round(el.getBoundingClientRect().left / 20))).size,
+);
 const eventsStrip = await page.locator(".strip").innerText();
-const eventsOk = markerCount >= 5 && confident >= 1 && /events/i.test(eventsStrip);
-console.log("event markers:", markerCount, "| confidence 0.95:", confident, "| strip:", eventsStrip.replace(/\n/g, " | ").slice(0, 80), "| ok:", eventsOk);
+const eventsOk = markerCount >= 5 && confident >= 1 && markerXs >= 5 && /events/i.test(eventsStrip);
+console.log("event markers:", markerCount, "| distinct x:", markerXs, "| confidence 0.95:", confident, "| strip:", eventsStrip.replace(/\n/g, " | ").slice(0, 80), "| ok:", eventsOk);
 await page.screenshot({ path: "/tmp/sn/qa-events.png" });
 
 // POLITICS: choropleth from the geo spine with feature-state values, hover card, vote timeline

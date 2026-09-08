@@ -471,6 +471,9 @@ table.sources th {
   border: none;
   color: var(--sn-ground-ink);
   white-space: nowrap;
+}
+/* the marker element carries MapLibre's positioning transform: animate the label, never the marker */
+.event-marker__label {
   animation: event-in var(--sn-duration-panel) var(--sn-ease-house) both;
 }
 @keyframes event-in {
@@ -483,7 +486,7 @@ table.sources th {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .event-marker {
+  .event-marker__label {
     animation: none;
   }
 }
@@ -500,6 +503,7 @@ table.sources th {
 }
 .event-marker__label {
   display: flex;
+  animation-delay: inherit;
   flex-direction: column;
   line-height: 1.15;
   background: rgba(244, 243, 239, 0.86);
