@@ -1,0 +1,32 @@
+name: Statistics data
+
+# Weekly refresh of the SWITZERLAND topics' static files (docs/IA.md): the BFS vote results
+# after a vote Sunday, later the statistics indicators. Commits the files to main so the
+# development fallback stays current; Blob upload follows once BLOB_READ_WRITE_TOKEN exists.
+on:
+  schedule:
+    - cron: "30 6 * * 2" # Tuesdays 06:30 UTC (results are final by the Tuesday after a vote Sunday)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  votes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @swiss-now/core build-data votes -- --sundays 4 --vintage 2026
+      - run: pnpm --filter @swiss-now/core test
+      - name: Commit refreshed data
+        run: |
+          git config user.name "swiss-now-data"
+          git config user.email "data@users.noreply.github.com"
+          git add apps/web/public/data
+          if git diff --cached --quiet; then echo "no changes"; else git commit -m "data: refresh politics ($(date -u +%F))" && git push; fi

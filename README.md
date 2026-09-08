@@ -6,17 +6,18 @@ Status: the MVP runs locally (weather, water, rail, earthquakes, the daily story
 
 ## What it does
 
-| View        | Content                                                                                                                                                                                               | Refresh        |
-| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| **NOW**     | The composite: temperature field, live radar, trains, quakes, and a national summary strip. No further instruments.                                                                                   | —              |
-| **WEATHER** | MeteoSwiss SwissMetNet stations (temperature, wind, gusts, precipitation, snow), wind particles, a 5-minute precipitation radar with a scrubber, national extremes.                                   | 10 min / 5 min |
-| **WATER**   | FOEN hydrology: river discharge and level, lake level, water temperature, flood danger levels; river widths follow discharge.                                                                         | 10 min         |
-| **RAIL**    | Trains interpolated from the GTFS timetable and GTFS-RT delays (Switzerland publishes no vehicle positions; every position is labelled as interpolated), delay marks, SBB disruptions, on-time index. | 60 s           |
-| **QUAKES**  | Swiss Seismological Service reviewed catalogue, last 30 days; the view appears in the rail only when there is a M ≥ 2 event.                                                                          | 2 min          |
-| **/today**  | The day's story: chapters ranked from 10-minute snapshots (extremes, rainfall, delays, rivers, quakes), scroll-driven over the live map, plus the video in a Remotion Player.                         | 10 min         |
-| **/status** | Freshness and source health.                                                                                                                                                                          |                |
+| View         | Content                                                                                                                                                                                               | Refresh        |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| **NOW**      | The composite: temperature field, live radar, trains, quakes, and a national summary strip. No further instruments.                                                                                   | —              |
+| **WEATHER**  | MeteoSwiss SwissMetNet stations (temperature, wind, gusts, precipitation, snow), wind particles, a 5-minute precipitation radar with a scrubber, national extremes.                                   | 10 min / 5 min |
+| **WATER**    | FOEN hydrology: river discharge and level, lake level, water temperature, flood danger levels; river widths follow discharge.                                                                         | 10 min         |
+| **RAIL**     | Trains interpolated from the GTFS timetable and GTFS-RT delays (Switzerland publishes no vehicle positions; every position is labelled as interpolated), delay marks, SBB disruptions, on-time index. | 60 s           |
+| **QUAKES**   | Swiss Seismological Service reviewed catalogue, last 30 days; the view appears in the rail only when there is a M ≥ 2 event.                                                                          | 2 min          |
+| **POLITICS** | Latest federal votes: yes-share per municipality (BFS), titles and results from swissvotes, next vote Sundays from the Federal Chancellery; TIMELINE scrubs through the recent votes.                 | weekly build   |
+| **/today**   | The day's story: chapters ranked from 10-minute snapshots (extremes, rainfall, delays, rivers, quakes), scroll-driven over the live map, plus the video in a Remotion Player.                         | 10 min         |
+| **/status**  | Freshness and source health.                                                                                                                                                                          |                |
 
-Every value carries an observation time and a source; freshness (`live · aging · stale · outage`) changes the rendering. A home place (stored locally, no account) makes the summary strip local.
+Topics sit in a rail (NOW · LIVE · SYSTEMS · SWITZERLAND) and are independent of the view mode (MAP · CHARTS · TIMELINE · COMPARE); the view is a URL (`?topic=politics&mode=timeline&t=6860`). See [`docs/IA.md`](docs/IA.md). Every value carries an observation time and a source; freshness (`live · aging · stale · outage`) changes the rendering. A home place (stored locally, no account) makes the summary strip local.
 
 ## How it works
 
@@ -30,6 +31,7 @@ Swiss open data → adapters (packages/core) → SwissNowState → tokens + moti
 - **Contracts.** `packages/core/src/state` holds the zod schemas: entities (`Station`, `Observation`, `Field`, `Event`, `TripSnapshot` with a mandatory `positionKind`), one state per layer, the composite `SwissNowState`, and `StorySpec`. Provider schemas never leave their adapter.
 - **Rendering split.** The map and its data layers are React, MapLibre GL and custom WebGL; UI transitions use Motion; Remotion is used only for the time-based composition. Web and video share contracts, design tokens and animation math, never a renderer.
 - **Video.** `packages/story-video` renders a `StorySpec` over a fixed MapLibre plate (the renderer camera moves only at cuts, under a dip to paper; motion within a chapter is a CSS transform). Chapter markers travel inside the story, so the video needs no state lookups. Renders run locally under the free Remotion licence.
+- **Statistics.** SWITZERLAND topics are static JSON built by `build-data` (BFS PxWeb and SDMX, swissvotes, LINDAS) and joined to the map through the geo spine: municipality polygons from swissBOUNDARIES3D and the BFS register, keyed by BFS number (`packages/geo-build`).
 - **Cost.** Free tiers only: Vercel Hobby, Vercel Blob, GitHub Actions, Remotion free licence. See `docs/FREE_TIER_ARCHITECTURE.md`.
 
 Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/MOTION_SYSTEM.md`](docs/MOTION_SYSTEM.md), [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md).
@@ -44,9 +46,9 @@ packages/
   core/           @swiss-now/core   state contracts, source registry, freshness, adapters, snapshot + story builders, CLIs
   motion/         @swiss-now/motion design tokens, scales, deterministic animation math, SVG primitives
   story-video/    @swiss-now/story-video  the "Switzerland Today" composition (the only package that imports Remotion)
-  geo-build/      build-time geodata scripts (forked basemap style)
+  geo-build/      build-time geo scripts, pure JS: forked basemap style, boundaries + register (geo spine)
 docs/             product vision, data-source matrix, architecture, free-tier plan, motion system, MVP plan, open questions
-.github/          ci.yml (checks), gtfs.yml (rail data build)
+.github/          ci.yml (checks), gtfs.yml (rail data build), data.yml (weekly statistics build)
 ```
 
 Dependency rules: `core` and `motion` never import React DOM, MapLibre, Motion or Remotion. `apps/web` and `apps/video` never import each other; shared code lives in packages. Workspace packages are consumed from `src/` without a build step.
@@ -80,6 +82,15 @@ Environment variables:
 | `SNAPSHOT_DIR`          | web                  | Local snapshot directory; default `apps/web/public/snapshots`.               |
 | `BLOB_READ_WRITE_TOKEN` | web, `gtfs.yml`, CLI | Vercel Blob for snapshots and rail files once deployed.                      |
 
+### Statistics data
+
+```bash
+pnpm --filter @swiss-now/core build-data votes -- --sundays 4     # BFS vote results → apps/web/public/data/politics
+pnpm --filter @swiss-now/geo-build build-boundaries -- --vintage 2026   # geo spine (yearly)
+```
+
+Committed as the development fallback; `data.yml` refreshes the vote files weekly. `DATA_BASE_URL` / `NEXT_PUBLIC_DATA_BASE_URL` point the app at Vercel Blob once deployed.
+
 ### Video
 
 ```bash
@@ -106,15 +117,16 @@ Interpolated train positions are estimates from the timetable and published dela
 
 ## Roadmap
 
-| Phase | Scope                                                                                                          | Status  |
-| ----- | -------------------------------------------------------------------------------------------------------------- | ------- |
-| 0     | Workspace, contracts, tokens, forked basemap, first cached handler, spikes                                     | done    |
-| 1     | Weather and water layers, radar, wind, HUD, home place                                                         | done    |
-| 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                     | done    |
-| 3     | Quakes, snapshots, story builder, `/today`                                                                     | done    |
-| 4     | "Switzerland Today" composition, local rendering, Player on `/today`                                           | done    |
-| —     | Deployment: Vercel Hobby, Blob store, scheduled snapshot ping                                                  | next    |
-| 5     | City air quality, polish (performance, accessibility, FR/IT); traffic and energy once their access terms allow | planned |
+| Phase | Scope                                                                                                                            | Status  |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| 0     | Workspace, contracts, tokens, forked basemap, first cached handler, spikes                                                       | done    |
+| 1     | Weather and water layers, radar, wind, HUD, home place                                                                           | done    |
+| 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                                       | done    |
+| 3     | Quakes, snapshots, story builder, `/today`                                                                                       | done    |
+| 4     | "Switzerland Today" composition, local rendering, Player on `/today`                                                             | done    |
+| E1    | Expansion stage 1: topics × modes IA, URL view state, geo spine, Politics                                                        | done    |
+| —     | Deployment: Vercel Hobby, Blob store, scheduled snapshot ping                                                                    | next    |
+| E2–E7 | Energy + Events · Air + Hazards · Statistics + CHARTS · TIMELINE + COMPARE · story/video + gated Aviation · polish and languages | planned |
 
 ## Licence
 
