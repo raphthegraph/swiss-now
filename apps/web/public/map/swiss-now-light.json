@@ -20,7 +20,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "background-color": "#F4F3EF"
+        "background-color": "#FAFAF8"
       }
     },
     {
@@ -601,7 +601,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "fill-color": "#D9E2EA"
+        "fill-color": "#DCE6EE"
       }
     },
     {
@@ -4362,7 +4362,7 @@
           0.8
         ],
         "text-halo-blur": 0.25,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": 1,
         "text-opacity": [
           "step",
@@ -4539,7 +4539,7 @@
           ["match", ["get", "class"], "lake_elevation", 0.8, 1]
         ],
         "text-halo-blur": 0.25,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": 0.5
       },
       "filter": ["!=", "class", "doline"]
@@ -4588,7 +4588,7 @@
           "#3f3d3b"
         ],
         "text-halo-blur": 0.2,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": [
           "interpolate",
           ["linear"],
@@ -4704,7 +4704,7 @@
       "paint": {
         "text-color": "#74797b",
         "text-halo-blur": 1,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": 1
       },
       "filter": ["all", ["==", "$type", "Point"], ["in", "subclass", "glacier"]]
@@ -4745,7 +4745,7 @@
       "paint": {
         "text-color": "#74797b",
         "text-halo-blur": 1,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": 1
       },
       "filter": ["all", ["==", "$type", "LineString"], ["in", "subclass", "glacier"]]
@@ -5148,7 +5148,7 @@
       },
       "paint": {
         "icon-color": "#020000",
-        "text-color": "#5C6068",
+        "text-color": "#64748B",
         "icon-opacity": [
           "step",
           ["zoom"],
@@ -5223,7 +5223,7 @@
         "text-halo-blur": 1,
         "icon-halo-color": "#fffffd",
         "icon-halo-width": 0,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": ["interpolate", ["linear"], ["zoom"], 12, 1.5, 18, 3]
       },
       "filter": ["all", ["has", "rank"], [">", "rank", 1], ["!in", "class", "mountain_pass"]]
@@ -5306,7 +5306,7 @@
         "icon-anchor": "center"
       },
       "paint": {
-        "text-color": "#5C6068",
+        "text-color": "#64748B",
         "icon-opacity": [
           "step",
           ["zoom"],
@@ -5354,7 +5354,7 @@
           1
         ],
         "text-halo-blur": 1,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": [
           "interpolate",
           ["cubic-bezier", 0, 0.75, 0.25, 1],
@@ -5577,7 +5577,7 @@
         "text-letter-spacing": 0.025
       },
       "paint": {
-        "text-color": "#5C6068",
+        "text-color": "#64748B",
         "icon-opacity": [
           "step",
           ["zoom"],
@@ -5643,7 +5643,7 @@
           1
         ],
         "text-halo-blur": 1,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": [
           "interpolate",
           ["cubic-bezier", 0, 0.75, 0.25, 1],
@@ -5736,7 +5736,7 @@
       },
       "paint": {
         "icon-color": "#020000",
-        "text-color": "#5C6068",
+        "text-color": "#64748B",
         "icon-opacity": [
           "step",
           ["zoom"],
@@ -5759,7 +5759,7 @@
         "text-halo-blur": 1,
         "icon-halo-color": "#fffffd",
         "icon-halo-width": 0,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": ["interpolate", ["linear"], ["zoom"], 10, 1.5, 18, 3]
       },
       "filter": [
@@ -5829,7 +5829,7 @@
       "paint": {
         "text-color": "#6F8598",
         "text-halo-blur": 1,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": 2
       },
       "filter": [
@@ -5973,7 +5973,7 @@
           ["match", ["get", "size"], [10, 9, 8, 7, 6, 5, 4, 3, 2, 1], 1, 1]
         ],
         "text-halo-blur": 0.25,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": 1
       },
       "filter": ["all", ["==", "$type", "Point"], ["==", "class", "lake"]]
@@ -5995,7 +5995,7 @@
       "paint": {
         "text-color": "rgba(108, 111, 101, 0.9)",
         "text-halo-blur": 1,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": 1
       },
       "filter": ["all", ["in", "class", "national_park"], ["==", "$type", "Point"]]
@@ -6031,7 +6031,7 @@
       "paint": {
         "text-color": "#32302e",
         "text-halo-blur": 1,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": 1
       },
       "filter": ["all", ["==", "$type", "Point"], ["in", "subclass", "massif"]]
@@ -6088,7 +6088,7 @@
         "icon-opacity": ["step", ["zoom"], 1, 11, 0],
         "text-opacity": 1,
         "text-halo-blur": 1,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": [
           "interpolate",
           ["cubic-bezier", 0, 0.75, 0.25, 1],
@@ -6134,9 +6134,9 @@
         "text-letter-spacing": 0.12
       },
       "paint": {
-        "text-color": "#5C6068",
+        "text-color": "#64748B",
         "text-halo-blur": 1,
-        "text-halo-color": "#F4F3EF",
+        "text-halo-color": "#FAFAF8",
         "text-halo-width": 1
       },
       "filter": ["==", "class", "country"]

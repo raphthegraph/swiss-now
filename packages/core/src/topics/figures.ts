@@ -14,6 +14,8 @@ import { currentDelay } from "../data-sources/transit/rail-state";
 import type { TopicId } from "./spec";
 import type { LocalizedText } from "../state/common";
 import { FL, t, withSuffix } from "../i18n";
+import { SOURCES } from "../sources/registry";
+import type { SourceId } from "../sources/ids";
 
 export interface Figure {
   id: string;
@@ -25,6 +27,8 @@ export interface Figure {
   text?: string;
   /** Secondary line: place, source, qualifier. */
   where?: string;
+  /** Attribution line ("Source: MeteoSwiss"), from the source registry. */
+  source?: string;
 }
 
 export interface TopicStates {
@@ -509,35 +513,60 @@ export function statsFigures(st: TopicStates["stats"]): Figure[] {
 }
 
 /** Figures for a topic; NOW composes the leads of its contributors. */
+/** Attaches the registry attribution to each figure; `pick` chooses the source per figure id. */
+function tag(figs: Figure[], id: SourceId | ((f: Figure) => SourceId)): Figure[] {
+  return figs.map((f) => ({
+    ...f,
+    source: SOURCES[typeof id === "function" ? id(f) : id].attribution,
+  }));
+}
+const hazardSource = (f: Figure): SourceId =>
+  f.id === "snow"
+    ? "slf-imis"
+    : f.id === "avalanche"
+      ? "slf-bulletin"
+      : f.id === "hail"
+        ? "meteoswiss-hail"
+        : f.id === "fire"
+          ? "bafu-fire-danger"
+          : "sed-fdsn";
+const energySource = (f: Figure): SourceId =>
+  f.id === "price" || f.id === "renewable" ? "energy-charts" : "swissgrid-live";
+const airSource = (f: Figure): SourceId =>
+  f.id === "citizen" ? "sensor-community" : f.id === "pollen" ? "meteoswiss-pollen" : "ugz-air";
+
 export function figuresFor(topic: TopicId, s: TopicStates, nowMs = Date.now()): Figure[] {
   switch (topic) {
     case "weather":
-      return weatherFigures(s.weather);
+      return tag(weatherFigures(s.weather), "meteoswiss-smn");
     case "water":
-      return waterFigures(s.hydrology);
+      return tag(waterFigures(s.hydrology), "bafu-lindas-hydro");
     case "rail":
-      return railFigures(s.rail, nowMs);
+      return tag(railFigures(s.rail, nowMs), "otd-gtfs-rt");
     case "hazards":
-      return hazardsFigures(s.hazards, s.seismic, nowMs);
+      return tag(hazardsFigures(s.hazards, s.seismic, nowMs), hazardSource);
     case "air":
-      return airFigures(s.air);
+      return tag(airFigures(s.air), airSource);
     case "population":
     case "housing":
     case "economy":
     case "tourism":
       return statsFigures(s.stats);
     case "politics":
-      return politicsFigures(s.politics, s.vote, nowMs);
+      return tag(politicsFigures(s.politics, s.vote, nowMs), "bfs");
     case "energy":
-      return energyFigures(s.energy);
+      return tag(energyFigures(s.energy), energySource);
     case "events":
-      return eventsFigures(s.events, nowMs);
+      return tag(eventsFigures(s.events, nowMs), "polizei-news");
     case "now":
       return [
-        ...weatherFigures(s.weather).slice(0, 2),
-        ...railFigures(s.rail, nowMs).filter((f) => f.id === "on-time"),
-        ...waterFigures(s.hydrology).slice(0, 1),
-        ...energyFigures(s.energy).slice(0, 1),
+        ...tag(weatherFigures(s.weather).slice(0, 2), "meteoswiss-smn"),
+        ...tag(
+          railFigures(s.rail, nowMs).filter((f) => f.id === "on-time"),
+          "otd-gtfs-rt",
+        ),
+        ...tag(waterFigures(s.hydrology).slice(0, 1), "bafu-lindas-hydro"),
+        ...tag(energyFigures(s.energy).slice(0, 1), "swissgrid-live"),
       ];
     default:
       return [];

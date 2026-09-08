@@ -19,6 +19,7 @@
     "@swiss-now/motion": "workspace:*",
     "@swiss-now/story-video": "workspace:*",
     "@vercel/blob": "^2.8.0",
+    "lucide-react": "^1.43.0",
     "maplibre-gl": "^6.7.0",
     "motion": "^13.2.0",
     "next": "^16.3.4",

@@ -40,7 +40,7 @@ Swiss open data → adapters (packages/core) → SwissNowState → tokens + moti
 - **Statistics.** SWITZERLAND topics are static JSON built by `build-data` (BFS PxWeb and SDMX, swissvotes, LINDAS) and joined to the map through the geo spine: municipality polygons from swissBOUNDARIES3D and the BFS register, keyed by BFS number (`packages/geo-build`).
 - **Cost.** Free tiers only: Vercel Hobby, Vercel Blob, GitHub Actions, Remotion free licence. See `docs/FREE_TIER_ARCHITECTURE.md`.
 
-Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md), [`docs/MOTION_SYSTEM.md`](docs/MOTION_SYSTEM.md), [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md).
+Full detail: [`docs/DESIGN.md`](docs/DESIGN.md), [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md), [`docs/MOTION_SYSTEM.md`](docs/MOTION_SYSTEM.md), [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md).
 
 ## Repository layout
 
@@ -53,7 +53,7 @@ packages/
   motion/         @swiss-now/motion design tokens, scales, deterministic animation math, SVG primitives
   story-video/    @swiss-now/story-video  the "Switzerland Today" composition (the only package that imports Remotion)
   geo-build/      build-time geo scripts, pure JS: forked basemap style, boundaries + register (geo spine)
-docs/             product vision, data-source matrix, architecture, free-tier plan, deployment, motion system, IA, open questions
+docs/             product vision, design, data-source matrix, architecture, free-tier plan, deployment, motion system, IA, open questions
 .github/          ci.yml (checks), gtfs.yml (rail data build), data.yml (weekly statistics build), snapshot.yml (10-minute snapshot ping)
 ```
 
@@ -96,6 +96,7 @@ Environment variables:
 pnpm --filter @swiss-now/core build-data votes -- --sundays 4     # BFS vote results → apps/web/public/data/politics
 pnpm --filter @swiss-now/core build-data stats                    # BFS SDMX/PxWeb indicators + KOF → apps/web/public/data/stats
 pnpm --filter @swiss-now/geo-build build-boundaries -- --vintage 2026   # geo spine (yearly)
+node packages/geo-build/scripts/build-mark.mjs                          # the contour brand mark from the spine
 ```
 
 Committed as the development fallback; `data.yml` refreshes the vote files weekly. `DATA_BASE_URL` / `NEXT_PUBLIC_DATA_BASE_URL` point the app at Vercel Blob once deployed.

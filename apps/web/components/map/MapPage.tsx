@@ -64,7 +64,8 @@ import { useRadarTimeline } from "@/lib/use-radar-timeline";
 import { useSnapshotPing } from "@/lib/use-snapshot-ping";
 import { TopicRail } from "../hud/TopicRail";
 import { ModeSwitcher } from "../hud/ModeSwitcher";
-import { Masthead } from "../hud/Masthead";
+import { TopBar } from "../hud/TopBar";
+import { MapControls } from "../hud/MapControls";
 import { FigureStrip } from "../hud/FigureStrip";
 import { FpsMeter } from "../hud/FpsMeter";
 
@@ -528,104 +529,65 @@ export function MapPage({
       {indicator.meta.attribution}
     </span>
   ) : undefined;
-  return (
-    <>
-      <LiveMap
-        weather={viewWeather}
-        hydrology={viewHydrology}
-        disruptions={viewDisruptions}
-        presence={presence}
-        muted={
-          topic === "rail" ||
-          topic === "hazards" ||
-          topic === "events" ||
-          mode === "charts" ||
-          compareMode
-        }
-        focus={focus}
-        radarFrame={radar.frame}
-        contributions={contributions}
-        onMapReady={(m) => {
-          setMap(m);
-          // QA hook: the software-WebGL harness reads sources and feature state through it
-          (window as unknown as { __swissNowMap?: MapLibreMap }).__swissNowMap = m;
-        }}
+  const instrument =
+    topic === "rail" ? (
+      <RailLegend loaded={railProgress.loaded} needed={railProgress.needed} />
+    ) : topic === "politics" ? (
+      <RampLegend scale="yesShare" label={t("yesShare")} unit=" %" />
+    ) : topic === "air" ? (
+      <RampLegend scale="airIndex" label={l(FL.airIndex)} />
+    ) : topic === "hazards" ? (
+      <RampLegend scale="dangerLevel" label={l(FL.dangerLevel)} />
+    ) : isStats && statsUpdate && indicator ? (
+      <DynamicRampLegend
+        stops={statsUpdate.stops}
+        label={l(indicator.meta.label)}
+        unit={indicator.meta.unit ? ` ${indicator.meta.unit}` : ""}
+        decimals={indicator.meta.decimals}
       />
-      {presence.weather !== "off" ? <WindParticles map={map} weather={viewWeather} /> : null}
-      {presence.energy !== "off" ? (
-        <FlowLayer
-          map={map}
-          energy={past ? past.energy : energy}
-          mode={presence.energy === "full" ? "full" : "quiet"}
-        />
-      ) : null}
-      {presence.aviation !== "off" && !past ? (
-        <AircraftLayer map={map} aviation={aviation} />
-      ) : null}
-      {presence.events !== "off" && !past ? (
-        <EventMarkers
-          map={map}
-          events={events}
-          mode={presence.events === "full" ? "full" : "quiet"}
-        />
-      ) : null}
-      {compareMode ? (
-        <CompareView
-          register={compareRegister}
-          a={{ place: placeA, figures: compareFigures(placeA) }}
-          b={{ place: placeB, figures: compareFigures(placeB) }}
-          onPickA={(p) => setPlaces(p.key, placeKeys[1])}
-          onPickB={(p) => setPlaces(placeKeys[0], p.key)}
-          title={t("compareTitle", { topic: l(TOPICS[topic].label) })}
-        />
-      ) : null}
-      {mode === "charts" ? (
-        <ChartsView
-          topic={topic}
-          energy={energy}
-          stats={
-            isStats
-              ? { series: indicator, national, register, accent: accentOf(topic), period }
-              : undefined
-          }
-        />
-      ) : null}
-      {presence.rail !== "off" && !past ? (
-        <TrainLayer
-          map={map}
-          rail={rail}
-          mode={presence.rail === "full" ? "full" : "quiet"}
-          onHover={setTrainHover}
-          onProgress={(loaded, needed) => setRailProgress({ loaded, needed })}
-        />
-      ) : null}
-      {topic === "rail" && trainHover && rail ? (
-        <div className="hover-anchor">
-          <TrainHoverCard hover={trainHover} freshness={rail.freshness} stopName={stopNames} />
-        </div>
-      ) : null}
-      {presence.seismic !== "off" ? (
-        <QuakeLayer
-          map={map}
-          seismic={viewSeismic}
-          mode={presence.seismic === "full" ? "full" : "quiet"}
-          onHover={setQuakeHover}
-        />
-      ) : null}
-      {topic === "hazards" && quakeHover ? (
-        <div className="hover-anchor">
-          <QuakeHoverCard hover={quakeHover} />
-        </div>
-      ) : null}
-      <TopicRail view={view} onSelect={setTopic} />
-      <ModeSwitcher view={view} onChange={setMode} />
-      {help ? (
-        <div className="hud hud--help" role="dialog" aria-label={t("shortcuts")}>
-          <span className="label">{t("shortcuts")}</span>
-          <span className="tnum">{t("shortcutsHelp")}</span>
-        </div>
-      ) : null}
-      <Masthead
+    ) : null;
+  const scrubber = snapshotMode ? (
+    <SnapshotScrubber
+      slots={tl.slots}
+      index={tl.index}
+      playing={tl.playing}
+      onChange={(i) => {
+        tl.setIndex(i);
+        setTime(
+          i === null
+            ? undefined
+            : tl.slots[i]?.url
+                .split("/")
+                .pop()
+                ?.replace(/\.json$/, ""),
+        );
+      }}
+      onTogglePlay={() => {
+        if (view.t) setTime(undefined);
+        tl.togglePlay();
+      }}
+    />
+  ) : isStats && mode === "timeline" && indicator ? (
+    <PeriodScrubber
+      periods={indicator.periods}
+      selected={period ?? latestValues(indicator).period}
+      onChange={setTime}
+      label={indicator.meta.periodKind === "month" ? t("month") : t("year")}
+    />
+  ) : topic === "politics" && mode === "timeline" && politics && voteId ? (
+    <VoteScrubber votes={politics.index} selectedId={voteId} onChange={setTime} />
+  ) : radarOn ? (
+    <RadarScrubber
+      frames={radar.frames}
+      index={radar.index}
+      playing={radar.playing}
+      onChange={radar.scrubTo}
+      onTogglePlay={radar.togglePlay}
+    />
+  ) : null;
+  return (
+    <div className="app">
+      <TopBar
         status={voteStatus}
         clock={{ observedAt: weather.observedAt, freshness: weather.freshness }}
         home={
@@ -641,73 +603,118 @@ export function MapPage({
           />
         }
       />
-      <FigureStrip
-        topic={topic}
-        figures={figures}
-        legend={
-          topic === "rail" ? (
-            <RailLegend loaded={railProgress.loaded} needed={railProgress.needed} />
-          ) : topic === "politics" ? (
-            <RampLegend scale="yesShare" label={t("yesShare")} unit=" %" />
-          ) : topic === "air" ? (
-            <RampLegend scale="airIndex" label={l(FL.airIndex)} />
-          ) : topic === "hazards" ? (
-            <RampLegend scale="dangerLevel" label={l(FL.dangerLevel)} />
-          ) : isStats && statsUpdate && indicator ? (
-            <DynamicRampLegend
-              stops={statsUpdate.stops}
-              label={l(indicator.meta.label)}
-              unit={indicator.meta.unit ? ` ${indicator.meta.unit}` : ""}
-              decimals={indicator.meta.decimals}
-            />
-          ) : null
-        }
-      >
-        {snapshotMode ? (
-          <SnapshotScrubber
-            slots={tl.slots}
-            index={tl.index}
-            playing={tl.playing}
-            onChange={(i) => {
-              tl.setIndex(i);
-              setTime(
-                i === null
-                  ? undefined
-                  : tl.slots[i]?.url
-                      .split("/")
-                      .pop()
-                      ?.replace(/\.json$/, ""),
-              );
-            }}
-            onTogglePlay={() => {
-              if (view.t) setTime(undefined);
-              tl.togglePlay();
-            }}
+      <aside className="sidebar">
+        <TopicRail view={view} onSelect={setTopic} />
+      </aside>
+      <div className="canvas">
+        <LiveMap
+          weather={viewWeather}
+          hydrology={viewHydrology}
+          disruptions={viewDisruptions}
+          presence={presence}
+          muted={
+            topic === "rail" ||
+            topic === "hazards" ||
+            topic === "events" ||
+            mode === "charts" ||
+            compareMode
+          }
+          focus={focus}
+          radarFrame={radar.frame}
+          contributions={contributions}
+          onMapReady={(m) => {
+            setMap(m);
+            // QA hook: the software-WebGL harness reads sources and feature state through it
+            (window as unknown as { __swissNowMap?: MapLibreMap }).__swissNowMap = m;
+          }}
+        />
+        {presence.weather !== "off" ? <WindParticles map={map} weather={viewWeather} /> : null}
+        {presence.energy !== "off" ? (
+          <FlowLayer
+            map={map}
+            energy={past ? past.energy : energy}
+            mode={presence.energy === "full" ? "full" : "quiet"}
           />
         ) : null}
-        {isStats && mode === "timeline" && indicator ? (
-          <PeriodScrubber
-            periods={indicator.periods}
-            selected={period ?? latestValues(indicator).period}
-            onChange={setTime}
-            label={indicator.meta.periodKind === "month" ? t("month") : t("year")}
+        {presence.aviation !== "off" && !past ? (
+          <AircraftLayer map={map} aviation={aviation} />
+        ) : null}
+        {presence.events !== "off" && !past ? (
+          <EventMarkers
+            map={map}
+            events={events}
+            mode={presence.events === "full" ? "full" : "quiet"}
           />
         ) : null}
-        {topic === "politics" && mode === "timeline" && politics && voteId ? (
-          <VoteScrubber votes={politics.index} selectedId={voteId} onChange={setTime} />
-        ) : null}
-        {radarOn ? (
-          <RadarScrubber
-            frames={radar.frames}
-            index={radar.index}
-            playing={radar.playing}
-            onChange={radar.scrubTo}
-            onTogglePlay={radar.togglePlay}
+        {compareMode ? (
+          <CompareView
+            register={compareRegister}
+            a={{ place: placeA, figures: compareFigures(placeA) }}
+            b={{ place: placeB, figures: compareFigures(placeB) }}
+            onPickA={(p) => setPlaces(p.key, placeKeys[1])}
+            onPickB={(p) => setPlaces(placeKeys[0], p.key)}
+            title={t("compareTitle", { topic: l(TOPICS[topic].label) })}
           />
         ) : null}
-      </FigureStrip>
-      {showFps ? <FpsMeter /> : null}
-    </>
+        {mode === "charts" ? (
+          <ChartsView
+            topic={topic}
+            energy={energy}
+            stats={
+              isStats
+                ? { series: indicator, national, register, accent: accentOf(topic), period }
+                : undefined
+            }
+          />
+        ) : null}
+        {presence.rail !== "off" && !past ? (
+          <TrainLayer
+            map={map}
+            rail={rail}
+            mode={presence.rail === "full" ? "full" : "quiet"}
+            onHover={setTrainHover}
+            onProgress={(loaded, needed) => setRailProgress({ loaded, needed })}
+          />
+        ) : null}
+        {topic === "rail" && trainHover && rail ? (
+          <div className="hover-anchor">
+            <TrainHoverCard hover={trainHover} freshness={rail.freshness} stopName={stopNames} />
+          </div>
+        ) : null}
+        {presence.seismic !== "off" ? (
+          <QuakeLayer
+            map={map}
+            seismic={viewSeismic}
+            mode={presence.seismic === "full" ? "full" : "quiet"}
+            onHover={setQuakeHover}
+          />
+        ) : null}
+        {topic === "hazards" && quakeHover ? (
+          <div className="hover-anchor">
+            <QuakeHoverCard hover={quakeHover} />
+          </div>
+        ) : null}
+        <ModeSwitcher view={view} onChange={setMode} />
+        <MapControls
+          map={map}
+          onLocate={(lonLat) => setFocus({ lonLat, zoom: 9.2, key: `me:${Date.now()}` })}
+        />
+        {help ? (
+          <div className="help" role="dialog" aria-label={t("shortcuts")}>
+            <span className="label">{t("shortcuts")}</span>
+            <span className="tnum">{t("shortcutsHelp")}</span>
+          </div>
+        ) : null}
+        {(instrument || scrubber) && mode !== "charts" && !compareMode ? (
+          <div className="instrument">
+            {scrubber}
+            {instrument}
+          </div>
+        ) : null}
+        {showFps ? <FpsMeter /> : null}
+      </div>
+      <FigureStrip topic={topic} figures={figures} />
+    </div>
   );
 }
 

@@ -49,6 +49,7 @@ The in-app and headless browsers used by the assistant cannot render WebGL, so m
 
 ```bash
 node scripts/qa-rail-hover.mjs            # rail hover card, every topic and mode, timelines, compare, the gate, /today; then a 1280×720 pass (rail above the strip, ? help), a 390×844 pass (horizontal rail, four figures, tap opens and closes a card) and reduced motion
+node scripts/qa-shots.mjs                 # screenshots of the main views at desktop and phone sizes → /tmp/sn/shot-*.png
 node scripts/qa-i18n.mjs                  # ?lang=de/fr/it: rail, figures, legend, modes, charts title, story headline; the FR switch and its stored choice
 ```
 

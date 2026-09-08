@@ -23,6 +23,7 @@ import { formatDateTime, formatNumber } from "@/lib/format";
 import { useT } from "@/lib/i18n/lang";
 import { TOPICS } from "@swiss-now/core/topics";
 import { LangSwitch } from "@/components/hud/LangSwitch";
+import { Wordmark } from "@/components/brand/Wordmark";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 // Remotion Player + MapLibre plate: browser-only, loaded when the section renders
@@ -114,11 +115,13 @@ export function TodayStory({
         {topic === "rail" ? <TrainLayer map={map} rail={rail} mode="quiet" /> : null}
         {topic === "hazards" ? <QuakeLayer map={map} seismic={seismic} mode="full" /> : null}
       </div>
-      <header className="hud hud--top">
-        <h1>
-          <Link href="/">Swiss Now</Link>
+      <header className="topbar topbar--today">
+        <h1 className="topbar__brand">
+          <Link href="/">
+            <Wordmark />
+          </Link>
         </h1>
-        <span className="label">{l(story.title)}</span>
+        <span className="label topbar__status">{l(story.title)}</span>
       </header>
       <main className="today__chapters">
         <div className="today__spacer" aria-hidden="true" />

@@ -14,7 +14,7 @@ const SOURCE_STYLE = "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.light
 const OUT = resolve(process.argv[2] ?? "../../apps/web/public/map/swiss-now-light.json");
 
 // tokens (kept in sync with @swiss-now/motion tokens/color.ts by hand — this script has no TS deps)
-const PAPER = "#F4F3EF";
+const PAPER = "#FAFAF8";
 const INK = "#111214";
 const GRAPHITE = "#5C6068";
 const LAKE = "#D9E2EA";

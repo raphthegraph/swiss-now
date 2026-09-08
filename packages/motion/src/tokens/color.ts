@@ -1,45 +1,53 @@
 /**
- * Colour tokens. Swiss modernism: a near-monochrome ground, one accent per layer,
- * colour reserved for information. Hex values are sRGB.
+ * Colour tokens (design direction 2026-09-08, docs/DESIGN.md): a quiet paper ground, white
+ * surfaces with hairline borders, graphite type, blue-grey secondary text, Swiss red and amber as
+ * the only warm accents. Colour is reserved for information. Hex values are sRGB.
  */
 export const ground = {
-  /** Warm off-white paper for the day ground. */
-  paper: "#F4F3EF",
-  /** Near-black ink for type and the night ground. */
-  ink: "#111214",
-  /** Mid-grey for secondary type and hairlines. */
-  graphite: "#5C6068",
+  /** Warm off-white paper: the page and the map ground. */
+  paper: "#FAFAF8",
+  /** White surfaces: cards, panels, the top bar. */
+  surface: "#FFFFFF",
+  /** Graphite ink for type and the night ground. */
+  ink: "#111827",
+  /** Blue-grey for secondary type and icons. */
+  graphite: "#64748B",
   /** Light hairline / disabled. */
-  mist: "#C9CBCF",
+  mist: "#E5E7EB",
   /** Water body fill on the basemap. */
-  lake: "#D9E2EA",
+  lake: "#DCE6EE",
   /** Relief hillshade tint (multiplied over the ground). */
-  relief: "#B9B6AE",
+  relief: "#C9CDD3",
+} as const;
+
+/** The two warm brand accents; everything else stays cool. */
+export const brand = {
+  swissRed: "#E2563D",
+  amber: "#F5A623",
 } as const;
 
 /** Environmental grounds derived from sun altitude over Bern (see `daylight`). */
 export const daylightGround = {
   dawn: { background: "#E9E4DC", foreground: "#1B1C1F", basemapOpacity: 0.9 },
-  day: { background: "#F4F3EF", foreground: "#111214", basemapOpacity: 1 },
+  day: { background: "#FAFAF8", foreground: "#111827", basemapOpacity: 1 },
   dusk: { background: "#2A2C33", foreground: "#EDEBE6", basemapOpacity: 0.75 },
   night: { background: "#0F1114", foreground: "#E6E4DF", basemapOpacity: 0.6 },
 } as const;
 
 /** One accent per layer. Used sparingly; the map ground stays monochrome. */
 export const layerAccent = {
-  weather: "#D9552B", // warm orange-red for temperature extremes and the layer label
-  rain: "#3E6D9C", // radar / precipitation
-  wind: "#7B8794", // particles are near-neutral so they read as motion, not colour
-  hydrology: "#2F6F9F",
-  rail: "#8A8F98", // trains are neutral grey…
-  railDelay: "#E30613", // …Swiss red is reserved for delay
-  traffic: "#D89A1E",
-  air: "#7A6E8C",
-  energy: "#9AA83A",
-  seismic: "#E0742D",
-  // expansion topics (2026-09-08); values provisional until checked on device
-  hazards: "#C4452B", // quakes, avalanche, forest fire, hail
-  events: "#2A2C33", // events are typographic: near-ink, the map stays the picture
+  weather: "#E2563D", // Swiss red for temperature extremes and the layer label
+  rain: "#6B8CAE", // radar / precipitation: soft blue-grey
+  wind: "#64748B", // particles are near-neutral so they read as motion, not colour
+  hydrology: "#4A7BA6",
+  rail: "#8B95A5", // trains are neutral grey…
+  railDelay: "#E2563D", // …Swiss red is reserved for delay
+  traffic: "#F5A623",
+  air: "#7C6F93",
+  energy: "#F5A623", // amber: the flows are the warm signal of the SYSTEMS group
+  seismic: "#E2563D",
+  hazards: "#C7432E", // quakes, avalanche, forest fire, hail
+  events: "#111827", // events are typographic: ink, the map stays the picture
   aviation: "#5F7D8C",
   politics: "#7A4E9A", // votes: a diverging yes/no ramp around 50 %
   population: "#3F6F8E",
@@ -57,13 +65,13 @@ export type LayerAccentKey = keyof typeof layerAccent;
 export const scaleStops = {
   /** Air temperature in °C. Cool blues → neutral paper → warm sand → red. */
   temperature: [
-    [-20, "#2B2D6B"],
-    [-10, "#3F5FA8"],
-    [0, "#7FA3C9"],
-    [10, "#D8D6CC"],
-    [20, "#E8B76E"],
-    [30, "#D9552B"],
-    [40, "#7A1B14"],
+    [-20, "#2F3E6B"],
+    [-10, "#4A6FA5"],
+    [0, "#8FB1CF"],
+    [10, "#DADDE2"],
+    [20, "#F5A623"],
+    [30, "#E2563D"],
+    [40, "#8A1F14"],
   ],
   /** Rain rate in mm/h. Transparent → blue → violet for extremes. */
   rainRate: [
@@ -94,7 +102,7 @@ export const scaleStops = {
     [20, "#8E1B1B"],
     [35, "#D9552B"],
     [45, "#E8C4A8"],
-    [50, "#F4F3EF"],
+    [50, "#FAFAF8"],
     [55, "#BFC8D9"],
     [65, "#5F7FB5"],
     [80, "#2B2D6B"],
@@ -110,10 +118,10 @@ export const scaleStops = {
   ],
   /** Delay in seconds → grey to Swiss red. */
   delay: [
-    [0, "#8A8F98"],
-    [180, "#B98A73"],
-    [600, "#E30613"],
-    [1800, "#8E0A11"],
+    [0, "#8B95A5"],
+    [180, "#D9A08A"],
+    [600, "#E2563D"],
+    [1800, "#8A1F14"],
   ],
 } as const satisfies Record<string, readonly (readonly [number, string])[]>;
 export type ScaleStopsKey = keyof typeof scaleStops;

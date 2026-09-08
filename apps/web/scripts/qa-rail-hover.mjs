@@ -70,9 +70,14 @@ console.log(
   "delayed:",
   trains.filter((t) => t.delay >= 180).length,
 );
-const target = trains.find((t) => t.x > 300 && t.x < 1100 && t.y > 150 && t.y < 700) ?? trains[0];
+const target = trains.find((t) => t.x > 300 && t.x < 1000 && t.y > 120 && t.y < 600) ?? trains[0];
+// train positions are canvas pixels; the canvas sits right of the sidebar and below the top bar
+const canvasRect = await page.evaluate(() => {
+  const r = window.__swissNowMap.getContainer().getBoundingClientRect();
+  return { left: r.left, top: r.top };
+});
 console.log("hovering", target);
-await page.mouse.move(target.x, target.y, { steps: 4 });
+await page.mouse.move(target.x + canvasRect.left, target.y + canvasRect.top, { steps: 4 });
 await page.waitForTimeout(400);
 const card = page.locator(".hover-card--rail");
 const shown = (await card.count()) > 0;
@@ -221,7 +226,7 @@ console.log("stats population filled:", popFilled, "| strip:", popStrip.replace(
 await page.screenshot({ path: "/tmp/sn/qa-stats.png" });
 
 // SNAPSHOT TIMELINE: NOW → TIMELINE shows the 48 h scrubber; stepping back writes the slot into the URL
-await page.getByRole("button", { name: "Now" }).click();
+await page.locator("nav[aria-label='Topics'] .rail__item").first().click();
 await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Timeline$/i }).click();
 await page.locator(".scrubber--snapshots").waitFor({ timeout: 30_000 });
 await page.locator(".scrubber--snapshots input[type=range]").waitFor({ timeout: 30_000 });
@@ -235,7 +240,7 @@ await page.waitForFunction(() => /snapshot/i.test(document.querySelector(".scrub
 await page.waitForTimeout(1200);
 const snapT = new URL(page.url()).searchParams.get("t");
 const snapStrip = await page.locator(".strip").innerText();
-const snapshotOk = /^\d{8}T\d{4}$/.test(snapT ?? "") && /warmest/i.test(snapStrip) && /snapshot/i.test(await page.locator(".hud--top").innerText());
+const snapshotOk = /^\d{8}T\d{4}$/.test(snapT ?? "") && /warmest/i.test(snapStrip) && /snapshot/i.test(await page.locator(".topbar__status").innerText());
 console.log("snapshot timeline t:", snapT, "| strip:", snapStrip.replace(/\n/g, " | ").slice(0, 60), "| ok:", snapshotOk);
 await page.screenshot({ path: "/tmp/sn/qa-snapshot.png" });
 await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Map$/i }).click();
@@ -292,8 +297,10 @@ const filled = await page.evaluate(() => {
 });
 const stripPolitics = await page.locator(".strip").innerText();
 const bern = await page.evaluate(() => {
-  const p = window.__swissNowMap.project([7.44, 46.95]);
-  return { x: p.x, y: p.y };
+  const m = window.__swissNowMap;
+  const p = m.project([7.44, 46.95]);
+  const r = m.getContainer().getBoundingClientRect();
+  return { x: p.x + r.left, y: p.y + r.top };
 });
 await page.mouse.move(bern.x, bern.y);
 await page.waitForTimeout(500);
@@ -366,10 +373,14 @@ await page.setViewportSize({ width: 1280, height: 720 });
 await page.goto(`${base}/?topic=weather`, { waitUntil: "domcontentloaded", timeout: 90_000 });
 await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 60_000 });
 await page.waitForTimeout(600);
-const railBox = await page.locator("nav[aria-label='Topics']").boundingBox();
-const stripBox = await page.locator(".hud--bottom").boundingBox();
-const shortOk = !!railBox && !!stripBox && railBox.y + railBox.height <= stripBox.y + 1;
-console.log("short viewport: rail bottom", Math.round(railBox?.y + railBox?.height), "strip top", Math.round(stripBox?.y), "| ok:", shortOk);
+// the sidebar scrolls inside the grid: the page itself never overflows and the last topic is reachable
+const noPageScroll = await page.evaluate(() => document.documentElement.scrollHeight <= innerHeight + 1);
+const lastTopic = page.locator("nav[aria-label='Topics'] .rail__item").last();
+await lastTopic.scrollIntoViewIfNeeded();
+const lastBox = await lastTopic.boundingBox();
+const stripBox = await page.locator(".bar").boundingBox();
+const shortOk = noPageScroll && !!lastBox && !!stripBox && lastBox.y + lastBox.height <= 720 + 1 && lastBox.x + lastBox.width <= stripBox.x + 1;
+console.log("short viewport: no page scroll", noPageScroll, "| last topic reachable", !!lastBox, "| ok:", shortOk);
 await page.keyboard.press("?");
 const helpOpen = (await page.locator("[role='dialog']").count()) === 1;
 await page.keyboard.press("Escape");
@@ -380,12 +391,12 @@ await page.goto(`${base}/?topic=weather`, { waitUntil: "domcontentloaded", timeo
 await page.getByRole("button", { name: "Rail" }).waitFor({ timeout: 60_000 });
 await page.waitForTimeout(800);
 const railM = await page.locator("nav[aria-label='Topics']").boundingBox();
-const stripM = await page.locator(".hud--bottom").boundingBox();
+const stripM = await page.locator(".bar").boundingBox();
 const metricsM = await page.locator(".metric--hud").evaluateAll((els) => els.filter((e) => e.getClientRects().length && getComputedStyle(e).display !== "none").length);
 const mobileOk = !!railM && !!stripM && railM.height < 80 && railM.y + railM.height <= stripM.y + 1 && metricsM >= 3;
 console.log("mobile: rail h", Math.round(railM?.height), "rail bottom", Math.round(railM?.y + railM?.height), "strip top", Math.round(stripM?.y), "figures", metricsM, "| ok:", mobileOk);
 await page.waitForFunction(() => { const m = window.__swissNowMap; return m && m.loaded() && m.queryRenderedFeatures().some((f) => f.geometry.type === "Point" && f.layer.id === "weather-temp-circles"); }, null, { timeout: 60_000 });
-const tapAt = await page.evaluate(() => { const m = window.__swissNowMap; const f = m.queryRenderedFeatures().find((x) => x.geometry.type === "Point" && x.layer.id === "weather-temp-circles"); const p = m.project(f.geometry.coordinates); return { x: p.x, y: p.y, layer: f.layer.id }; });
+const tapAt = await page.evaluate(() => { const m = window.__swissNowMap; const f = m.queryRenderedFeatures().find((x) => x.geometry.type === "Point" && x.layer.id === "weather-temp-circles"); const p = m.project(f.geometry.coordinates); const r = m.getContainer().getBoundingClientRect(); return { x: p.x + r.left, y: p.y + r.top, layer: f.layer.id }; });
 await page.mouse.click(tapAt.x, tapAt.y);
 await page.waitForTimeout(300);
 const tapOk = (await page.locator(".hover-card").count()) >= 1;
@@ -394,7 +405,8 @@ console.log("tap on", tapAt.layer, "opens a card:", tapOk);
 const lake = await page.evaluate(({ top, bottom }) => {
   const m = window.__swissNowMap;
   for (const ll of [[6.55, 46.45], [6.85, 46.9], [9.4, 47.6], [8.55, 47.25], [8.3, 46.95]]) {
-    const p = m.project(ll);
+    const r = m.getContainer().getBoundingClientRect();
+    const p = { x: m.project(ll).x + r.left, y: m.project(ll).y + r.top };
     if (p.x > 20 && p.x < innerWidth - 20 && p.y > top && p.y < bottom) return { x: p.x, y: p.y };
   }
   return null;
@@ -411,7 +423,7 @@ await mp.getByRole("button", { name: "Rail" }).waitFor({ timeout: 60_000 });
 await mp.waitForTimeout(800);
 const railT = await mp.locator("nav[aria-label='Topics']").boundingBox();
 const bottomShare = railT ? (844 - railT.y) / 844 : 1;
-await mp.getByRole("button", { name: "Water" }).tap();
+await mp.getByRole("button", { name: "Water", exact: true }).tap();
 await mp.waitForFunction(() => new URL(location.href).searchParams.get("topic") === "water", null, { timeout: 10_000 }).catch(() => {});
 const tTopic = new URL(mp.url()).searchParams.get("topic");
 await mp.getByRole("button", { name: "Timeline" }).tap();
@@ -423,7 +435,7 @@ const sheetItems = await mp.locator(".sheet__list li").count();
 await mp.locator(".sheet__close").tap();
 await mp.waitForTimeout(200);
 const sheetClosed = (await mp.locator(".sheet").count()) === 0;
-const homeHidden = await mp.locator(".hud--top .home").evaluate((el) => getComputedStyle(el).display === "none").catch(() => true);
+const homeHidden = await mp.locator(".topbar__home").evaluate((el) => getComputedStyle(el).display === "none").catch(() => true);
 await mp.screenshot({ path: "/tmp/sn/qa-phone.png" });
 const touchOk = bottomShare <= 0.36 && tTopic === "water" && tMode === "timeline" && sheetItems >= 3 && sheetClosed && homeHidden;
 console.log("phone: bottom HUD share", bottomShare.toFixed(2), "| tap topic", tTopic, "| tap mode", tMode, "| sources", sheetItems, "closed", sheetClosed, "| home hidden", homeHidden, "| ok:", touchOk);

@@ -1,7 +1,8 @@
-/** Typography. A Swiss grotesk with tabular figures; final family chosen in the Phase 0 design sprint. */
+/** Typography (docs/DESIGN.md): Inter for the interface, Montserrat for the wordmark only. */
 export const fontFamily = {
-  /** Candidates under evaluation: "Inter Tight", "Instrument Sans", "Public Sans". */
-  sans: '"Inter Tight", "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif',
+  sans: 'Inter, "Helvetica Neue", Helvetica, Arial, sans-serif',
+  /** The wordmark: SWISS in bold, NOW in light. */
+  brand: 'Montserrat, Inter, "Helvetica Neue", Arial, sans-serif',
   mono: '"JetBrains Mono", "SF Mono", Menlo, monospace',
 } as const;
 

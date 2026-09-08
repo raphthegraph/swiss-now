@@ -1,6 +1,6 @@
-import { ground, layerAccent, daylightGround } from "./color";
+import { brand, ground, layerAccent, daylightGround } from "./color";
 import { fontFamily, typeScale } from "./type";
-import { space, hudMargin } from "./space";
+import { space, hudMargin, radius, shadow } from "./space";
 import { duration, cssEasing } from "./motion";
 
 /**
@@ -11,11 +11,15 @@ export function toCssVariables(): Record<string, string> {
   const vars: Record<string, string> = {};
   for (const [k, v] of Object.entries(ground)) vars[`--sn-ground-${kebab(k)}`] = v;
   for (const [k, v] of Object.entries(layerAccent)) vars[`--sn-accent-${kebab(k)}`] = v;
+  for (const [k, v] of Object.entries(brand)) vars[`--sn-brand-${kebab(k)}`] = v;
+  for (const [k, v] of Object.entries(radius)) vars[`--sn-radius-${k}`] = `${v}px`;
+  for (const [k, v] of Object.entries(shadow)) vars[`--sn-shadow-${k}`] = v;
   for (const [state, g] of Object.entries(daylightGround)) {
     vars[`--sn-daylight-${state}-bg`] = g.background;
     vars[`--sn-daylight-${state}-fg`] = g.foreground;
   }
   vars["--sn-font-sans"] = fontFamily.sans;
+  vars["--sn-font-brand"] = fontFamily.brand;
   vars["--sn-font-mono"] = fontFamily.mono;
   for (const [k, t] of Object.entries(typeScale)) {
     vars[`--sn-type-${kebab(k)}-size`] = `${t.size}px`;

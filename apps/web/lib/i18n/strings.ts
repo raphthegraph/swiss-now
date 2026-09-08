@@ -12,6 +12,8 @@ export const STRINGS = {
   view: t("Ansicht", "View", "Vue", "Vista"),
   status: t("Status", "Status", "État", "Stato"),
   keyFigures: t("Kennzahlen", "Key figures", "Chiffres clés", "Cifre chiave"),
+  zoomIn: t("Hineinzoomen", "Zoom in", "Zoomer", "Ingrandisci"),
+  zoomOut: t("Herauszoomen", "Zoom out", "Dézoomer", "Riduci"),
   mapOfSwitzerland: t(
     "Karte der Schweiz",
     "Map of Switzerland",
