@@ -139,9 +139,10 @@ export const TOPICS: Record<TopicId, TopicSpec> = {
     sources: ["adsb-fi"],
     cadenceSeconds: 10,
     geoLevel: "point",
-    modes: ["map", "timeline"],
+    modes: ["map"],
     freshnessKind: "clock",
-    built: false,
+    // built, but adsb.fi is personal-use only: the policy hides the topic until an agreement exists
+    built: true,
   },
   politics: {
     id: "politics",

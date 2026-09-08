@@ -2,7 +2,7 @@
 
 A living, near-real-time map of Switzerland. Official Swiss open data is normalized into one state model that drives two renderers: an interactive web map and a Remotion video, "Switzerland Today".
 
-Status: the MVP runs locally (weather, water, rail, earthquakes, the daily story and the video). Deployment to Vercel is the next step. CI: typecheck, tests, formatting on every push.
+Status: runs locally with fifteen topics across four groups, the daily story and the video. Deployment to Vercel is the next step. CI: typecheck, tests, formatting on every push.
 
 ## What it does
 
@@ -19,7 +19,8 @@ Status: the MVP runs locally (weather, water, rail, earthquakes, the daily story
 | **EVENTS**                                            | Police communiqués and SRF headlines placed on the map by our own geocoding (municipality register, then the swisstopo gazetteer) with a confidence per event; headline, link and source only.                                                                                                                                                 | 5 min          |
 | **POLITICS**                                          | Latest federal votes: yes-share per municipality (BFS), titles and results from swissvotes, next vote Sundays from the Federal Chancellery; TIMELINE scrubs through the recent votes.                                                                                                                                                          | weekly build   |
 | **POPULATION**, **HOUSING**, **ECONOMY**, **TOURISM** | Statistics on the geo spine: permanent resident population and vacancy rate per municipality (BFS SDMX), full-time-equivalent jobs per municipality (BFS STATENT), hotel nights per canton and month (BFS HESTA), the KOF barometer; quantile-scaled choropleths, CHARTS with rankings and national courses, TIMELINE over vintages or months. | weekly build   |
-| **/today**                                            | The day's story: chapters ranked from 10-minute snapshots (extremes, rainfall, delays, rivers, quakes), scroll-driven over the live map, plus the video in a Remotion Player.                                                                                                                                                                  | 10 min         |
+| **AVIATION**                                          | Built and gated: aircraft over Switzerland at reported (never interpolated) positions with stepped trails. Hidden until a commercially clean feed or an agreement exists; the only source, adsb.fi, allows personal use only. `SWISS_NOW_ALLOW=adsb-fi` enables it for a local run.                                                            | 10 s           |
+| **/today**                                            | The day's story: chapters ranked from 10-minute snapshots across the live topics (extremes, rainfall, delays, rivers, quakes, energy flows, hazards, events, air) and the latest vote in the week after a vote Sunday, scroll-driven over the live map, plus the video in a Remotion Player.                                                   | 10 min         |
 | **/status**                                           | Freshness and source health.                                                                                                                                                                                                                                                                                                                   |                |
 
 Topics sit in a rail (NOW · LIVE · SYSTEMS · SWITZERLAND) and are independent of the view mode (MAP · CHARTS · TIMELINE · COMPARE); the view is a URL (`?topic=politics&mode=timeline&t=6860`, `?topic=population&mode=compare&place=261,351`). TIMELINE scrubs the last 48 hours of 10-minute snapshots for the live topics, radar frames for weather, votes and vintages for the statistics; COMPARE puts two places side by side with the same figures. Keyboard: `[` `]` topics, `1`–`4` modes, `Esc` back to NOW, `/` place search. See [`docs/IA.md`](docs/IA.md). Every value carries an observation time and a source; freshness (`live · aging · stale · outage`) changes the rendering. A home place (stored locally, no account) makes the summary strip local.
@@ -35,7 +36,7 @@ Swiss open data → adapters (packages/core) → SwissNowState → tokens + moti
 - **Ingestion.** Small live sources are read through pull-through cached route handlers (`/api/state/*`): one upstream fetch per cadence, CDN `stale-while-revalidate` for everyone else, browsers never call Swiss APIs. Heavy work runs outside request time: the twice-weekly GTFS build (GitHub Actions, `gtfs.yml`) and the 10-minute composite snapshots (written by visitors on the free tier, optionally by a scheduled ping).
 - **Contracts.** `packages/core/src/state` holds the zod schemas: entities (`Station`, `Observation`, `Field`, `Event`, `TripSnapshot` with a mandatory `positionKind`), one state per layer, the composite `SwissNowState`, and `StorySpec`. Provider schemas never leave their adapter.
 - **Rendering split.** The map and its data layers are React, MapLibre GL and custom WebGL; UI transitions use Motion; Remotion is used only for the time-based composition. Web and video share contracts, design tokens and animation math, never a renderer.
-- **Video.** `packages/story-video` renders a `StorySpec` over a fixed MapLibre plate (the renderer camera moves only at cuts, under a dip to paper; motion within a chapter is a CSS transform). Chapter markers travel inside the story, so the video needs no state lookups. Renders run locally under the free Remotion licence.
+- **Video.** `packages/story-video` renders a `StorySpec` over a fixed MapLibre plate (the renderer camera moves only at cuts, under a dip to paper; motion within a chapter is a CSS transform). Chapter markers travel inside the story, so the video needs no state lookups; energy chapters draw the border arrows, vote chapters a municipality choropleth from the geo spine, both projected on the plate. Renders run locally under the free Remotion licence.
 - **Statistics.** SWITZERLAND topics are static JSON built by `build-data` (BFS PxWeb and SDMX, swissvotes, LINDAS) and joined to the map through the geo spine: municipality polygons from swissBOUNDARIES3D and the BFS register, keyed by BFS number (`packages/geo-build`).
 - **Cost.** Free tiers only: Vercel Hobby, Vercel Blob, GitHub Actions, Remotion free licence. See `docs/FREE_TIER_ARCHITECTURE.md`.
 
@@ -113,7 +114,7 @@ Details and the landscape variant: [`apps/video/README.md`](apps/video/README.md
 pnpm typecheck && pnpm test && pnpm format:check
 ```
 
-Map behaviour is verified against a production build with Chromium's software WebGL renderer: `node apps/web/scripts/qa-rail-hover.mjs` (rail hover card, summary figures, quakes view, Today page and the embedded Player). See [`apps/web/README.md`](apps/web/README.md).
+Map behaviour is verified against a production build with Chromium's software WebGL renderer: `node apps/web/scripts/qa-rail-hover.mjs` (rail groups and modes, hover cards, choropleths, timelines, compare, the licence gate, Today page and the embedded Player). See [`apps/web/README.md`](apps/web/README.md).
 
 ## Data sources and attribution
 
@@ -123,16 +124,16 @@ Interpolated train positions are estimates from the timetable and published dela
 
 ## Roadmap
 
-| Phase | Scope                                                                                                                            | Status  |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| 0     | Workspace, contracts, tokens, forked basemap, first cached handler, spikes                                                       | done    |
-| 1     | Weather and water layers, radar, wind, HUD, home place                                                                           | done    |
-| 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                                       | done    |
-| 3     | Quakes, snapshots, story builder, `/today`                                                                                       | done    |
-| 4     | "Switzerland Today" composition, local rendering, Player on `/today`                                                             | done    |
-| E1    | Expansion stage 1: topics × modes IA, URL view state, geo spine, Politics                                                        | done    |
-| —     | Deployment: Vercel Hobby, Blob store, scheduled snapshot ping                                                                    | next    |
-| E2–E7 | Energy + Events · Air + Hazards · Statistics + CHARTS · TIMELINE + COMPARE · story/video + gated Aviation · polish and languages | planned |
+| Phase | Scope                                                                                                                                                                              | Status  |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| 0     | Workspace, contracts, tokens, forked basemap, first cached handler, spikes                                                                                                         | done    |
+| 1     | Weather and water layers, radar, wind, HUD, home place                                                                                                                             | done    |
+| 2     | Rail: GTFS pipeline, route paths, interpolated trains, delays, disruptions                                                                                                         | done    |
+| 3     | Quakes, snapshots, story builder, `/today`                                                                                                                                         | done    |
+| 4     | "Switzerland Today" composition, local rendering, Player on `/today`                                                                                                               | done    |
+| E1–E6 | Expansion: topics × modes IA, geo spine, Politics · Energy + Events · Air + Hazards · Statistics + CHARTS · TIMELINE + COMPARE · story/video across the new topics, gated Aviation | done    |
+| —     | Deployment: Vercel Hobby, Blob store, scheduled snapshot ping                                                                                                                      | next    |
+| E7    | Polish, mobile, languages, docs                                                                                                                                                    | planned |
 
 ## Licence
 

@@ -6,6 +6,7 @@ import type { Map as MapLibreMap } from "maplibre-gl";
 import type {
   GeoRegister as GeoRegisterType,
   AirState,
+  AviationState,
   EnergyState,
   EventsState,
   HazardsState,
@@ -41,6 +42,7 @@ import { formatDate } from "@/lib/format";
 import { RampLegend } from "../hud/RampLegend";
 import { VoteScrubber } from "../hud/VoteScrubber";
 import { FlowLayer } from "./FlowLayer";
+import { AircraftLayer } from "./AircraftLayer";
 import { EventMarkers } from "./EventMarkers";
 import { ChartsView } from "../views/ChartsView";
 import { QuakeLayer, type QuakeHover } from "./QuakeLayer";
@@ -77,6 +79,7 @@ function presenceOf(topic: TopicId): LayerPresence {
     air: presenceFor(topic, "air"),
     hazards: presenceFor(topic, "hazards"),
     stats: presenceFor(topic, "stats"),
+    aviation: presenceFor(topic, "aviation"),
   };
 }
 
@@ -228,6 +231,12 @@ export function MapPage({
   };
   const setPlaces = (a: string | undefined, b: string | undefined) =>
     setPlace([a, b].filter(Boolean).join(",") || undefined);
+  const aviation = useLayerState<AviationState | undefined>(
+    "/api/state/aviation",
+    undefined,
+    10_000,
+    presence.aviation !== "off",
+  );
   const [airLayer] = useState(() => airContribution(undefined));
   // statistics: the catalogue, the topic's map indicator, the register for names, quantile stops
   const isStats = STATS_TOPICS.has(topic);
@@ -542,6 +551,9 @@ export function MapPage({
           energy={past ? past.energy : energy}
           mode={presence.energy === "full" ? "full" : "quiet"}
         />
+      ) : null}
+      {presence.aviation !== "off" && !past ? (
+        <AircraftLayer map={map} aviation={aviation} />
       ) : null}
       {presence.events !== "off" && !past ? (
         <EventMarkers

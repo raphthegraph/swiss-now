@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useBufferState, useDelayRender } from "remotion";
 import { Map as MapLibreMap, setWorkerUrl } from "maplibre-gl";
 import type { LonLat } from "@swiss-now/core";
@@ -13,9 +13,13 @@ export interface MapAssets {
   styleUrl: string;
   /** MapLibre worker module served as a static file (bundlers mis-resolve import.meta.url). */
   workerUrl: string;
+  /** the geo spine TopoJSON for vote chapters */
+  topoUrl?: string;
 }
 
 export interface FixedMapPlateProps {
+  /** rendered inside the transformed plate, above the map canvas (plate coordinates) */
+  overlay?: ReactNode;
   plate: PlateCamera;
   /** Changes when the renderer camera must jump (at chapter cuts); the jump waits for `idle`. */
   plateKey: string;
@@ -34,6 +38,7 @@ const TIMEOUT = 60_000;
  * under the paper dip, and rendering (or Player playback) waits for the tiles.
  */
 export function FixedMapPlate({
+  overlay,
   plate,
   plateKey,
   plateW,
@@ -104,6 +109,7 @@ export function FixedMapPlate({
       }}
     >
       <div ref={container} style={{ width: plateW, height: plateH }} />
+      {overlay}
     </div>
   );
 }

@@ -11,10 +11,13 @@ export type SourceAccess = "allowed" | "notice" | "blocked";
 export interface PolicyOptions {
   /** Block "unresolved" sources too (set SWISS_NOW_STRICT=1). */
   strict?: boolean;
+  /** Local override for blocked sources (SWISS_NOW_ALLOW=adsb-fi,…); never set in production. */
+  allow?: SourceId[];
 }
 
 export function sourceAccess(id: SourceId, opts: PolicyOptions = {}): SourceAccess {
   const meta = SOURCES[id];
+  if (opts.allow?.includes(id)) return "notice";
   switch (meta.commercialUse) {
     case "yes":
       return "allowed";
@@ -41,5 +44,9 @@ export function accessForSources(ids: SourceId[], opts?: PolicyOptions): SourceA
 }
 
 export function policyFromEnv(env: Record<string, string | undefined> = {}): PolicyOptions {
-  return { strict: env["SWISS_NOW_STRICT"] === "1" };
+  const allow = (env["SWISS_NOW_ALLOW"] ?? "")
+    .split(",")
+    .map((x) => x.trim())
+    .filter((x): x is SourceId => x.length > 0 && x in SOURCES);
+  return { strict: env["SWISS_NOW_STRICT"] === "1", ...(allow.length ? { allow } : {}) };
 }

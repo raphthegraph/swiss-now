@@ -27,6 +27,8 @@ export const dischargeRatioColor: ColorScale = colorScaleFromStops("dischargeRat
 export const dangerLevelColor: ColorScale = colorScaleFromStops("dangerLevel");
 /** Delay seconds → colour (grey → Swiss red). */
 export const delayColor: ColorScale = colorScaleFromStops("delay");
+/** Yes share in %, diverging around 50. */
+export const yesShareColor: ColorScale = colorScaleFromStops("yesShare");
 
 /** Wind speed km/h → particle density factor 0–1 (0 below 3 km/h, 1 at 60 km/h and above). */
 export const windParticleDensity: ScaleLinear<number, number> = scaleLinear()

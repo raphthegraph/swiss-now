@@ -36,7 +36,8 @@
     "./data-sources/hazards": "./src/data-sources/hazards/index.ts",
     "./data-sources/bfs-sdmx": "./src/data-sources/bfs-sdmx/index.ts",
     "./data-sources/kof": "./src/data-sources/kof/index.ts",
-    "./data-sources/stats": "./src/data-sources/stats/index.ts"
+    "./data-sources/stats": "./src/data-sources/stats/index.ts",
+    "./data-sources/adsb-fi": "./src/data-sources/adsb-fi/index.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

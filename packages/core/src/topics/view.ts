@@ -5,6 +5,7 @@
  */
 import { Mode, TopicId } from "./spec";
 import { TOPICS } from "./registry";
+import { accessForSources } from "../sources/policy";
 
 export interface ViewState {
   topic: TopicId;
@@ -28,7 +29,13 @@ function read(params: ParamsLike, name: string): string | undefined {
 export function parseViewState(params: ParamsLike): ViewState {
   const topicRaw = read(params, "topic");
   const topic = TopicId.safeParse(topicRaw ?? "now");
-  const id: TopicId = topic.success && TOPICS[topic.data].built ? topic.data : "now";
+  // built topics only, and never one the licence policy blocks (e.g. aviation until an agreement)
+  const id: TopicId =
+    topic.success &&
+    TOPICS[topic.data].built &&
+    accessForSources(TOPICS[topic.data].sources) !== "blocked"
+      ? topic.data
+      : "now";
   const modeRaw = Mode.safeParse(read(params, "mode") ?? "map");
   const mode = modeRaw.success && TOPICS[id].modes.includes(modeRaw.data) ? modeRaw.data : "map";
   const out: ViewState = { topic: id, mode };

@@ -32,7 +32,8 @@ describe("topic registry", () => {
   it("keeps the built topics commercially clean or noticed, never blocked", () => {
     for (const id of TOPIC_ORDER) {
       const s = TOPICS[id];
-      if (s.built) expect(accessForSources(s.sources)).not.toBe("blocked");
+      // aviation is built but gated: adsb.fi is personal-use only
+      if (s.built && id !== "aviation") expect(accessForSources(s.sources)).not.toBe("blocked");
     }
     expect(sourceAccess("adsb-fi")).toBe("blocked");
     expect(sourceAccess("sed-fdsn")).toBe("notice");
@@ -53,7 +54,8 @@ describe("view state", () => {
   });
   it("falls back for unknown topics, unbuilt topics and unsupported modes", () => {
     expect(parseViewState({ topic: "nope" }).topic).toBe("now");
-    expect(parseViewState({ topic: "aviation" }).topic).toBe("now");
+    expect(parseViewState({ topic: "aviation" }).topic).toBe("now"); // built but blocked by the policy
+    expect(parseViewState({ topic: "trade" }).topic).toBe("now"); // not built
     expect(parseViewState({ topic: "rail", mode: "compare" }).mode).toBe("map");
     expect(parseViewState({ topic: "now", mode: "charts" }).mode).toBe("map");
     expect(parseViewState({ t: "<script>" }).t).toBeUndefined();

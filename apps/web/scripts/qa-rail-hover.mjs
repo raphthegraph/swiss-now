@@ -233,6 +233,12 @@ console.log("snapshot timeline t:", snapT, "| strip:", snapStrip.replace(/\n/g, 
 await page.screenshot({ path: "/tmp/sn/qa-snapshot.png" });
 await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Map$/i }).click();
 
+// AVIATION stays gated: no rail entry, the route answers 451
+const aviationButton = await page.getByRole("button", { name: "Aviation" }).count();
+const aviationStatus = await page.evaluate(async () => (await fetch("/api/state/aviation")).status);
+const aviationOk = aviationButton === 0 && aviationStatus === 451;
+console.log("aviation gated: button", aviationButton, "| api", aviationStatus, "| ok:", aviationOk);
+
 // COMPARE: two places via the URL, figures side by side (population)
 await page.goto(`${base}/?topic=population&mode=compare&place=261,351`, { waitUntil: "domcontentloaded", timeout: 90_000 });
 await page.locator(".compare-view").waitFor({ timeout: 60_000 });
@@ -366,7 +372,8 @@ process.exit(
   statsOk &&
   snapshotOk &&
   compareOk &&
-  keyTopic === "housing"
+  keyTopic === "housing" &&
+  aviationOk
     ? 0
     : 1,
 );

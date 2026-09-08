@@ -23,6 +23,11 @@ export const ChapterType = z.enum([
   "snow",
   "energy",
   "stat",
+  // expansion (docs/IA.md)
+  "events",
+  "hazard",
+  "air",
+  "vote",
 ]);
 export type ChapterType = z.infer<typeof ChapterType>;
 

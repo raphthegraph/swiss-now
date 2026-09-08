@@ -7,6 +7,7 @@ import type { Snapshot } from "../snapshot/index";
 import type { Chapter, StoryMarker, StorySpec } from "../state/story";
 import type { LonLat } from "../state/common";
 import type { Event, Observation, Station } from "../state/entities";
+import type { PoliticsState } from "../state/politics";
 
 export const SWITZERLAND_CENTER: LonLat = [8.2275, 46.8182];
 const NATIONAL = { center: SWITZERLAND_CENTER, zoom: 7.2, bearing: 0, pitch: 0 } as const;
@@ -17,6 +18,8 @@ export interface BuildStoryOptions {
   now: Date;
   minScore?: number;
   maxChapters?: number;
+  /** the politics state: a vote Sunday within the last week becomes a chapter */
+  politics?: PoliticsState | undefined;
 }
 
 const fmt = (v: number, d = 1) => v.toFixed(d).replace(/\.0$/, "");
@@ -406,12 +409,133 @@ export function buildStory(snapshots: Snapshot[], opts: BuildStoryOptions): Stor
           priceEurPerMWh: peak.priceEurPerMWh,
           frequencyHz: peak.frequencyHz,
           renewableSharePct: peak.renewableSharePct,
+          borderFlows: peak.borderFlows,
         },
         camera: { ...NATIONAL },
         durationHint: 5,
         score: Math.min(1, mw / 4000),
       });
     }
+  }
+
+  // 8. events: a busy day on the police and news feeds
+  const ev = latest?.events;
+  if (ev && ev.count >= 10) {
+    credits.add("Source: polizei.news");
+    credits.add("Source: SRF");
+    const cats = Object.entries(ev.byCategory)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 2)
+      .map(
+        ([c, n]) =>
+          `${n} ${c === "natural-hazard" ? "natural hazards" : c === "crime" ? "police cases" : `${c}s`}`,
+      );
+    const headline = `${ev.count} events in 24 hours${cats.length ? ` · ${cats.join(", ")}` : ""}`;
+    chapters.push({
+      id: "events",
+      type: "events",
+      layer: "events",
+      headline: { de: headline, en: headline },
+      body: {
+        de: `${ev.placed} placed on the map with high confidence`,
+        en: `${ev.placed} placed on the map with high confidence`,
+      },
+      highlights: [],
+      markers: [],
+      data: { count: ev.count, placed: ev.placed, byCategory: ev.byCategory },
+      camera: { ...NATIONAL },
+      durationHint: 5,
+      score: Math.min(1, ev.count / 60),
+    });
+  }
+
+  // 9. hazards: forest-fire danger at level 4 or more, or hail
+  const hz = latest?.hazards;
+  if (hz && ((hz.fireMaxLevel ?? 0) >= 4 || hz.hail)) {
+    credits.add("Source: FOEN");
+    if (hz.hail) credits.add("Source: MeteoSwiss");
+    const level = hz.fireMaxLevel ?? 0;
+    const headline =
+      level >= 4
+        ? `Forest-fire danger level ${level} in ${hz.fireRegionsAt3Plus} regions${hz.hail ? " · hail detected" : ""}`
+        : "Hail detected by the radar";
+    chapters.push({
+      id: "hazard",
+      type: "hazard",
+      layer: "hazards",
+      headline: { de: headline, en: headline },
+      highlights: [],
+      markers: [],
+      data: {
+        fireMaxLevel: hz.fireMaxLevel,
+        fireRegionsAt3Plus: hz.fireRegionsAt3Plus,
+        hail: hz.hail,
+      },
+      camera: { ...NATIONAL },
+      durationHint: 5,
+      score: Math.min(1, 0.3 + level * 0.15 + (hz.hail ? 0.2 : 0)),
+    });
+  }
+
+  // 10. air: a poor hour at a reference station
+  const air = latest?.air;
+  if (air?.worstIndex !== undefined && air.worstIndex >= 4) {
+    credits.add("Source: Stadt Zürich UGZ");
+    const headline = `Air quality index ${air.worstIndex} in Zürich`;
+    chapters.push({
+      id: "air",
+      type: "air",
+      layer: "air",
+      headline: { de: headline, en: headline },
+      highlights: [],
+      markers: [],
+      data: {
+        worstIndex: air.worstIndex,
+        referenceStations: air.referenceStations,
+        citizenSensors: air.citizenSensors,
+      },
+      camera: { center: [8.54, 47.38], zoom: 10, bearing: 0, pitch: 0 },
+      durationHint: 5,
+      score: Math.min(1, (air.worstIndex - 2) / 4),
+    });
+  }
+
+  // 11. vote: a federal vote Sunday within the last week
+  const vote = opts.politics?.latest[0];
+  if (
+    vote &&
+    opts.now.getTime() - new Date(`${vote.meta.date}T12:00:00+02:00`).getTime() < 7 * 86_400_000
+  ) {
+    credits.add("Source: BFS");
+    credits.add("Source: swissvotes.ch");
+    const title = vote.meta.title.en ?? vote.meta.title.de;
+    const yes = vote.national.yesPct;
+    const accepted = vote.meta.national?.accepted;
+    const headline =
+      yes === null
+        ? `Vote Sunday: ${title}`
+        : `${accepted === undefined ? "" : accepted ? "Accepted: " : "Rejected: "}${title} · ${yes.toFixed(1)} % yes`;
+    const byMunicipality: Record<string, number> = {};
+    for (const [k, v] of Object.entries(vote.byMunicipality))
+      if (v.yesPct !== null) byMunicipality[k] = v.yesPct;
+    chapters.push({
+      id: `vote-${vote.meta.id}`,
+      type: "vote",
+      layer: "politics",
+      headline: { de: headline, en: headline },
+      highlights: [],
+      markers: [],
+      data: {
+        yesPct: yes,
+        turnoutPct: vote.national.turnoutPct,
+        accepted,
+        byMunicipality,
+        voteId: vote.meta.id,
+      },
+      camera: { ...NATIONAL },
+      durationHint: 7,
+      score: 0.9,
+    });
   }
 
   credits.add("© swisstopo");
@@ -507,13 +631,36 @@ export function chapterFigures(c: Chapter): ChapterFigure[] {
       push("Depth", typeof e?.depthKm === "number" ? e.depthKm : undefined, 0, "km");
       break;
     }
-    case "energy":
-      push("Net flow", num("netImportMW"), 0, "MW");
+    case "energy": {
+      const net = num("netImportMW");
+      push(
+        net !== undefined && net < 0 ? "Net export" : "Net import",
+        net === undefined ? undefined : Math.abs(net),
+        0,
+        "MW",
+      );
       push("Price", num("priceEurPerMWh"), 0, "€/MWh");
       push("Renewable", num("renewableSharePct"), 0, "%");
       break;
+    }
     case "stat":
       push("Gust", obs("gust"), 0, "km/h");
+      break;
+    case "events":
+      push("Events, 24 h", num("count"), 0);
+      push("Placed", num("placed"), 0);
+      break;
+    case "hazard":
+      push("Fire danger", num("fireMaxLevel"), 0);
+      push("Regions ≥ 3", num("fireRegionsAt3Plus"), 0);
+      break;
+    case "air":
+      push("Air index", num("worstIndex"), 0);
+      push("Citizen sensors", num("citizenSensors"), 0);
+      break;
+    case "vote":
+      push("Yes", num("yesPct"), 1, "%");
+      push("Turnout", num("turnoutPct"), 1, "%");
       break;
     case "snow":
       push("Snow depth", obs("snow"), 0, "cm");

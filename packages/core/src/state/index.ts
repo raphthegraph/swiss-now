@@ -9,3 +9,4 @@ export * from "./politics";
 export * from "./events";
 export * from "./hazards";
 export * from "./stats";
+export * from "./aviation";

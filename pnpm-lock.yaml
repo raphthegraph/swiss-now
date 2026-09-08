@@ -247,6 +247,9 @@ importers:
       remotion:
         specifier: 4.0.522
         version: 4.0.522(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      topojson-client:
+        specifier: ^3.1.0
+        version: 3.1.0
       zod:
         specifier: ^4.1.5
         version: 4.5.4
@@ -254,6 +257,12 @@ importers:
       '@types/react':
         specifier: ^19.1.12
         version: 19.2.18
+      '@types/topojson-client':
+        specifier: ^3.1.5
+        version: 3.1.5
+      '@types/topojson-specification':
+        specifier: ^1.0.5
+        version: 1.0.5
       react:
         specifier: ^19.2.8
         version: 19.2.8

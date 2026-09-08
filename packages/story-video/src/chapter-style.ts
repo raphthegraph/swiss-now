@@ -15,6 +15,16 @@ export function chapterAccent(c: Chapter): string {
       return layerAccent.seismic;
     case "stat":
       return layerAccent.wind;
+    case "energy":
+      return layerAccent.energy;
+    case "events":
+      return layerAccent.events;
+    case "hazard":
+      return layerAccent.hazards;
+    case "air":
+      return layerAccent.air;
+    case "vote":
+      return layerAccent.politics;
     default:
       return layerAccent.weather;
   }
@@ -25,6 +35,11 @@ const CREDIT: Partial<Record<LayerId, string>> = {
   hydrology: "Source: FOEN",
   rail: "Source: opentransportdata.swiss",
   seismic: "Source: Swiss Seismological Service (SED) at ETH Zurich",
+  energy: "Source: Swissgrid · Energy-Charts.info (Fraunhofer ISE)",
+  events: "Source: polizei.news · SRF",
+  hazards: "Source: FOEN · MeteoSwiss",
+  air: "Source: Stadt Zürich UGZ",
+  politics: "Source: BFS · swissvotes.ch",
 };
 
 /** Attribution line for a chapter; the basemap credit is always present. */
@@ -34,5 +49,5 @@ export function chapterCredit(c: Chapter): string {
 }
 
 export function layerLabel(c: Chapter): string {
-  return c.layer === "hydrology" ? "water" : c.layer === "seismic" ? "quakes" : c.layer;
+  return c.layer === "hydrology" ? "water" : c.layer === "seismic" ? "hazards" : c.layer;
 }

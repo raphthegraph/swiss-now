@@ -42,3 +42,4 @@ apps/web/public/rail/
 packages/core/out/
 apps/web/public/snapshots/
 packages/geo-build/out/
+apps/video/public/geo/

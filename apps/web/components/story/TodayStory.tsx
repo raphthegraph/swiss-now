@@ -28,13 +28,25 @@ const StoryPlayer = dynamic(() => import("./StoryPlayer").then((m) => m.StoryPla
 });
 
 function topicFor(c: Chapter): TopicId {
-  return c.layer === "seismic"
-    ? "hazards"
-    : c.layer === "hydrology"
-      ? "water"
-      : c.layer === "rail"
-        ? "rail"
-        : "weather";
+  switch (c.layer) {
+    case "seismic":
+    case "hazards":
+      return "hazards";
+    case "hydrology":
+      return "water";
+    case "rail":
+      return "rail";
+    case "energy":
+      return "energy";
+    case "events":
+      return "events";
+    case "air":
+      return "air";
+    case "politics":
+      return "politics";
+    default:
+      return "weather";
+  }
 }
 
 /**

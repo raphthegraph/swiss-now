@@ -14,6 +14,9 @@ import { SWITZERLAND_CAMERA, VIDEO_FPS } from "@swiss-now/motion/specs";
 import { fontFamily, ground } from "@swiss-now/motion/tokens";
 import { FixedMapPlate, type MapAssets, type PlateCamera } from "./FixedMapPlate";
 import { Markers } from "./Markers";
+import { FlowMarks } from "./FlowMarks";
+import { ChoroplethPlate } from "./ChoroplethPlate";
+import { clamp01 } from "@swiss-now/motion/math";
 import { ChapterHud } from "./hud/ChapterHud";
 import { CreditsCard } from "./hud/CreditsCard";
 import { TitleCard, formatStoryDate } from "./hud/TitleCard";
@@ -39,6 +42,7 @@ export type SwitzerlandTodayProps = {
 export const DEFAULT_ASSETS: MapAssets = {
   styleUrl: "/map/swiss-now-light.json",
   workerUrl: "/map/vendor/maplibre-gl-worker.mjs",
+  topoUrl: "/geo/ch-2026.topo.json",
 };
 
 /** Plate is 2× the frame; the push-in keeps the CSS scale ≤ 1 (render-stability.md). */
@@ -87,6 +91,7 @@ export function SwitzerlandToday({ story, assets = DEFAULT_ASSETS }: Switzerland
   const plateW = width * PLATE_SCALE;
   const plateH = height * PLATE_SCALE;
   const plate = plateFor(seq);
+  const cutCentre = seq.from + (seq.index === 0 ? 0 : TRANSITION_FRAMES / 2);
   const localFrame = frame - seq.from;
   const camera = cameraAt(seq, plate, localFrame);
   const scale = 2 ** (camera.zoom - plate.zoom);
@@ -95,13 +100,27 @@ export function SwitzerlandToday({ story, assets = DEFAULT_ASSETS }: Switzerland
   const ty = L.focus.y - p.y * scale;
   const chapters = story.chapters;
   const progress = frame / Math.max(1, tl.durationInFrames - 1);
-  const cutCentre = seq.from + (seq.index === 0 ? 0 : TRANSITION_FRAMES / 2);
 
   return (
     <AbsoluteFill
       style={{ background: ground.paper, overflow: "hidden", fontFamily: fontFamily.sans }}
     >
       <FixedMapPlate
+        overlay={
+          seq.kind === "chapter" && seq.chapter.type === "vote" && assets.topoUrl ? (
+            <ChoroplethPlate
+              topoUrl={assets.topoUrl}
+              values={
+                (seq.chapter.data as { byMunicipality?: Record<string, number> }).byMunicipality ??
+                {}
+              }
+              plate={plate}
+              plateW={plateW}
+              plateH={plateH}
+              progress={easeHouse(clamp01((frame - cutCentre) / (fps * 0.8)))}
+            />
+          ) : null
+        }
         plate={plate}
         plateKey={`${seq.kind}-${seq.index}`}
         plateW={plateW}
@@ -109,6 +128,23 @@ export function SwitzerlandToday({ story, assets = DEFAULT_ASSETS }: Switzerland
         transform={`translate(${tx}px, ${ty}px) scale(${scale})`}
         assets={assets}
       />
+      {seq.kind === "chapter" && seq.chapter.type === "energy" ? (
+        <FlowMarks
+          borderFlows={
+            (seq.chapter.data as { borderFlows?: Record<string, number> }).borderFlows ?? {}
+          }
+          plate={plate}
+          plateW={plateW}
+          plateH={plateH}
+          scale={scale}
+          tx={tx}
+          ty={ty}
+          localFrame={frame - cutCentre}
+          fps={fps}
+          width={width}
+          height={height}
+        />
+      ) : null}
       {seq.kind === "chapter" ? (
         <Markers
           markers={seq.chapter.markers}

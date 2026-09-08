@@ -2,6 +2,7 @@ import { buildStory } from "@swiss-now/core/story";
 import type { Snapshot, StorySpec } from "@swiss-now/core";
 import { snapshotStore } from "@/lib/snapshots/store";
 import { maybeWriteSnapshot } from "@/lib/snapshots/writer";
+import { getPoliticsState } from "@/lib/state/politics";
 
 /** Local date in Switzerland, `YYYY-MM-DD`. */
 export function swissDate(now = new Date()): string {
@@ -29,5 +30,7 @@ export async function getTodayStory(now = new Date()): Promise<StorySpec> {
     const s = await store.read(id);
     if (s) snapshots.push(s);
   }
-  return buildStory(snapshots, { date, now });
+  // a vote Sunday within the last week becomes a chapter
+  const politics = await getPoliticsState(now).catch(() => undefined);
+  return buildStory(snapshots, { date, now, politics });
 }
