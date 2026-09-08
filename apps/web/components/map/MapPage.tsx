@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Map as MapLibreMap } from "maplibre-gl";
-import type { HydrologyState, WeatherState } from "@swiss-now/core";
+import type { HydrologyState, RailState, WeatherState } from "@swiss-now/core";
+import { TrainLayer } from "./TrainLayer";
 import { useLayerState } from "@/lib/use-layer-state";
 import { LayerRail } from "../hud/LayerRail";
 import type { ActiveLayer } from "@/lib/layers";
@@ -20,12 +21,15 @@ import { FpsMeter } from "../hud/FpsMeter";
 export function MapPage({
   initial,
   initialHydrology,
+  initialRail,
 }: {
   initial: WeatherState;
   initialHydrology?: HydrologyState | undefined;
+  initialRail?: RailState | undefined;
 }) {
   const weather = useLayerState("/api/state/weather", initial, 300_000);
   const hydrology = useLayerState("/api/state/hydrology", initialHydrology, 600_000);
+  const rail = useLayerState("/api/state/rail", initialRail, 60_000);
   const [active, setActive] = useState<ActiveLayer>("now");
   const { home, setHome } = useHomePlace();
   const [focus, setFocus] = useState<
@@ -46,11 +50,17 @@ export function MapPage({
         radarFrame={radar.frame}
         onMapReady={setMap}
       />
-      {active !== "water" ? <WindParticles map={map} weather={weather} /> : null}
+      {active === "now" || active === "weather" ? (
+        <WindParticles map={map} weather={weather} />
+      ) : null}
+      {active === "now" || active === "rail" ? (
+        <TrainLayer map={map} rail={rail} mode={active === "rail" ? "full" : "quiet"} />
+      ) : null}
       <LayerRail active={active} onChange={setActive} />
       <SummaryStrip
         state={weather}
         hydrology={hydrology}
+        rail={rail}
         active={active}
         home={
           <HomePlace

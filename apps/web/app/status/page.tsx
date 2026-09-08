@@ -1,5 +1,6 @@
 import Link from "next/link";
-import type { HydrologyState, WeatherState } from "@swiss-now/core";
+import type { HydrologyState, RailState, WeatherState } from "@swiss-now/core";
+import { getRailState } from "@/lib/state/rail";
 import { getHydrologyState } from "@/lib/state/hydrology";
 import { listSources } from "@swiss-now/core";
 import { getWeatherState } from "@/lib/state/weather";
@@ -13,7 +14,15 @@ export default async function StatusPage() {
   let weatherError: string | undefined;
   let hydrology: HydrologyState | undefined;
   let hydrologyError: string | undefined;
-  const [w, h] = await Promise.allSettled([getWeatherState(), getHydrologyState()]);
+  let rail: RailState | undefined;
+  let railError: string | undefined;
+  const [w, h, r] = await Promise.allSettled([
+    getWeatherState(),
+    getHydrologyState(),
+    getRailState(),
+  ]);
+  if (r.status === "fulfilled") rail = r.value;
+  else railError = r.reason instanceof Error ? r.reason.message : String(r.reason);
   if (w.status === "fulfilled") weather = w.value;
   else weatherError = w.reason instanceof Error ? w.reason.message : String(w.reason);
   if (h.status === "fulfilled") hydrology = h.value;
@@ -71,6 +80,17 @@ export default async function StatusPage() {
               </td>
               <td className="tnum">{hydrology?.stations.length ?? "–"}</td>
               <td className="tnum">{hydrology?.observations.length ?? "–"}</td>
+            </tr>
+            <tr>
+              <td>rail</td>
+              <td>
+                <span className="freshness" data-state={rail?.freshness ?? "outage"}>
+                  {rail?.freshness ?? "outage"}
+                </span>
+              </td>
+              <td className="tnum">{rail ? formatTime(rail.observedAt) : railError}</td>
+              <td className="tnum">{rail ? `${rail.activeTrips.length} trips` : "–"}</td>
+              <td className="tnum">{rail?.gtfsBuild ?? "–"}</td>
             </tr>
           </tbody>
         </table>

@@ -38,3 +38,5 @@ apps/web/next-env.d.ts
 apps/web/public/map/vendor/
 apps/video/public/map/vendor/
 apps/video/out/
+apps/web/public/rail/
+packages/core/out/

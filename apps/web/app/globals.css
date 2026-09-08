@@ -535,3 +535,8 @@ table.sources th {
     display: none;
   }
 }
+.train-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}

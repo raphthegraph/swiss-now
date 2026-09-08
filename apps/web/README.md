@@ -20,4 +20,13 @@ pnpm install
 pnpm --filter @swiss-now/web dev
 ```
 
-No environment variables are required yet: every Phase 0 source is open and unauthenticated.
+## Rail data
+
+The RAIL layer needs two generated inputs (gitignored, rebuilt twice a week by `.github/workflows/gtfs.yml`):
+
+```bash
+pnpm --filter @swiss-now/core build-gtfs -- --out apps/web/public/rail --days 7        # downloads the 248 MB GTFS, ≈ 3 min
+pnpm --filter @swiss-now/core build-rail-paths -- --rail apps/web/public/rail          # SBB line graph → one path per stop sequence
+```
+
+and the free GTFS-RT token in `apps/web/.env.local` as `OTD_API_KEY=…` (register at api-manager.opentransportdata.swiss). Without the token the layer still shows scheduled trains, marked stale.

@@ -6,7 +6,8 @@ import { AnimatePresence, motion } from "motion/react";
 import { duration } from "@swiss-now/motion/tokens";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-import type { HydrologyState, WeatherState } from "@swiss-now/core";
+import type { HydrologyState, RailState, WeatherState } from "@swiss-now/core";
+import { currentDelay } from "@swiss-now/core/data-sources/transit";
 import type { ActiveLayer } from "@/lib/layers";
 import { formatNumber, formatTime } from "@/lib/format";
 
@@ -14,12 +15,14 @@ import { formatNumber, formatTime } from "@/lib/format";
 export function SummaryStrip({
   state,
   hydrology,
+  rail,
   active = "now",
   children,
   home,
 }: {
   state: WeatherState;
   hydrology?: HydrologyState | undefined;
+  rail?: RailState | undefined;
   active?: ActiveLayer;
   children?: ReactNode;
   home?: ReactNode;
@@ -145,6 +148,7 @@ export function SummaryStrip({
         <div className="colophon colophon--hud">
           <span>Source: MeteoSwiss</span>
           {hydrology ? <span>Source: FOEN</span> : null}
+          {rail ? <span>Source: opentransportdata.swiss</span> : null}
           <span>© swisstopo</span>
           <Link href="/status">Status</Link>
         </div>

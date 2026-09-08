@@ -425,6 +425,8 @@ export function LiveMap({
       map.getLayer(id) && map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
     const weatherOn = active === "now" || active === "weather";
     const waterOn = active === "now" || active === "water";
+    if (active === "rail") map.getCanvas().style.filter = "saturate(0.6)";
+    else map.getCanvas().style.filter = "";
     show(LAYER_CIRCLES, weatherOn);
     show(LAYER_LABELS, active === "weather");
     RADAR_LAYERS.forEach((l) => show(l, weatherOn));

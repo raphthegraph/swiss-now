@@ -195,6 +195,8 @@ export const TripSnapshot = z.object({
   tripId: z.string().min(1),
   routeId: z.string().min(1),
   routeShortName: z.string(),
+  /** Operator train number (e.g. "1234"), when different from the line name. */
+  trainNumber: z.string().optional(),
   /** Id of the precomputed route path (GeoJSON LineString on Blob). */
   pathId: z.string().min(1),
   positionKind: z.enum(["interpolated", "reported"]),

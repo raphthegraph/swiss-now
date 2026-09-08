@@ -13,16 +13,23 @@
     "./data-sources": "./src/data-sources/index.ts",
     "./data-sources/geoadmin": "./src/data-sources/geoadmin/index.ts",
     "./data-sources/meteoswiss/radar": "./src/data-sources/meteoswiss/radar/index.ts",
-    "./data-sources/hydrology": "./src/data-sources/hydrology/index.ts"
+    "./data-sources/hydrology": "./src/data-sources/hydrology/index.ts",
+    "./data-sources/transit": "./src/data-sources/transit/index.ts",
+    "./data-sources/transit/build": "./src/data-sources/transit/build.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "build-gtfs": "tsx src/cli/build-gtfs.ts",
+    "build-rail-paths": "tsx src/cli/build-rail-paths.ts"
   },
   "dependencies": {
+    "csv-parse": "^7.0.2",
+    "gtfs-realtime-bindings": "^2.2.0",
     "h5wasm": "^0.10.3",
+    "node-stream-zip": "^1.16.0",
     "pngjs": "^7.0.0",
     "proj4": "^2.22.0",
     "zod": "^4.1.5"
