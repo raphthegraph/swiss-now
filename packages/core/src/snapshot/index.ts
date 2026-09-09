@@ -76,11 +76,24 @@ export const HazardsSummary = z.object({
 });
 export type HazardsSummary = z.infer<typeof HazardsSummary>;
 
+/**
+ * Rolling 24-hour history carried by every snapshot: one air temperature per station and slot
+ * (null = no value). Reading the newest snapshot therefore gives a day of history in one request.
+ */
+export const SnapshotHistory = z.object({
+  /** slot ids, oldest → newest, at most HISTORY_SLOTS */
+  slots: z.array(z.string()),
+  temperature: z.record(z.string(), z.array(z.number().nullable())),
+});
+export type SnapshotHistory = z.infer<typeof SnapshotHistory>;
+export const HISTORY_SLOTS = 144;
+
 export const Snapshot = z.object({
   schemaVersion: z.literal(SCHEMA_VERSION),
   /** snapshot time, rounded down to the 10-minute slot (UTC) */
   at: ISODateTime,
   generatedAt: ISODateTime,
+  history: SnapshotHistory.optional(),
   weather: WeatherState.optional(),
   hydrology: HydrologyState.optional(),
   rail: RailSummary.optional(),
@@ -154,6 +167,35 @@ export interface BuildSnapshotInputs {
   events?: EventsSummary | undefined;
   air?: AirSummary | undefined;
   hazards?: HazardsSummary | undefined;
+  /** the previous snapshot, whose history this one extends */
+  previous?: Snapshot | undefined;
+}
+
+/** Extends the previous history by this slot's station temperatures (a 24-hour window). */
+export function rollHistory(
+  previous: SnapshotHistory | undefined,
+  slotId: string,
+  weather: WeatherState | undefined,
+): SnapshotHistory {
+  const prevSlots = previous?.slots ?? [];
+  const rewrite = prevSlots[prevSlots.length - 1] === slotId;
+  const base = rewrite ? prevSlots.slice(0, -1) : prevSlots;
+  const slots = [...base, slotId].slice(-HISTORY_SLOTS);
+  const drop = base.length + 1 - slots.length;
+  const latest = new Map<string, number>();
+  for (const o of weather?.observations ?? [])
+    if (o.parameter === "airTemperature" && !latest.has(o.stationId))
+      latest.set(o.stationId, o.value);
+  const temperature: Record<string, (number | null)[]> = {};
+  const ids = new Set([...Object.keys(previous?.temperature ?? {}), ...latest.keys()]);
+  for (const id of ids) {
+    let prev = (previous?.temperature[id] ?? []).slice();
+    if (rewrite) prev = prev.slice(0, -1);
+    while (prev.length < base.length) prev.unshift(null);
+    const series = [...prev.slice(-base.length), latest.get(id) ?? null].slice(drop);
+    if (series.some((v) => v !== null)) temperature[id] = series;
+  }
+  return { slots, temperature };
 }
 
 /** Assembles a snapshot; the weather keeps only its newest radar frame to stay small. */
@@ -219,6 +261,7 @@ export function buildSnapshot(i: BuildSnapshotInputs): Snapshot {
   }
   if (i.hydrology) snap.hydrology = i.hydrology;
   if (i.rail) snap.rail = i.rail;
+  snap.history = rollHistory(i.previous?.history, snapshotId(at), i.weather);
   if (i.energy) snap.energy = i.energy;
   if (i.events) snap.events = i.events;
   if (i.air) snap.air = i.air;

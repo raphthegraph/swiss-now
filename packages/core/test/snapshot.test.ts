@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { buildSnapshot, parseSnapshotId, snapshotId, snapshotSlot } from "../src/snapshot/index";
+import {
+  HISTORY_SLOTS,
+  buildSnapshot,
+  parseSnapshotId,
+  rollHistory,
+  snapshotId,
+  snapshotSlot,
+} from "../src/snapshot/index";
 import { FL } from "../src/i18n";
 
 describe("snapshots", () => {
@@ -83,5 +90,46 @@ describe("snapshot figures", () => {
     expect(rail[2]!.value).toBe(20);
     const energy = figuresForSnapshot("energy", snap, 0);
     expect(energy[0]).toMatchObject({ id: "net-flow", label: FL.netExport, value: 120 });
+  });
+});
+
+describe("snapshot history", () => {
+  const obs = (id: string, v: number) =>
+    ({
+      stationId: id,
+      parameter: "airTemperature",
+      value: v,
+      observedAt: "2026-09-09T10:00:00Z",
+      source: "meteoswiss-smn",
+    }) as never;
+  const weather = (pairs: [string, number][]) =>
+    ({ observations: pairs.map(([id, v]) => obs(id, v)) }) as never;
+  it("rolls a 24-hour window and pads stations that appear later", () => {
+    let h = rollHistory(undefined, "20260909T1000", weather([["a", 10]]));
+    expect(h.slots).toEqual(["20260909T1000"]);
+    expect(h.temperature["a"]).toEqual([10]);
+    h = rollHistory(
+      h,
+      "20260909T1010",
+      weather([
+        ["a", 11],
+        ["b", 5],
+      ]),
+    );
+    expect(h.temperature["a"]).toEqual([10, 11]);
+    expect(h.temperature["b"]).toEqual([null, 5]);
+    // the same slot written twice replaces the last value
+    h = rollHistory(h, "20260909T1010", weather([["a", 12]]));
+    expect(h.slots).toEqual(["20260909T1000", "20260909T1010"]);
+    expect(h.temperature["a"]).toEqual([10, 12]);
+    expect(h.temperature["b"]).toBeUndefined();
+  });
+  it("never exceeds the window", () => {
+    let h: ReturnType<typeof rollHistory> | undefined;
+    for (let k = 0; k < HISTORY_SLOTS + 5; k++)
+      h = rollHistory(h, `slot${String(k).padStart(4, "0")}`, weather([["a", k]]));
+    expect(h!.slots.length).toBe(HISTORY_SLOTS);
+    expect(h!.temperature["a"]!.length).toBe(HISTORY_SLOTS);
+    expect(h!.temperature["a"]![HISTORY_SLOTS - 1]).toBe(HISTORY_SLOTS + 4);
   });
 });

@@ -1,5 +1,6 @@
 import {
   buildSnapshot,
+  snapshotId,
   snapshotSlot,
   summarizeAir,
   summarizeEnergy,
@@ -45,8 +46,12 @@ export async function maybeWriteSnapshot(
         getAirState(),
         getHazardsState(),
       ]);
+      const previous = latest
+        ? await store.read(snapshotId(new Date(latest.at))).catch(() => undefined)
+        : undefined;
       const snap = buildSnapshot({
         now,
+        previous,
         weather: w.status === "fulfilled" ? w.value : undefined,
         hydrology: h.status === "fulfilled" ? h.value : undefined,
         rail: r.status === "fulfilled" ? summarizeRail(r.value, now, currentDelay) : undefined,

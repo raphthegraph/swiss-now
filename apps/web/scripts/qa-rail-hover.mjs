@@ -373,6 +373,23 @@ if ((await quakesButton.count()) > 0) {
   console.log("strip in QUAKES:", quakeStrip.slice(0, 140), "| ok:", quakesOk);
   await page.screenshot({ path: "/tmp/sn/qa-quakes.png" });
 } else console.log("QUAKES not in rail (no M≥2 event in window)");
+// place page: reachable from a municipality click and complete for Bern
+await page.goto(`${base}/?topic=population`, { waitUntil: "domcontentloaded", timeout: 90_000 });
+await page.waitForFunction(() => { const m = window.__swissNowMap; return m && m.getLayer("stats-muni-fill") && m.queryRenderedFeatures({ layers: ["stats-muni-fill"] }).length > 100; }, null, { timeout: 60_000 }).catch(() => {});
+await page.waitForTimeout(1200);
+const bernPt = await page.evaluate(() => { const m = window.__swissNowMap; const p = m.project([7.44, 46.95]); const r = m.getContainer().getBoundingClientRect(); return { x: p.x + r.left, y: p.y + r.top }; });
+await page.mouse.move(bernPt.x, bernPt.y);
+await page.waitForTimeout(400);
+const popHover = (await page.locator(".hover-card").count()) ? await page.locator(".hover-card").first().innerText() : "";
+await page.mouse.click(bernPt.x, bernPt.y);
+await page.waitForURL(/\/place\/\d+/, { timeout: 20_000 }).catch(() => {});
+const placeUrl = new URL(page.url()).pathname;
+await page.locator(".place__name").waitFor({ timeout: 60_000 }).catch(() => {});
+const placeName = (await page.locator(".place__name").count()) ? await page.locator(".place__name").innerText() : "";
+const placeCards = await page.locator(".card").count();
+const placeBoard = await page.locator(".board__time").count();
+const placeOk = /\d/.test(popHover) && /^\/place\/\d+$/.test(placeUrl) && placeName.length > 0 && placeCards >= 5;
+console.log("population hover:", popHover.replace(/\n/g, " | ").slice(0, 70), "| click →", placeUrl, placeName, "| cards", placeCards, "departures", placeBoard, "| ok:", placeOk);
 // Stage 7: short viewport, keyboard help, mobile layout, tap-to-card, reduced motion
 await page.setViewportSize({ width: 1280, height: 720 });
 await page.goto(`${base}/?topic=weather`, { waitUntil: "domcontentloaded", timeout: 90_000 });
@@ -478,6 +495,7 @@ process.exit(
   aviationOk &&
   wordmarkOk &&
   markOk &&
+  placeOk &&
   shortOk &&
   helpOk &&
   mobileOk &&

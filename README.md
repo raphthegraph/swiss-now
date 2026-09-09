@@ -40,7 +40,7 @@ Swiss open data → adapters (packages/core) → SwissNowState → tokens + moti
 - **Statistics.** SWITZERLAND topics are static JSON built by `build-data` (BFS PxWeb and SDMX, swissvotes, LINDAS) and joined to the map through the geo spine: municipality polygons from swissBOUNDARIES3D and the BFS register, keyed by BFS number (`packages/geo-build`).
 - **Cost.** Free tiers only: Vercel Hobby, Vercel Blob, GitHub Actions, Remotion free licence. See `docs/FREE_TIER_ARCHITECTURE.md`.
 
-Full detail: [`docs/DESIGN.md`](docs/DESIGN.md), [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md), [`docs/MOTION_SYSTEM.md`](docs/MOTION_SYSTEM.md), [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md).
+Full detail: [`docs/DEPTH_PLAN.md`](docs/DEPTH_PLAN.md) (what comes next), [`docs/DESIGN.md`](docs/DESIGN.md), [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md), [`docs/MOTION_SYSTEM.md`](docs/MOTION_SYSTEM.md), [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md).
 
 ## Repository layout
 

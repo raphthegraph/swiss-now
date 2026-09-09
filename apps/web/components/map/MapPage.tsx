@@ -1,5 +1,7 @@
 "use client";
 
+import { useGeoRegister } from "@/lib/use-geo-register";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Map as MapLibreMap } from "maplibre-gl";
@@ -104,24 +106,7 @@ const MAP_INDICATOR: Partial<Record<TopicId, string>> = {
 const accentOf = (t: TopicId) =>
   layerAccent[TOPICS[t].accent as keyof typeof layerAccent] ?? layerAccent.population;
 
-let registerPromise: Promise<GeoRegisterType | undefined> | undefined;
 /** The municipality register (names) for figures and charts; fetched once when a statistics topic opens. */
-function useGeoRegister(enabled: boolean): GeoRegisterType | undefined {
-  const [reg, setReg] = useState<GeoRegisterType | undefined>(undefined);
-  useEffect(() => {
-    if (!enabled) return;
-    registerPromise ??= fetch("/geo/municipalities-2026.json")
-      .then((r) => (r.ok ? r.json() : undefined))
-      .then((j: unknown) => (j ? GeoRegister.parse(j) : undefined))
-      .catch(() => undefined);
-    let cancelled = false;
-    void registerPromise.then((r) => !cancelled && setReg(r));
-    return () => {
-      cancelled = true;
-    };
-  }, [enabled]);
-  return reg;
-}
 
 /** The vote to show: the timeline selection when it is in the index, else the latest Sunday's first. */
 function useVoteResult(
@@ -166,6 +151,7 @@ export function MapPage({
 }) {
   const { t, l, lang } = useT();
   const { view, setTopic, setMode, setTime, setPlace } = useViewState();
+  const router = useRouter();
   const { topic, mode } = view;
   const presence = useMemo(() => presenceOf(topic), [topic]);
   // poll only what is on screen (the masthead clock always needs weather)
@@ -641,6 +627,7 @@ export function MapPage({
           }
           focus={focus}
           fitKey={topic}
+          onPlaceClick={(key) => router.push(`/place/${key}`)}
           radarFrame={radar.frame}
           contributions={contributions}
           onMapReady={(m) => {

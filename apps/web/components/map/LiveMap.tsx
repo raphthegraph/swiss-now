@@ -75,6 +75,8 @@ export interface LiveMapProps {
   focus?: { lonLat: [number, number]; zoom: number; key: string } | null | undefined;
   /** Whenever this changes (e.g. the topic), the camera returns to the whole country. */
   fitKey?: string | undefined;
+  /** A click on a municipality or canton polygon (choropleths) opens its place page. */
+  onPlaceClick?: ((key: string) => void) | undefined;
   /** Radar frame to show; defaults to the newest in `weather.fields`. */
   radarFrame?: Field | undefined;
   /** Additional topic contributions (installed once, updated when their state changes). */
@@ -98,6 +100,7 @@ export function LiveMap({
   muted,
   focus,
   fitKey,
+  onPlaceClick,
   radarFrame,
   contributions,
   onFrame,
@@ -105,6 +108,8 @@ export function LiveMap({
 }: LiveMapProps) {
   const { t } = useT();
   const containerRef = useRef<HTMLDivElement>(null);
+  const onPlaceClickRef = useRef(onPlaceClick);
+  onPlaceClickRef.current = onPlaceClick;
   const mapRef = useRef<MapLibreMap | null>(null);
   const [ready, setReady] = useState(false);
   const [hovered, setHovered] = useState<Hovered | null>(null);
@@ -213,8 +218,16 @@ export function LiveMap({
       let hoveredId: string | number | undefined;
       let hoveredSource = "";
       const onMove = (e: MapMouseEvent & { features?: MapGeoJSONFeature[] }) => {
-        const f = e.features?.[0];
+        let f = e.features?.[0];
         if (!f) return;
+        // stacked choropleths (municipalities under cantons): prefer the polygon that carries a value
+        if (f.state?.["value"] === undefined) {
+          const layers = [...hoverBound.current].filter((id) => map.getLayer(id));
+          const withValue = map
+            .queryRenderedFeatures(e.point, { layers })
+            .find((x) => x.state?.["value"] !== undefined);
+          if (withValue) f = withValue;
+        }
         if (hoveredId !== undefined && hoveredId !== f.id)
           map.setFeatureState({ source: hoveredSource, id: hoveredId }, { hover: false });
         hoveredId = f.id;
@@ -242,7 +255,16 @@ export function LiveMap({
       // touch: a tap on a feature opens its card (the layer handlers above); a tap elsewhere closes it
       map.on("click", (e) => {
         const layers = [...hoverBound.current].filter((id) => map.getLayer(id));
-        if (!layers.length || !map.queryRenderedFeatures(e.point, { layers }).length) onLeave();
+        const hits = layers.length ? map.queryRenderedFeatures(e.point, { layers }) : [];
+        if (!hits.length) return onLeave();
+        // a municipality (numeric id) or canton (two letters) polygon: go to its page
+        const poly =
+          hits.find((h) => /-fill$/.test(h.layer.id) && h.state?.["value"] !== undefined) ??
+          hits.find((h) => /-fill$/.test(h.layer.id));
+        if (poly && onPlaceClickRef.current) {
+          const key = String(poly.id ?? "");
+          if (/^\d{1,5}$|^[A-Z]{2}$/.test(key)) onPlaceClickRef.current(key);
+        }
       });
       // keep the card anchored while the camera moves
       map.on("move", () => {

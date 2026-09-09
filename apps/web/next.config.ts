@@ -20,6 +20,7 @@ const nextConfig: NextConfig = {
     "/api/state/events": ["./public/geo/municipalities-2026.json"],
     "/api/snapshot": ["./public/data/politics/**", "./public/geo/municipalities-2026.json"],
     "/api/story/today": ["./public/data/politics/**"],
+    "/place/[key]": ["./public/data/**", "./public/geo/municipalities-2026.json"],
   },
   async headers() {
     return [

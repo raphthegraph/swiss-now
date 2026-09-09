@@ -165,6 +165,7 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
             : null}
           {` · ${c.choropleth.source}`}
         </div>
+        <div className="hover-card__hint label">{t("place.open")}</div>
       </div>
     );
   }

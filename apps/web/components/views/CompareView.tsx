@@ -5,6 +5,7 @@ import type { GeoRegister, LocalizedText } from "@swiss-now/core";
 import { PlaceSearch, type PlacePick } from "../hud/PlaceSearch";
 import { formatNumber } from "@/lib/format";
 import { useT } from "@/lib/i18n/lang";
+import Link from "next/link";
 
 export interface CompareSide {
   place: PlacePick | undefined;
@@ -49,8 +50,8 @@ export function CompareView({
         <thead>
           <tr>
             <th />
-            <th>{a.place?.name ?? "A"}</th>
-            <th>{b.place?.name ?? "B"}</th>
+            <th>{a.place ? <Link href={`/place/${a.place.key}`}>{a.place.name}</Link> : "A"}</th>
+            <th>{b.place ? <Link href={`/place/${b.place.key}`}>{b.place.name}</Link> : "B"}</th>
           </tr>
         </thead>
         <tbody>
