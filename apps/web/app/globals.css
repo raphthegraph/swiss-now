@@ -1558,3 +1558,70 @@ table.sources th {
     scrollbar-width: none;
   }
 }
+
+/* ---- password screen ---- */
+.gate {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--sn-space-5);
+  background: var(--sn-ground-paper);
+}
+.gate__card {
+  width: min(400px, 100%);
+  display: grid;
+  gap: var(--sn-space-4);
+  padding: var(--sn-space-6) var(--sn-space-6) var(--sn-space-5);
+  background: var(--sn-ground-surface);
+  border: 1px solid var(--sn-ground-mist);
+  border-radius: var(--sn-radius-card);
+  box-shadow: var(--sn-shadow-card);
+}
+.gate__mark {
+  height: 26px;
+  width: auto;
+  justify-self: start;
+}
+.gate__lead {
+  margin: 0;
+  color: var(--sn-ground-graphite);
+  font-size: var(--sn-type-caption-size);
+}
+.gate__field {
+  display: grid;
+  gap: var(--sn-space-2);
+  margin-top: var(--sn-space-2);
+}
+.gate__input {
+  font: inherit;
+  font-size: var(--sn-type-body-large-size);
+  padding: 10px var(--sn-space-3);
+  border: 1px solid var(--sn-ground-mist);
+  border-radius: var(--sn-radius-control);
+  background: var(--sn-ground-paper);
+  color: var(--sn-ground-ink);
+  outline: none;
+}
+.gate__input:focus {
+  border-color: var(--sn-ground-ink);
+}
+.gate__error {
+  margin: 0;
+  color: var(--sn-brand-swiss-red);
+  font-size: var(--sn-type-caption-size);
+}
+.gate__button {
+  font: inherit;
+  font-size: var(--sn-type-label-size);
+  letter-spacing: var(--sn-type-label-tracking);
+  text-transform: uppercase;
+  padding: 12px var(--sn-space-4);
+  border: none;
+  border-radius: var(--sn-radius-control);
+  background: var(--sn-ground-ink);
+  color: var(--sn-ground-surface);
+  cursor: pointer;
+}
+.gate__button:hover {
+  background: #1f2937;
+}

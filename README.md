@@ -89,6 +89,7 @@ Environment variables:
 | `BLOB_READ_WRITE_TOKEN` | web     | Vercel Blob for the 10-minute snapshots once deployed (added by the store).                    |
 | `DATA_BASE_URL`         | web     | Read the statistics files from a public URL instead of `public/data`.                          |
 | `SWISS_NOW_ALLOW`       | web     | Comma-separated source ids to enable despite the licence policy (local only).                  |
+| `SITE_PASSWORD`         | web     | The shared password of the deployed site's entry screen (`docs/DEPLOYMENT.md`).                |
 
 ### Statistics data
 

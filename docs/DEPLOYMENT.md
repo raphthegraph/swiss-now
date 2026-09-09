@@ -42,6 +42,16 @@ These steps need account credentials and are done by the owner, not by tooling:
    `DATA_BASE_URL` and `NEXT_PUBLIC_DATA_BASE_URL` to `https://<store-id>.public.blob.vercel-storage.com/data`.
    Until then the files are served from the build.
 
+## Password screen
+
+The deployed site sits behind one shared password (no accounts): `apps/web/proxy.ts` redirects
+every page to `/enter` until the browser carries the access cookie (30 days); API routes, static
+files and the brand assets stay open so the app's own fetches and the snapshot ping work. The gate
+is active whenever the app runs on Vercel or `SITE_PASSWORD` is set; local development has no gate.
+The password is never in the repository: set `SITE_PASSWORD` in the Vercel environment to choose
+it; while it is unset, the launch password (agreed with the owner, its SHA-256 in `lib/gate.ts`)
+applies. Changing the password logs everyone out.
+
 ## Free-tier budget
 
 Vercel Hobby never bills; a feature that exceeds its quota is paused for 30 days. The tight one
