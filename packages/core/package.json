@@ -38,7 +38,9 @@
     "./data-sources/bfs-sdmx": "./src/data-sources/bfs-sdmx/index.ts",
     "./data-sources/kof": "./src/data-sources/kof/index.ts",
     "./data-sources/stats": "./src/data-sources/stats/index.ts",
-    "./data-sources/adsb-fi": "./src/data-sources/adsb-fi/index.ts"
+    "./data-sources/adsb-fi": "./src/data-sources/adsb-fi/index.ts",
+    "./data-sources/bfe-plants": "./src/data-sources/bfe-plants/index.ts",
+    "./data-sources/sfoe-reservoirs": "./src/data-sources/sfoe-reservoirs/index.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

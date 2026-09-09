@@ -3,6 +3,7 @@
  * and independently versioned.
  */
 import { z } from "zod";
+import { ReservoirState } from "./energy-sites";
 import { Freshness, ISODateTime, SCHEMA_VERSION } from "./common";
 import { Event, Field, Observation, Segment, Station, TripSnapshot } from "./entities";
 import { SourceId } from "../sources/ids";
@@ -150,6 +151,8 @@ export const EnergyState = LayerBase.extend({
       renewableSharePct: z.number().optional(),
     })
     .optional(),
+  /** Storage lakes (weekly, SFOE). */
+  reservoir: ReservoirState.optional(),
   /** Hourly series of the last day for the mix chart. */
   generationSeries: z
     .object({

@@ -6,6 +6,8 @@ import type { HydroFeatureProps } from "@/lib/map/hydro-geojson";
 import type { DisruptionFeatureProps } from "@/lib/map/disruptions-geojson";
 import type { AirFeatureProps, PollenFeatureProps } from "@/lib/map/contributions/air";
 import type { RegionFeatureProps, SnowFeatureProps } from "@/lib/map/contributions/hazards";
+import type { PlantFeatureProps } from "@/lib/map/contributions/energy-sites";
+import { PLANT_TYPE } from "@swiss-now/core/i18n";
 import { formatNumber, formatTime } from "@/lib/format";
 import { useT } from "@/lib/i18n/lang";
 
@@ -27,14 +29,15 @@ export interface Hovered {
     | AirFeatureProps
     | PollenFeatureProps
     | RegionFeatureProps
-    | SnowFeatureProps;
+    | SnowFeatureProps
+    | PlantFeatureProps;
   lonLat: [number, number];
   point: { x: number; y: number };
 }
 
 /** value · time · source — the honesty rule made visible (docs/PRODUCT_VISION.md §5.8). */
 export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness: Freshness }) {
-  const { t, lang } = useT();
+  const { t, l, lang } = useT();
   const { props, point } = hovered;
   const at = (p: { observedAt?: string }) => (p.observedAt ? formatTime(p.observedAt, lang) : "");
   const indexWord = (i: number) =>
@@ -46,6 +49,29 @@ export function HoverCard({ hovered, freshness }: { hovered: Hovered; freshness:
       {t(`fresh.${freshness}`)}
     </span>
   );
+  if ("plant" in props) {
+    const p = props;
+    const mw = p.kw / 1000;
+    return (
+      <div
+        className="hover-card hover-card--energy"
+        style={{ transform: `translate(${point.x + 14}px, ${point.y - 12}px)` }}
+      >
+        <div className="hover-card__name">
+          {p.name}
+          {p.name !== p.municipality ? <span className="label"> · {p.municipality}</span> : null}
+          <span className="label"> {p.canton}</span>
+        </div>
+        <div className="hover-card__value tnum">
+          {mw >= 100 ? formatNumber(mw, 0) : formatNumber(mw, 1)}
+          <span className="label"> MW · {l(PLANT_TYPE[p.type])}</span>
+        </div>
+        <div className="hover-card__meta">
+          {p.since ? `${t("energy.since", { year: p.since })} · ` : ""}Source: SFOE
+        </div>
+      </div>
+    );
+  }
   if ("air" in props) {
     const a = props;
     const parts = [

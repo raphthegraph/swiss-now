@@ -20,6 +20,20 @@ export const ground = {
   relief: "#C9CDD3",
 } as const;
 
+/** Plant types on the energy map: water blues, nuclear ink, solar amber, biomass green, fossil grey. */
+export const plantType = {
+  "hydro-storage": "#2F5E8F",
+  "hydro-pumped": "#4A7BA6",
+  "hydro-run": "#7FA6C9",
+  nuclear: "#111827",
+  solar: "#F5A623",
+  wind: "#64748B",
+  biomass: "#5B8C5A",
+  waste: "#8C6A3F",
+  gas: "#9CA3AF",
+  other: "#C9CDD3",
+} as const;
+
 /** The two warm brand accents; everything else stays cool. */
 export const brand = {
   swissRed: "#E2563D",

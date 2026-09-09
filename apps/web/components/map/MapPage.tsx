@@ -36,6 +36,9 @@ import { localSummary } from "@/lib/local-summary";
 import { Mode } from "@swiss-now/core/topics";
 import { choroplethContribution } from "@/lib/map/contributions/choropleth";
 import { airContribution } from "@/lib/map/contributions/air";
+import { energySitesContribution } from "@/lib/map/contributions/energy-sites";
+import { useEnergySites } from "@/lib/use-energy-sites";
+import { EnergyLegend } from "../hud/EnergyLegend";
 import { useIndicator, useIndicatorCatalog } from "@/lib/use-indicator";
 import { quantileStops, sequentialRamp } from "@/lib/map/quantile-stops";
 import { GeoRegister, latestValues } from "@swiss-now/core/state";
@@ -240,6 +243,9 @@ export function MapPage({
     presence.aviation !== "off",
   );
   const [airLayer] = useState(() => airContribution(undefined));
+  const [energySites] = useState(() => energySitesContribution());
+  const sites = useEnergySites(topic === "energy");
+  const energySitesState = useMemo(() => ({ sites, energy }), [sites, energy]);
   // statistics: the catalogue, the topic's map indicator, the register for names, quantile stops
   const isStats = STATS_TOPICS.has(topic);
   const catalog = useIndicatorCatalog(isStats);
@@ -355,6 +361,7 @@ export function MapPage({
     () => [
       { contribution: choropleth, state: choroState },
       { contribution: airLayer, state: air },
+      { contribution: energySites, state: energySitesState },
       { contribution: hazardsLayer, state: hazards },
       {
         contribution: statsMuni,
@@ -370,6 +377,8 @@ export function MapPage({
       choroState,
       airLayer,
       air,
+      energySites,
+      energySitesState,
       hazardsLayer,
       hazards,
       statsMuni,
@@ -540,6 +549,8 @@ export function MapPage({
       />
     ) : topic === "politics" ? (
       <RampLegend scale="yesShare" label={t("yesShare")} unit=" %" />
+    ) : topic === "energy" ? (
+      <EnergyLegend energy={energy} />
     ) : topic === "air" ? (
       <RampLegend scale="airIndex" label={l(FL.airIndex)} />
     ) : topic === "hazards" ? (

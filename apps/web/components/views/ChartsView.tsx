@@ -109,7 +109,58 @@ export function EnergyCharts({ energy }: { energy: EnergyState | undefined }) {
           <strong className="tnum">{formatNumber(energy.price.eurPerMWh, 0)} €/MWh</strong>
         </p>
       ) : null}
+      {energy.reservoir && energy.reservoir.series.length > 10 ? (
+        <ReservoirChart reservoir={energy.reservoir} />
+      ) : null}
     </div>
+  );
+}
+
+function ReservoirChart({ reservoir }: { reservoir: NonNullable<EnergyState["reservoir"]> }) {
+  const { t } = useT();
+  const rows = useMemo(
+    () =>
+      reservoir.series.map((r) => ({
+        t: new Date(`${r.date}T12:00:00Z`),
+        gwh: r.gwh,
+        max: r.maxGwh,
+      })),
+    [reservoir],
+  );
+  const options = useMemo<Plot.PlotOptions>(
+    () => ({
+      height: 220,
+      marginLeft: 56,
+      marginRight: 16,
+      x: { type: "time", label: null },
+      y: { label: "GWh", grid: true, tickFormat: (v: number) => formatNumber(v, 0) },
+      marks: [
+        Plot.areaY(rows, {
+          x: "t",
+          y: "gwh",
+          fill: layerAccent.hydrology,
+          fillOpacity: 0.12,
+          curve: "monotone-x",
+        }),
+        Plot.lineY(rows, {
+          x: "t",
+          y: "gwh",
+          stroke: layerAccent.hydrology,
+          strokeWidth: 1.5,
+          curve: "monotone-x",
+        }),
+        Plot.lineY(rows, { x: "t", y: "max", stroke: ground.mist, strokeDasharray: "3,3" }),
+        Plot.dot(rows.slice(-1), { x: "t", y: "gwh", fill: layerAccent.hydrology, r: 4 }),
+      ],
+    }),
+    [rows],
+  );
+  return (
+    <>
+      <h3 className="charts__title charts__title--small">{t("energy.reservoirTitle")}</h3>
+      <p className="charts__meta label">{t("energy.reservoirNote")}</p>
+      <PlotFigure options={options} title={t("energy.reservoirTitle")} />
+    </>
   );
 }
 

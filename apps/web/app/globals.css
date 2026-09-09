@@ -1929,3 +1929,66 @@ table.sources th {
     display: none;
   }
 }
+
+/* ---- energy legend ---- */
+.legend--energy {
+  display: grid;
+  gap: var(--sn-space-2);
+}
+.legend__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sn-space-2) var(--sn-space-4);
+  align-items: center;
+}
+.legend__swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--sn-ground-surface);
+  box-shadow: 0 0 0 1px var(--sn-ground-mist);
+}
+.legend__grid {
+  display: inline-block;
+  width: 16px;
+  height: 0;
+  border-top: 1.5px solid var(--sn-ground-graphite);
+  opacity: 0.6;
+}
+.legend__reservoirs {
+  gap: var(--sn-space-2) var(--sn-space-4);
+}
+.reservoir {
+  display: inline-grid;
+  gap: 2px;
+  min-width: 96px;
+}
+.reservoir__bar {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--sn-ground-mist);
+  overflow: hidden;
+}
+.reservoir__fill {
+  display: block;
+  height: 100%;
+  background: var(--sn-accent-hydrology);
+  transition: width var(--sn-duration-panel) var(--sn-ease-house);
+}
+.reservoir__label {
+  font-size: var(--sn-type-caption-size);
+  color: var(--sn-ground-graphite);
+}
+.hover-card--energy {
+  border-left-color: var(--sn-accent-energy);
+}
+@media (max-width: 767px) {
+  .legend--energy .legend__row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+}

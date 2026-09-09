@@ -1,0 +1,19 @@
+﻿xtf_id,Address,PostCode,Municipality,Canton,BeginningOfOperation,InitialPower,TotalPower,MainCategory,SubCategory,PlantCategory,_x,_y
+5686,Binenweg 5,3904,Naters,VS,1969-09-01,349576,349576,maincat_1,subcat_1,plantcat_7,2642480.025,1130235.125
+10569,,3904,Naters,VS,2011-11-01,45,45,maincat_1,subcat_1,plantcat_5,2641995,1134913
+11893,Hegdornweg 4,3904,Naters,VS,2008-08-13,6.9,6.9,maincat_2,subcat_2,plantcat_8,2642338.34,1130668.304
+12220,Panoramaweg 39,3904,Naters,VS,2008-12-20,5.9,5.9,maincat_2,subcat_2,plantcat_8,2643036.314,1130990.729
+13686,Underürbach,3862,Innertkirchen,BE,2016-10-21,3500,3500,maincat_1,subcat_1,plantcat_2,2660250,1171765
+13958,,2610,Mont-Soleil,BE,2010-09-05,2000,2000,maincat_2,subcat_3,,2570589,1227331
+13967,,2610,Mont-Soleil,BE,2010-09-01,2000,2000,maincat_2,subcat_3,,2568464,1226224
+15344,Sur la Côte 20,2610,Mont-Soleil,BE,2009-10-08,9.4,9.4,maincat_2,subcat_2,plantcat_9,2562100.381,1221216.57
+15826,,2610,Mont-Soleil,BE,2009-06-01,2.7,11.25,maincat_2,subcat_2,plantcat_8,2564851,1222424
+22143,Bäumliweg 32,5325,Leibstadt,AG,2011-09-28,59.6,59.6,maincat_2,subcat_2,plantcat_8,2655215.139,1271909.98
+22775,Mont-Soleil 104,2610,Mont-Soleil,BE,2010-07-05,7.9,7.9,maincat_2,subcat_2,plantcat_8,2566061.816,1223280.644
+24354,Blattenstrasse 54,3904,Naters,VS,2012-12-20,27.3,27.3,maincat_2,subcat_2,plantcat_9,2642733.348,1130847.023
+﻿xtf_id,Address,PostCode,Municipality,Canton,BeginningOfOperation,InitialPower,TotalPower,MainCategory,SubCategory,PlantCategory,_x,_y
+5686,Binenweg 5,3904,Naters,VS,1969-09-01,349576,349576,maincat_1,subcat_1,plantcat_7,2642480.025,1130235.125
+5740,Auenstrasse,8783,Linthal,GL,1962-03-18,1526000,1526000,maincat_1,subcat_1,plantcat_6,,
+5741,,7314,Vadura,SG,1977-03-14,366000,366000,maincat_1,subcat_1,plantcat_6,2755487,1201728
+5776,Chemin du Gilloud 1,1920,Martigny,VS,1968-01-01,351000,351000,maincat_1,subcat_1,plantcat_6,2570875.419,1106540.265
+5788,Muglinè,7530,Zernez,GR,1962-09-24,408000,408000,maincat_1,subcat_1,plantcat_7,,

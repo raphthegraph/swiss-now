@@ -18,7 +18,7 @@ it off.
 
 Each stage is one to two sessions, one commit per step, CI green, docs updated, QA extended.
 
-### Stage D1 — Place page and history (in progress)
+### Stage D1 — Place page and history (shipped 2026-09-09)
 
 - `/place/{bfs|canton}`: weather now with every parameter of the nearest station, a 24-hour
   temperature sparkline, the nearest river gauge, the nearest air sensor with its index, the next
@@ -32,7 +32,7 @@ Each stage is one to two sessions, one commit per step, CI green, docs updated, 
   a hint on the hover card. Fix shipped in the same step: stacked choropleths now hover the
   polygon that carries a value (the population hover bug).
 
-### Stage D2 — Energy sites, hazard context, national air
+### Stage D2 — Energy sites, hazard context, national air (energy shipped 2026-09-09; air open)
 
 | Topic   | Source (verified)                                                                                                              | Licence                                                                        | What ships                                                                                                             |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |

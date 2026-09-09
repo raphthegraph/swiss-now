@@ -148,6 +148,7 @@ export const FL = {
   gust: t("Böe", "Gust", "Rafale", "Raffica"),
   snowDepth: t("Schneehöhe", "Snow depth", "Hauteur de neige", "Altezza neve"),
   temperature: t("Temperatur", "Temperature", "Température", "Temperatura"),
+  reservoirs: t("Speicherseen", "Storage lakes", "Lacs de retenue", "Bacini di accumulo"),
   rain10min: t("Regen, 10 min", "Rain, 10 min", "Pluie, 10 min", "Pioggia, 10 min"),
   river: t("Fluss", "River", "Rivière", "Fiume"),
   water: t("Wasser", "Water", "Eau", "Acqua"),
@@ -185,3 +186,32 @@ export const EVENT_CATEGORY = {
     many: t("Meldungen", "news items", "actualités", "notizie"),
   },
 } as const satisfies Record<string, { one: LocalizedText; many: LocalizedText }>;
+
+/** Plant types on the energy map (state/energy-sites.ts). */
+export const PLANT_TYPE = {
+  "hydro-storage": t(
+    "Speicherkraftwerk",
+    "Storage hydro",
+    "Centrale à accumulation",
+    "Centrale ad accumulazione",
+  ),
+  "hydro-pumped": t("Pumpspeicher", "Pumped storage", "Pompage-turbinage", "Pompaggio"),
+  "hydro-run": t(
+    "Laufwasser",
+    "Run-of-river hydro",
+    "Hydraulique au fil de l'eau",
+    "Idroelettrico ad acqua fluente",
+  ),
+  nuclear: t("Kernkraft", "Nuclear", "Nucléaire", "Nucleare"),
+  solar: t("Solar", "Solar", "Solaire", "Solare"),
+  wind: t("Wind", "Wind", "Éolien", "Eolico"),
+  biomass: t("Biomasse", "Biomass", "Biomasse", "Biomassa"),
+  waste: t(
+    "Kehrichtverbrennung",
+    "Waste incineration",
+    "Incinération des déchets",
+    "Incenerimento rifiuti",
+  ),
+  gas: t("Gas und Öl", "Gas and oil", "Gaz et pétrole", "Gas e petrolio"),
+  other: t("Übrige", "Other", "Autres", "Altri"),
+} as const satisfies Record<string, LocalizedText>;

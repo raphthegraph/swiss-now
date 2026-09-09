@@ -5,6 +5,7 @@ import type { BorderFlows, FrequencySample } from "../swissgrid/index";
 import { latestGeneration, type GenerationSeries } from "../energy-charts/index";
 
 export interface EnergyInputs {
+  reservoir?: import("../../state/energy-sites").ReservoirState | undefined;
   flows?: BorderFlows | undefined;
   frequency?: FrequencySample | undefined;
   generation?: GenerationSeries | undefined;
@@ -39,6 +40,10 @@ export function buildEnergyState(inputs: EnergyInputs, now = new Date()): Energy
     state.generation = { observedAt: latest.observedAt, byTypeMW: latest.byTypeMW };
     if (latest.renewableSharePct !== undefined)
       state.generation.renewableSharePct = latest.renewableSharePct;
+  }
+  if (inputs.reservoir) {
+    state.reservoir = inputs.reservoir;
+    if (!state.sources.includes("sfoe-reservoirs")) state.sources.push("sfoe-reservoirs");
   }
   if (inputs.generation)
     state.generationSeries = {

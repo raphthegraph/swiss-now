@@ -120,8 +120,8 @@ const energyApi = await page.evaluate(async () => {
 });
 const flowCanvas = await page.locator(".flow-canvas").count();
 await page.locator("nav[aria-label='View'] .modes__item", { hasText: /^Charts$/i }).click();
-await page.locator(".charts-view svg.plot").waitFor({ timeout: 30_000 });
-const chartOk = (await page.locator(".charts-view svg.plot").count()) === 1;
+await page.locator(".charts-view svg.plot").first().waitFor({ timeout: 30_000 });
+const chartOk = (await page.locator(".charts-view svg.plot").count()) >= 1; // the mix and the reservoir course
 const energyOk = energyApi.status === 200 && energyApi.flows === 4 && flowCanvas === 1 && chartOk;
 console.log("energy api:", JSON.stringify(energyApi), "| flow canvas:", flowCanvas, "| chart:", chartOk, "| ok:", energyOk);
 await page.screenshot({ path: "/tmp/sn/qa-energy-charts.png" });
@@ -373,6 +373,17 @@ if ((await quakesButton.count()) > 0) {
   console.log("strip in QUAKES:", quakeStrip.slice(0, 140), "| ok:", quakesOk);
   await page.screenshot({ path: "/tmp/sn/qa-quakes.png" });
 } else console.log("QUAKES not in rail (no M≥2 event in window)");
+// energy sites: plants ≥ 1 MW and the grid on the ENERGY map, a hover card on Leibstadt
+await page.goto(`${base}/?topic=energy`, { waitUntil: "domcontentloaded", timeout: 90_000 });
+await page.waitForFunction(() => { const m = window.__swissNowMap; return m && m.getLayer("energy-plants-circles") && m.querySourceFeatures("energy-plants").length > 500 && m.querySourceFeatures("energy-grid").length > 100; }, null, { timeout: 60_000 }).catch(() => {});
+const siteCounts = await page.evaluate(() => { const m = window.__swissNowMap; return { plants: m.querySourceFeatures("energy-plants").length, grid: m.querySourceFeatures("energy-grid").length, visible: m.getLayoutProperty("energy-plants-circles", "visibility") }; });
+const leib = await page.evaluate(() => { const m = window.__swissNowMap; const p = m.project([8.1826, 47.6013]); const r = m.getContainer().getBoundingClientRect(); return { x: p.x + r.left, y: p.y + r.top }; });
+await page.mouse.move(leib.x, leib.y);
+await page.waitForTimeout(500);
+const plantCard = (await page.locator(".hover-card--energy").count()) ? await page.locator(".hover-card--energy").innerText() : "";
+const legendEnergy = await page.locator(".legend--energy .legend__swatch").count();
+const sitesOk = siteCounts.plants > 500 && siteCounts.grid > 100 && siteCounts.visible === "visible" && /MW/.test(plantCard) && legendEnergy >= 8;
+console.log("energy sites:", JSON.stringify(siteCounts), "| Leibstadt card:", plantCard.replace(/\n/g, " | ").slice(0, 70), "| legend swatches", legendEnergy, "| ok:", sitesOk);
 // place page: reachable from a municipality click and complete for Bern
 await page.goto(`${base}/?topic=population`, { waitUntil: "domcontentloaded", timeout: 90_000 });
 await page.waitForFunction(() => { const m = window.__swissNowMap; return m && m.getLayer("stats-muni-fill") && m.queryRenderedFeatures({ layers: ["stats-muni-fill"] }).length > 100; }, null, { timeout: 60_000 }).catch(() => {});
@@ -496,6 +507,7 @@ process.exit(
   wordmarkOk &&
   markOk &&
   placeOk &&
+  sitesOk &&
   shortOk &&
   helpOk &&
   mobileOk &&

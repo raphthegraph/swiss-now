@@ -42,6 +42,10 @@ export const SourceId = z.enum([
   "lindas-politics",
   "kof",
   "seco",
+  "bfe-plants",
+  "bfe-wasta",
+  "esti-grid",
+  "sfoe-reservoirs",
   "ecb",
   "eurostat",
 ]);

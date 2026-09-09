@@ -24,6 +24,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @swiss-now/core build-data votes -- --sundays 4 --vintage 2026
       - run: pnpm --filter @swiss-now/core build-data stats -- --vintage 2026
+      - run: pnpm --filter @swiss-now/core build-data energy
       - run: pnpm --filter @swiss-now/core test
       - name: Commit refreshed data
         run: |

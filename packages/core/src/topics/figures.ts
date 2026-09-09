@@ -311,6 +311,16 @@ export function energyFigures(e: EnergyState | undefined): Figure[] {
         where: "this hour · Energy-Charts",
       }),
     );
+  if (e.reservoir) {
+    const total = e.reservoir.regions.total;
+    if (total && total.maxGwh > 0)
+      out.push(
+        fig("reservoirs", FL.reservoirs, (total.gwh / total.maxGwh) * 100, 0, {
+          unit: "%",
+          where: `${Math.round(total.gwh)} of ${Math.round(total.maxGwh)} GWh · ${e.reservoir.date}`,
+        }),
+      );
+  }
   if (e.generation?.renewableSharePct !== undefined)
     out.push(
       fig("renewable", FL.renewableShare, e.generation.renewableSharePct, 0, {
@@ -531,7 +541,11 @@ const hazardSource = (f: Figure): SourceId =>
           ? "bafu-fire-danger"
           : "sed-fdsn";
 const energySource = (f: Figure): SourceId =>
-  f.id === "price" || f.id === "renewable" ? "energy-charts" : "swissgrid-live";
+  f.id === "reservoirs"
+    ? "sfoe-reservoirs"
+    : f.id === "price" || f.id === "renewable"
+      ? "energy-charts"
+      : "swissgrid-live";
 const airSource = (f: Figure): SourceId =>
   f.id === "citizen" ? "sensor-community" : f.id === "pollen" ? "meteoswiss-pollen" : "ugz-air";
 

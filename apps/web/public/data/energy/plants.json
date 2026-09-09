@@ -1,0 +1,7828 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-09T12:59:27.944Z",
+  "minKw": 1000,
+  "attribution": "Source: SFOE",
+  "plants": [
+    {
+      "id": "56891",
+      "name": "Innertkirchen 1 und 1a",
+      "municipality": "Innertkirchen",
+      "canton": "BE",
+      "type": "hydro-pumped",
+      "kw": 1336100,
+      "lonLat": [8.23277, 46.7012],
+      "since": 1961
+    },
+    {
+      "id": "60663",
+      "name": "Leibstadt",
+      "municipality": "Leibstadt",
+      "canton": "AG",
+      "type": "nuclear",
+      "kw": 1250000,
+      "lonLat": [8.18502, 47.60167],
+      "since": 1984
+    },
+    {
+      "id": "61197",
+      "name": "Däniken SO",
+      "municipality": "Däniken SO",
+      "canton": "SO",
+      "type": "nuclear",
+      "kw": 1035000,
+      "lonLat": [7.96642, 47.36576],
+      "since": 1979
+    },
+    {
+      "id": "320541",
+      "name": "Chatelard Barberine",
+      "municipality": "Le Châtelard VS",
+      "canton": "VS",
+      "type": "hydro-pumped",
+      "kw": 945000,
+      "lonLat": [6.95801, 46.06101],
+      "since": 2022
+    },
+    {
+      "id": "119055",
+      "name": "Thusis",
+      "municipality": "Thusis",
+      "canton": "GR",
+      "type": "hydro-pumped",
+      "kw": 445900,
+      "lonLat": [9.43335, 46.68333],
+      "since": 1963
+    },
+    {
+      "id": "72400",
+      "name": "Biasca",
+      "municipality": "Biasca",
+      "canton": "TI",
+      "type": "hydro-run",
+      "kw": 431000,
+      "lonLat": [8.98093, 46.33438],
+      "since": 1962
+    },
+    {
+      "id": "5741",
+      "name": "Mapragg",
+      "municipality": "Vadura",
+      "canton": "SG",
+      "type": "hydro-pumped",
+      "kw": 366000,
+      "lonLat": [9.48126, 46.94842],
+      "since": 1977
+    },
+    {
+      "id": "61136",
+      "name": "Döttingen",
+      "municipality": "Döttingen",
+      "canton": "AG",
+      "type": "nuclear",
+      "kw": 364800,
+      "lonLat": [8.22827, 47.55169],
+      "since": 1969
+    },
+    {
+      "id": "61137",
+      "name": "Döttingen",
+      "municipality": "Döttingen",
+      "canton": "AG",
+      "type": "nuclear",
+      "kw": 364800,
+      "lonLat": [8.22866, 47.55243],
+      "since": 1971
+    },
+    {
+      "id": "5776",
+      "name": "La Batiaz",
+      "municipality": "Martigny",
+      "canton": "VS",
+      "type": "hydro-pumped",
+      "kw": 351000,
+      "lonLat": [7.06196, 46.10973],
+      "since": 1968
+    },
+    {
+      "id": "5686",
+      "name": "Naters",
+      "municipality": "Naters",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 349576,
+      "lonLat": [7.99021, 46.32217],
+      "since": 1969
+    },
+    {
+      "id": "6032",
+      "name": "Stalden KWM",
+      "municipality": "Stalden VS",
+      "canton": "VS",
+      "type": "hydro-pumped",
+      "kw": 263700,
+      "lonLat": [7.87015, 46.23017],
+      "since": 1960
+    },
+    {
+      "id": "5926",
+      "name": "Veytaux ",
+      "municipality": "Veytaux",
+      "canton": "VD",
+      "type": "hydro-pumped",
+      "kw": 240000,
+      "lonLat": [6.93157, 46.41019],
+      "since": 1971
+    },
+    {
+      "id": "6059",
+      "name": "Rothenbrunnen KWZ",
+      "municipality": "Vals",
+      "canton": "GR",
+      "type": "hydro-pumped",
+      "kw": 232000,
+      "lonLat": [9.41825, 46.76592],
+      "since": 1957
+    },
+    {
+      "id": "119054",
+      "name": "Ferrera 1",
+      "municipality": "Innerferrera",
+      "canton": "GR",
+      "type": "hydro-pumped",
+      "kw": 189000,
+      "lonLat": [9.43421, 46.53292],
+      "since": 1963
+    },
+    {
+      "id": "10408",
+      "name": "Goeschenen Goescheneralp",
+      "municipality": "Göschenen",
+      "canton": "UR",
+      "type": "hydro-storage",
+      "kw": 160650,
+      "lonLat": [8.58505, 46.66728],
+      "since": 1961
+    },
+    {
+      "id": "90911",
+      "name": "Etzelwerk Altendorf",
+      "municipality": "Altendorf",
+      "canton": "SZ",
+      "type": "hydro-pumped",
+      "kw": 121000,
+      "lonLat": [8.81257, 47.19447],
+      "since": 1937
+    },
+    {
+      "id": "5903",
+      "name": "Loetschen",
+      "municipality": "Steg VS",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 120000,
+      "lonLat": [7.74427, 46.31974],
+      "since": 1976
+    },
+    {
+      "id": "85974",
+      "name": "Amsteg",
+      "municipality": "Amsteg",
+      "canton": "UR",
+      "type": "hydro-storage",
+      "kw": 120000,
+      "lonLat": [8.67149, 46.76799],
+      "since": 1998
+    },
+    {
+      "id": "6033",
+      "name": "Mesocco",
+      "municipality": "Mesocco",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 117900,
+      "lonLat": [9.19558, 46.31208],
+      "since": 1962
+    },
+    {
+      "id": "77661",
+      "name": "Sierre",
+      "municipality": "Sierre",
+      "canton": "VS",
+      "type": "hydro-pumped",
+      "kw": 115900,
+      "lonLat": [7.53187, 46.29343],
+      "since": 1958
+    },
+    {
+      "id": "9983",
+      "name": "Rheinfelden",
+      "municipality": "Rheinfelden",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 112000,
+      "lonLat": [7.83571, 47.57597],
+      "since": 1930
+    },
+    {
+      "id": "40044",
+      "name": "Loebbia Albigna",
+      "municipality": "Casaccia",
+      "canton": "GR",
+      "type": "hydro-pumped",
+      "kw": 109000,
+      "lonLat": [9.65904, 46.37517],
+      "since": 1960
+    },
+    {
+      "id": "57739",
+      "name": "Siebnen",
+      "municipality": "Siebnen",
+      "canton": "SZ",
+      "type": "hydro-pumped",
+      "kw": 107400,
+      "lonLat": [8.89989, 47.17207],
+      "since": 1924
+    },
+    {
+      "id": "51332",
+      "name": "Laufenburg",
+      "municipality": "Laufenburg",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 106000,
+      "lonLat": [8.05136, 47.55558],
+      "since": 1914
+    },
+    {
+      "id": "8883",
+      "name": "St-Leonard",
+      "municipality": "St-Léonard",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 105300,
+      "lonLat": [7.44362, 46.26009],
+      "since": 1958
+    },
+    {
+      "id": "61237",
+      "name": "Verbois",
+      "municipality": "Russin",
+      "canton": "GE",
+      "type": "hydro-run",
+      "kw": 104700,
+      "lonLat": [6.0273, 46.19232],
+      "since": 1943
+    },
+    {
+      "id": "90158",
+      "name": "Vernayaz CFF",
+      "municipality": "Vernayaz",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 100250,
+      "lonLat": [7.03604, 46.13407],
+      "since": 1974
+    },
+    {
+      "id": "40064",
+      "name": "Castasegna",
+      "municipality": "Castasegna",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 100000,
+      "lonLat": [9.51602, 46.33601],
+      "since": 1960
+    },
+    {
+      "id": "64264",
+      "name": "Bern",
+      "municipality": "Bern",
+      "canton": "BE",
+      "type": "gas",
+      "kw": 92000,
+      "lonLat": [7.41612, 46.95218],
+      "since": 2012
+    },
+    {
+      "id": "16735",
+      "name": "Birsfelden",
+      "municipality": "Birsfelden",
+      "canton": "BL",
+      "type": "hydro-run",
+      "kw": 90000,
+      "lonLat": [7.62698, 47.5593],
+      "since": 1954
+    },
+    {
+      "id": "52146",
+      "name": "Ilanz 1",
+      "municipality": "Ilanz",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 89950,
+      "lonLat": [9.19524, 46.77476],
+      "since": 1990
+    },
+    {
+      "id": "5786",
+      "name": "Filisur",
+      "municipality": "Filisur",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 87380,
+      "lonLat": [9.68922, 46.66989],
+      "since": 1967
+    },
+    {
+      "id": "62564",
+      "name": "Schiffenen",
+      "municipality": "Kleinbösingen",
+      "canton": "FR",
+      "type": "hydro-storage",
+      "kw": 86800,
+      "lonLat": [7.19643, 46.88503],
+      "since": 1964
+    },
+    {
+      "id": "79720",
+      "name": "Lavey",
+      "municipality": "Lavey-Village",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 86400,
+      "lonLat": [7.0123, 46.21426],
+      "since": 1950
+    },
+    {
+      "id": "40062",
+      "name": "Tiefencastel Ost",
+      "municipality": "Tiefencastel",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 82000,
+      "lonLat": [9.56269, 46.66438],
+      "since": 1949
+    },
+    {
+      "id": "5801",
+      "name": "Gordola",
+      "municipality": "Gordola",
+      "canton": "TI",
+      "type": "hydro-storage",
+      "kw": 79920,
+      "lonLat": [8.8491, 46.19421],
+      "since": 1959
+    },
+    {
+      "id": "90725",
+      "name": "Chatelard Barberine",
+      "municipality": "Finhaut",
+      "canton": "VS",
+      "type": "hydro-pumped",
+      "kw": 77750,
+      "lonLat": [6.95859, 46.06198],
+      "since": 1923
+    },
+    {
+      "id": "62560",
+      "name": "Hauterive",
+      "municipality": "Posieux",
+      "canton": "FR",
+      "type": "hydro-run",
+      "kw": 71900,
+      "lonLat": [7.12725, 46.76886],
+      "since": 1948
+    },
+    {
+      "id": "77662",
+      "name": "Sierre",
+      "municipality": "Sierre",
+      "canton": "VS",
+      "type": "hydro-pumped",
+      "kw": 71550,
+      "lonLat": [7.53187, 46.29343],
+      "since": 2013
+    },
+    {
+      "id": "5916",
+      "name": "Mieville",
+      "municipality": "Vernayaz",
+      "canton": "VS",
+      "type": "hydro-pumped",
+      "kw": 70418,
+      "lonLat": [7.02879, 46.1465],
+      "since": 1953
+    },
+    {
+      "id": "40063",
+      "name": "Tinizong",
+      "municipality": "Tinizong",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 70000,
+      "lonLat": [9.61044, 46.58275],
+      "since": 1956
+    },
+    {
+      "id": "64904",
+      "name": "Fieschertal",
+      "municipality": "Ernen",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 60800,
+      "lonLat": [8.14113, 46.42628],
+      "since": 1974
+    },
+    {
+      "id": "5816",
+      "name": "Am Loentsch",
+      "municipality": "Netstal",
+      "canton": "GL",
+      "type": "hydro-storage",
+      "kw": 60000,
+      "lonLat": [9.04883, 47.05685],
+      "since": 1908
+    },
+    {
+      "id": "5904",
+      "name": "Ackersand 2",
+      "municipality": "Stalden VS",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 57600,
+      "lonLat": [7.87423, 46.24022],
+      "since": 1959
+    },
+    {
+      "id": "5927",
+      "name": "Simplon Dorf",
+      "municipality": "Simplon Dorf",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 55900,
+      "lonLat": [8.13991, 46.19564],
+      "since": 1952
+    },
+    {
+      "id": "5727",
+      "name": "Campocologno 1",
+      "municipality": "Campocologno",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 55000,
+      "lonLat": [10.14377, 46.23215],
+      "since": 1907
+    },
+    {
+      "id": "109115",
+      "name": "Wassen Pfaffensprung",
+      "municipality": "Wassen UR",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 53750,
+      "lonLat": [8.60985, 46.71556],
+      "since": 1948
+    },
+    {
+      "id": "61234",
+      "name": "Hermance",
+      "municipality": "Hermance",
+      "canton": "GE",
+      "type": "hydro-run",
+      "kw": 52000,
+      "lonLat": [6.17224, 46.2264],
+      "since": 1925
+    },
+    {
+      "id": "5861",
+      "name": "Goesgen",
+      "municipality": "Niedergösgen",
+      "canton": "SO",
+      "type": "hydro-run",
+      "kw": 51000,
+      "lonLat": [7.97927, 47.36839],
+      "since": 2000
+    },
+    {
+      "id": "5860",
+      "name": "Lucendro",
+      "municipality": "Airolo",
+      "canton": "TI",
+      "type": "hydro-storage",
+      "kw": 50125,
+      "lonLat": [8.59763, 46.52651],
+      "since": 1944
+    },
+    {
+      "id": "6069",
+      "name": "Sion",
+      "municipality": "Sion",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 49592,
+      "lonLat": [7.3672, 46.22823],
+      "since": 1960
+    },
+    {
+      "id": "62607",
+      "name": "Cornaux NE",
+      "municipality": "Cornaux NE",
+      "canton": "NE",
+      "type": "gas",
+      "kw": 47200,
+      "lonLat": [7.03042, 47.02969],
+      "since": 1988
+    },
+    {
+      "id": "64903",
+      "name": "Heiligkreuz",
+      "municipality": "Ernen",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 45450,
+      "lonLat": [8.17519, 46.34761],
+      "since": 1971
+    },
+    {
+      "id": "5936",
+      "name": "Eglisau",
+      "municipality": "Zweidlen",
+      "canton": "ZH",
+      "type": "hydro-run",
+      "kw": 45220,
+      "lonLat": [8.47385, 47.57437],
+      "since": 1920
+    },
+    {
+      "id": "5730",
+      "name": "Kueblis",
+      "municipality": "Küblis",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 44200,
+      "lonLat": [9.7819, 46.91366],
+      "since": 1922
+    },
+    {
+      "id": "5803",
+      "name": "Wildegg-Brugg",
+      "municipality": "Villnachern",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 44100,
+      "lonLat": [8.16992, 47.46882],
+      "since": 1952
+    },
+    {
+      "id": "5744",
+      "name": "Rupperswil-Auenstein",
+      "municipality": "Auenstein",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 42600,
+      "lonLat": [8.11997, 47.41298],
+      "since": 1949
+    },
+    {
+      "id": "5747",
+      "name": "Rheinau",
+      "municipality": "Rheinau",
+      "canton": "ZH",
+      "type": "hydro-run",
+      "kw": 42500,
+      "lonLat": [8.60218, 47.63836],
+      "since": 1956
+    },
+    {
+      "id": "5753",
+      "name": "Reckingen",
+      "municipality": "Rekingen AG",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 41380,
+      "lonLat": [8.33834, 47.56979],
+      "since": 1941
+    },
+    {
+      "id": "5751",
+      "name": "Klingnau",
+      "municipality": "Klingnau",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 40950,
+      "lonLat": [8.22669, 47.59515],
+      "since": 1902
+    },
+    {
+      "id": "10407",
+      "name": "Goeschenen Goescheneralp",
+      "municipality": "Göschenen",
+      "canton": "UR",
+      "type": "hydro-storage",
+      "kw": 36650,
+      "lonLat": [8.58505, 46.66728],
+      "since": 1961
+    },
+    {
+      "id": "5897",
+      "name": "Muehleberg",
+      "municipality": "Mühleberg",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 36000,
+      "lonLat": [7.28343, 46.96923],
+      "since": 1920
+    },
+    {
+      "id": "5750",
+      "name": "Augst",
+      "municipality": "Augst BL",
+      "canton": "BL",
+      "type": "hydro-run",
+      "kw": 35980,
+      "lonLat": [7.70953, 47.53664],
+      "since": 1992
+    },
+    {
+      "id": "5905",
+      "name": "Moerel Aletsch",
+      "municipality": "Mörel",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 35300,
+      "lonLat": [8.04841, 46.35733],
+      "since": 1950
+    },
+    {
+      "id": "58158",
+      "name": "Obermatt Nebenzentrale",
+      "municipality": "Engelberg",
+      "canton": "OW",
+      "type": "hydro-storage",
+      "kw": 33900,
+      "lonLat": [8.37074, 46.84141],
+      "since": 1905
+    },
+    {
+      "id": "6119",
+      "name": "Grono",
+      "municipality": "Grono",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 33052,
+      "lonLat": [9.15353, 46.242],
+      "since": 1963
+    },
+    {
+      "id": "90157",
+      "name": "Ritom 1",
+      "municipality": "Piotta",
+      "canton": "TI",
+      "type": "hydro-storage",
+      "kw": 33000,
+      "lonLat": [8.67551, 46.51727],
+      "since": 1920
+    },
+    {
+      "id": "222801",
+      "name": "Bern",
+      "municipality": "Bern",
+      "canton": "BE",
+      "type": "biomass",
+      "kw": 32700,
+      "lonLat": [7.41612, 46.95218],
+      "since": 2012
+    },
+    {
+      "id": "6014",
+      "name": "Bramois",
+      "municipality": "Bramois",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 32485,
+      "lonLat": [7.40558, 46.22559],
+      "since": 1915
+    },
+    {
+      "id": "40047",
+      "name": "Wettingen",
+      "municipality": "Wettingen",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 32300,
+      "lonLat": [8.3206, 47.45715],
+      "since": 1933
+    },
+    {
+      "id": "5886",
+      "name": "Ernen",
+      "municipality": "Ernen",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 32176,
+      "lonLat": [8.13011, 46.39119],
+      "since": 1954
+    },
+    {
+      "id": "57751",
+      "name": "Schwanden Gemeinde",
+      "municipality": "Schwanden GL",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 30500,
+      "lonLat": [9.08657, 46.99573],
+      "since": 2004
+    },
+    {
+      "id": "40056",
+      "name": "Sils ewz",
+      "municipality": "Sils im Domleschg",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 30000,
+      "lonLat": [9.46349, 46.70416],
+      "since": 1977
+    },
+    {
+      "id": "5743",
+      "name": "Turtmann",
+      "municipality": "Turtmann",
+      "canton": "VS",
+      "type": "hydro-pumped",
+      "kw": 29920,
+      "lonLat": [7.686, 46.2954],
+      "since": 1926
+    },
+    {
+      "id": "5947",
+      "name": "Bannwil",
+      "municipality": "Bannwil",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 28500,
+      "lonLat": [7.73159, 47.22925],
+      "since": 1970
+    },
+    {
+      "id": "5979",
+      "name": "Ackersand 1",
+      "municipality": "Stalden VS",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 28000,
+      "lonLat": [7.87488, 46.23981],
+      "since": 1909
+    },
+    {
+      "id": "51290",
+      "name": "Montbovon",
+      "municipality": "Montbovon",
+      "canton": "FR",
+      "type": "hydro-storage",
+      "kw": 27800,
+      "lonLat": [7.04838, 46.48804],
+      "since": 1896
+    },
+    {
+      "id": "97946",
+      "name": "Hagneck 2",
+      "municipality": "Hagneck",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 27500,
+      "lonLat": [7.17818, 47.0602],
+      "since": 2015
+    },
+    {
+      "id": "51295",
+      "name": "La Dernier",
+      "municipality": "Vallorbe",
+      "canton": "VD",
+      "type": "hydro-storage",
+      "kw": 27370,
+      "lonLat": [6.36006, 46.70392],
+      "since": 1904
+    },
+    {
+      "id": "194381",
+      "name": "Perlen",
+      "municipality": "Perlen",
+      "canton": "LU",
+      "type": "waste",
+      "kw": 27200,
+      "lonLat": [8.37602, 47.11353],
+      "since": 2016
+    },
+    {
+      "id": "64902",
+      "name": "Mubisa",
+      "municipality": "Ernen",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 26563,
+      "lonLat": [8.13434, 46.39624],
+      "since": 1965
+    },
+    {
+      "id": "51201",
+      "name": "Lignerolle",
+      "municipality": "Lignerolle",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 26400,
+      "lonLat": [6.45655, 46.73996],
+      "since": 1954
+    },
+    {
+      "id": "62013",
+      "name": "Buchs SG",
+      "municipality": "Buchs SG",
+      "canton": "SG",
+      "type": "waste",
+      "kw": 26150,
+      "lonLat": [9.48329, 47.17583],
+      "since": 1974
+    },
+    {
+      "id": "6089",
+      "name": "Realta Rabiusa",
+      "municipality": "Rothenbrunnen",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 26000,
+      "lonLat": [9.41788, 46.76496],
+      "since": 1949
+    },
+    {
+      "id": "42819",
+      "name": "Engeweiher",
+      "municipality": "Schaffhausen",
+      "canton": "SH",
+      "type": "hydro-run",
+      "kw": 25200,
+      "lonLat": [8.63052, 47.69358],
+      "since": 1963
+    },
+    {
+      "id": "18035",
+      "name": "Buerglen Unterschaechen",
+      "municipality": "Bürglen UR",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 25000,
+      "lonLat": [8.66429, 46.87693],
+      "since": 1966
+    },
+    {
+      "id": "51289",
+      "name": "Broc",
+      "municipality": "Broc",
+      "canton": "FR",
+      "type": "hydro-storage",
+      "kw": 24375,
+      "lonLat": [7.10884, 46.60955],
+      "since": 1921
+    },
+    {
+      "id": "55104",
+      "name": "Unteraa Melchaa",
+      "municipality": "Giswil",
+      "canton": "OW",
+      "type": "hydro-storage",
+      "kw": 24000,
+      "lonLat": [8.17446, 46.82142],
+      "since": 1994
+    },
+    {
+      "id": "55105",
+      "name": "Unteraa Melchaa",
+      "municipality": "Giswil",
+      "canton": "OW",
+      "type": "hydro-storage",
+      "kw": 24000,
+      "lonLat": [8.17446, 46.82142],
+      "since": 1994
+    },
+    {
+      "id": "6035",
+      "name": "Orsieres",
+      "municipality": "Orsières",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 23040,
+      "lonLat": [7.14231, 46.02108],
+      "since": 1931
+    },
+    {
+      "id": "5862",
+      "name": "Ruppoldingen",
+      "municipality": "Boningen",
+      "canton": "SO",
+      "type": "hydro-run",
+      "kw": 23000,
+      "lonLat": [7.87794, 47.31241],
+      "since": 2000
+    },
+    {
+      "id": "14692",
+      "name": "Winterthur",
+      "municipality": "Winterthur",
+      "canton": "ZH",
+      "type": "waste",
+      "kw": 23000,
+      "lonLat": [8.75243, 47.49791],
+      "since": 2012
+    },
+    {
+      "id": "64650",
+      "name": "Schwyz",
+      "municipality": "Schwyz",
+      "canton": "SZ",
+      "type": "hydro-run",
+      "kw": 22600,
+      "lonLat": [8.65237, 47.02313],
+      "since": 1966
+    },
+    {
+      "id": "9343",
+      "name": "Domat/Ems",
+      "municipality": "Domat/Ems",
+      "canton": "GR",
+      "type": "biomass",
+      "kw": 22494,
+      "lonLat": [9.42392, 46.82765],
+      "since": 2007
+    },
+    {
+      "id": "5863",
+      "name": "Ruppoldingen",
+      "municipality": "Boningen",
+      "canton": "SO",
+      "type": "hydro-run",
+      "kw": 22000,
+      "lonLat": [7.87794, 47.31241],
+      "since": 1970
+    },
+    {
+      "id": "6090",
+      "name": "Lostallo",
+      "municipality": "Lostallo",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 22000,
+      "lonLat": [9.20904, 46.32195],
+      "since": 1958
+    },
+    {
+      "id": "6031",
+      "name": "Sassello",
+      "municipality": "Roveredo GR",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 21600,
+      "lonLat": [9.1185, 46.2392],
+      "since": 1951
+    },
+    {
+      "id": "51206",
+      "name": "La Peuffeyre",
+      "municipality": "Frenières-sur-Bex",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 21549,
+      "lonLat": [7.05752, 46.26705],
+      "since": 1927
+    },
+    {
+      "id": "214309",
+      "name": "Lausanne",
+      "municipality": "Lausanne",
+      "canton": "VD",
+      "type": "waste",
+      "kw": 21240,
+      "lonLat": [6.64493, 46.53352],
+      "since": 2006
+    },
+    {
+      "id": "58079",
+      "name": "Hinwil",
+      "municipality": "Hinwil",
+      "canton": "ZH",
+      "type": "waste",
+      "kw": 20200,
+      "lonLat": [8.82046, 47.30783],
+      "since": 1976
+    },
+    {
+      "id": "60179",
+      "name": "Wynau",
+      "municipality": "Wynau",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 20200,
+      "lonLat": [7.7866, 47.25503],
+      "since": 1996
+    },
+    {
+      "id": "64942",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "gas",
+      "kw": 20175,
+      "lonLat": [7.57984, 47.57063],
+      "since": 2008
+    },
+    {
+      "id": "74956",
+      "name": "Zürich",
+      "municipality": "Zürich",
+      "canton": "ZH",
+      "type": "waste",
+      "kw": 19600,
+      "lonLat": [8.56325, 47.41512],
+      "since": 2008
+    },
+    {
+      "id": "5802",
+      "name": "Beznau",
+      "municipality": "Döttingen",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 19250,
+      "lonLat": [8.23715, 47.55781],
+      "since": 1902
+    },
+    {
+      "id": "5928",
+      "name": "Martigny",
+      "municipality": "Martigny",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 19200,
+      "lonLat": [7.07119, 46.10029],
+      "since": 1908
+    },
+    {
+      "id": "45782",
+      "name": "Monthey Vieze",
+      "municipality": "Monthey",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 19100,
+      "lonLat": [6.94402, 46.25012],
+      "since": 2013
+    },
+    {
+      "id": "5899",
+      "name": "Kandergrund",
+      "municipality": "Kandergrund",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 19000,
+      "lonLat": [7.6601, 46.54394],
+      "since": 1991
+    },
+    {
+      "id": "5938",
+      "name": "Bremgarten-Zufikon",
+      "municipality": "Bremgarten AG",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 19000,
+      "lonLat": [8.34501, 47.34373],
+      "since": 1975
+    },
+    {
+      "id": "5898",
+      "name": "Spiez",
+      "municipality": "Spiez",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 18600,
+      "lonLat": [7.66556, 46.69448],
+      "since": 1985
+    },
+    {
+      "id": "211974",
+      "name": "Giubiasco",
+      "municipality": "Giubiasco",
+      "canton": "TI",
+      "type": "waste",
+      "kw": 18600,
+      "lonLat": [8.99008, 46.17212],
+      "since": 2010
+    },
+    {
+      "id": "61120",
+      "name": "Aire-la-Ville",
+      "municipality": "Aire-la-Ville",
+      "canton": "GE",
+      "type": "waste",
+      "kw": 18400,
+      "lonLat": [6.03196, 46.19401],
+      "since": 1966
+    },
+    {
+      "id": "5804",
+      "name": "Faetschbach",
+      "municipality": "Linthal",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 18200,
+      "lonLat": [8.98786, 46.91554],
+      "since": 1949
+    },
+    {
+      "id": "5901",
+      "name": "Innergsteig",
+      "municipality": "Gsteig b. Gstaad",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 18000,
+      "lonLat": [7.278, 46.37646],
+      "since": 1966
+    },
+    {
+      "id": "61387",
+      "name": "Dallenwil",
+      "municipality": "Wolfenschiessen",
+      "canton": "NW",
+      "type": "hydro-run",
+      "kw": 17750,
+      "lonLat": [8.39356, 46.91166],
+      "since": 1960
+    },
+    {
+      "id": "10599",
+      "name": "Morobbia",
+      "municipality": "Giubiasco",
+      "canton": "TI",
+      "type": "hydro-storage",
+      "kw": 17500,
+      "lonLat": [9.01686, 46.16806],
+      "since": 1970
+    },
+    {
+      "id": "5948",
+      "name": "Erlenbach",
+      "municipality": "Erlenbach im Simmental",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 17000,
+      "lonLat": [7.55043, 46.65889],
+      "since": 1959
+    },
+    {
+      "id": "207246",
+      "name": "Bern",
+      "municipality": "Bern",
+      "canton": "BE",
+      "type": "waste",
+      "kw": 17000,
+      "lonLat": [7.41612, 46.95218],
+      "since": 2012
+    },
+    {
+      "id": "27255",
+      "name": "Kubel",
+      "municipality": "St. Gallen",
+      "canton": "SG",
+      "type": "hydro-storage",
+      "kw": 16800,
+      "lonLat": [9.32489, 47.40149],
+      "since": 1976
+    },
+    {
+      "id": "62572",
+      "name": "Oelberg",
+      "municipality": "Fribourg",
+      "canton": "FR",
+      "type": "hydro-run",
+      "kw": 16620,
+      "lonLat": [7.16761, 46.80179],
+      "since": 1910
+    },
+    {
+      "id": "57315",
+      "name": "Schwanden Niederenbach",
+      "municipality": "Schwanden GL",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 16500,
+      "lonLat": [9.08723, 46.9957],
+      "since": 2005
+    },
+    {
+      "id": "37824",
+      "name": "Sembrancher",
+      "municipality": "Sembrancher",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 16000,
+      "lonLat": [7.16006, 46.07562],
+      "since": 1929
+    },
+    {
+      "id": "60031",
+      "name": "Aarau Stadt",
+      "municipality": "Aarau",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 16000,
+      "lonLat": [8.03572, 47.39538],
+      "since": 1894
+    },
+    {
+      "id": "184328",
+      "name": "Saegengueetli Bruggwiti",
+      "municipality": "Flums",
+      "canton": "SG",
+      "type": "hydro-storage",
+      "kw": 15950,
+      "lonLat": [9.34001, 47.08861],
+      "since": 2021
+    },
+    {
+      "id": "64646",
+      "name": "Schwyz",
+      "municipality": "Schwyz",
+      "canton": "SZ",
+      "type": "hydro-run",
+      "kw": 15900,
+      "lonLat": [8.65237, 47.02313],
+      "since": 1962
+    },
+    {
+      "id": "61115",
+      "name": "Thun",
+      "municipality": "Thun",
+      "canton": "BE",
+      "type": "waste",
+      "kw": 15070,
+      "lonLat": [7.60878, 46.76473],
+      "since": 2003
+    },
+    {
+      "id": "14833",
+      "name": "Aarberg",
+      "municipality": "Aarberg",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 15000,
+      "lonLat": [7.27029, 47.03993],
+      "since": 1968
+    },
+    {
+      "id": "14834",
+      "name": "Niederried",
+      "municipality": "Niederried b. Kallnach",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 15000,
+      "lonLat": [7.24119, 47.00539],
+      "since": 1963
+    },
+    {
+      "id": "14132",
+      "name": "Gletsch-Oberwald",
+      "municipality": "Oberwald",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 14726,
+      "lonLat": [8.35911, 46.54113],
+      "since": 2018
+    },
+    {
+      "id": "42945",
+      "name": "Weinfelden",
+      "municipality": "Weinfelden",
+      "canton": "TG",
+      "type": "waste",
+      "kw": 14360,
+      "lonLat": [9.13028, 47.55653],
+      "since": 1996
+    },
+    {
+      "id": "61852",
+      "name": "Turgi",
+      "municipality": "Turgi",
+      "canton": "AG",
+      "type": "waste",
+      "kw": 13600,
+      "lonLat": [8.26918, 47.48553],
+      "since": 1970
+    },
+    {
+      "id": "13948",
+      "name": "Dala",
+      "municipality": "Leuk Stadt",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 13400,
+      "lonLat": [7.62382, 46.31855],
+      "since": 2014
+    },
+    {
+      "id": "51229",
+      "name": "Les Farettes",
+      "municipality": "Aigle",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 13400,
+      "lonLat": [6.98619, 46.31734],
+      "since": 1906
+    },
+    {
+      "id": "18026",
+      "name": "Arniberg",
+      "municipality": "Amsteg",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 13000,
+      "lonLat": [8.667, 46.76989],
+      "since": 1969
+    },
+    {
+      "id": "54712",
+      "name": "Trimmis",
+      "municipality": "Trimmis",
+      "canton": "GR",
+      "type": "waste",
+      "kw": 13000,
+      "lonLat": [9.55706, 46.91602],
+      "since": 1991
+    },
+    {
+      "id": "51297",
+      "name": "Des Moulinets",
+      "municipality": "Montcherand",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 12778,
+      "lonLat": [6.53243, 46.72345],
+      "since": 1906
+    },
+    {
+      "id": "5877",
+      "name": "Mutteins",
+      "municipality": "Tavanasa",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 12640,
+      "lonLat": [9.07177, 46.7581],
+      "since": 1960
+    },
+    {
+      "id": "62710",
+      "name": "Plan Dessous",
+      "municipality": "Aubonne",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 12600,
+      "lonLat": [6.38621, 46.49894],
+      "since": 2000
+    },
+    {
+      "id": "46854",
+      "name": "Aarberg",
+      "municipality": "Aarberg",
+      "canton": "BE",
+      "type": "biomass",
+      "kw": 12580,
+      "lonLat": [7.27566, 47.03668],
+      "since": 2021
+    },
+    {
+      "id": "18046",
+      "name": "Seedorf Chuchibach",
+      "municipality": "Seedorf UR",
+      "canton": "UR",
+      "type": "hydro-pumped",
+      "kw": 12500,
+      "lonLat": [8.59334, 46.89917],
+      "since": 1955
+    },
+    {
+      "id": "56379",
+      "name": "Niederurnen",
+      "municipality": "Niederurnen",
+      "canton": "GL",
+      "type": "waste",
+      "kw": 12500,
+      "lonLat": [9.04099, 47.13565],
+      "since": 1984
+    },
+    {
+      "id": "13655",
+      "name": "Erstfeldertal",
+      "municipality": "Erstfeld",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 12352,
+      "lonLat": [8.642, 46.81846],
+      "since": 2020
+    },
+    {
+      "id": "16334",
+      "name": "Aarewerk62",
+      "municipality": "Thun",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 12150,
+      "lonLat": [7.62128, 46.76127],
+      "since": 1962
+    },
+    {
+      "id": "61107",
+      "name": "Z'Mutt Centrale pomp. et turb.",
+      "municipality": "Zermatt",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 12000,
+      "lonLat": [7.71723, 46.00647],
+      "since": 2002
+    },
+    {
+      "id": "64656",
+      "name": "Unteraa Lungerersee",
+      "municipality": "Giswil",
+      "canton": "OW",
+      "type": "hydro-storage",
+      "kw": 12000,
+      "lonLat": [8.17439, 46.82255],
+      "since": 2013
+    },
+    {
+      "id": "14012",
+      "name": "Taschinas",
+      "municipality": "Grüsch",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 11900,
+      "lonLat": [9.64488, 46.98284],
+      "since": 2011
+    },
+    {
+      "id": "29775",
+      "name": "Felsenau",
+      "municipality": "Bern",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 11500,
+      "lonLat": [7.4409, 46.97052],
+      "since": 1989
+    },
+    {
+      "id": "207260",
+      "name": "Buchs AG",
+      "municipality": "Buchs AG",
+      "canton": "AG",
+      "type": "waste",
+      "kw": 11150,
+      "lonLat": [8.10311, 47.38842],
+      "since": 2013
+    },
+    {
+      "id": "76263",
+      "name": "Wallisellen",
+      "municipality": "Wallisellen",
+      "canton": "ZH",
+      "type": "biomass",
+      "kw": 11130,
+      "lonLat": [8.5751, 47.41249],
+      "since": 2010
+    },
+    {
+      "id": "207227",
+      "name": "Bazenheid",
+      "municipality": "Bazenheid",
+      "canton": "SG",
+      "type": "waste",
+      "kw": 11000,
+      "lonLat": [9.0677, 47.42337],
+      "since": 2012
+    },
+    {
+      "id": "9978",
+      "name": "Giumaglio",
+      "municipality": "Giumaglio",
+      "canton": "TI",
+      "type": "hydro-storage",
+      "kw": 10800,
+      "lonLat": [8.66976, 46.28241],
+      "since": 1967
+    },
+    {
+      "id": "292726",
+      "name": "Wolhusen",
+      "municipality": "Wolhusen",
+      "canton": "LU",
+      "type": "gas",
+      "kw": 10200,
+      "lonLat": [8.09269, 47.06179],
+      "since": 2001
+    },
+    {
+      "id": "5797",
+      "name": "Tremorgio",
+      "municipality": "Rodi-Fiesso",
+      "canton": "TI",
+      "type": "hydro-storage",
+      "kw": 10000,
+      "lonLat": [8.73667, 46.49028],
+      "since": 1926
+    },
+    {
+      "id": "62569",
+      "name": "Posieux",
+      "municipality": "Posieux",
+      "canton": "FR",
+      "type": "waste",
+      "kw": 10000,
+      "lonLat": [7.12014, 46.77376],
+      "since": 2001
+    },
+    {
+      "id": "20839",
+      "name": "Gurtnellen",
+      "municipality": "Gurtnellen",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 9822,
+      "lonLat": [8.619, 46.72593],
+      "since": 2017
+    },
+    {
+      "id": "6029",
+      "name": "Altstafel",
+      "municipality": "Ulrichen",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 9744,
+      "lonLat": [8.37219, 46.46955],
+      "since": 1967
+    },
+    {
+      "id": "64642",
+      "name": "Schwyz",
+      "municipality": "Schwyz",
+      "canton": "SZ",
+      "type": "hydro-run",
+      "kw": 9700,
+      "lonLat": [8.65237, 47.02313],
+      "since": 1970
+    },
+    {
+      "id": "127754",
+      "name": "Frauenfeld",
+      "municipality": "Frauenfeld",
+      "canton": "TG",
+      "type": "gas",
+      "kw": 9520,
+      "lonLat": [8.87505, 47.55593],
+      "since": 1960
+    },
+    {
+      "id": "10371",
+      "name": "Ruechlig",
+      "municipality": "Aarau",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 9500,
+      "lonLat": [8.04998, 47.39966],
+      "since": 2014
+    },
+    {
+      "id": "56325",
+      "name": "St. Joseph",
+      "municipality": "Obersaxen",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 9500,
+      "lonLat": [9.07231, 46.74613],
+      "since": 2017
+    },
+    {
+      "id": "62232",
+      "name": "Dietikon",
+      "municipality": "Dietikon",
+      "canton": "ZH",
+      "type": "waste",
+      "kw": 9500,
+      "lonLat": [8.40306, 47.4158],
+      "since": 1995
+    },
+    {
+      "id": "49805",
+      "name": "Simmenfluh",
+      "municipality": "Wimmis",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 9100,
+      "lonLat": [7.62276, 46.673],
+      "since": 1962
+    },
+    {
+      "id": "99951",
+      "name": "Muehleberg",
+      "municipality": "Mühleberg",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 9000,
+      "lonLat": [7.28343, 46.96923],
+      "since": 1964
+    },
+    {
+      "id": "53562",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "biomass",
+      "kw": 8850,
+      "lonLat": [7.56785, 47.57303],
+      "since": 2019
+    },
+    {
+      "id": "64633",
+      "name": "Schwyz",
+      "municipality": "Schwyz",
+      "canton": "SZ",
+      "type": "hydro-run",
+      "kw": 8600,
+      "lonLat": [8.65237, 47.02313],
+      "since": 1960
+    },
+    {
+      "id": "40050",
+      "name": "Solis",
+      "municipality": "Valbella",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 8500,
+      "lonLat": [9.52518, 46.68188],
+      "since": 1980
+    },
+    {
+      "id": "60483",
+      "name": "Oberrickenbach",
+      "municipality": "Oberrickenbach",
+      "canton": "NW",
+      "type": "hydro-run",
+      "kw": 8500,
+      "lonLat": [8.42127, 46.8802],
+      "since": 1937
+    },
+    {
+      "id": "90940",
+      "name": "Massaboden",
+      "municipality": "Bitsch",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 8500,
+      "lonLat": [8.01221, 46.33247],
+      "since": 1960
+    },
+    {
+      "id": "32265",
+      "name": "Onnens VD",
+      "municipality": "Onnens VD",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 8303,
+      "lonLat": [6.68703, 46.83228],
+      "since": 2016
+    },
+    {
+      "id": "14835",
+      "name": "Kallnach",
+      "municipality": "Kallnach",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 8300,
+      "lonLat": [7.22787, 47.02152],
+      "since": 1982
+    },
+    {
+      "id": "15896",
+      "name": "Augand",
+      "municipality": "Spiez",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 8300,
+      "lonLat": [7.66711, 46.6749],
+      "since": 2023
+    },
+    {
+      "id": "61638",
+      "name": "Engelberg Truebsee",
+      "municipality": "Engelberg",
+      "canton": "OW",
+      "type": "hydro-storage",
+      "kw": 8250,
+      "lonLat": [8.39193, 46.8165],
+      "since": 1968
+    },
+    {
+      "id": "52689",
+      "name": "Sisseln AG",
+      "municipality": "Sisseln AG",
+      "canton": "AG",
+      "type": "biomass",
+      "kw": 8154,
+      "lonLat": [7.9788, 47.55119],
+      "since": 2019
+    },
+    {
+      "id": "12275",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "waste",
+      "kw": 8107,
+      "lonLat": [7.56886, 47.57319],
+      "since": 2008
+    },
+    {
+      "id": "106270",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "waste",
+      "kw": 8107,
+      "lonLat": [7.56886, 47.57319],
+      "since": 2008
+    },
+    {
+      "id": "40053",
+      "name": "Lizun",
+      "municipality": "Casaccia",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 8000,
+      "lonLat": [9.65892, 46.38263],
+      "since": 1960
+    },
+    {
+      "id": "99433",
+      "name": "Sublin 1",
+      "municipality": "Bex",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 8000,
+      "lonLat": [7.0353, 46.26565],
+      "since": 1992
+    },
+    {
+      "id": "470931",
+      "name": "Domdidier",
+      "municipality": "Domdidier",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 7900,
+      "lonLat": [7.01477, 46.87583],
+      "since": 2026
+    },
+    {
+      "id": "60487",
+      "name": "Küssnacht am Rigi",
+      "municipality": "Küssnacht am Rigi",
+      "canton": "SZ",
+      "type": "biomass",
+      "kw": 7880,
+      "lonLat": [8.41222, 47.08767],
+      "since": 2020
+    },
+    {
+      "id": "62559",
+      "name": "Lessoc",
+      "municipality": "Lessoc",
+      "canton": "FR",
+      "type": "hydro-storage",
+      "kw": 7800,
+      "lonLat": [7.05333, 46.50614],
+      "since": 1972
+    },
+    {
+      "id": "62018",
+      "name": "Oftringen",
+      "municipality": "Oftringen",
+      "canton": "AG",
+      "type": "waste",
+      "kw": 7760,
+      "lonLat": [7.9239, 47.30276],
+      "since": 1992
+    },
+    {
+      "id": "178861",
+      "name": "Cressier NE",
+      "municipality": "Cressier NE",
+      "canton": "NE",
+      "type": "solar",
+      "kw": 7703,
+      "lonLat": [7.03337, 47.04003],
+      "since": 2023
+    },
+    {
+      "id": "61270",
+      "name": "La Goule",
+      "municipality": "Le Noirmont",
+      "canton": "JU",
+      "type": "hydro-run",
+      "kw": 7550,
+      "lonLat": [6.9292, 47.22884],
+      "since": 1894
+    },
+    {
+      "id": "62017",
+      "name": "Silliboden",
+      "municipality": "Brig",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 7500,
+      "lonLat": [8.00418, 46.30443],
+      "since": 1942
+    },
+    {
+      "id": "5826",
+      "name": "Monthey",
+      "municipality": "Monthey",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 7490,
+      "lonLat": [6.9552, 46.25565],
+      "since": 1961
+    },
+    {
+      "id": "444713",
+      "name": "Wohlen AG",
+      "municipality": "Wohlen AG",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 7445,
+      "lonLat": [8.26166, 47.352],
+      "since": 2025
+    },
+    {
+      "id": "13300",
+      "name": "Mulegn Ragn d‘Err",
+      "municipality": "Tinizong",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 7060,
+      "lonLat": [9.62207, 46.57698],
+      "since": 2016
+    },
+    {
+      "id": "39324",
+      "name": "Lueen Sagenbach",
+      "municipality": "Langwies",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 7000,
+      "lonLat": [9.60564, 46.82712],
+      "since": 1914
+    },
+    {
+      "id": "55107",
+      "name": "Hugschwendi",
+      "municipality": "Melchtal",
+      "canton": "OW",
+      "type": "hydro-storage",
+      "kw": 7000,
+      "lonLat": [8.28144, 46.79964],
+      "since": 1957
+    },
+    {
+      "id": "55108",
+      "name": "Hugschwendi",
+      "municipality": "Melchtal",
+      "canton": "OW",
+      "type": "hydro-storage",
+      "kw": 7000,
+      "lonLat": [8.28144, 46.79964],
+      "since": 1957
+    },
+    {
+      "id": "21286",
+      "name": "Eaux du Fossau",
+      "municipality": "Vouvry",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 6840,
+      "lonLat": [6.88187, 46.33591],
+      "since": 2019
+    },
+    {
+      "id": "13706",
+      "name": "Plons",
+      "municipality": "Plons",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 6800,
+      "lonLat": [9.40019, 47.05391],
+      "since": 2018
+    },
+    {
+      "id": "89557",
+      "name": "Vétroz",
+      "municipality": "Vétroz",
+      "canton": "VS",
+      "type": "biomass",
+      "kw": 6750,
+      "lonLat": [7.28595, 46.20357],
+      "since": 2022
+    },
+    {
+      "id": "60489",
+      "name": "Wolfenschiessen",
+      "municipality": "Wolfenschiessen",
+      "canton": "NW",
+      "type": "hydro-run",
+      "kw": 6700,
+      "lonLat": [8.39672, 46.90138],
+      "since": 1945
+    },
+    {
+      "id": "13408",
+      "name": "Gere",
+      "municipality": "Oberwald",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 6660,
+      "lonLat": [8.3582, 46.53225],
+      "since": 2020
+    },
+    {
+      "id": "68327",
+      "name": "La Chaux-de-Fonds",
+      "municipality": "La Chaux-de-Fonds",
+      "canton": "NE",
+      "type": "waste",
+      "kw": 6625,
+      "lonLat": [6.83463, 47.10656],
+      "since": 2000
+    },
+    {
+      "id": "16476",
+      "name": "Tasnan",
+      "municipality": "Ardez",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 6600,
+      "lonLat": [10.2256, 46.77766],
+      "since": 2014
+    },
+    {
+      "id": "9725",
+      "name": "Kappelerhof",
+      "municipality": "Baden",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 6550,
+      "lonLat": [8.29306, 47.48416],
+      "since": 2006
+    },
+    {
+      "id": "245561",
+      "name": "Galgenen",
+      "municipality": "Galgenen",
+      "canton": "SZ",
+      "type": "biomass",
+      "kw": 6452,
+      "lonLat": [8.8757, 47.18505],
+      "since": 2022
+    },
+    {
+      "id": "70358",
+      "name": "Perlen",
+      "municipality": "Perlen",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 6426,
+      "lonLat": [8.36555, 47.11329],
+      "since": 2020
+    },
+    {
+      "id": "61640",
+      "name": "Plaetz",
+      "municipality": "Murg",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 6290,
+      "lonLat": [9.20783, 47.09249],
+      "since": 1959
+    },
+    {
+      "id": "386687",
+      "name": "Chur",
+      "municipality": "Chur",
+      "canton": "GR",
+      "type": "gas",
+      "kw": 6280,
+      "lonLat": [9.53882, 46.86386],
+      "since": 2019
+    },
+    {
+      "id": "32130",
+      "name": "Beznau Wehrkraftwerk",
+      "municipality": "Döttingen",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 6205,
+      "lonLat": [8.2306, 47.55408],
+      "since": 2001
+    },
+    {
+      "id": "13766",
+      "name": "Sot Ruinas Susasca",
+      "municipality": "Susch",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 6200,
+      "lonLat": [10.07871, 46.75105],
+      "since": 2010
+    },
+    {
+      "id": "60155",
+      "name": "Trin",
+      "municipality": "Trin",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 6160,
+      "lonLat": [9.36103, 46.82834],
+      "since": 1944
+    },
+    {
+      "id": "67807",
+      "name": "Payerne",
+      "municipality": "Payerne",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 6034,
+      "lonLat": [6.93401, 46.81345],
+      "since": 2015
+    },
+    {
+      "id": "61123",
+      "name": "Seujet",
+      "municipality": "Genève",
+      "canton": "GE",
+      "type": "hydro-run",
+      "kw": 6000,
+      "lonLat": [6.13667, 46.20421],
+      "since": 1995
+    },
+    {
+      "id": "66219",
+      "name": "Luchsingen",
+      "municipality": "Luchsingen",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 6000,
+      "lonLat": [9.03447, 46.96589],
+      "since": 2024
+    },
+    {
+      "id": "62831",
+      "name": "Bocki 2",
+      "municipality": "Erstfeld",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 5930,
+      "lonLat": [8.63218, 46.84095],
+      "since": 1963
+    },
+    {
+      "id": "106513",
+      "name": "Frauenfeld",
+      "municipality": "Frauenfeld",
+      "canton": "TG",
+      "type": "biomass",
+      "kw": 5920,
+      "lonLat": [8.87325, 47.55705],
+      "since": 2023
+    },
+    {
+      "id": "47831",
+      "name": "Zuchwil",
+      "municipality": "Zuchwil",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 5762,
+      "lonLat": [7.55462, 47.20772],
+      "since": 2015
+    },
+    {
+      "id": "62556",
+      "name": "St. Gallen",
+      "municipality": "St. Gallen",
+      "canton": "SG",
+      "type": "waste",
+      "kw": 5700,
+      "lonLat": [9.33282, 47.41523],
+      "since": 1987
+    },
+    {
+      "id": "15062",
+      "name": "Petit Pont de la Tine",
+      "municipality": "Le Sépey",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 5600,
+      "lonLat": [7.04216, 46.34381],
+      "since": 1990
+    },
+    {
+      "id": "13385",
+      "name": "Jungbach",
+      "municipality": "St. Niklaus VS",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 5568,
+      "lonLat": [7.80258, 46.18768],
+      "since": 2015
+    },
+    {
+      "id": "25778",
+      "name": "Aue",
+      "municipality": "Baden",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 5424,
+      "lonLat": [8.31124, 47.47042],
+      "since": 1966
+    },
+    {
+      "id": "13436",
+      "name": "Schaechen",
+      "municipality": "Schattdorf",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 5355,
+      "lonLat": [8.63756, 46.86411],
+      "since": 2019
+    },
+    {
+      "id": "345224",
+      "name": "Niederstetten",
+      "municipality": "Niederstetten",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 5349,
+      "lonLat": [9.07143, 47.44879],
+      "since": 2023
+    },
+    {
+      "id": "61213",
+      "name": "Lorzentobel 1",
+      "municipality": "Baar",
+      "canton": "ZG",
+      "type": "hydro-run",
+      "kw": 5315,
+      "lonLat": [8.55509, 47.18013],
+      "since": 1891
+    },
+    {
+      "id": "16340",
+      "name": "Neuhausen",
+      "municipality": "Neuhausen am Rheinfall",
+      "canton": "SH",
+      "type": "hydro-run",
+      "kw": 5160,
+      "lonLat": [8.61526, 47.67887],
+      "since": 1951
+    },
+    {
+      "id": "64637",
+      "name": "Schwyz",
+      "municipality": "Schwyz",
+      "canton": "SZ",
+      "type": "hydro-run",
+      "kw": 5100,
+      "lonLat": [8.65237, 47.02313],
+      "since": 1960
+    },
+    {
+      "id": "56466",
+      "name": "Engeweiher",
+      "municipality": "Schaffhausen",
+      "canton": "SH",
+      "type": "hydro-pumped",
+      "kw": 5040,
+      "lonLat": [8.63052, 47.69358],
+      "since": 1993
+    },
+    {
+      "id": "39321",
+      "name": "Litzirueti",
+      "municipality": "Litzirüti",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 4800,
+      "lonLat": [9.70592, 46.80005],
+      "since": 1968
+    },
+    {
+      "id": "84035",
+      "name": "Thusis",
+      "municipality": "Thusis",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 4800,
+      "lonLat": [9.43768, 46.69685],
+      "since": 1968
+    },
+    {
+      "id": "132450",
+      "name": "Bevieux",
+      "municipality": "Bex",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 4780,
+      "lonLat": [7.0291, 46.26108],
+      "since": 1943
+    },
+    {
+      "id": "62562",
+      "name": "St-Sulpice",
+      "municipality": "St-Sulpice NE",
+      "canton": "NE",
+      "type": "hydro-storage",
+      "kw": 4770,
+      "lonLat": [6.55758, 46.91053],
+      "since": 1988
+    },
+    {
+      "id": "64639",
+      "name": "Schwyz",
+      "municipality": "Schwyz",
+      "canton": "SZ",
+      "type": "hydro-run",
+      "kw": 4700,
+      "lonLat": [8.65237, 47.02313],
+      "since": 1962
+    },
+    {
+      "id": "68329",
+      "name": "Colombier NE",
+      "municipality": "Colombier NE",
+      "canton": "NE",
+      "type": "waste",
+      "kw": 4680,
+      "lonLat": [6.84503, 46.97494],
+      "since": 1991
+    },
+    {
+      "id": "174591",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "gas",
+      "kw": 4604,
+      "lonLat": [7.6058, 47.55864],
+      "since": 2016
+    },
+    {
+      "id": "13493",
+      "name": "Walibach",
+      "municipality": "Biel VS",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 4600,
+      "lonLat": [8.21507, 46.45215],
+      "since": 2013
+    },
+    {
+      "id": "9974",
+      "name": "Ticinetto",
+      "municipality": "Chironico",
+      "canton": "TI",
+      "type": "hydro-storage",
+      "kw": 4575,
+      "lonLat": [8.85069, 46.41957],
+      "since": 1998
+    },
+    {
+      "id": "63096",
+      "name": "Sion",
+      "municipality": "Sion",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 4560,
+      "lonLat": [7.3672, 46.22823],
+      "since": 1977
+    },
+    {
+      "id": "5956",
+      "name": "Tenero Centrale di dotazione",
+      "municipality": "Tenero",
+      "canton": "TI",
+      "type": "hydro-run",
+      "kw": 4400,
+      "lonLat": [8.8547, 46.18089],
+      "since": 1959
+    },
+    {
+      "id": "31815",
+      "name": "Schattigmatt",
+      "municipality": "Bristen",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 4374,
+      "lonLat": [8.71077, 46.76654],
+      "since": 2016
+    },
+    {
+      "id": "150858",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "biomass",
+      "kw": 4365,
+      "lonLat": [7.56886, 47.57319],
+      "since": 2008
+    },
+    {
+      "id": "229530",
+      "name": "Aigle",
+      "municipality": "Aigle",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 4321,
+      "lonLat": [6.94222, 46.30184],
+      "since": 2023
+    },
+    {
+      "id": "172948",
+      "name": "Weinfelden",
+      "municipality": "Weinfelden",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 4320,
+      "lonLat": [9.08941, 47.56541],
+      "since": 2021
+    },
+    {
+      "id": "60388",
+      "name": "Stechelberg",
+      "municipality": "Stechelberg",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 4300,
+      "lonLat": [7.89974, 46.5446],
+      "since": 1906
+    },
+    {
+      "id": "212529",
+      "name": "Islas",
+      "municipality": "Celerina/Schlarigna",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 4300,
+      "lonLat": [9.85746, 46.50568],
+      "since": 2008
+    },
+    {
+      "id": "51203",
+      "name": "Diablerets",
+      "municipality": "Les Diablerets",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 4240,
+      "lonLat": [7.15806, 46.35139],
+      "since": 1957
+    },
+    {
+      "id": "51532",
+      "name": "Le Grand-Saconnex",
+      "municipality": "Le Grand-Saconnex",
+      "canton": "GE",
+      "type": "solar",
+      "kw": 4170,
+      "lonLat": [6.11842, 46.23373],
+      "since": 2012
+    },
+    {
+      "id": "13908",
+      "name": "Rondchatel",
+      "municipality": "Frinvillier",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 4100,
+      "lonLat": [7.24961, 47.17105],
+      "since": 2013
+    },
+    {
+      "id": "61228",
+      "name": "Biel/Bienne",
+      "municipality": "Biel/Bienne",
+      "canton": "BE",
+      "type": "waste",
+      "kw": 4050,
+      "lonLat": [7.25819, 47.12148],
+      "since": 1991
+    },
+    {
+      "id": "14643",
+      "name": "Rueyres",
+      "municipality": "Rueyres",
+      "canton": "VD",
+      "type": "biomass",
+      "kw": 4000,
+      "lonLat": [6.6996, 46.69676],
+      "since": 2012
+    },
+    {
+      "id": "18115",
+      "name": "Steigs Stoffel",
+      "municipality": "Mels",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 4000,
+      "lonLat": [9.41457, 47.04374],
+      "since": 2014
+    },
+    {
+      "id": "62872",
+      "name": "St-Brais",
+      "municipality": "St-Brais",
+      "canton": "JU",
+      "type": "wind",
+      "kw": 4000,
+      "lonLat": [7.10551, 47.3028],
+      "since": 2009
+    },
+    {
+      "id": "258017",
+      "name": "St. Gallen",
+      "municipality": "St. Gallen",
+      "canton": "SG",
+      "type": "gas",
+      "kw": 4000,
+      "lonLat": [9.39977, 47.43925],
+      "since": 2022
+    },
+    {
+      "id": "56100",
+      "name": "Obersaxen",
+      "municipality": "Obersaxen",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 3995,
+      "lonLat": [9.06935, 46.72175],
+      "since": 2017
+    },
+    {
+      "id": "61255",
+      "name": "Boezingen",
+      "municipality": "Biel/Bienne",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 3920,
+      "lonLat": [7.26745, 47.154],
+      "since": 1984
+    },
+    {
+      "id": "13218",
+      "name": "Bern",
+      "municipality": "Bern",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 3900,
+      "lonLat": [7.47271, 46.95432],
+      "since": 2017
+    },
+    {
+      "id": "222496",
+      "name": "Bulle",
+      "municipality": "Bulle",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 3783,
+      "lonLat": [7.0379, 46.62572],
+      "since": 2023
+    },
+    {
+      "id": "15820",
+      "name": "Lueen Sagenbach",
+      "municipality": "Tschiertschen",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 3752,
+      "lonLat": [9.60619, 46.82851],
+      "since": 2013
+    },
+    {
+      "id": "444937",
+      "name": "Neuchâtel",
+      "municipality": "Neuchâtel",
+      "canton": "NE",
+      "type": "solar",
+      "kw": 3722,
+      "lonLat": [6.91032, 47.0008],
+      "since": 2024
+    },
+    {
+      "id": "61471",
+      "name": "Buchs SG",
+      "municipality": "Buchs SG",
+      "canton": "SG",
+      "type": "hydro-storage",
+      "kw": 3700,
+      "lonLat": [9.47, 47.16557],
+      "since": 1987
+    },
+    {
+      "id": "26115",
+      "name": "Neuendorf",
+      "municipality": "Neuendorf",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 3620,
+      "lonLat": [7.78438, 47.30802],
+      "since": 2013
+    },
+    {
+      "id": "11291",
+      "name": "Engi Muehlebach",
+      "municipality": "Engi",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 3600,
+      "lonLat": [9.15218, 46.98504],
+      "since": 2009
+    },
+    {
+      "id": "33837",
+      "name": "Ferrera Trun",
+      "municipality": "Trun",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 3600,
+      "lonLat": [8.98733, 46.74136],
+      "since": 1998
+    },
+    {
+      "id": "11400",
+      "name": "Calcaccia",
+      "municipality": "Airolo",
+      "canton": "TI",
+      "type": "hydro-storage",
+      "kw": 3580,
+      "lonLat": [8.63244, 46.51998],
+      "since": 1976
+    },
+    {
+      "id": "351679",
+      "name": "Uetendorf",
+      "municipality": "Uetendorf",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 3560,
+      "lonLat": [7.59738, 46.7803],
+      "since": 2024
+    },
+    {
+      "id": "20843",
+      "name": "Eggli Berschis",
+      "municipality": "Berschis",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 3510,
+      "lonLat": [9.36025, 47.10445],
+      "since": 2019
+    },
+    {
+      "id": "13686",
+      "name": "Innertkirchen 3",
+      "municipality": "Innertkirchen",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 3500,
+      "lonLat": [8.22634, 46.69438],
+      "since": 2016
+    },
+    {
+      "id": "31512",
+      "name": "Dietikon Dotierzentrale",
+      "municipality": "Dietikon",
+      "canton": "ZH",
+      "type": "hydro-run",
+      "kw": 3500,
+      "lonLat": [8.409, 47.40816],
+      "since": 2020
+    },
+    {
+      "id": "104788",
+      "name": "Niederurnen",
+      "municipality": "Niederurnen",
+      "canton": "GL",
+      "type": "solar",
+      "kw": 3422,
+      "lonLat": [9.05885, 47.12223],
+      "since": 2016
+    },
+    {
+      "id": "58159",
+      "name": "Arni Engelberg",
+      "municipality": "Engelberg",
+      "canton": "OW",
+      "type": "hydro-storage",
+      "kw": 3400,
+      "lonLat": [8.38713, 46.81951],
+      "since": 1966
+    },
+    {
+      "id": "12213",
+      "name": "Schiffmuehle",
+      "municipality": "Untersiggenthal",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 3345,
+      "lonLat": [8.26488, 47.4886],
+      "since": 1988
+    },
+    {
+      "id": "83952",
+      "name": "Mont-Crosin",
+      "municipality": "Mont-Crosin",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 3300,
+      "lonLat": [7.06387, 47.19866],
+      "since": 2016
+    },
+    {
+      "id": "83957",
+      "name": "Mont-Crosin",
+      "municipality": "Mont-Crosin",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 3300,
+      "lonLat": [7.05944, 47.1987],
+      "since": 2016
+    },
+    {
+      "id": "83961",
+      "name": "Mont-Soleil",
+      "municipality": "Mont-Soleil",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 3300,
+      "lonLat": [6.98783, 47.16547],
+      "since": 2016
+    },
+    {
+      "id": "91710",
+      "name": "Mont-Soleil",
+      "municipality": "Mont-Soleil",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 3300,
+      "lonLat": [6.96927, 47.16014],
+      "since": 2016
+    },
+    {
+      "id": "16301",
+      "name": "Wysswasser",
+      "municipality": "Fiesch",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 3200,
+      "lonLat": [8.13392, 46.40027],
+      "since": 2012
+    },
+    {
+      "id": "29305",
+      "name": "Schattenhalb 3",
+      "municipality": "Schattenhalb",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 3200,
+      "lonLat": [8.18455, 46.71947],
+      "since": 2017
+    },
+    {
+      "id": "64362",
+      "name": "Stenna",
+      "municipality": "Flims Dorf",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 3200,
+      "lonLat": [9.28478, 46.83367],
+      "since": 1962
+    },
+    {
+      "id": "45237",
+      "name": "Borgnone",
+      "municipality": "Borgnone",
+      "canton": "TI",
+      "type": "hydro-run",
+      "kw": 3195,
+      "lonLat": [8.62375, 46.15789],
+      "since": 2018
+    },
+    {
+      "id": "62606",
+      "name": "Sainte-Anne",
+      "municipality": "Grandvillard",
+      "canton": "FR",
+      "type": "hydro-run",
+      "kw": 3184,
+      "lonLat": [7.08775, 46.53593],
+      "since": 1999
+    },
+    {
+      "id": "79723",
+      "name": "Aboyeu",
+      "municipality": "Collonges",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 3150,
+      "lonLat": [7.03413, 46.18261],
+      "since": 1981
+    },
+    {
+      "id": "87864",
+      "name": "Courgenay",
+      "municipality": "Courgenay",
+      "canton": "JU",
+      "type": "solar",
+      "kw": 3129,
+      "lonLat": [7.12804, 47.41023],
+      "since": 2016
+    },
+    {
+      "id": "64971",
+      "name": "Riehen",
+      "municipality": "Riehen",
+      "canton": "BS",
+      "type": "gas",
+      "kw": 3116,
+      "lonLat": [7.65514, 47.59259],
+      "since": 2011
+    },
+    {
+      "id": "195394",
+      "name": "Au SG",
+      "municipality": "Au SG",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 3116,
+      "lonLat": [9.63695, 47.41972],
+      "since": 2021
+    },
+    {
+      "id": "72230",
+      "name": "Hagneck 1 Dotierzentrale",
+      "municipality": "Hagneck",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 3100,
+      "lonLat": [7.17905, 47.06111],
+      "since": 2016
+    },
+    {
+      "id": "222961",
+      "name": "Horgen",
+      "municipality": "Horgen",
+      "canton": "ZH",
+      "type": "waste",
+      "kw": 3100,
+      "lonLat": [8.60924, 47.24883],
+      "since": 2016
+    },
+    {
+      "id": "235733",
+      "name": "Laufenburg",
+      "municipality": "Laufenburg",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 3092,
+      "lonLat": [8.05873, 47.5573],
+      "since": 2023
+    },
+    {
+      "id": "318357",
+      "name": "Giornico",
+      "municipality": "Giornico",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 3082,
+      "lonLat": [8.89329, 46.38498],
+      "since": 2024
+    },
+    {
+      "id": "15814",
+      "name": "Campo Vallemaggia",
+      "municipality": "Campo (Vallemaggia)",
+      "canton": "TI",
+      "type": "hydro-run",
+      "kw": 3060,
+      "lonLat": [8.50899, 46.28515],
+      "since": 2019
+    },
+    {
+      "id": "342978",
+      "name": "Oberriet SG",
+      "municipality": "Oberriet SG",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 3051,
+      "lonLat": [9.57185, 47.31999],
+      "since": 2023
+    },
+    {
+      "id": "146353",
+      "name": "Blatten 1 Runeja",
+      "municipality": "Blatten (Lötschen)",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 3050,
+      "lonLat": [7.8199, 46.41996],
+      "since": 2017
+    },
+    {
+      "id": "62740",
+      "name": "Perlen",
+      "municipality": "Perlen",
+      "canton": "LU",
+      "type": "biomass",
+      "kw": 3036,
+      "lonLat": [8.36636, 47.1116],
+      "since": 2017
+    },
+    {
+      "id": "127944",
+      "name": "Perlen",
+      "municipality": "Perlen",
+      "canton": "LU",
+      "type": "gas",
+      "kw": 3036,
+      "lonLat": [8.36636, 47.1116],
+      "since": 2017
+    },
+    {
+      "id": "13485",
+      "name": "Lavinuoz",
+      "municipality": "Lavin",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 3000,
+      "lonLat": [10.11446, 46.76889],
+      "since": 2014
+    },
+    {
+      "id": "13535",
+      "name": "Haldenstein",
+      "municipality": "Haldenstein",
+      "canton": "GR",
+      "type": "wind",
+      "kw": 3000,
+      "lonLat": [9.53811, 46.89483],
+      "since": 2013
+    },
+    {
+      "id": "13542",
+      "name": "Charrat",
+      "municipality": "Charrat",
+      "canton": "VS",
+      "type": "wind",
+      "kw": 3000,
+      "lonLat": [7.14542, 46.13114],
+      "since": 2012
+    },
+    {
+      "id": "310444",
+      "name": "Laufen",
+      "municipality": "Laufen",
+      "canton": "BL",
+      "type": "solar",
+      "kw": 3000,
+      "lonLat": [7.50421, 47.41275],
+      "since": 2023
+    },
+    {
+      "id": "53601",
+      "name": "Wohlen AG",
+      "municipality": "Wohlen AG",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 2954,
+      "lonLat": [8.26166, 47.352],
+      "since": 2012
+    },
+    {
+      "id": "145988",
+      "name": "Siggenthal Station",
+      "municipality": "Siggenthal Station",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 2920,
+      "lonLat": [8.23757, 47.51896],
+      "since": 2020
+    },
+    {
+      "id": "242354",
+      "name": "Neuendorf",
+      "municipality": "Neuendorf",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 2916,
+      "lonLat": [7.78438, 47.30802],
+      "since": 2022
+    },
+    {
+      "id": "21120",
+      "name": "Sublin 2",
+      "municipality": "Bex",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 2861,
+      "lonLat": [7.04045, 46.2651],
+      "since": 2013
+    },
+    {
+      "id": "68366",
+      "name": "Weite",
+      "municipality": "Weite",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 2855,
+      "lonLat": [9.50043, 47.10354],
+      "since": 2013
+    },
+    {
+      "id": "13859",
+      "name": "Laubeggfall",
+      "municipality": "Boltigen",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 2850,
+      "lonLat": [7.37823, 46.58945],
+      "since": 2016
+    },
+    {
+      "id": "68330",
+      "name": "Colombier NE",
+      "municipality": "Colombier NE",
+      "canton": "NE",
+      "type": "waste",
+      "kw": 2840,
+      "lonLat": [6.84858, 46.97213],
+      "since": 1985
+    },
+    {
+      "id": "61642",
+      "name": "Goedis",
+      "municipality": "Murg",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 2800,
+      "lonLat": [9.21478, 47.10849],
+      "since": 1990
+    },
+    {
+      "id": "79639",
+      "name": "Mägenwil",
+      "municipality": "Mägenwil",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 2768,
+      "lonLat": [8.2292, 47.41521],
+      "since": 2021
+    },
+    {
+      "id": "322548",
+      "name": "Münchenbuchsee",
+      "municipality": "Münchenbuchsee",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 2760,
+      "lonLat": [7.46177, 47.01334],
+      "since": 2024
+    },
+    {
+      "id": "79274",
+      "name": "Sévaz",
+      "municipality": "Sévaz",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 2739,
+      "lonLat": [6.87165, 46.83542],
+      "since": 2015
+    },
+    {
+      "id": "52904",
+      "name": "Schwarzenbach SG",
+      "municipality": "Schwarzenbach SG",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 2728,
+      "lonLat": [9.07254, 47.44311],
+      "since": 2015
+    },
+    {
+      "id": "385912",
+      "name": "Otelfingen",
+      "municipality": "Otelfingen",
+      "canton": "ZH",
+      "type": "biomass",
+      "kw": 2720,
+      "lonLat": [8.40712, 47.45942],
+      "since": 2002
+    },
+    {
+      "id": "449488",
+      "name": "Hinwil",
+      "municipality": "Hinwil",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 2709,
+      "lonLat": [8.82703, 47.30326],
+      "since": 2025
+    },
+    {
+      "id": "50826",
+      "name": "Wannebode",
+      "municipality": "Reckingen VS",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 2700,
+      "lonLat": [8.25296, 46.46583],
+      "since": 2012
+    },
+    {
+      "id": "73695",
+      "name": "Realp 2",
+      "municipality": "Realp",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 2700,
+      "lonLat": [8.49588, 46.58807],
+      "since": 2017
+    },
+    {
+      "id": "73801",
+      "name": "Buoholzbach",
+      "municipality": "Wolfenschiessen",
+      "canton": "NW",
+      "type": "hydro-run",
+      "kw": 2700,
+      "lonLat": [8.39928, 46.92713],
+      "since": 2013
+    },
+    {
+      "id": "27365",
+      "name": "Chrizji",
+      "municipality": "Visperterminen",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 2680,
+      "lonLat": [7.89672, 46.26763],
+      "since": 2018
+    },
+    {
+      "id": "287896",
+      "name": "Reinach AG",
+      "municipality": "Reinach AG",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 2646,
+      "lonLat": [8.17263, 47.25713],
+      "since": 2022
+    },
+    {
+      "id": "13646",
+      "name": "Stenna",
+      "municipality": "Flims Dorf",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 2640,
+      "lonLat": [9.28478, 46.83367],
+      "since": 2012
+    },
+    {
+      "id": "152472",
+      "name": "Thun",
+      "municipality": "Thun",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 2617,
+      "lonLat": [7.62336, 46.73092],
+      "since": 2020
+    },
+    {
+      "id": "319404",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "solar",
+      "kw": 2609,
+      "lonLat": [7.59531, 47.58609],
+      "since": 2024
+    },
+    {
+      "id": "68838",
+      "name": "Merezenbach",
+      "municipality": "Münster VS",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 2600,
+      "lonLat": [8.27735, 46.48563],
+      "since": 2012
+    },
+    {
+      "id": "64822",
+      "name": "Waldhalde",
+      "municipality": "Schönenberg ZH",
+      "canton": "ZH",
+      "type": "hydro-storage",
+      "kw": 2590,
+      "lonLat": [8.62835, 47.18004],
+      "since": 1900
+    },
+    {
+      "id": "13159",
+      "name": "Quinto",
+      "municipality": "Quinto",
+      "canton": "TI",
+      "type": "wind",
+      "kw": 2550,
+      "lonLat": [8.55865, 46.55638],
+      "since": 2020
+    },
+    {
+      "id": "13171",
+      "name": "Airolo",
+      "municipality": "Airolo",
+      "canton": "TI",
+      "type": "wind",
+      "kw": 2550,
+      "lonLat": [8.56334, 46.55308],
+      "since": 2020
+    },
+    {
+      "id": "13179",
+      "name": "Airolo",
+      "municipality": "Airolo",
+      "canton": "TI",
+      "type": "wind",
+      "kw": 2550,
+      "lonLat": [8.56351, 46.56001],
+      "since": 2020
+    },
+    {
+      "id": "13578",
+      "name": "Airolo",
+      "municipality": "Airolo",
+      "canton": "TI",
+      "type": "wind",
+      "kw": 2550,
+      "lonLat": [8.55589, 46.56023],
+      "since": 2020
+    },
+    {
+      "id": "13582",
+      "name": "Airolo",
+      "municipality": "Airolo",
+      "canton": "TI",
+      "type": "wind",
+      "kw": 2550,
+      "lonLat": [8.55579, 46.56379],
+      "since": 2020
+    },
+    {
+      "id": "15572",
+      "name": "Cotlan",
+      "municipality": "Rüti GL",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 2544,
+      "lonLat": [9.01117, 46.93363],
+      "since": 2017
+    },
+    {
+      "id": "213763",
+      "name": "Itingen",
+      "municipality": "Itingen",
+      "canton": "BL",
+      "type": "solar",
+      "kw": 2534,
+      "lonLat": [7.77947, 47.46927],
+      "since": 2021
+    },
+    {
+      "id": "40203",
+      "name": "Yvonand",
+      "municipality": "Yvonand",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 2533,
+      "lonLat": [6.75256, 46.79887],
+      "since": 2016
+    },
+    {
+      "id": "40054",
+      "name": "Letten",
+      "municipality": "Zürich",
+      "canton": "ZH",
+      "type": "hydro-run",
+      "kw": 2500,
+      "lonLat": [8.53262, 47.38732],
+      "since": 2003
+    },
+    {
+      "id": "86293",
+      "name": "Charmey",
+      "municipality": "Charmey (Gruyère)",
+      "canton": "FR",
+      "type": "hydro-run",
+      "kw": 2500,
+      "lonLat": [7.16241, 46.61425],
+      "since": 1982
+    },
+    {
+      "id": "86294",
+      "name": "Charmey",
+      "municipality": "Charmey (Gruyère)",
+      "canton": "FR",
+      "type": "hydro-run",
+      "kw": 2500,
+      "lonLat": [7.16241, 46.61425],
+      "since": 1957
+    },
+    {
+      "id": "86295",
+      "name": "Charmey",
+      "municipality": "Charmey (Gruyère)",
+      "canton": "FR",
+      "type": "hydro-run",
+      "kw": 2500,
+      "lonLat": [7.16241, 46.61425],
+      "since": 1964
+    },
+    {
+      "id": "31702",
+      "name": "Risi",
+      "municipality": "Näfels",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 2490,
+      "lonLat": [9.05667, 47.09465],
+      "since": 2010
+    },
+    {
+      "id": "137602",
+      "name": "Dielsdorf",
+      "municipality": "Dielsdorf",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 2482,
+      "lonLat": [8.45693, 47.48588],
+      "since": 2019
+    },
+    {
+      "id": "57711",
+      "name": "Wasserauen",
+      "municipality": "Wasserauen",
+      "canton": "AI",
+      "type": "hydro-storage",
+      "kw": 2480,
+      "lonLat": [9.42117, 47.28075],
+      "since": 1954
+    },
+    {
+      "id": "13906",
+      "name": "Brummbach Niederschwende",
+      "municipality": "Linthal",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 2440,
+      "lonLat": [9.00236, 46.92763],
+      "since": 2010
+    },
+    {
+      "id": "420969",
+      "name": "Boswil",
+      "municipality": "Boswil",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 2438,
+      "lonLat": [8.31361, 47.3072],
+      "since": 2025
+    },
+    {
+      "id": "27356",
+      "name": "Stundhues",
+      "municipality": "Visp",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 2430,
+      "lonLat": [7.8805, 46.26719],
+      "since": 2018
+    },
+    {
+      "id": "26118",
+      "name": "Neuendorf",
+      "municipality": "Neuendorf",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 2419,
+      "lonLat": [7.79011, 47.30969],
+      "since": 2013
+    },
+    {
+      "id": "305660",
+      "name": "Niederbipp",
+      "municipality": "Niederbipp",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 2413,
+      "lonLat": [7.70099, 47.27886],
+      "since": 2023
+    },
+    {
+      "id": "61217",
+      "name": "Lorzentobel 3",
+      "municipality": "Baar",
+      "canton": "ZG",
+      "type": "hydro-run",
+      "kw": 2403,
+      "lonLat": [8.53713, 47.19549],
+      "since": 1902
+    },
+    {
+      "id": "61130",
+      "name": "Schwanden Gemeinde",
+      "municipality": "Schwanden GL",
+      "canton": "GL",
+      "type": "hydro-pumped",
+      "kw": 2400,
+      "lonLat": [9.08657, 46.99573],
+      "since": 1899
+    },
+    {
+      "id": "61328",
+      "name": "Punt dal Gall Dotierzentrale",
+      "municipality": "Zernez",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 2400,
+      "lonLat": [10.19375, 46.62449],
+      "since": 1970
+    },
+    {
+      "id": "62558",
+      "name": "Rossens Centrale de dotation 1",
+      "municipality": "Rossens FR",
+      "canton": "FR",
+      "type": "hydro-run",
+      "kw": 2400,
+      "lonLat": [7.11175, 46.71953],
+      "since": 1976
+    },
+    {
+      "id": "13805",
+      "name": "Vouvry",
+      "municipality": "Vouvry",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 2372,
+      "lonLat": [6.88132, 46.33618],
+      "since": 2018
+    },
+    {
+      "id": "31137",
+      "name": "Fellitobel",
+      "municipality": "Gurtnellen",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 2365,
+      "lonLat": [8.64491, 46.74027],
+      "since": 2018
+    },
+    {
+      "id": "87859",
+      "name": "Courgenay",
+      "municipality": "Courgenay",
+      "canton": "JU",
+      "type": "solar",
+      "kw": 2364,
+      "lonLat": [7.1288, 47.41037],
+      "since": 2016
+    },
+    {
+      "id": "12550",
+      "name": "Sedrun",
+      "municipality": "Sedrun",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 2350,
+      "lonLat": [8.77357, 46.67925],
+      "since": 2009
+    },
+    {
+      "id": "14267",
+      "name": "Ulrichen",
+      "municipality": "Ulrichen",
+      "canton": "VS",
+      "type": "wind",
+      "kw": 2350,
+      "lonLat": [8.37722, 46.46228],
+      "since": 2016
+    },
+    {
+      "id": "14299",
+      "name": "Ulrichen",
+      "municipality": "Ulrichen",
+      "canton": "VS",
+      "type": "wind",
+      "kw": 2350,
+      "lonLat": [8.37182, 46.46411],
+      "since": 2016
+    },
+    {
+      "id": "14302",
+      "name": "Ulrichen",
+      "municipality": "Ulrichen",
+      "canton": "VS",
+      "type": "wind",
+      "kw": 2350,
+      "lonLat": [8.37894, 46.46239],
+      "since": 2016
+    },
+    {
+      "id": "14402",
+      "name": "Ste-Croix",
+      "municipality": "Ste-Croix",
+      "canton": "VD",
+      "type": "wind",
+      "kw": 2350,
+      "lonLat": [6.48543, 46.81786],
+      "since": 2024
+    },
+    {
+      "id": "14403",
+      "name": "Ste-Croix",
+      "municipality": "Ste-Croix",
+      "canton": "VD",
+      "type": "wind",
+      "kw": 2350,
+      "lonLat": [6.46905, 46.79693],
+      "since": 2024
+    },
+    {
+      "id": "14404",
+      "name": "Ste-Croix",
+      "municipality": "Ste-Croix",
+      "canton": "VD",
+      "type": "wind",
+      "kw": 2350,
+      "lonLat": [6.46733, 46.79982],
+      "since": 2024
+    },
+    {
+      "id": "14405",
+      "name": "Ste-Croix",
+      "municipality": "Ste-Croix",
+      "canton": "VD",
+      "type": "wind",
+      "kw": 2350,
+      "lonLat": [6.46711, 46.80183],
+      "since": 2024
+    },
+    {
+      "id": "14406",
+      "name": "Ste-Croix",
+      "municipality": "Ste-Croix",
+      "canton": "VD",
+      "type": "wind",
+      "kw": 2350,
+      "lonLat": [6.48278, 46.81378],
+      "since": 2024
+    },
+    {
+      "id": "14407",
+      "name": "Ste-Croix",
+      "municipality": "Ste-Croix",
+      "canton": "VD",
+      "type": "wind",
+      "kw": 2350,
+      "lonLat": [6.48529, 46.81526],
+      "since": 2024
+    },
+    {
+      "id": "21115",
+      "name": "Rengg",
+      "municipality": "Rengg",
+      "canton": "LU",
+      "type": "wind",
+      "kw": 2350,
+      "lonLat": [8.10811, 46.99474],
+      "since": 2013
+    },
+    {
+      "id": "48068",
+      "name": "Frauenfeld",
+      "municipality": "Frauenfeld",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 2344,
+      "lonLat": [8.90289, 47.56751],
+      "since": 2015
+    },
+    {
+      "id": "180536",
+      "name": "Rheinfelden",
+      "municipality": "Rheinfelden",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 2342,
+      "lonLat": [7.78573, 47.54697],
+      "since": 2021
+    },
+    {
+      "id": "259368",
+      "name": "Rotkreuz",
+      "municipality": "Rotkreuz",
+      "canton": "ZG",
+      "type": "solar",
+      "kw": 2342,
+      "lonLat": [8.43363, 47.1525],
+      "since": 2023
+    },
+    {
+      "id": "13409",
+      "name": "Ulrichen",
+      "municipality": "Ulrichen",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 2320,
+      "lonLat": [8.31866, 46.50286],
+      "since": 2014
+    },
+    {
+      "id": "61639",
+      "name": "Saege Murg",
+      "municipality": "Murg",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 2320,
+      "lonLat": [9.2191, 47.11319],
+      "since": 1990
+    },
+    {
+      "id": "60571",
+      "name": "Eichi",
+      "municipality": "Alpnach Dorf",
+      "canton": "OW",
+      "type": "hydro-run",
+      "kw": 2310,
+      "lonLat": [8.28912, 46.94198],
+      "since": 1957
+    },
+    {
+      "id": "11815",
+      "name": "Amsteg Regulierzentrale",
+      "municipality": "Amsteg",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 2300,
+      "lonLat": [8.6674, 46.7768],
+      "since": 1998
+    },
+    {
+      "id": "13929",
+      "name": "Les Breuleux",
+      "municipality": "Les Breuleux",
+      "canton": "JU",
+      "type": "wind",
+      "kw": 2300,
+      "lonLat": [6.97121, 47.20476],
+      "since": 2010
+    },
+    {
+      "id": "13930",
+      "name": "Les Breuleux",
+      "municipality": "Les Breuleux",
+      "canton": "JU",
+      "type": "wind",
+      "kw": 2300,
+      "lonLat": [6.96292, 47.20194],
+      "since": 2010
+    },
+    {
+      "id": "13931",
+      "name": "Les Breuleux",
+      "municipality": "Les Breuleux",
+      "canton": "JU",
+      "type": "wind",
+      "kw": 2300,
+      "lonLat": [6.95535, 47.19979],
+      "since": 2010
+    },
+    {
+      "id": "14265",
+      "name": "Ulrichen",
+      "municipality": "Ulrichen",
+      "canton": "VS",
+      "type": "wind",
+      "kw": 2300,
+      "lonLat": [8.37456, 46.46304],
+      "since": 2012
+    },
+    {
+      "id": "15887",
+      "name": "Gadastaett Schaniela",
+      "municipality": "Ascharina",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 2300,
+      "lonLat": [9.80029, 46.94377],
+      "since": 2019
+    },
+    {
+      "id": "376582",
+      "name": "Göschenen",
+      "municipality": "Göschenen",
+      "canton": "UR",
+      "type": "wind",
+      "kw": 2300,
+      "lonLat": [8.60666, 46.65271],
+      "since": 2025
+    },
+    {
+      "id": "376584",
+      "name": "Göschenen",
+      "municipality": "Göschenen",
+      "canton": "UR",
+      "type": "wind",
+      "kw": 2300,
+      "lonLat": [8.60865, 46.65329],
+      "since": 2025
+    },
+    {
+      "id": "152509",
+      "name": "Wildegg",
+      "municipality": "Wildegg",
+      "canton": "AG",
+      "type": "biomass",
+      "kw": 2290,
+      "lonLat": [8.16123, 47.41484],
+      "since": 2017
+    },
+    {
+      "id": "335452",
+      "name": "Obfelden",
+      "municipality": "Obfelden",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 2273,
+      "lonLat": [8.41637, 47.25115],
+      "since": 2024
+    },
+    {
+      "id": "421792",
+      "name": "Stein AG",
+      "municipality": "Stein AG",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 2254,
+      "lonLat": [7.95919, 47.55258],
+      "since": 2024
+    },
+    {
+      "id": "25263",
+      "name": "Ecublens VD",
+      "municipality": "Ecublens VD",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 2222,
+      "lonLat": [6.56619, 46.52483],
+      "since": 2010
+    },
+    {
+      "id": "164302",
+      "name": "Hagendorn",
+      "municipality": "Hagendorn",
+      "canton": "ZG",
+      "type": "solar",
+      "kw": 2206,
+      "lonLat": [8.42948, 47.20261],
+      "since": 2020
+    },
+    {
+      "id": "27946",
+      "name": "Mueliacher",
+      "municipality": "Steinen",
+      "canton": "SZ",
+      "type": "hydro-run",
+      "kw": 2200,
+      "lonLat": [8.61412, 47.05382],
+      "since": 2016
+    },
+    {
+      "id": "172970",
+      "name": "Granges VS",
+      "municipality": "Granges VS",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 2187,
+      "lonLat": [7.44776, 46.2599],
+      "since": 2021
+    },
+    {
+      "id": "15815",
+      "name": "Cerentino",
+      "municipality": "Cerentino",
+      "canton": "TI",
+      "type": "hydro-run",
+      "kw": 2186,
+      "lonLat": [8.55147, 46.30665],
+      "since": 2019
+    },
+    {
+      "id": "178895",
+      "name": "Linthal",
+      "municipality": "Linthal",
+      "canton": "GL",
+      "type": "solar",
+      "kw": 2184,
+      "lonLat": [8.98332, 46.87934],
+      "since": 2021
+    },
+    {
+      "id": "173083",
+      "name": "Oberglatt ZH",
+      "municipality": "Oberglatt ZH",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 2174,
+      "lonLat": [8.50032, 47.47832],
+      "since": 2021
+    },
+    {
+      "id": "234175",
+      "name": "Villeneuve VD",
+      "municipality": "Villeneuve VD",
+      "canton": "VD",
+      "type": "biomass",
+      "kw": 2170,
+      "lonLat": [6.92685, 46.37313],
+      "since": 2011
+    },
+    {
+      "id": "13869",
+      "name": "Matten Fermelbach",
+      "municipality": "Matten (St. Stephan)",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 2160,
+      "lonLat": [7.41957, 46.49451],
+      "since": 2016
+    },
+    {
+      "id": "30305",
+      "name": "Vionnaz",
+      "municipality": "Vionnaz",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 2160,
+      "lonLat": [6.89579, 46.31716],
+      "since": 2019
+    },
+    {
+      "id": "67392",
+      "name": "Mulin",
+      "municipality": "Trin Mulin",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 2160,
+      "lonLat": [9.34016, 46.83331],
+      "since": 2004
+    },
+    {
+      "id": "12625",
+      "name": "Kandersteg Alpbach",
+      "municipality": "Kandersteg",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 2155,
+      "lonLat": [7.66104, 46.47618],
+      "since": 2009
+    },
+    {
+      "id": "425148",
+      "name": "Gerlafingen",
+      "municipality": "Gerlafingen",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 2155,
+      "lonLat": [7.56247, 47.17073],
+      "since": 2025
+    },
+    {
+      "id": "15604",
+      "name": "Nesselnbach",
+      "municipality": "Nesselnbach",
+      "canton": "AG",
+      "type": "biomass",
+      "kw": 2134,
+      "lonLat": [8.29267, 47.39736],
+      "since": 2011
+    },
+    {
+      "id": "74877",
+      "name": "Verdan",
+      "municipality": "Fully",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 2129,
+      "lonLat": [7.11717, 46.14309],
+      "since": 2017
+    },
+    {
+      "id": "47536",
+      "name": "Landquart",
+      "municipality": "Landquart",
+      "canton": "GR",
+      "type": "solar",
+      "kw": 2127,
+      "lonLat": [9.56213, 46.95404],
+      "since": 2015
+    },
+    {
+      "id": "12951",
+      "name": "Biel/Bienne",
+      "municipality": "Biel/Bienne",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 2105,
+      "lonLat": [7.27471, 47.15356],
+      "since": 2015
+    },
+    {
+      "id": "64365",
+      "name": "Stenna",
+      "municipality": "Flims Dorf",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 2100,
+      "lonLat": [9.28478, 46.83367],
+      "since": 1998
+    },
+    {
+      "id": "35337",
+      "name": "Windisch",
+      "municipality": "Windisch",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 2097,
+      "lonLat": [8.23026, 47.48239],
+      "since": 2013
+    },
+    {
+      "id": "142207",
+      "name": "Altishofen",
+      "municipality": "Altishofen",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 2075,
+      "lonLat": [7.97174, 47.2004],
+      "since": 2019
+    },
+    {
+      "id": "38061",
+      "name": "Rheinfelden",
+      "municipality": "Rheinfelden",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 2065,
+      "lonLat": [7.78666, 47.54681],
+      "since": 2013
+    },
+    {
+      "id": "247720",
+      "name": "Oberbuchsiten",
+      "municipality": "Oberbuchsiten",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 2051,
+      "lonLat": [7.77406, 47.30466],
+      "since": 2023
+    },
+    {
+      "id": "65211",
+      "name": "Arbon",
+      "municipality": "Arbon",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 2049,
+      "lonLat": [9.42223, 47.5003],
+      "since": 2013
+    },
+    {
+      "id": "20805",
+      "name": "La Delise",
+      "municipality": "Bourg-St-Pierre",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 2040,
+      "lonLat": [7.2184, 45.94485],
+      "since": 2017
+    },
+    {
+      "id": "30459",
+      "name": "Evionnaz",
+      "municipality": "Evionnaz",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 2026,
+      "lonLat": [7.02332, 46.17158],
+      "since": 2012
+    },
+    {
+      "id": "9453",
+      "name": "Martigny",
+      "municipality": "Martigny",
+      "canton": "VS",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.05219, 46.12661],
+      "since": 2008
+    },
+    {
+      "id": "13107",
+      "name": "Unterschaechen",
+      "municipality": "Unterschächen",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 2000,
+      "lonLat": [8.76477, 46.86399],
+      "since": 1962
+    },
+    {
+      "id": "13958",
+      "name": "Mont-Soleil",
+      "municipality": "Mont-Soleil",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.05051, 47.19627],
+      "since": 2010
+    },
+    {
+      "id": "13960",
+      "name": "Mont-Crosin",
+      "municipality": "Mont-Crosin",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.00922, 47.17653],
+      "since": 2010
+    },
+    {
+      "id": "13965",
+      "name": "Mont-Crosin",
+      "municipality": "Mont-Crosin",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.01976, 47.18092],
+      "since": 2010
+    },
+    {
+      "id": "13967",
+      "name": "Mont-Soleil",
+      "municipality": "Mont-Soleil",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.02254, 47.18621],
+      "since": 2010
+    },
+    {
+      "id": "14412",
+      "name": "Mont-Crosin",
+      "municipality": "Mont-Crosin",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.07401, 47.20162],
+      "since": 2010
+    },
+    {
+      "id": "42927",
+      "name": "St-Imier",
+      "municipality": "St-Imier",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [6.98601, 47.16265],
+      "since": 2025
+    },
+    {
+      "id": "52932",
+      "name": "Cormoret",
+      "municipality": "Cormoret",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.02513, 47.18769],
+      "since": 2010
+    },
+    {
+      "id": "52933",
+      "name": "Villeret",
+      "municipality": "Villeret",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.01416, 47.18412],
+      "since": 2010
+    },
+    {
+      "id": "60599",
+      "name": "Rathausen",
+      "municipality": "Emmen",
+      "canton": "LU",
+      "type": "hydro-run",
+      "kw": 2000,
+      "lonLat": [8.31423, 47.08145],
+      "since": 1980
+    },
+    {
+      "id": "62689",
+      "name": "Mont-Crosin",
+      "municipality": "Mont-Crosin",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.0157, 47.17689],
+      "since": 2013
+    },
+    {
+      "id": "62691",
+      "name": "Mont-Crosin",
+      "municipality": "Mont-Crosin",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.01237, 47.1802],
+      "since": 2013
+    },
+    {
+      "id": "62693",
+      "name": "Mont-Crosin",
+      "municipality": "Mont-Crosin",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.01025, 47.18227],
+      "since": 2013
+    },
+    {
+      "id": "62695",
+      "name": "Mont-Crosin",
+      "municipality": "Mont-Crosin",
+      "canton": "BE",
+      "type": "wind",
+      "kw": 2000,
+      "lonLat": [7.00335, 47.17167],
+      "since": 2013
+    },
+    {
+      "id": "70593",
+      "name": "Schindellegi",
+      "municipality": "Schindellegi",
+      "canton": "SZ",
+      "type": "hydro-run",
+      "kw": 2000,
+      "lonLat": [8.71275, 47.17488],
+      "since": 1961
+    },
+    {
+      "id": "191519",
+      "name": "Spluegen Huescherabach",
+      "municipality": "Splügen",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 2000,
+      "lonLat": [9.3223, 46.55385],
+      "since": 2021
+    },
+    {
+      "id": "131808",
+      "name": "St. Gallen",
+      "municipality": "St. Gallen",
+      "canton": "SG",
+      "type": "gas",
+      "kw": 1992,
+      "lonLat": [9.33282, 47.41523],
+      "since": 2017
+    },
+    {
+      "id": "407038",
+      "name": "Rothenburg",
+      "municipality": "Rothenburg",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1987,
+      "lonLat": [8.23974, 47.09358],
+      "since": 2025
+    },
+    {
+      "id": "13395",
+      "name": "Icogne",
+      "municipality": "Icogne",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1972,
+      "lonLat": [7.43847, 46.30588],
+      "since": 2012
+    },
+    {
+      "id": "14605",
+      "name": "Rupperswil-Auenstein",
+      "municipality": "Auenstein",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 1960,
+      "lonLat": [8.11997, 47.41298],
+      "since": 2010
+    },
+    {
+      "id": "60340",
+      "name": "Willisau",
+      "municipality": "Willisau",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1960,
+      "lonLat": [8.00653, 47.11752],
+      "since": 2021
+    },
+    {
+      "id": "446044",
+      "name": "Allaman",
+      "municipality": "Allaman",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1954,
+      "lonLat": [6.4015, 46.47644],
+      "since": 2024
+    },
+    {
+      "id": "269222",
+      "name": "Liesberg",
+      "municipality": "Liesberg",
+      "canton": "BL",
+      "type": "solar",
+      "kw": 1947,
+      "lonLat": [7.4298, 47.39526],
+      "since": 2024
+    },
+    {
+      "id": "140046",
+      "name": "Buochs",
+      "municipality": "Buochs",
+      "canton": "NW",
+      "type": "solar",
+      "kw": 1939,
+      "lonLat": [8.3983, 46.9703],
+      "since": 2021
+    },
+    {
+      "id": "27715",
+      "name": "Clemgia",
+      "municipality": "Scuol",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 1936,
+      "lonLat": [10.29725, 46.78828],
+      "since": 1941
+    },
+    {
+      "id": "235885",
+      "name": "Oberriet SG",
+      "municipality": "Oberriet SG",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1929,
+      "lonLat": [9.57181, 47.31037],
+      "since": 2014
+    },
+    {
+      "id": "156955",
+      "name": "Sennwald",
+      "municipality": "Sennwald",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1907,
+      "lonLat": [9.51874, 47.25284],
+      "since": 2020
+    },
+    {
+      "id": "9135",
+      "name": "Au Schoenenberg",
+      "municipality": "Schönenberg an der Thur",
+      "canton": "TG",
+      "type": "hydro-run",
+      "kw": 1900,
+      "lonLat": [9.18672, 47.52396],
+      "since": 2002
+    },
+    {
+      "id": "13505",
+      "name": "Spluegen Tambobach",
+      "municipality": "Splügen",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 1890,
+      "lonLat": [9.30988, 46.54592],
+      "since": 2012
+    },
+    {
+      "id": "134618",
+      "name": "Bönigen b. Interlaken",
+      "municipality": "Bönigen b. Interlaken",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1875,
+      "lonLat": [7.88871, 46.68876],
+      "since": 2021
+    },
+    {
+      "id": "75991",
+      "name": "Dagmersellen",
+      "municipality": "Dagmersellen",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1872,
+      "lonLat": [7.9806, 47.21096],
+      "since": 2015
+    },
+    {
+      "id": "279095",
+      "name": "Erlen",
+      "municipality": "Erlen",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1872,
+      "lonLat": [9.22425, 47.55197],
+      "since": 2023
+    },
+    {
+      "id": "207049",
+      "name": "Möhlin",
+      "municipality": "Möhlin",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1863,
+      "lonLat": [7.85002, 47.56824],
+      "since": 2021
+    },
+    {
+      "id": "38535",
+      "name": "Breithorn Fafleralp",
+      "municipality": "Blatten (Lötschen)",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1850,
+      "lonLat": [7.86199, 46.43793],
+      "since": 2019
+    },
+    {
+      "id": "70141",
+      "name": "Bleichi Dorfbach",
+      "municipality": "Niederurnen",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 1850,
+      "lonLat": [9.042, 47.1236],
+      "since": 1978
+    },
+    {
+      "id": "248905",
+      "name": "Schönenwerd",
+      "municipality": "Schönenwerd",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1847,
+      "lonLat": [8.0111, 47.37977],
+      "since": 2024
+    },
+    {
+      "id": "400694",
+      "name": "Uetendorf",
+      "municipality": "Uetendorf",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1845,
+      "lonLat": [7.57675, 46.77479],
+      "since": 2024
+    },
+    {
+      "id": "168308",
+      "name": "Zürich",
+      "municipality": "Zürich",
+      "canton": "ZH",
+      "type": "biomass",
+      "kw": 1840,
+      "lonLat": [8.48107, 47.39998],
+      "since": 2000
+    },
+    {
+      "id": "48028",
+      "name": "Au SG",
+      "municipality": "Au SG",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1832,
+      "lonLat": [9.63695, 47.41972],
+      "since": 2012
+    },
+    {
+      "id": "100090",
+      "name": "Muranzina",
+      "municipality": "Sta. Maria Val Müstair",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 1832,
+      "lonLat": [10.42787, 46.59657],
+      "since": 1957
+    },
+    {
+      "id": "377235",
+      "name": "Emmenbrücke",
+      "municipality": "Emmenbrücke",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1832,
+      "lonLat": [8.29359, 47.07435],
+      "since": 2023
+    },
+    {
+      "id": "211019",
+      "name": "Niederhasli",
+      "municipality": "Niederhasli",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1826,
+      "lonLat": [8.48145, 47.48108],
+      "since": 2021
+    },
+    {
+      "id": "200209",
+      "name": "Ebikon",
+      "municipality": "Ebikon",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1825,
+      "lonLat": [8.35595, 47.09125],
+      "since": 2021
+    },
+    {
+      "id": "78136",
+      "name": "Le Chable EVB",
+      "municipality": "Le Châble VS",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1822,
+      "lonLat": [7.20272, 46.08268],
+      "since": 2017
+    },
+    {
+      "id": "395277",
+      "name": "Bützberg",
+      "municipality": "Bützberg",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1806,
+      "lonLat": [7.75103, 47.21307],
+      "since": 2025
+    },
+    {
+      "id": "9612",
+      "name": "Trempel",
+      "municipality": "Ebnat-Kappel",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 1800,
+      "lonLat": [9.16328, 47.2494],
+      "since": 2007
+    },
+    {
+      "id": "13856",
+      "name": "Ossasco",
+      "municipality": "Bedretto",
+      "canton": "TI",
+      "type": "hydro-run",
+      "kw": 1800,
+      "lonLat": [8.53818, 46.51224],
+      "since": 2012
+    },
+    {
+      "id": "61014",
+      "name": "Vallorbe",
+      "municipality": "Vallorbe",
+      "canton": "VD",
+      "type": "hydro-storage",
+      "kw": 1800,
+      "lonLat": [6.37923, 46.71131],
+      "since": 1955
+    },
+    {
+      "id": "62760",
+      "name": "St. Gallen",
+      "municipality": "St. Gallen",
+      "canton": "SG",
+      "type": "gas",
+      "kw": 1800,
+      "lonLat": [9.30694, 47.40834],
+      "since": 2007
+    },
+    {
+      "id": "132553",
+      "name": "Nandro",
+      "municipality": "Riom",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 1800,
+      "lonLat": [9.57028, 46.56806],
+      "since": 2011
+    },
+    {
+      "id": "95010",
+      "name": "Luterbach",
+      "municipality": "Luterbach",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1798,
+      "lonLat": [7.58043, 47.20415],
+      "since": 2017
+    },
+    {
+      "id": "57008",
+      "name": "Risi",
+      "municipality": "Näfels",
+      "canton": "GL",
+      "type": "hydro-storage",
+      "kw": 1785,
+      "lonLat": [9.05667, 47.09465],
+      "since": 1961
+    },
+    {
+      "id": "40048",
+      "name": "Hoengg",
+      "municipality": "Zürich",
+      "canton": "ZH",
+      "type": "hydro-run",
+      "kw": 1770,
+      "lonLat": [8.48661, 47.40154],
+      "since": 1987
+    },
+    {
+      "id": "64593",
+      "name": "Schlattingen",
+      "municipality": "Schlattingen",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1753,
+      "lonLat": [8.7628, 47.67427],
+      "since": 2013
+    },
+    {
+      "id": "93576",
+      "name": "La Serriere",
+      "municipality": "Neuchâtel",
+      "canton": "NE",
+      "type": "hydro-run",
+      "kw": 1750,
+      "lonLat": [6.90475, 46.9818],
+      "since": 2016
+    },
+    {
+      "id": "61215",
+      "name": "Lorzentobel 2",
+      "municipality": "Baar",
+      "canton": "ZG",
+      "type": "hydro-run",
+      "kw": 1747,
+      "lonLat": [8.55979, 47.16795],
+      "since": 1897
+    },
+    {
+      "id": "86331",
+      "name": "Satigny",
+      "municipality": "Satigny",
+      "canton": "GE",
+      "type": "solar",
+      "kw": 1745,
+      "lonLat": [6.05819, 46.21803],
+      "since": 2015
+    },
+    {
+      "id": "64941",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "gas",
+      "kw": 1740,
+      "lonLat": [7.603, 47.5676],
+      "since": 2012
+    },
+    {
+      "id": "220736",
+      "name": "Bad Zurzach",
+      "municipality": "Bad Zurzach",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1735,
+      "lonLat": [8.31448, 47.57654],
+      "since": 2022
+    },
+    {
+      "id": "287849",
+      "name": "Luterbach",
+      "municipality": "Luterbach",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1709,
+      "lonLat": [7.5752, 47.21968],
+      "since": 2023
+    },
+    {
+      "id": "26868",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "solar",
+      "kw": 1707,
+      "lonLat": [7.58979, 47.58304],
+      "since": 2011
+    },
+    {
+      "id": "172479",
+      "name": "Baar",
+      "municipality": "Baar",
+      "canton": "ZG",
+      "type": "solar",
+      "kw": 1705,
+      "lonLat": [8.50905, 47.20889],
+      "since": 2021
+    },
+    {
+      "id": "13516",
+      "name": "Thurfeld",
+      "municipality": "Schönenberg an der Thur",
+      "canton": "TG",
+      "type": "hydro-run",
+      "kw": 1700,
+      "lonLat": [9.20626, 47.52],
+      "since": 2011
+    },
+    {
+      "id": "14809",
+      "name": "Alle",
+      "municipality": "Alle",
+      "canton": "JU",
+      "type": "solar",
+      "kw": 1685,
+      "lonLat": [7.13202, 47.42011],
+      "since": 2012
+    },
+    {
+      "id": "56046",
+      "name": "Huttwil",
+      "municipality": "Huttwil",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1683,
+      "lonLat": [7.86258, 47.11171],
+      "since": 2013
+    },
+    {
+      "id": "61636",
+      "name": "Pissevache",
+      "municipality": "Vernayaz",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1683,
+      "lonLat": [7.02722, 46.14406],
+      "since": 2016
+    },
+    {
+      "id": "186624",
+      "name": "Hüttwilen",
+      "municipality": "Hüttwilen",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1672,
+      "lonLat": [8.86613, 47.6104],
+      "since": 2022
+    },
+    {
+      "id": "212812",
+      "name": "Hochdorf",
+      "municipality": "Hochdorf",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1671,
+      "lonLat": [8.28052, 47.16232],
+      "since": 2023
+    },
+    {
+      "id": "68969",
+      "name": "Morteratsch",
+      "municipality": "Pontresina",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 1655,
+      "lonLat": [9.94157, 46.45267],
+      "since": 2016
+    },
+    {
+      "id": "226863",
+      "name": "Hasle b. Burgdorf",
+      "municipality": "Hasle b. Burgdorf",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1645,
+      "lonLat": [7.65599, 47.00845],
+      "since": 2023
+    },
+    {
+      "id": "319758",
+      "name": "Altenrhein",
+      "municipality": "Altenrhein",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1639,
+      "lonLat": [9.5507, 47.48833],
+      "since": 2024
+    },
+    {
+      "id": "358998",
+      "name": "Effretikon",
+      "municipality": "Effretikon",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1637,
+      "lonLat": [8.6826, 47.42032],
+      "since": 2024
+    },
+    {
+      "id": "81025",
+      "name": "Derendingen",
+      "municipality": "Derendingen",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1626,
+      "lonLat": [7.60152, 47.19693],
+      "since": 2016
+    },
+    {
+      "id": "384055",
+      "name": "Hasle LU",
+      "municipality": "Hasle LU",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1623,
+      "lonLat": [8.0467, 46.97954],
+      "since": 2024
+    },
+    {
+      "id": "13699",
+      "name": "Linthal Spinnerei",
+      "municipality": "Linthal",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 1620,
+      "lonLat": [8.99892, 46.9262],
+      "since": 2012
+    },
+    {
+      "id": "94868",
+      "name": "Egolzwil",
+      "municipality": "Egolzwil",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1614,
+      "lonLat": [7.97788, 47.1846],
+      "since": 2016
+    },
+    {
+      "id": "61110",
+      "name": "Taeschbach",
+      "municipality": "Täsch",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 1600,
+      "lonLat": [7.77831, 46.06703],
+      "since": 1993
+    },
+    {
+      "id": "62726",
+      "name": "Hospitalet",
+      "municipality": "Bourg-St-Pierre",
+      "canton": "VS",
+      "type": "hydro-storage",
+      "kw": 1600,
+      "lonLat": [7.19344, 45.90056],
+      "since": 1964
+    },
+    {
+      "id": "62830",
+      "name": "Bocki 2",
+      "municipality": "Erstfeld",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 1600,
+      "lonLat": [8.63218, 46.84095],
+      "since": 1997
+    },
+    {
+      "id": "86091",
+      "name": "Baerenburg Dotierzentrale",
+      "municipality": "Andeer",
+      "canton": "GR",
+      "type": "hydro-run",
+      "kw": 1600,
+      "lonLat": [9.42157, 46.59018],
+      "since": 2012
+    },
+    {
+      "id": "216434",
+      "name": "Altenrhein",
+      "municipality": "Altenrhein",
+      "canton": "SG",
+      "type": "biomass",
+      "kw": 1600,
+      "lonLat": [9.56744, 47.48991],
+      "since": 2009
+    },
+    {
+      "id": "61528",
+      "name": "Renens VD",
+      "municipality": "Renens VD",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1599,
+      "lonLat": [6.59668, 46.52966],
+      "since": 2013
+    },
+    {
+      "id": "13128",
+      "name": "Nesslau Ijentalbach",
+      "municipality": "Nesslau",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 1595,
+      "lonLat": [9.18484, 47.22164],
+      "since": 2011
+    },
+    {
+      "id": "219188",
+      "name": "Goldach",
+      "municipality": "Goldach",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1580,
+      "lonLat": [9.47729, 47.47269],
+      "since": 2022
+    },
+    {
+      "id": "335438",
+      "name": "Laufen",
+      "municipality": "Laufen",
+      "canton": "BL",
+      "type": "solar",
+      "kw": 1576,
+      "lonLat": [7.50456, 47.41569],
+      "since": 2023
+    },
+    {
+      "id": "412172",
+      "name": "Sierre",
+      "municipality": "Sierre",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1569,
+      "lonLat": [7.55262, 46.29185],
+      "since": 2024
+    },
+    {
+      "id": "42411",
+      "name": "Vernier",
+      "municipality": "Vernier",
+      "canton": "GE",
+      "type": "solar",
+      "kw": 1568,
+      "lonLat": [6.07838, 46.21965],
+      "since": 2012
+    },
+    {
+      "id": "329035",
+      "name": "Landquart",
+      "municipality": "Landquart",
+      "canton": "GR",
+      "type": "solar",
+      "kw": 1568,
+      "lonLat": [9.56304, 46.95177],
+      "since": 2023
+    },
+    {
+      "id": "114905",
+      "name": "Balerna",
+      "municipality": "Balerna",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1559,
+      "lonLat": [9.01031, 45.83725],
+      "since": 2017
+    },
+    {
+      "id": "64898",
+      "name": "Sustli",
+      "municipality": "Beckenried",
+      "canton": "NW",
+      "type": "hydro-run",
+      "kw": 1558,
+      "lonLat": [8.48338, 46.96384],
+      "since": 1957
+    },
+    {
+      "id": "31299",
+      "name": "Worb",
+      "municipality": "Worb",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1548,
+      "lonLat": [7.55597, 46.94177],
+      "since": 2012
+    },
+    {
+      "id": "376199",
+      "name": "Villmergen",
+      "municipality": "Villmergen",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1548,
+      "lonLat": [8.25093, 47.35679],
+      "since": 2024
+    },
+    {
+      "id": "11795",
+      "name": "Bioggio",
+      "municipality": "Bioggio",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1541,
+      "lonLat": [8.91399, 46.01507],
+      "since": 2009
+    },
+    {
+      "id": "404911",
+      "name": "Menznau",
+      "municipality": "Menznau",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1540,
+      "lonLat": [8.02549, 47.08724],
+      "since": 2025
+    },
+    {
+      "id": "360406",
+      "name": "Bioley-Orjulaz",
+      "municipality": "Bioley-Orjulaz",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1537,
+      "lonLat": [6.58947, 46.62159],
+      "since": 2022
+    },
+    {
+      "id": "81476",
+      "name": "Balerna",
+      "municipality": "Balerna",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1536,
+      "lonLat": [9.0077, 45.83852],
+      "since": 2015
+    },
+    {
+      "id": "13217",
+      "name": "Wiler Milibach",
+      "municipality": "Wiler (Lötschen)",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1530,
+      "lonLat": [7.7895, 46.40695],
+      "since": 2010
+    },
+    {
+      "id": "298893",
+      "name": "Biel/Bienne",
+      "municipality": "Biel/Bienne",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1515,
+      "lonLat": [7.27886, 47.15916],
+      "since": 2023
+    },
+    {
+      "id": "307637",
+      "name": "Bulle",
+      "municipality": "Bulle",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1514,
+      "lonLat": [7.06397, 46.63147],
+      "since": 2023
+    },
+    {
+      "id": "6099",
+      "name": "Orsières",
+      "municipality": "Orsières",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1512,
+      "lonLat": [7.14987, 46.03355],
+      "since": 1931
+    },
+    {
+      "id": "310366",
+      "name": "Neuhausen am Rheinfall",
+      "municipality": "Neuhausen am Rheinfall",
+      "canton": "SH",
+      "type": "solar",
+      "kw": 1509,
+      "lonLat": [8.61836, 47.67889],
+      "since": 2023
+    },
+    {
+      "id": "37854",
+      "name": "Rothenburg",
+      "municipality": "Rothenburg",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1508,
+      "lonLat": [8.24422, 47.09741],
+      "since": 2015
+    },
+    {
+      "id": "9457",
+      "name": "Bueeli",
+      "municipality": "Oberterzen",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 1500,
+      "lonLat": [9.25981, 47.10041],
+      "since": 2008
+    },
+    {
+      "id": "15864",
+      "name": "Fafleralp",
+      "municipality": "Blatten (Lötschen)",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1500,
+      "lonLat": [7.84572, 46.42965],
+      "since": 2012
+    },
+    {
+      "id": "37300",
+      "name": "Ibach",
+      "municipality": "Ibach",
+      "canton": "SZ",
+      "type": "biomass",
+      "kw": 1500,
+      "lonLat": [8.62667, 47.01426],
+      "since": 2015
+    },
+    {
+      "id": "134119",
+      "name": "Bulle",
+      "municipality": "Bulle",
+      "canton": "FR",
+      "type": "gas",
+      "kw": 1490,
+      "lonLat": [7.03575, 46.62437],
+      "since": 2018
+    },
+    {
+      "id": "342026",
+      "name": "La Chaux-de-Fonds",
+      "municipality": "La Chaux-de-Fonds",
+      "canton": "NE",
+      "type": "solar",
+      "kw": 1483,
+      "lonLat": [6.80381, 47.08423],
+      "since": 2024
+    },
+    {
+      "id": "376648",
+      "name": "Merenschwand",
+      "municipality": "Merenschwand",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1483,
+      "lonLat": [8.39799, 47.26709],
+      "since": 2024
+    },
+    {
+      "id": "58882",
+      "name": "Ruswil",
+      "municipality": "Ruswil",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1481,
+      "lonLat": [8.13831, 47.07959],
+      "since": 2012
+    },
+    {
+      "id": "327139",
+      "name": "Bern",
+      "municipality": "Bern",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1473,
+      "lonLat": [7.37437, 46.9444],
+      "since": 2024
+    },
+    {
+      "id": "423004",
+      "name": "Muri AG",
+      "municipality": "Muri AG",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1473,
+      "lonLat": [8.34822, 47.26735],
+      "since": 2025
+    },
+    {
+      "id": "25199",
+      "name": "Schlieren",
+      "municipality": "Schlieren",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1470,
+      "lonLat": [8.46886, 47.39539],
+      "since": 2012
+    },
+    {
+      "id": "127108",
+      "name": "Bern",
+      "municipality": "Bern",
+      "canton": "BE",
+      "type": "gas",
+      "kw": 1467,
+      "lonLat": [7.37854, 46.9486],
+      "since": 2014
+    },
+    {
+      "id": "71923",
+      "name": "Givisiez",
+      "municipality": "Givisiez",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1462,
+      "lonLat": [7.11727, 46.8149],
+      "since": 2018
+    },
+    {
+      "id": "143640",
+      "name": "Galgenen",
+      "municipality": "Galgenen",
+      "canton": "SZ",
+      "type": "solar",
+      "kw": 1457,
+      "lonLat": [8.86771, 47.18625],
+      "since": 2020
+    },
+    {
+      "id": "371295",
+      "name": "Möhlin",
+      "municipality": "Möhlin",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1456,
+      "lonLat": [7.84722, 47.5666],
+      "since": 2024
+    },
+    {
+      "id": "344346",
+      "name": "Tägerschen",
+      "municipality": "Tägerschen",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1452,
+      "lonLat": [9.02414, 47.50682],
+      "since": 2024
+    },
+    {
+      "id": "51853",
+      "name": "Felsberg",
+      "municipality": "Felsberg",
+      "canton": "GR",
+      "type": "solar",
+      "kw": 1451,
+      "lonLat": [9.47512, 46.85757],
+      "since": 2020
+    },
+    {
+      "id": "170143",
+      "name": "Nebikon",
+      "municipality": "Nebikon",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1448,
+      "lonLat": [7.9751, 47.19552],
+      "since": 2021
+    },
+    {
+      "id": "50784",
+      "name": "Vétroz",
+      "municipality": "Vétroz",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1447,
+      "lonLat": [7.28502, 46.20398],
+      "since": 2012
+    },
+    {
+      "id": "55981",
+      "name": "Martigny",
+      "municipality": "Martigny",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1445,
+      "lonLat": [7.08533, 46.10165],
+      "since": 2012
+    },
+    {
+      "id": "219174",
+      "name": "Vétroz",
+      "municipality": "Vétroz",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1445,
+      "lonLat": [7.2822, 46.20432],
+      "since": 2020
+    },
+    {
+      "id": "13437",
+      "name": "Zer Niwu Schiir",
+      "municipality": "Mund",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1440,
+      "lonLat": [7.94573, 46.31424],
+      "since": 2016
+    },
+    {
+      "id": "13465",
+      "name": "Badhalte",
+      "municipality": "Brigerbad",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1440,
+      "lonLat": [7.93954, 46.30473],
+      "since": 2016
+    },
+    {
+      "id": "100959",
+      "name": "Deitingen",
+      "municipality": "Deitingen",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1437,
+      "lonLat": [7.62272, 47.21751],
+      "since": 2018
+    },
+    {
+      "id": "399909",
+      "name": "Wiler b. Utzenstorf",
+      "municipality": "Wiler b. Utzenstorf",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1432,
+      "lonLat": [7.55846, 47.1581],
+      "since": 2024
+    },
+    {
+      "id": "16685",
+      "name": "Payerne",
+      "municipality": "Payerne",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1422,
+      "lonLat": [6.95251, 46.81378],
+      "since": 2016
+    },
+    {
+      "id": "310891",
+      "name": "Eclépens",
+      "municipality": "Eclépens",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1421,
+      "lonLat": [6.55082, 46.65482],
+      "since": 2023
+    },
+    {
+      "id": "53996",
+      "name": "Wauwil",
+      "municipality": "Wauwil",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1418,
+      "lonLat": [8.03049, 47.18386],
+      "since": 2012
+    },
+    {
+      "id": "207835",
+      "name": "Volketswil",
+      "municipality": "Volketswil",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1416,
+      "lonLat": [8.69394, 47.38429],
+      "since": 2022
+    },
+    {
+      "id": "99582",
+      "name": "Schaffhausen",
+      "municipality": "Schaffhausen",
+      "canton": "SH",
+      "type": "solar",
+      "kw": 1414,
+      "lonLat": [8.66583, 47.71692],
+      "since": 2017
+    },
+    {
+      "id": "379586",
+      "name": "Romanshorn",
+      "municipality": "Romanshorn",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1411,
+      "lonLat": [9.3569, 47.55529],
+      "since": 2024
+    },
+    {
+      "id": "376519",
+      "name": "Marthalen",
+      "municipality": "Marthalen",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1407,
+      "lonLat": [8.65009, 47.63668],
+      "since": 2024
+    },
+    {
+      "id": "458592",
+      "name": "Schlatt TG",
+      "municipality": "Schlatt TG",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1405,
+      "lonLat": [8.68893, 47.68063],
+      "since": 2025
+    },
+    {
+      "id": "49917",
+      "name": "Porrentruy",
+      "municipality": "Porrentruy",
+      "canton": "JU",
+      "type": "biomass",
+      "kw": 1400,
+      "lonLat": [7.09337, 47.4196],
+      "since": 2017
+    },
+    {
+      "id": "62863",
+      "name": "Grindelwald",
+      "municipality": "Grindelwald",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 1400,
+      "lonLat": [7.97746, 46.71147],
+      "since": 1961
+    },
+    {
+      "id": "67574",
+      "name": "Buttisholz",
+      "municipality": "Buttisholz",
+      "canton": "LU",
+      "type": "biomass",
+      "kw": 1400,
+      "lonLat": [8.08295, 47.11009],
+      "since": 2016
+    },
+    {
+      "id": "70418",
+      "name": "S. Antonino",
+      "municipality": "S. Antonino",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1397,
+      "lonLat": [8.96808, 46.15634],
+      "since": 2014
+    },
+    {
+      "id": "323998",
+      "name": "Bischofszell",
+      "municipality": "Bischofszell",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1397,
+      "lonLat": [9.23663, 47.49925],
+      "since": 2024
+    },
+    {
+      "id": "296593",
+      "name": "Villmergen",
+      "municipality": "Villmergen",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1396,
+      "lonLat": [8.25858, 47.3537],
+      "since": 2023
+    },
+    {
+      "id": "333197",
+      "name": "Zofingen",
+      "municipality": "Zofingen",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1395,
+      "lonLat": [7.93307, 47.29433],
+      "since": 2024
+    },
+    {
+      "id": "344624",
+      "name": "Koblenz",
+      "municipality": "Koblenz",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1391,
+      "lonLat": [8.2268, 47.60136],
+      "since": 2024
+    },
+    {
+      "id": "153420",
+      "name": "Kräiligen",
+      "municipality": "Kräiligen",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1380,
+      "lonLat": [7.53655, 47.14291],
+      "since": 2019
+    },
+    {
+      "id": "35497",
+      "name": "Madulain",
+      "municipality": "Madulain",
+      "canton": "GR",
+      "type": "hydro-storage",
+      "kw": 1376,
+      "lonLat": [9.95955, 46.60222],
+      "since": 1902
+    },
+    {
+      "id": "288654",
+      "name": "Winterthur",
+      "municipality": "Winterthur",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1374,
+      "lonLat": [8.75777, 47.49446],
+      "since": 2023
+    },
+    {
+      "id": "133067",
+      "name": "Moosseedorf",
+      "municipality": "Moosseedorf",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1367,
+      "lonLat": [7.4898, 47.01557],
+      "since": 2015
+    },
+    {
+      "id": "297813",
+      "name": "Affeltrangen",
+      "municipality": "Affeltrangen",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1362,
+      "lonLat": [9.03741, 47.52527],
+      "since": 2023
+    },
+    {
+      "id": "398458",
+      "name": "Sierre",
+      "municipality": "Sierre",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1359,
+      "lonLat": [7.51896, 46.27399],
+      "since": 2025
+    },
+    {
+      "id": "74190",
+      "name": "Vuadens",
+      "municipality": "Vuadens",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1357,
+      "lonLat": [7.0149, 46.62055],
+      "since": 2016
+    },
+    {
+      "id": "13770",
+      "name": "Ruechlig",
+      "municipality": "Aarau",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 1354,
+      "lonLat": [8.04987, 47.39978],
+      "since": 2014
+    },
+    {
+      "id": "13406",
+      "name": "Morgental",
+      "municipality": "Steinach",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 1350,
+      "lonLat": [9.42811, 47.50229],
+      "since": 2014
+    },
+    {
+      "id": "433760",
+      "name": "Rickenbach SO",
+      "municipality": "Rickenbach SO",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1350,
+      "lonLat": [7.85793, 47.33562],
+      "since": 2025
+    },
+    {
+      "id": "216486",
+      "name": "Avenches",
+      "municipality": "Avenches",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1349,
+      "lonLat": [7.03988, 46.8868],
+      "since": 2014
+    },
+    {
+      "id": "60983",
+      "name": "Bern",
+      "municipality": "Bern",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1347,
+      "lonLat": [7.46485, 46.96218],
+      "since": 2005
+    },
+    {
+      "id": "359770",
+      "name": "Regensdorf",
+      "municipality": "Regensdorf",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1342,
+      "lonLat": [8.45663, 47.44539],
+      "since": 2024
+    },
+    {
+      "id": "13407",
+      "name": "Breite Staeg",
+      "municipality": "Unterbäch VS",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1340,
+      "lonLat": [7.7821, 46.26556],
+      "since": 2010
+    },
+    {
+      "id": "346451",
+      "name": "Emmen",
+      "municipality": "Emmen",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1340,
+      "lonLat": [8.30411, 47.08396],
+      "since": 2024
+    },
+    {
+      "id": "163501",
+      "name": "Horn",
+      "municipality": "Horn",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1339,
+      "lonLat": [9.45888, 47.49408],
+      "since": 2020
+    },
+    {
+      "id": "202110",
+      "name": "Satigny",
+      "municipality": "Satigny",
+      "canton": "GE",
+      "type": "solar",
+      "kw": 1333,
+      "lonLat": [6.06026, 46.20033],
+      "since": 2021
+    },
+    {
+      "id": "324010",
+      "name": "Bischofszell",
+      "municipality": "Bischofszell",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1329,
+      "lonLat": [9.23822, 47.5022],
+      "since": 2023
+    },
+    {
+      "id": "388690",
+      "name": "Sennwald",
+      "municipality": "Sennwald",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1329,
+      "lonLat": [9.52588, 47.26069],
+      "since": 2024
+    },
+    {
+      "id": "374639",
+      "name": "Wittenbach",
+      "municipality": "Wittenbach",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1327,
+      "lonLat": [9.38129, 47.46657],
+      "since": 2024
+    },
+    {
+      "id": "269229",
+      "name": "Kleindöttingen",
+      "municipality": "Kleindöttingen",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1323,
+      "lonLat": [8.23542, 47.57652],
+      "since": 2024
+    },
+    {
+      "id": "153840",
+      "name": "Egnach",
+      "municipality": "Egnach",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1318,
+      "lonLat": [9.38391, 47.54276],
+      "since": 2020
+    },
+    {
+      "id": "63801",
+      "name": "Birsfelden",
+      "municipality": "Birsfelden",
+      "canton": "BL",
+      "type": "solar",
+      "kw": 1310,
+      "lonLat": [7.64237, 47.55216],
+      "since": 2015
+    },
+    {
+      "id": "64947",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "gas",
+      "kw": 1310,
+      "lonLat": [7.5698, 47.54735],
+      "since": 1992
+    },
+    {
+      "id": "80632",
+      "name": "Collombey",
+      "municipality": "Collombey",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1310,
+      "lonLat": [6.95391, 46.26529],
+      "since": 2015
+    },
+    {
+      "id": "61547",
+      "name": "Affeltrangen",
+      "municipality": "Affeltrangen",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1308,
+      "lonLat": [9.03861, 47.52451],
+      "since": 2013
+    },
+    {
+      "id": "406911",
+      "name": "Bischofszell",
+      "municipality": "Bischofszell",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1308,
+      "lonLat": [9.23642, 47.50053],
+      "since": 2024
+    },
+    {
+      "id": "274468",
+      "name": "Rueyres",
+      "municipality": "Rueyres",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1307,
+      "lonLat": [6.70022, 46.6952],
+      "since": 2022
+    },
+    {
+      "id": "273420",
+      "name": "Bösingen",
+      "municipality": "Bösingen",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1304,
+      "lonLat": [7.22497, 46.90136],
+      "since": 2023
+    },
+    {
+      "id": "346651",
+      "name": "Cresciano",
+      "municipality": "Cresciano",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1304,
+      "lonLat": [8.9983, 46.28593],
+      "since": 2024
+    },
+    {
+      "id": "50948",
+      "name": "Domdidier",
+      "municipality": "Domdidier",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1302,
+      "lonLat": [7.01701, 46.87386],
+      "since": 2015
+    },
+    {
+      "id": "8316",
+      "name": "Bassecourt",
+      "municipality": "Bassecourt",
+      "canton": "JU",
+      "type": "hydro-run",
+      "kw": 1300,
+      "lonLat": [7.22495, 47.32788],
+      "since": 2001
+    },
+    {
+      "id": "13583",
+      "name": "Muehlau",
+      "municipality": "Bazenheid",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 1300,
+      "lonLat": [9.07799, 47.4106],
+      "since": 2010
+    },
+    {
+      "id": "51231",
+      "name": "Taulan",
+      "municipality": "Montreux",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 1300,
+      "lonLat": [6.91767, 46.43375],
+      "since": 1994
+    },
+    {
+      "id": "469911",
+      "name": "Cournillens",
+      "municipality": "Cournillens",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1296,
+      "lonLat": [7.09039, 46.84979],
+      "since": 2025
+    },
+    {
+      "id": "207249",
+      "name": "Dagmersellen",
+      "municipality": "Dagmersellen",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1291,
+      "lonLat": [7.98134, 47.22071],
+      "since": 2022
+    },
+    {
+      "id": "56842",
+      "name": "Lochmedli Hostetbach",
+      "municipality": "Guttannen",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 1287,
+      "lonLat": [8.29176, 46.66554],
+      "since": 2016
+    },
+    {
+      "id": "12635",
+      "name": "Göschenen",
+      "municipality": "Göschenen",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 1280,
+      "lonLat": [8.58999, 46.91058],
+      "since": 1905
+    },
+    {
+      "id": "133185",
+      "name": "Weinfelden",
+      "municipality": "Weinfelden",
+      "canton": "TG",
+      "type": "waste",
+      "kw": 1280,
+      "lonLat": [9.10401, 47.56179],
+      "since": 1996
+    },
+    {
+      "id": "137227",
+      "name": "Burgdorf",
+      "municipality": "Burgdorf",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1278,
+      "lonLat": [7.6012, 47.06456],
+      "since": 2018
+    },
+    {
+      "id": "235863",
+      "name": "Schwarzenbach SG",
+      "municipality": "Schwarzenbach SG",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1278,
+      "lonLat": [9.07519, 47.44486],
+      "since": 2023
+    },
+    {
+      "id": "377379",
+      "name": "Le Crêt-du-Locle",
+      "municipality": "Le Crêt-du-Locle",
+      "canton": "NE",
+      "type": "solar",
+      "kw": 1278,
+      "lonLat": [6.78961, 47.07783],
+      "since": 2024
+    },
+    {
+      "id": "436054",
+      "name": "Bitsch",
+      "municipality": "Bitsch",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1268,
+      "lonLat": [8.01508, 46.3317],
+      "since": 2024
+    },
+    {
+      "id": "178444",
+      "name": "Bremgarten AG",
+      "municipality": "Bremgarten AG",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1266,
+      "lonLat": [8.34069, 47.35361],
+      "since": 2021
+    },
+    {
+      "id": "33961",
+      "name": "Rüdtligen",
+      "municipality": "Rüdtligen",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1261,
+      "lonLat": [7.56777, 47.07643],
+      "since": 2015
+    },
+    {
+      "id": "246032",
+      "name": "Schattdorf",
+      "municipality": "Schattdorf",
+      "canton": "UR",
+      "type": "solar",
+      "kw": 1261,
+      "lonLat": [8.64325, 46.8568],
+      "since": 2022
+    },
+    {
+      "id": "323936",
+      "name": "Tübach",
+      "municipality": "Tübach",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1258,
+      "lonLat": [9.45735, 47.48693],
+      "since": 2024
+    },
+    {
+      "id": "327843",
+      "name": "Rüthi (Rheintal)",
+      "municipality": "Rüthi (Rheintal)",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1258,
+      "lonLat": [9.54933, 47.29869],
+      "since": 2023
+    },
+    {
+      "id": "420962",
+      "name": "Bussigny",
+      "municipality": "Bussigny",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1258,
+      "lonLat": [6.56087, 46.54645],
+      "since": 2025
+    },
+    {
+      "id": "204894",
+      "name": "Cadenazzo",
+      "municipality": "Cadenazzo",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1257,
+      "lonLat": [8.94384, 46.15342],
+      "since": 2022
+    },
+    {
+      "id": "421785",
+      "name": "Zürich",
+      "municipality": "Zürich",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1256,
+      "lonLat": [8.53486, 47.41478],
+      "since": 2024
+    },
+    {
+      "id": "444837",
+      "name": "Studen BE",
+      "municipality": "Studen BE",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1255,
+      "lonLat": [7.31248, 47.10799],
+      "since": 2025
+    },
+    {
+      "id": "229528",
+      "name": "Buhwil",
+      "municipality": "Buhwil",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1253,
+      "lonLat": [9.17479, 47.52696],
+      "since": 2023
+    },
+    {
+      "id": "436789",
+      "name": "Niederbipp",
+      "municipality": "Niederbipp",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1252,
+      "lonLat": [7.70979, 47.27631],
+      "since": 2025
+    },
+    {
+      "id": "8159",
+      "name": "Hackeren",
+      "municipality": "Lungern",
+      "canton": "OW",
+      "type": "hydro-run",
+      "kw": 1250,
+      "lonLat": [8.15568, 46.77981],
+      "since": 2003
+    },
+    {
+      "id": "54946",
+      "name": "Giessbach",
+      "municipality": "Brienz BE",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 1250,
+      "lonLat": [8.01989, 46.73496],
+      "since": 2005
+    },
+    {
+      "id": "61482",
+      "name": "Loechli",
+      "municipality": "Grabs",
+      "canton": "SG",
+      "type": "hydro-storage",
+      "kw": 1250,
+      "lonLat": [9.43219, 47.17808],
+      "since": 1996
+    },
+    {
+      "id": "324063",
+      "name": "Möhlin",
+      "municipality": "Möhlin",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1247,
+      "lonLat": [7.84153, 47.57807],
+      "since": 2024
+    },
+    {
+      "id": "458253",
+      "name": "Mauren TG",
+      "municipality": "Mauren TG",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1245,
+      "lonLat": [9.15348, 47.56561],
+      "since": 2025
+    },
+    {
+      "id": "426111",
+      "name": "Vétroz",
+      "municipality": "Vétroz",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1244,
+      "lonLat": [7.27867, 46.2087],
+      "since": 2025
+    },
+    {
+      "id": "68279",
+      "name": "Baar",
+      "municipality": "Baar",
+      "canton": "ZG",
+      "type": "solar",
+      "kw": 1243,
+      "lonLat": [8.51206, 47.21042],
+      "since": 2013
+    },
+    {
+      "id": "261569",
+      "name": "Biel/Bienne",
+      "municipality": "Biel/Bienne",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1241,
+      "lonLat": [7.28345, 47.15341],
+      "since": 2023
+    },
+    {
+      "id": "215440",
+      "name": "Satigny",
+      "municipality": "Satigny",
+      "canton": "GE",
+      "type": "solar",
+      "kw": 1238,
+      "lonLat": [6.05977, 46.197],
+      "since": 2022
+    },
+    {
+      "id": "320042",
+      "name": "Satigny",
+      "municipality": "Satigny",
+      "canton": "GE",
+      "type": "solar",
+      "kw": 1238,
+      "lonLat": [6.05829, 46.21742],
+      "since": 2023
+    },
+    {
+      "id": "24592",
+      "name": "Wil SG",
+      "municipality": "Wil SG",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1235,
+      "lonLat": [9.04689, 47.45623],
+      "since": 2012
+    },
+    {
+      "id": "138062",
+      "name": "Brügg BE",
+      "municipality": "Brügg BE",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1231,
+      "lonLat": [7.26689, 47.11922],
+      "since": 2018
+    },
+    {
+      "id": "64418",
+      "name": "Büetigen",
+      "municipality": "Büetigen",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1230,
+      "lonLat": [7.33433, 47.11608],
+      "since": 2016
+    },
+    {
+      "id": "57930",
+      "name": "Crissier",
+      "municipality": "Crissier",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1226,
+      "lonLat": [6.57288, 46.54178],
+      "since": 2016
+    },
+    {
+      "id": "411401",
+      "name": "Regensdorf",
+      "municipality": "Regensdorf",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1224,
+      "lonLat": [8.46895, 47.43877],
+      "since": 2024
+    },
+    {
+      "id": "399011",
+      "name": "Nänikon",
+      "municipality": "Nänikon",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1221,
+      "lonLat": [8.68082, 47.37488],
+      "since": 2025
+    },
+    {
+      "id": "235865",
+      "name": "Orbe",
+      "municipality": "Orbe",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1220,
+      "lonLat": [6.54512, 46.71916],
+      "since": 2019
+    },
+    {
+      "id": "294708",
+      "name": "Grand-Lancy",
+      "municipality": "Grand-Lancy",
+      "canton": "GE",
+      "type": "gas",
+      "kw": 1220,
+      "lonLat": [6.12782, 46.17931],
+      "since": 2002
+    },
+    {
+      "id": "446073",
+      "name": "Möhlin",
+      "municipality": "Möhlin",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1219,
+      "lonLat": [7.8519, 47.57083],
+      "since": 2024
+    },
+    {
+      "id": "307700",
+      "name": "Oensingen",
+      "municipality": "Oensingen",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1217,
+      "lonLat": [7.71656, 47.27986],
+      "since": 2022
+    },
+    {
+      "id": "378195",
+      "name": "Affoltern am Albis",
+      "municipality": "Affoltern am Albis",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1215,
+      "lonLat": [8.44048, 47.27169],
+      "since": 2025
+    },
+    {
+      "id": "36102",
+      "name": "Wolfwil",
+      "municipality": "Wolfwil",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1213,
+      "lonLat": [7.82366, 47.26842],
+      "since": 2015
+    },
+    {
+      "id": "21762",
+      "name": "Wattwil",
+      "municipality": "Wattwil",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1212,
+      "lonLat": [9.09159, 47.29167],
+      "since": 2010
+    },
+    {
+      "id": "212769",
+      "name": "Villmergen",
+      "municipality": "Villmergen",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1205,
+      "lonLat": [8.25539, 47.35747],
+      "since": 2023
+    },
+    {
+      "id": "406852",
+      "name": "Sumiswald",
+      "municipality": "Sumiswald",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1205,
+      "lonLat": [7.76038, 47.03233],
+      "since": 2024
+    },
+    {
+      "id": "8148",
+      "name": "Stalden Kloster",
+      "municipality": "Engelberg",
+      "canton": "OW",
+      "type": "hydro-run",
+      "kw": 1200,
+      "lonLat": [8.44616, 46.80538],
+      "since": 1941
+    },
+    {
+      "id": "12765",
+      "name": "Neuewelt",
+      "municipality": "Münchenstein",
+      "canton": "BL",
+      "type": "hydro-run",
+      "kw": 1200,
+      "lonLat": [7.62214, 47.52576],
+      "since": 1998
+    },
+    {
+      "id": "18025",
+      "name": "Isenthal",
+      "municipality": "Isenthal",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 1200,
+      "lonLat": [8.55901, 46.90271],
+      "since": 1959
+    },
+    {
+      "id": "39369",
+      "name": "Klusi",
+      "municipality": "Erlenbach im Simmental",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 1200,
+      "lonLat": [7.54822, 46.66394],
+      "since": 1996
+    },
+    {
+      "id": "61654",
+      "name": "Valeis",
+      "municipality": "Wangs",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 1200,
+      "lonLat": [9.44812, 47.02367],
+      "since": 1981
+    },
+    {
+      "id": "207221",
+      "name": "Villars-sur-Glâne",
+      "municipality": "Villars-sur-Glâne",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1199,
+      "lonLat": [7.12468, 46.79824],
+      "since": 2022
+    },
+    {
+      "id": "289331",
+      "name": "Evionnaz",
+      "municipality": "Evionnaz",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1199,
+      "lonLat": [7.02635, 46.171],
+      "since": 2021
+    },
+    {
+      "id": "23086",
+      "name": "Amlikon-Bissegg",
+      "municipality": "Amlikon-Bissegg",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1196,
+      "lonLat": [9.0335, 47.56091],
+      "since": 2011
+    },
+    {
+      "id": "87862",
+      "name": "Courgenay",
+      "municipality": "Courgenay",
+      "canton": "JU",
+      "type": "solar",
+      "kw": 1195,
+      "lonLat": [7.12824, 47.41023],
+      "since": 2016
+    },
+    {
+      "id": "333121",
+      "name": "Koblenz",
+      "municipality": "Koblenz",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1191,
+      "lonLat": [8.24088, 47.61077],
+      "since": 2024
+    },
+    {
+      "id": "475125",
+      "name": "S. Antonino",
+      "municipality": "S. Antonino",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1191,
+      "lonLat": [8.96749, 46.15763],
+      "since": 2026
+    },
+    {
+      "id": "9608",
+      "name": "Turtig",
+      "municipality": "Unterbäch VS",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1190,
+      "lonLat": [7.79388, 46.30124],
+      "since": 2007
+    },
+    {
+      "id": "117921",
+      "name": "Perlen 2 Root",
+      "municipality": "Perlen",
+      "canton": "LU",
+      "type": "hydro-run",
+      "kw": 1188,
+      "lonLat": [8.36636, 47.1116],
+      "since": 1999
+    },
+    {
+      "id": "360555",
+      "name": "Schlieren",
+      "municipality": "Schlieren",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1188,
+      "lonLat": [8.46741, 47.39888],
+      "since": 2024
+    },
+    {
+      "id": "207025",
+      "name": "Kölliken",
+      "municipality": "Kölliken",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1187,
+      "lonLat": [8.01765, 47.32274],
+      "since": 2021
+    },
+    {
+      "id": "242582",
+      "name": "Reichenburg",
+      "municipality": "Reichenburg",
+      "canton": "SZ",
+      "type": "solar",
+      "kw": 1185,
+      "lonLat": [8.9922, 47.16891],
+      "since": 2023
+    },
+    {
+      "id": "233698",
+      "name": "Dintikon",
+      "municipality": "Dintikon",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1179,
+      "lonLat": [8.22844, 47.37555],
+      "since": 2022
+    },
+    {
+      "id": "346593",
+      "name": "Kleindöttingen",
+      "municipality": "Kleindöttingen",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1178,
+      "lonLat": [8.23581, 47.57576],
+      "since": 2024
+    },
+    {
+      "id": "358973",
+      "name": "Zuchwil",
+      "municipality": "Zuchwil",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1178,
+      "lonLat": [7.57032, 47.21425],
+      "since": 2025
+    },
+    {
+      "id": "421915",
+      "name": "Fétigny",
+      "municipality": "Fétigny",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1177,
+      "lonLat": [6.92322, 46.80708],
+      "since": 2025
+    },
+    {
+      "id": "163500",
+      "name": "Villeneuve VD",
+      "municipality": "Villeneuve VD",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1176,
+      "lonLat": [6.92919, 46.39209],
+      "since": 2021
+    },
+    {
+      "id": "34104",
+      "name": "Chur",
+      "municipality": "Chur",
+      "canton": "GR",
+      "type": "solar",
+      "kw": 1175,
+      "lonLat": [9.5316, 46.86952],
+      "since": 2012
+    },
+    {
+      "id": "276339",
+      "name": "Beringen",
+      "municipality": "Beringen",
+      "canton": "SH",
+      "type": "solar",
+      "kw": 1173,
+      "lonLat": [8.58686, 47.69493],
+      "since": 2023
+    },
+    {
+      "id": "344333",
+      "name": "Rümlang",
+      "municipality": "Rümlang",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1173,
+      "lonLat": [8.52149, 47.45958],
+      "since": 2022
+    },
+    {
+      "id": "193683",
+      "name": "Escholzmatt",
+      "municipality": "Escholzmatt",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1172,
+      "lonLat": [7.94473, 46.92151],
+      "since": 2019
+    },
+    {
+      "id": "253253",
+      "name": "Reiden",
+      "municipality": "Reiden",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1171,
+      "lonLat": [7.964, 47.25211],
+      "since": 2023
+    },
+    {
+      "id": "355586",
+      "name": "Novazzano",
+      "municipality": "Novazzano",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1170,
+      "lonLat": [9.00238, 45.83777],
+      "since": 2024
+    },
+    {
+      "id": "172334",
+      "name": "Appenzell",
+      "municipality": "Appenzell",
+      "canton": "AI",
+      "type": "solar",
+      "kw": 1168,
+      "lonLat": [9.40158, 47.33764],
+      "since": 2022
+    },
+    {
+      "id": "131372",
+      "name": "Triengen",
+      "municipality": "Triengen",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1164,
+      "lonLat": [8.07749, 47.22866],
+      "since": 2018
+    },
+    {
+      "id": "288885",
+      "name": "Belp",
+      "municipality": "Belp",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1163,
+      "lonLat": [7.50483, 46.90235],
+      "since": 2023
+    },
+    {
+      "id": "373009",
+      "name": "Schachen LU",
+      "municipality": "Schachen LU",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1157,
+      "lonLat": [8.13729, 47.04023],
+      "since": 2024
+    },
+    {
+      "id": "407575",
+      "name": "Hochdorf",
+      "municipality": "Hochdorf",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1157,
+      "lonLat": [8.28277, 47.16106],
+      "since": 2025
+    },
+    {
+      "id": "290422",
+      "name": "Root",
+      "municipality": "Root",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1154,
+      "lonLat": [8.371, 47.10388],
+      "since": 2024
+    },
+    {
+      "id": "29767",
+      "name": "Matte",
+      "municipality": "Bern",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 1150,
+      "lonLat": [7.45655, 46.94645],
+      "since": 1986
+    },
+    {
+      "id": "445210",
+      "name": "Einsiedeln",
+      "municipality": "Einsiedeln",
+      "canton": "SZ",
+      "type": "solar",
+      "kw": 1148,
+      "lonLat": [8.74515, 47.13593],
+      "since": 2025
+    },
+    {
+      "id": "406923",
+      "name": "Neudorf",
+      "municipality": "Neudorf",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1147,
+      "lonLat": [8.20608, 47.19223],
+      "since": 2024
+    },
+    {
+      "id": "17584",
+      "name": "Hergiswil b. Willisau",
+      "municipality": "Hergiswil b. Willisau",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1144,
+      "lonLat": [7.95298, 47.06482],
+      "since": 2011
+    },
+    {
+      "id": "140798",
+      "name": "Oberarth",
+      "municipality": "Oberarth",
+      "canton": "SZ",
+      "type": "solar",
+      "kw": 1144,
+      "lonLat": [8.53303, 47.05904],
+      "since": 2020
+    },
+    {
+      "id": "15866",
+      "name": "Lauenen Louibach",
+      "municipality": "Lauenen b. Gstaad",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 1140,
+      "lonLat": [7.32243, 46.42473],
+      "since": 2014
+    },
+    {
+      "id": "376261",
+      "name": "Granges-près-Marnand",
+      "municipality": "Granges-près-Marnand",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1140,
+      "lonLat": [6.8934, 46.7647],
+      "since": 2024
+    },
+    {
+      "id": "26120",
+      "name": "Neuendorf",
+      "municipality": "Neuendorf",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1138,
+      "lonLat": [7.78147, 47.309],
+      "since": 2013
+    },
+    {
+      "id": "260702",
+      "name": "Möhlin",
+      "municipality": "Möhlin",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1137,
+      "lonLat": [7.85042, 47.57049],
+      "since": 2023
+    },
+    {
+      "id": "37008",
+      "name": "Stans",
+      "municipality": "Stans",
+      "canton": "NW",
+      "type": "solar",
+      "kw": 1136,
+      "lonLat": [8.38017, 46.9738],
+      "since": 2016
+    },
+    {
+      "id": "230266",
+      "name": "Rupperswil",
+      "municipality": "Rupperswil",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1135,
+      "lonLat": [8.14927, 47.41238],
+      "since": 2022
+    },
+    {
+      "id": "273500",
+      "name": "Steinach",
+      "municipality": "Steinach",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1134,
+      "lonLat": [9.43201, 47.50181],
+      "since": 2023
+    },
+    {
+      "id": "55537",
+      "name": "Conthey",
+      "municipality": "Conthey",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1128,
+      "lonLat": [7.30147, 46.22325],
+      "since": 2012
+    },
+    {
+      "id": "200594",
+      "name": "Forel (Lavaux)",
+      "municipality": "Forel (Lavaux)",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1126,
+      "lonLat": [6.76678, 46.53351],
+      "since": 2021
+    },
+    {
+      "id": "63553",
+      "name": "Crans-Montana",
+      "municipality": "Crans-Montana",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1125,
+      "lonLat": [7.45695, 46.30543],
+      "since": 2019
+    },
+    {
+      "id": "243822",
+      "name": "Altenrhein",
+      "municipality": "Altenrhein",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1124,
+      "lonLat": [9.54964, 47.4889],
+      "since": 2023
+    },
+    {
+      "id": "256964",
+      "name": "Ermatingen",
+      "municipality": "Ermatingen",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1123,
+      "lonLat": [9.08142, 47.67203],
+      "since": 2023
+    },
+    {
+      "id": "346901",
+      "name": "Russin",
+      "municipality": "Russin",
+      "canton": "GE",
+      "type": "solar",
+      "kw": 1121,
+      "lonLat": [6.0273, 46.19232],
+      "since": 2024
+    },
+    {
+      "id": "291979",
+      "name": "Aigle",
+      "municipality": "Aigle",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1119,
+      "lonLat": [6.94749, 46.29964],
+      "since": 2023
+    },
+    {
+      "id": "53158",
+      "name": "Châtel-St-Denis",
+      "municipality": "Châtel-St-Denis",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1118,
+      "lonLat": [6.90643, 46.51583],
+      "since": 2016
+    },
+    {
+      "id": "255443",
+      "name": "Le Crêt-du-Locle",
+      "municipality": "Le Crêt-du-Locle",
+      "canton": "NE",
+      "type": "solar",
+      "kw": 1117,
+      "lonLat": [6.78966, 47.08058],
+      "since": 2022
+    },
+    {
+      "id": "367452",
+      "name": "Grandson",
+      "municipality": "Grandson",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1116,
+      "lonLat": [6.67459, 46.82339],
+      "since": 2024
+    },
+    {
+      "id": "163889",
+      "name": "Collombey",
+      "municipality": "Collombey",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1114,
+      "lonLat": [6.95661, 46.26521],
+      "since": 2021
+    },
+    {
+      "id": "462654",
+      "name": "Marin-Epagnier",
+      "municipality": "Marin-Epagnier",
+      "canton": "NE",
+      "type": "solar",
+      "kw": 1113,
+      "lonLat": [7.01045, 47.01211],
+      "since": 2025
+    },
+    {
+      "id": "378841",
+      "name": "Uznach",
+      "municipality": "Uznach",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1112,
+      "lonLat": [8.96552, 47.23029],
+      "since": 2024
+    },
+    {
+      "id": "361067",
+      "name": "Worb",
+      "municipality": "Worb",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1111,
+      "lonLat": [7.55632, 46.94263],
+      "since": 2022
+    },
+    {
+      "id": "332293",
+      "name": "Vuarrens",
+      "municipality": "Vuarrens",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1109,
+      "lonLat": [6.64977, 46.68325],
+      "since": 2024
+    },
+    {
+      "id": "207054",
+      "name": "Niederönz",
+      "municipality": "Niederönz",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1105,
+      "lonLat": [7.69333, 47.19183],
+      "since": 2022
+    },
+    {
+      "id": "8157",
+      "name": "Wysserlen",
+      "municipality": "Kerns",
+      "canton": "OW",
+      "type": "hydro-run",
+      "kw": 1100,
+      "lonLat": [8.29624, 46.91121],
+      "since": 1997
+    },
+    {
+      "id": "15515",
+      "name": "Rufi",
+      "municipality": "Hätzingen",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 1100,
+      "lonLat": [9.0318, 46.95866],
+      "since": 2016
+    },
+    {
+      "id": "29145",
+      "name": "Bachtoly",
+      "municipality": "Eischoll",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1100,
+      "lonLat": [7.77903, 46.29264],
+      "since": 2014
+    },
+    {
+      "id": "30324",
+      "name": "Eisten",
+      "municipality": "Eisten",
+      "canton": "VS",
+      "type": "hydro-run",
+      "kw": 1100,
+      "lonLat": [7.89816, 46.19337],
+      "since": 2014
+    },
+    {
+      "id": "80704",
+      "name": "Lyssach",
+      "municipality": "Lyssach",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1100,
+      "lonLat": [7.5682, 47.07264],
+      "since": 2015
+    },
+    {
+      "id": "274786",
+      "name": "Oberriet SG",
+      "municipality": "Oberriet SG",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1097,
+      "lonLat": [9.57509, 47.34002],
+      "since": 2023
+    },
+    {
+      "id": "14551",
+      "name": "Adligenswil",
+      "municipality": "Adligenswil",
+      "canton": "LU",
+      "type": "biomass",
+      "kw": 1096,
+      "lonLat": [8.34335, 47.13192],
+      "since": 2020
+    },
+    {
+      "id": "288169",
+      "name": "Vufflens-la-Ville",
+      "municipality": "Vufflens-la-Ville",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1096,
+      "lonLat": [6.52717, 46.57336],
+      "since": 2023
+    },
+    {
+      "id": "69728",
+      "name": "Hägendorf",
+      "municipality": "Hägendorf",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1095,
+      "lonLat": [7.85332, 47.33558],
+      "since": 2013
+    },
+    {
+      "id": "207854",
+      "name": "Birsfelden",
+      "municipality": "Birsfelden",
+      "canton": "BL",
+      "type": "solar",
+      "kw": 1093,
+      "lonLat": [7.6337, 47.55764],
+      "since": 2022
+    },
+    {
+      "id": "47987",
+      "name": "Saxon",
+      "municipality": "Saxon",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1092,
+      "lonLat": [7.1637, 46.14688],
+      "since": 2013
+    },
+    {
+      "id": "446059",
+      "name": "Aclens",
+      "municipality": "Aclens",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1088,
+      "lonLat": [6.52647, 46.56463],
+      "since": 2025
+    },
+    {
+      "id": "68579",
+      "name": "Stettfurt",
+      "municipality": "Stettfurt",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1086,
+      "lonLat": [8.95138, 47.52481],
+      "since": 2015
+    },
+    {
+      "id": "172715",
+      "name": "Wil ZH",
+      "municipality": "Wil ZH",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1085,
+      "lonLat": [8.53043, 47.59671],
+      "since": 2022
+    },
+    {
+      "id": "271079",
+      "name": "Stabio",
+      "municipality": "Stabio",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1085,
+      "lonLat": [8.94594, 45.85115],
+      "since": 2023
+    },
+    {
+      "id": "176451",
+      "name": "Manno",
+      "municipality": "Manno",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1082,
+      "lonLat": [8.92581, 46.03465],
+      "since": 2020
+    },
+    {
+      "id": "44217",
+      "name": "Schüpbach",
+      "municipality": "Schüpbach",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1081,
+      "lonLat": [7.73964, 46.92572],
+      "since": 2015
+    },
+    {
+      "id": "38070",
+      "name": "Emmenweid",
+      "municipality": "Emmenbrücke",
+      "canton": "LU",
+      "type": "hydro-run",
+      "kw": 1080,
+      "lonLat": [8.27247, 47.07348],
+      "since": 2025
+    },
+    {
+      "id": "297883",
+      "name": "Spreitenbach",
+      "municipality": "Spreitenbach",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1080,
+      "lonLat": [8.36819, 47.42985],
+      "since": 2023
+    },
+    {
+      "id": "102774",
+      "name": "Weinfelden",
+      "municipality": "Weinfelden",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1079,
+      "lonLat": [9.08662, 47.56268],
+      "since": 2016
+    },
+    {
+      "id": "138853",
+      "name": "Etzgen",
+      "municipality": "Etzgen",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1078,
+      "lonLat": [8.10474, 47.57483],
+      "since": 2019
+    },
+    {
+      "id": "417300",
+      "name": "Massongex",
+      "municipality": "Massongex",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1077,
+      "lonLat": [6.97561, 46.2445],
+      "since": 2022
+    },
+    {
+      "id": "42846",
+      "name": "Urdorf",
+      "municipality": "Urdorf",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1076,
+      "lonLat": [8.42679, 47.36836],
+      "since": 2015
+    },
+    {
+      "id": "220742",
+      "name": "Luzern",
+      "municipality": "Luzern",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1076,
+      "lonLat": [8.26855, 47.06932],
+      "since": 2022
+    },
+    {
+      "id": "375458",
+      "name": "Bargen BE",
+      "municipality": "Bargen BE",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1076,
+      "lonLat": [7.25639, 47.04165],
+      "since": 2024
+    },
+    {
+      "id": "158724",
+      "name": "Schaffhausen",
+      "municipality": "Schaffhausen",
+      "canton": "SH",
+      "type": "solar",
+      "kw": 1075,
+      "lonLat": [8.66519, 47.7211],
+      "since": 2021
+    },
+    {
+      "id": "305471",
+      "name": "Crissier",
+      "municipality": "Crissier",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1075,
+      "lonLat": [6.58405, 46.54955],
+      "since": 2023
+    },
+    {
+      "id": "325317",
+      "name": "Domat/Ems",
+      "municipality": "Domat/Ems",
+      "canton": "GR",
+      "type": "solar",
+      "kw": 1074,
+      "lonLat": [9.42631, 46.83031],
+      "since": 2023
+    },
+    {
+      "id": "130782",
+      "name": "St. Gallen",
+      "municipality": "St. Gallen",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1072,
+      "lonLat": [9.41336, 47.4377],
+      "since": 2020
+    },
+    {
+      "id": "198994",
+      "name": "Estavayer-le-Lac",
+      "municipality": "Estavayer-le-Lac",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1072,
+      "lonLat": [6.85044, 46.84705],
+      "since": 2021
+    },
+    {
+      "id": "435339",
+      "name": "Luterbach",
+      "municipality": "Luterbach",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1070,
+      "lonLat": [7.57589, 47.21889],
+      "since": 2025
+    },
+    {
+      "id": "13567",
+      "name": "Herisau",
+      "municipality": "Herisau",
+      "canton": "AR",
+      "type": "biomass",
+      "kw": 1065,
+      "lonLat": [9.2601, 47.36054],
+      "since": 2006
+    },
+    {
+      "id": "74760",
+      "name": "Bern",
+      "municipality": "Bern",
+      "canton": "BE",
+      "type": "gas",
+      "kw": 1065,
+      "lonLat": [7.45352, 46.95553],
+      "since": 2003
+    },
+    {
+      "id": "320532",
+      "name": "Altstätten SG",
+      "municipality": "Altstätten SG",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1063,
+      "lonLat": [9.55644, 47.37572],
+      "since": 2024
+    },
+    {
+      "id": "444373",
+      "name": "Collombey",
+      "municipality": "Collombey",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1063,
+      "lonLat": [6.94457, 46.28708],
+      "since": 2025
+    },
+    {
+      "id": "212838",
+      "name": "Pratteln",
+      "municipality": "Pratteln",
+      "canton": "BL",
+      "type": "solar",
+      "kw": 1061,
+      "lonLat": [7.68146, 47.52456],
+      "since": 2023
+    },
+    {
+      "id": "285802",
+      "name": "Fehraltorf",
+      "municipality": "Fehraltorf",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1061,
+      "lonLat": [8.73787, 47.39357],
+      "since": 2024
+    },
+    {
+      "id": "18362",
+      "name": "Spreitenbach",
+      "municipality": "Spreitenbach",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1057,
+      "lonLat": [8.37492, 47.42151],
+      "since": 2011
+    },
+    {
+      "id": "83218",
+      "name": "Montévraz",
+      "municipality": "Montévraz",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1056,
+      "lonLat": [7.17554, 46.74259],
+      "since": 2015
+    },
+    {
+      "id": "288091",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "solar",
+      "kw": 1056,
+      "lonLat": [7.60132, 47.58546],
+      "since": 2023
+    },
+    {
+      "id": "204901",
+      "name": "Frick",
+      "municipality": "Frick",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1055,
+      "lonLat": [8.03442, 47.50191],
+      "since": 2022
+    },
+    {
+      "id": "385162",
+      "name": "Cheseaux-sur-Lausanne",
+      "municipality": "Cheseaux-sur-Lausanne",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1055,
+      "lonLat": [6.59068, 46.57743],
+      "since": 2024
+    },
+    {
+      "id": "276517",
+      "name": "Grancia",
+      "municipality": "Grancia",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1054,
+      "lonLat": [8.9258, 45.96981],
+      "since": 2023
+    },
+    {
+      "id": "343943",
+      "name": "Biel/Bienne",
+      "municipality": "Biel/Bienne",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1053,
+      "lonLat": [7.29425, 47.16065],
+      "since": 2024
+    },
+    {
+      "id": "373591",
+      "name": "Oberbipp",
+      "municipality": "Oberbipp",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1053,
+      "lonLat": [7.66721, 47.26101],
+      "since": 2024
+    },
+    {
+      "id": "413020",
+      "name": "Zürich",
+      "municipality": "Zürich",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1053,
+      "lonLat": [8.52031, 47.38997],
+      "since": 2024
+    },
+    {
+      "id": "64967",
+      "name": "Le Chatelot Centrale dotation",
+      "municipality": "Les Planchettes",
+      "canton": "NE",
+      "type": "hydro-run",
+      "kw": 1050,
+      "lonLat": [6.7444, 47.10187],
+      "since": 2005
+    },
+    {
+      "id": "288930",
+      "name": "Schaffhausen",
+      "municipality": "Schaffhausen",
+      "canton": "SH",
+      "type": "solar",
+      "kw": 1048,
+      "lonLat": [8.66143, 47.71287],
+      "since": 2023
+    },
+    {
+      "id": "342341",
+      "name": "Tolochenaz",
+      "municipality": "Tolochenaz",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1046,
+      "lonLat": [6.48112, 46.50141],
+      "since": 2023
+    },
+    {
+      "id": "409004",
+      "name": "Leytron",
+      "municipality": "Leytron",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1044,
+      "lonLat": [7.20512, 46.18161],
+      "since": 2024
+    },
+    {
+      "id": "199077",
+      "name": "Marin-Epagnier",
+      "municipality": "Marin-Epagnier",
+      "canton": "NE",
+      "type": "solar",
+      "kw": 1042,
+      "lonLat": [7.00622, 47.0112],
+      "since": 2021
+    },
+    {
+      "id": "234136",
+      "name": "Quartino",
+      "municipality": "Quartino",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1042,
+      "lonLat": [8.91339, 46.1504],
+      "since": 2024
+    },
+    {
+      "id": "37861",
+      "name": "Allaman",
+      "municipality": "Allaman",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1041,
+      "lonLat": [6.3951, 46.47519],
+      "since": 2015
+    },
+    {
+      "id": "289285",
+      "name": "Willisau",
+      "municipality": "Willisau",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1041,
+      "lonLat": [7.99889, 47.13159],
+      "since": 2023
+    },
+    {
+      "id": "338580",
+      "name": "Steinhausen",
+      "municipality": "Steinhausen",
+      "canton": "ZG",
+      "type": "solar",
+      "kw": 1041,
+      "lonLat": [8.47711, 47.19159],
+      "since": 2024
+    },
+    {
+      "id": "124879",
+      "name": "Perlen 2 Root",
+      "municipality": "Perlen",
+      "canton": "LU",
+      "type": "hydro-run",
+      "kw": 1040,
+      "lonLat": [8.36636, 47.1116],
+      "since": 1980
+    },
+    {
+      "id": "396954",
+      "name": "Windisch",
+      "municipality": "Windisch",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1039,
+      "lonLat": [8.21872, 47.48182],
+      "since": 2024
+    },
+    {
+      "id": "64628",
+      "name": "Siegershausen",
+      "municipality": "Siegershausen",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1038,
+      "lonLat": [9.16755, 47.60697],
+      "since": 2013
+    },
+    {
+      "id": "137251",
+      "name": "Wyssachen",
+      "municipality": "Wyssachen",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1038,
+      "lonLat": [7.82629, 47.08643],
+      "since": 2018
+    },
+    {
+      "id": "320655",
+      "name": "Stabio",
+      "municipality": "Stabio",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1038,
+      "lonLat": [8.94413, 45.84804],
+      "since": 2024
+    },
+    {
+      "id": "260848",
+      "name": "Buchrain",
+      "municipality": "Buchrain",
+      "canton": "LU",
+      "type": "solar",
+      "kw": 1034,
+      "lonLat": [8.34169, 47.10761],
+      "since": 2022
+    },
+    {
+      "id": "60393",
+      "name": "Kandersteg Dorf",
+      "municipality": "Kandersteg",
+      "canton": "BE",
+      "type": "hydro-run",
+      "kw": 1030,
+      "lonLat": [7.67545, 46.49605],
+      "since": 1996
+    },
+    {
+      "id": "261818",
+      "name": "Martigny",
+      "municipality": "Martigny",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1030,
+      "lonLat": [7.0869, 46.10624],
+      "since": 2023
+    },
+    {
+      "id": "239003",
+      "name": "Aadorf",
+      "municipality": "Aadorf",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1029,
+      "lonLat": [8.90107, 47.49865],
+      "since": 2022
+    },
+    {
+      "id": "342558",
+      "name": "Utzenstorf",
+      "municipality": "Utzenstorf",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1028,
+      "lonLat": [7.56211, 47.13522],
+      "since": 2024
+    },
+    {
+      "id": "22537",
+      "name": "Muri AG",
+      "municipality": "Muri AG",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1026,
+      "lonLat": [8.33279, 47.28536],
+      "since": 2014
+    },
+    {
+      "id": "12775",
+      "name": "Turgi",
+      "municipality": "Turgi",
+      "canton": "AG",
+      "type": "hydro-run",
+      "kw": 1024,
+      "lonLat": [8.25336, 47.49571],
+      "since": 1986
+    },
+    {
+      "id": "31530",
+      "name": "Niederbipp",
+      "municipality": "Niederbipp",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1023,
+      "lonLat": [7.70388, 47.27368],
+      "since": 2013
+    },
+    {
+      "id": "70951",
+      "name": "St-Aubin FR",
+      "municipality": "St-Aubin FR",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1023,
+      "lonLat": [6.99089, 46.88267],
+      "since": 2015
+    },
+    {
+      "id": "322181",
+      "name": "Le Noirmont",
+      "municipality": "Le Noirmont",
+      "canton": "JU",
+      "type": "solar",
+      "kw": 1023,
+      "lonLat": [6.96758, 47.22487],
+      "since": 2023
+    },
+    {
+      "id": "167254",
+      "name": "Oberbüren",
+      "municipality": "Oberbüren",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1022,
+      "lonLat": [9.15435, 47.45243],
+      "since": 2019
+    },
+    {
+      "id": "228044",
+      "name": "Rancate",
+      "municipality": "Rancate",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1021,
+      "lonLat": [8.97448, 45.88606],
+      "since": 2022
+    },
+    {
+      "id": "376558",
+      "name": "Gossau SG",
+      "municipality": "Gossau SG",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1019,
+      "lonLat": [9.23895, 47.43876],
+      "since": 2024
+    },
+    {
+      "id": "64285",
+      "name": "Rorschacherberg",
+      "municipality": "Rorschacherberg",
+      "canton": "SG",
+      "type": "solar",
+      "kw": 1018,
+      "lonLat": [9.5205, 47.47829],
+      "since": 2013
+    },
+    {
+      "id": "368151",
+      "name": "Dietlikon",
+      "municipality": "Dietlikon",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1018,
+      "lonLat": [8.61767, 47.41615],
+      "since": 2024
+    },
+    {
+      "id": "126809",
+      "name": "Münsingen",
+      "municipality": "Münsingen",
+      "canton": "BE",
+      "type": "gas",
+      "kw": 1016,
+      "lonLat": [7.56265, 46.86703],
+      "since": 2016
+    },
+    {
+      "id": "246078",
+      "name": "Birmensdorf ZH",
+      "municipality": "Birmensdorf ZH",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1016,
+      "lonLat": [8.42885, 47.36516],
+      "since": 2023
+    },
+    {
+      "id": "34654",
+      "name": "Châtel-St-Denis",
+      "municipality": "Châtel-St-Denis",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1015,
+      "lonLat": [6.90185, 46.52187],
+      "since": 2011
+    },
+    {
+      "id": "235732",
+      "name": "Botterens",
+      "municipality": "Botterens",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1013,
+      "lonLat": [7.11172, 46.61489],
+      "since": 2023
+    },
+    {
+      "id": "418003",
+      "name": "Oensingen",
+      "municipality": "Oensingen",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1013,
+      "lonLat": [7.71265, 47.28333],
+      "since": 2024
+    },
+    {
+      "id": "13668",
+      "name": "Des Moulinets",
+      "municipality": "Orbe",
+      "canton": "VD",
+      "type": "hydro-run",
+      "kw": 1012,
+      "lonLat": [6.53092, 46.72184],
+      "since": 2013
+    },
+    {
+      "id": "320526",
+      "name": "Stabio",
+      "municipality": "Stabio",
+      "canton": "TI",
+      "type": "solar",
+      "kw": 1011,
+      "lonLat": [8.9238, 45.84231],
+      "since": 2024
+    },
+    {
+      "id": "341086",
+      "name": "Burgdorf",
+      "municipality": "Burgdorf",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1011,
+      "lonLat": [7.61129, 47.06605],
+      "since": 2024
+    },
+    {
+      "id": "42840",
+      "name": "Wangen b. Olten",
+      "municipality": "Wangen b. Olten",
+      "canton": "SO",
+      "type": "solar",
+      "kw": 1010,
+      "lonLat": [7.86441, 47.34026],
+      "since": 2013
+    },
+    {
+      "id": "241763",
+      "name": "Denges",
+      "municipality": "Denges",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1010,
+      "lonLat": [6.5412, 46.51852],
+      "since": 2023
+    },
+    {
+      "id": "350592",
+      "name": "Oftringen",
+      "municipality": "Oftringen",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1009,
+      "lonLat": [7.92167, 47.30559],
+      "since": 2024
+    },
+    {
+      "id": "186454",
+      "name": "Rothrist",
+      "municipality": "Rothrist",
+      "canton": "AG",
+      "type": "solar",
+      "kw": 1005,
+      "lonLat": [7.86569, 47.29959],
+      "since": 2022
+    },
+    {
+      "id": "25771",
+      "name": "Saxon",
+      "municipality": "Saxon",
+      "canton": "VS",
+      "type": "solar",
+      "kw": 1003,
+      "lonLat": [7.16927, 46.15057],
+      "since": 2011
+    },
+    {
+      "id": "95586",
+      "name": "Bulle",
+      "municipality": "Bulle",
+      "canton": "FR",
+      "type": "solar",
+      "kw": 1003,
+      "lonLat": [7.04611, 46.6147],
+      "since": 2017
+    },
+    {
+      "id": "15359",
+      "name": "Mex VD",
+      "municipality": "Mex VD",
+      "canton": "VD",
+      "type": "solar",
+      "kw": 1002,
+      "lonLat": [6.55255, 46.56819],
+      "since": 2012
+    },
+    {
+      "id": "203347",
+      "name": "Grüsch",
+      "municipality": "Grüsch",
+      "canton": "GR",
+      "type": "solar",
+      "kw": 1002,
+      "lonLat": [9.64295, 46.97631],
+      "since": 2021
+    },
+    {
+      "id": "180266",
+      "name": "Rüdtligen",
+      "municipality": "Rüdtligen",
+      "canton": "BE",
+      "type": "solar",
+      "kw": 1001,
+      "lonLat": [7.56777, 47.07643],
+      "since": 2021
+    },
+    {
+      "id": "245458",
+      "name": "Frauenfeld",
+      "municipality": "Frauenfeld",
+      "canton": "TG",
+      "type": "solar",
+      "kw": 1001,
+      "lonLat": [8.91409, 47.57198],
+      "since": 2024
+    },
+    {
+      "id": "8442",
+      "name": "Soor",
+      "municipality": "Bütschwil",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 1000,
+      "lonLat": [9.07844, 47.35643],
+      "since": 2002
+    },
+    {
+      "id": "8572",
+      "name": "Dietfurt",
+      "municipality": "Dietfurt",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 1000,
+      "lonLat": [9.08075, 47.34449],
+      "since": 2002
+    },
+    {
+      "id": "8933",
+      "name": "Piumogna",
+      "municipality": "Dalpe",
+      "canton": "TI",
+      "type": "hydro-run",
+      "kw": 1000,
+      "lonLat": [8.77633, 46.47174],
+      "since": 1999
+    },
+    {
+      "id": "11826",
+      "name": "Wassen Pfaffensprung",
+      "municipality": "Wassen UR",
+      "canton": "UR",
+      "type": "hydro-run",
+      "kw": 1000,
+      "lonLat": [8.60841, 46.71348],
+      "since": 1998
+    },
+    {
+      "id": "13945",
+      "name": "Brummbach Braunwald",
+      "municipality": "Braunwald",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 1000,
+      "lonLat": [8.98687, 46.93865],
+      "since": 2014
+    },
+    {
+      "id": "14620",
+      "name": "Gossau SG",
+      "municipality": "Gossau SG",
+      "canton": "SG",
+      "type": "biomass",
+      "kw": 1000,
+      "lonLat": [9.23982, 47.43842],
+      "since": 2010
+    },
+    {
+      "id": "53598",
+      "name": "Basel",
+      "municipality": "Basel",
+      "canton": "BS",
+      "type": "solar",
+      "kw": 1000,
+      "lonLat": [7.59546, 47.57933],
+      "since": 2020
+    },
+    {
+      "id": "57753",
+      "name": "Leuggelbach",
+      "municipality": "Leuggelbach",
+      "canton": "GL",
+      "type": "hydro-run",
+      "kw": 1000,
+      "lonLat": [9.04724, 46.97732],
+      "since": 1993
+    },
+    {
+      "id": "61473",
+      "name": "Buchs SG",
+      "municipality": "Buchs SG",
+      "canton": "SG",
+      "type": "hydro-storage",
+      "kw": 1000,
+      "lonLat": [9.45321, 47.15527],
+      "since": 1987
+    },
+    {
+      "id": "70596",
+      "name": "Schindellegi",
+      "municipality": "Schindellegi",
+      "canton": "SZ",
+      "type": "hydro-run",
+      "kw": 1000,
+      "lonLat": [8.71298, 47.1736],
+      "since": 1988
+    },
+    {
+      "id": "167266",
+      "name": "Talbach",
+      "municipality": "Mols",
+      "canton": "SG",
+      "type": "hydro-run",
+      "kw": 1000,
+      "lonLat": [9.27055, 47.11048],
+      "since": 2019
+    },
+    {
+      "id": "324007",
+      "name": "Hinwil",
+      "municipality": "Hinwil",
+      "canton": "ZH",
+      "type": "solar",
+      "kw": 1000,
+      "lonLat": [8.83154, 47.30369],
+      "since": 2023
+    }
+  ]
+}
