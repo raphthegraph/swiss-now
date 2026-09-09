@@ -56,8 +56,8 @@ export const SOURCES: Record<SourceId, SourceMeta> = {
     url: "https://api3.geo.admin.ch/rest/services/all/MapServer/layersConfig",
     license: "opendata.swiss terms_open",
     commercialUse: "yes",
-    cadenceSeconds: 5 * MIN,
-    typicalLagSeconds: 6 * MIN,
+    cadenceSeconds: 10 * MIN, // 10-minute values, published about ten minutes after the observation
+    typicalLagSeconds: 10 * MIN,
     notes:
       "Coordinates are EPSG:2056 inside a GeoJSON envelope; reproject. Not a documented API contract — keep OGD CSVs as fallback.",
   },
@@ -69,8 +69,8 @@ export const SOURCES: Record<SourceId, SourceMeta> = {
     url: "https://api3.geo.admin.ch/rest/services/all/MapServer/layersConfig",
     license: "opendata.swiss terms_open",
     commercialUse: "yes",
-    cadenceSeconds: 5 * MIN,
-    typicalLagSeconds: 6 * MIN,
+    cadenceSeconds: 10 * MIN, // 10-minute values, published about ten minutes after the observation
+    typicalLagSeconds: 10 * MIN,
     notes: "Classes and symbols only, no numeric values. Use LINDAS for values.",
   },
   "bafu-lindas-hydro": {

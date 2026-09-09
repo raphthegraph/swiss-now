@@ -25,9 +25,11 @@ render from whatever snapshots exist.
 
 These steps need account credentials and are done by the owner, not by tooling:
 
-1. **Blob store.** Vercel dashboard → Storage → Create → Blob → connect it to `swiss-now`. This adds
-   `BLOB_READ_WRITE_TOKEN` to the project's environments. Redeploy (Deployments → ⋯ → Redeploy). From
-   then on `/api/snapshot` writes to Blob (`snapshots/<id>.json`) and the timeline and story fill up.
+1. **Blob store.** Vercel dashboard → Storage → Create → Blob → connect it to `swiss-now`. A private
+   store adds `BLOB_STORE_ID` (the SDK authenticates with Vercel's OIDC token, no secret needed); a
+   classic store adds `BLOB_READ_WRITE_TOKEN`. Both work. Redeploy once (Deployments → ⋯ →
+   Redeploy). From then on `/api/snapshot` writes to Blob (`snapshots/<id>.json`), browsers read the
+   snapshots through `/api/snapshots/<id>`, and the timeline and story fill up.
 2. **Rail.** Project → Settings → Environment Variables → add `OTD_API_KEY` (the "Token" field of
    the application on api-manager.opentransportdata.swiss, a JWT starting with `eyJ`; not the
    "Token Hash") for Production, and `RAIL_DATA_URL` = `https://raphthegraph.github.io/swiss-now`.

@@ -40,5 +40,5 @@ export async function getWeatherState(): Promise<WeatherState> {
 }
 
 export function cacheControl(ttlSeconds: number): string {
-  return `public, s-maxage=${ttlSeconds}, stale-while-revalidate=${ttlSeconds * 5}`;
+  return `public, s-maxage=${ttlSeconds}, stale-while-revalidate=${ttlSeconds * 2}`;
 }
